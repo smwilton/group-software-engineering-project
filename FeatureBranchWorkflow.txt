@@ -1,0 +1,17 @@
+When developing a new feature please create a new feature branch:
+
+git checkout -b {Initials}-{FeatureName}-{Type}
+
+for example to create the branch: PM-InputService-Feature:
+
+git checkout -b PM-InputService-Feature
+
+As you make changes you will want to regulary commit to *your* branch
+
+First, to stage your newly created files (tell git you want it to track them)
+
+git add *or* or git add .
+
+Then to create a commit (think of this like a check point):
+
+git commit -m "{ }"
