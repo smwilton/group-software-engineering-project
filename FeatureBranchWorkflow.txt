@@ -1,4 +1,8 @@
-When developing a new feature please create a new feature branch:
+To get the latest work from the *remote* main
+
+git pull origin main
+
+When developing a new feature please create a new feature branch off the main branch:
 
 git checkout -b {Initials}-{FeatureName}-{Type}
 
@@ -14,4 +18,10 @@ git add *or* or git add .
 
 Then to create a commit (think of this like a check point):
 
-git commit -m "{ }"
+git commit -m "{ your commit message }"
+
+When ready to add your feature push it to the remote repo:
+
+git push origin { your-branch-name }
+
+Then complete the merge in gitlab
