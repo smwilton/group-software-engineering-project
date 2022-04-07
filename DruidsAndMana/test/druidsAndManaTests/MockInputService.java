@@ -1,4 +1,6 @@
-package druidsAndMana;
+package druidsAndManaTests;
+
+import druidsAndMana.IInputService;
 
 public class MockInputService implements IInputService {
 
