@@ -19,7 +19,7 @@ public class GameEngine {
 		boolean val = this.inputService.GetUserConfirmation("test");
 		
 		// Printing the userInput
-		System.out.println(selectedValue);
+		System.out.println(val);
 		
 		// Store all of the variables
 		
