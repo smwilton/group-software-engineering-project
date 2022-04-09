@@ -2,10 +2,10 @@ package druidsAndMana;
 
 public class GameBoard {
 
-	private ForestSquare[] forestSquares;
+	private Square[] squares;
 	
 	public GameBoard(IGameBoardBuilder iGameBoardBuilder, int noSquares) {
-		this.forestSquares = iGameBoardBuilder.buildGameBoard(noSquares);
+		this.squares = iGameBoardBuilder.buildGameBoard(noSquares);
 	}
 	
 	/**
@@ -16,7 +16,7 @@ public class GameBoard {
 	 */
 	public int newsquarePosition(int playerCurrentPosition, int placesToMove) {
 		int total = playerCurrentPosition + placesToMove;
-		return total > forestSquares.length ? total - 14 : total;
+		return total > squares.length ? total - 14 : total;
 	}
 		
 	/**
@@ -25,7 +25,7 @@ public class GameBoard {
 	 * @return 
 	 */
 	public String getsquareOwnerId(int squareIndex) {
-		return forestSquares[squareIndex].owner;
+		return squares[squareIndex].ownerId;
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class GameBoard {
 	 * @return
 	 */
 	public void setsquareOwnerId(int squareIndex, String playerId) {
-		forestSquares[squareIndex].Name = playerId;
+		squares[squareIndex].Name = playerId;
 	}
 	
 	/**

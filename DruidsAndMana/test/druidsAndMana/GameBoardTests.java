@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import druidsAndMana.ForestSquare;
+import druidsAndMana.Square;
 import druidsAndMana.GameBoard;
 import druidsAndMana.IGameBoardBuilder;
 
@@ -24,11 +24,11 @@ class GameBoardTests {
 		MockGameBoardBuilder mockBoardBuilder = new MockGameBoardBuilder();
 		
 		// Create the mockForestSquare:
-		ForestSquare mockForestSquare = new ForestSquare();
+		Square mockForestSquare = new Square();
 		mockForestSquare.owner = "Mock";
 		
 		// Create the mockBoardBuilder:
-		mockBoardBuilder.mockSquares = new ForestSquare[] { mockForestSquare };
+		mockBoardBuilder.mockSquares = new Square[] { mockForestSquare };
 		
 		GameBoard mockGameBoard = new GameBoard(mockBoardBuilder, 0);
 		
