@@ -1,14 +1,14 @@
 package druidsAndMana;
 
-import druidsAndMana.ForestSquare;
+import druidsAndMana.Square;
 import druidsAndMana.IGameBoardBuilder;
 
 public class MockGameBoardBuilder implements IGameBoardBuilder {
 
-	public ForestSquare[] mockSquares;
+	public Square[] mockSquares;
 	
 	@Override
-	public ForestSquare[] buildGameBoard(int noSquares) {
+	public Square[] buildGameBoard(int noSquares) {
 		return mockSquares;
 	}
 

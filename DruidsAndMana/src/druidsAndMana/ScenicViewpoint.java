@@ -7,6 +7,6 @@ package druidsAndMana;
  * @author Nicola
  *
  */
-public class ScenicViewpoint extends ForestSquare{
+public class ScenicViewpoint extends Square{
 
 }

@@ -6,7 +6,7 @@ package druidsAndMana;
  * @author Nicola Stirling 40020701
  *
  */
-public class Grassland extends ForestSquare {
+public class Grassland extends Square {
 
 	// instance vars
 	private Realm realm;

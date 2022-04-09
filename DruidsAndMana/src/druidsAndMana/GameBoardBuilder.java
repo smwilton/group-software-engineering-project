@@ -2,15 +2,15 @@ package druidsAndMana;
 
 public class GameBoardBuilder implements IGameBoardBuilder {
 	
-	public ForestSquare[] buildGameBoard(int noSquares) {
+	public Square[] buildGameBoard(int noSquares) {
 		//TODO: some logic here around build the square objects:
 		
-		ForestSquare[] forestSquares = new ForestSquare[noSquares];
+		Square[] squares = new Square[noSquares];
 		
 		for (int i = 0; i < noSquares; i++) {
-			forestSquares[i] = new ForestSquare();
+			squares[i] = new Tropical();
 		}
 		
-		return forestSquares;
+		return squares;
 	}
 }
