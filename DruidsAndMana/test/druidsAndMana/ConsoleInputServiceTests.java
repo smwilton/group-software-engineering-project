@@ -1,17 +1,15 @@
-/**
- * 
- */
-package druidsAndManaTests;
+package druidsAndMana;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * @author Dave
- *
- */
-class GameAdminTests {
+class ConsoleInputServiceTests {
+
+	@BeforeEach
+	void setUp() throws Exception {
+	}
 
 	@Test
 	void test() {

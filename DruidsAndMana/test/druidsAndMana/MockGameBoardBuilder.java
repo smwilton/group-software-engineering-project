@@ -1,4 +1,4 @@
-package druidsAndManaTests;
+package druidsAndMana;
 
 import druidsAndMana.ForestSquare;
 import druidsAndMana.IGameBoardBuilder;
