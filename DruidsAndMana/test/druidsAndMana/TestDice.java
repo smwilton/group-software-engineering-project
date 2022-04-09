@@ -24,6 +24,7 @@ class TestDice {
 	void setUp() throws Exception {
 		upperLimit = 4;
 		lowerLimit = 1;
+		dice = new Dice();
 	}
 
 	/**
@@ -31,7 +32,13 @@ class TestDice {
 	 */
 	@Test
 	void testRollDice() {
-		fail("Not yet implemented");
+		int result = dice.rollDice();
+		
+		if (result >=lowerLimit && result<=upperLimit) {
+			assertTrue(true);
+		} else {
+			assertTrue(false);
+		}
 	}
 
 }
