@@ -1,4 +1,4 @@
-package druidsAndManaTests;
+package druidsAndMana;
 
 import static org.junit.jupiter.api.Assertions.*;
 

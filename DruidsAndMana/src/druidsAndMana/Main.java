@@ -1,6 +1,6 @@
 package druidsAndMana;
 
-import druidsAndManaTests.MockInputService;
+import druidsAndMana.MockInputService;
 
 public class Main {
 

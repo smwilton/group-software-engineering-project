@@ -6,11 +6,17 @@ package druidsAndMana;
  * @author Nicola Stirling 40020701
  *
  */
-public class Grassland {
-
+public class Grassland extends ForestSquare {
+	
 	// instance vars
 	private Realm realm;
 
+	// declaring constants
+	/**
+	 * 
+	 */
+	private static final int[] GRASSLAND_PRICE = {60,50,40,30};
+	
 	// constructors
 	/**
 	 * Default constructor
