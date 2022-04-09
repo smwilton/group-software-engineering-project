@@ -81,13 +81,20 @@ public class Grassland extends ForestSquare {
 	/**
 	 * Constructor with Realm arg
 	 * 
+	 * When a Grassland is instantiated the owner is initially declared as an empty
+	 * string to indicate that tehre is no owner, the number of forests planted is
+	 * set to 0 and the wildlife reserve is set to false.
+	 * 
 	 * @param realm - the realm the grassland is part of
 	 */
 	public Grassland(Realm realm) {
 		this.setRealm(realm);
+		this.setOwner("");
+		this.setNumForestsPlanted(0);
+		this.setWildlifeReserve(false);
 	}
 
-	// getters and setters
+	// Methods
 
 	/**
 	 * @return the realm
@@ -97,56 +104,156 @@ public class Grassland extends ForestSquare {
 	}
 
 	/**
-	 * Method to set the realm. 
-	 * This method also identifies the tier of the realm and therefore the prices and CO2 impact rating
-	 * @param realm the realm to set
+	 * Method to set the realm. This method also sets the array index based on the
+	 * realm so the index can be used to access the relevant values in the
+	 * constants. Private method as realm cannot be changed after the Grassland is
+	 * instantiated.
+	 * 
+	 * @param realm - the realm to set
 	 */
-	public void setRealm(Realm realm) {
+	private void setRealm(Realm realm) {
 		this.realm = realm;
-		
-		switch(realm) {
+
+		switch (realm) {
 		case TROPICAL:
 			this.arrayIndex = 0;
 			break;
 		case SUBTROPICAL:
 			this.arrayIndex = 1;
 			break;
-		case TEMPERATE :
+		case TEMPERATE:
 			this.arrayIndex = 2;
 			break;
 		case BOREAL:
 			this.arrayIndex = 3;
-			break; // design decision not to include a default case as a realm can only be one of the 4 enum values
+			break; // design decision not to include a default case as a realm can only be one of
+					// the 4 enum values
 		}
 	}
 
-	// other methods
-	public void plantForest() {
-		//TODO
+	/**
+	 * @return the owner
+	 */
+	public String getOwner() {
+		return owner;
 	}
 
-	public void upgradeToWildlifeReserve() {
-		//TODO
+	/**
+	 * @param owner - the owner to set
+	 */
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
-	
-	public int calculatePrice () {
+
+	/**
+	 * This method returns the number of forests planted on a grassland as an int
+	 * 
+	 * @return the numForestsPlanted
+	 */
+	public int getNumForestsPlanted() {
+		return numForestsPlanted;
+	}
+
+	/**
+	 * @param numForestsPlanted - the numForestsPlanted to set
+	 */
+	private void setNumForestsPlanted(int numForestsPlanted) {
+		this.numForestsPlanted = numForestsPlanted;
+	}
+
+	/**
+	 * Will return true if the Grassland has been upgraded to a wildlife reserve
+	 * 
+	 * @return the isWildlifeReserve
+	 */
+	public boolean isWildlifeReserve() {
+		return isWildlifeReserve;
+	}
+
+	/**
+	 * @param isWildlifeReserve - setting the status of whether the Grassland
+	 *                          contains a Wildlife reserve or not
+	 */
+	private void setWildlifeReserve(boolean isWildlifeReserve) {
+		this.isWildlifeReserve = isWildlifeReserve;
+	}
+
+	/**
+	 * Method to add a forest to the grassland
+	 * 
+	 * Validation to prevent planting a forest until a Player owns all Grassland and
+	 * to prevent more than 3 forests being planted is done in the class where the
+	 * Grassland is instantiated.
+	 */
+	public void plantForest() {
+		// get current number of forests and add 1
+		int newNumForestsPlanted = getNumForestsPlanted() + 1;
+
+		// set updated number of forests
+		setNumForestsPlanted(newNumForestsPlanted);
+	}
+
+	/**
+	 * Method to record the major development of upgrading the Grassland to a
+	 * Wildlife Reserve
+	 * 
+	 * Contains validation to ensure the status can only be changed to true if there
+	 * are 3 forests planted
+	 */
+	public void upgradeToWildlifeReserve() {
+		if (this.numForestsPlanted == 3) {
+			setWildlifeReserve(true);
+		} else {
+			setWildlifeReserve(false);
+		}
+
+	}
+
+	/**
+	 * Method to get the Mana price of a vacant Grassland
+	 * 
+	 * @return - the price to buy the Grassland
+	 */
+	public int getPriceToBuy() {
 		int price;
-		price = 0;
-		//TODO
+		price = PRICE_GRASSLAND[this.arrayIndex];
 		return price;
 	}
-	
+
+	/**
+	 * Method to get how much it costs for a Player to plant a forest on their
+	 * grassland
+	 * 
+	 * @return - the price to plant a forest
+	 */
+	public int getPriceToPlantForest() {
+		int price;
+		price = PRICE_MINOR_DEV[this.arrayIndex];
+		return price;
+	}
+
+	/**
+	 * Method to get how much it costs for a Player to upgrade to a Wildlife Reserve
+	 * 
+	 * @return - the price to upgrade to a Wildlife Reserve
+	 */
+	public int getPriceToUpgradeToWildlifeReserve() {
+		int price;
+		price = PRICE_MAJOR_DEV[this.arrayIndex];
+		return price;
+	}
+
 	public int calculateCo2ImpactRating() {
 		int impact;
 		impact = 0;
-		//TODO
+		// TODO
 		return impact;
 	}
-	
+
 	public int calculateCostToLandOn() {
 		int cost;
 		cost = 0;
-		//TODO
+		// TODO
 		return cost;
 	}
 }
