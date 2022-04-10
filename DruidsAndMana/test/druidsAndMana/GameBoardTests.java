@@ -14,7 +14,8 @@ class GameBoardTests {
 	private MockGameBoardBuilder mockBoardBuilder;
 	private SacredAlder mockAlderSquare;
 	private ScenicViewpoint mockScenicViewpoint;
-	private Tropical mockTropical;
+	private Tropical mockTropical_1;
+	private Tropical mockTropical_2;
 	private Subtropical mockSubtropical;
 	private Boreal mockBoreal;
 	private Temperate mockTemporate;
@@ -28,13 +29,14 @@ class GameBoardTests {
 		// Create the squares:
 		mockAlderSquare = new SacredAlder();
 		mockScenicViewpoint = new ScenicViewpoint();
-		mockTropical = new Tropical(Realm.Tropical);
+		mockTropical_1 = new Tropical(Realm.Tropical);
+		mockTropical_2 = new Tropical(Realm.Tropical);
 		mockSubtropical = new Subtropical(Realm.Subtropical);
 		mockBoreal = new Boreal(Realm.Boreal);
 		mockTemporate = new Temperate(Realm.Temperate);
 		
 		// Create the mockBoardBuilder:
-		mockBoardBuilder.mockSquares = new ISquare[] { mockAlderSquare, mockScenicViewpoint, mockTropical, mockSubtropical, mockBoreal, mockTemporate };
+		mockBoardBuilder.mockSquares = new ISquare[] { mockAlderSquare, mockScenicViewpoint, mockTropical_1, mockTropical_2, mockSubtropical, mockBoreal, mockTemporate };
 		
 		// Create the mock game board:
 		mockGameBoard = new GameBoard(mockBoardBuilder);
@@ -52,8 +54,8 @@ class GameBoardTests {
 		
 		// Assert
 		assertTrue(ownerIdSet);
-		assertEquals(ownerId, mockTropical.getOwnerId());
-		assertEquals(SquareStatus.Grassland, mockTropical.getSquareStatus());
+		assertEquals(ownerId, mockTropical_1.getOwnerId());
+		assertEquals(SquareStatus.Grassland, mockTropical_1.getSquareStatus());
 	}
 	
 	@Test
@@ -68,7 +70,7 @@ class GameBoardTests {
 		
 		// Assert
 		assertFalse(ownerIdSet);
-		assertEquals(null, mockTropical.getOwnerId());
+		assertEquals(null, mockTropical_1.getOwnerId());
 	}
 	
 	@Test
@@ -94,7 +96,7 @@ class GameBoardTests {
 		// Arrange
 		String ownerId = "12345";
 		int index = 2;
-		mockTropical.setOwnerId(ownerId);
+		mockTropical_1.setOwnerId(ownerId);
 		
 		// Act
 		String ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
@@ -120,12 +122,13 @@ class GameBoardTests {
 	void playerCanUpgrade_PlayerOwnsAllGrasslandInRealm_ReturnsTrue() {
 		
 		// Arrange
-		String ownerId = "12345";
+		String playerId = "12345";
 		int index = 2;
-		mockTropical.setOwnerId(ownerId);
+		mockTropical_1.setOwnerId(playerId);
+		mockTropical_2.setOwnerId(playerId);
 		
 		// Act
-		boolean palyerCanUpgrade = this.mockGameBoard.playerCanUpgrade(ownerId, index);
+		boolean palyerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, index);
 		
 		// Assert
 		assertTrue(palyerCanUpgrade);
@@ -135,10 +138,25 @@ class GameBoardTests {
 	void playerCanUpgrade_PlayerDoesNotOwnAllGrasslandInRealm_ReturnsFalse() {
 		
 		// Arrange
-		String playerId = "54321";
-		String ownerId = "12345";
+		String playerId_1 = "54321";
+		String playerId_2 = "12345";
 		int index = 2;
-		mockTropical.setOwnerId(ownerId);
+		mockTropical_1.setOwnerId(playerId_1);
+		mockTropical_2.setOwnerId(playerId_2);
+		
+		// Act
+		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId_1, index);
+		
+		// Assert
+		assertFalse(playerCanUpgrade);
+	}
+	
+	@Test
+	void playerCanUpgrade_RealmHasAVacantSquare_ReturnsFalse() {
+		// Arrange
+		String playerId = "54321";
+		int index = 2;
+		mockTropical_1.setOwnerId(playerId);
 		
 		// Act
 		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, index);
@@ -161,13 +179,34 @@ class GameBoardTests {
 	}
 	
 	@Test
-	void playerCanUpgrade_RealmHasUnOnwedGrassland_ReturnFalse() {
+	void playerCanUpgrade_SquareIsVacant_ReturnTrue() {
 		
 		// Arrange
 		String playerId = "54321";
 		
 		// Act
 		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, 4);
+		
+		// Assert
+		assertTrue(playerCanUpgrade);
+	}	
+	
+	@Test 
+	void playerCanUpgrade_SquareIsAWildlifeSanctuary_ReturnFalse(){
+		// Arrange
+		String playerId = "12345";
+		int index = 2;
+		mockTropical_1.setOwnerId(playerId);
+		mockTropical_2.setOwnerId(playerId);
+		
+		while(mockTropical_1.developGrassland()) {
+			mockTropical_1.developGrassland();
+		}
+		
+		assertEquals(SquareStatus.WildlifeSanctuary, mockTropical_1.getSquareStatus());
+		
+		// Act
+		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, index);
 		
 		// Assert
 		assertFalse(playerCanUpgrade);
