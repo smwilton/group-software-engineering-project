@@ -13,13 +13,23 @@ public class GameEngine {
 		// Lots of logic here:
 		
 		//Getting some user input:
-		String selectedValue = this.inputService.GetUserInput("Please enter your pokemon type", new String[] { "Earth", "Wind", "Fire", "Water" });
+		//String selectedValue = this.inputService.GetUserInput("Please enter your pokemon type", new String[] { "Earth", "Wind", "Fire", "Water" });
+		
+		//Create a new game board... just for fun
+		GameBoard testGameBoard = new GameBoard(new GameBoardBuilder());
+		
+		String art = testGameBoard.squareAsciiArt(6);
+		String description = testGameBoard.squareDescription(6);
+		
+		System.out.println(art);
+		System.out.println();
+		System.out.println(description);
 		
 		// 
-		boolean val = this.inputService.GetUserConfirmation("test");
+		//boolean val = this.inputService.GetUserConfirmation("test");
 		
 		// Printing the userInput
-		System.out.println(val);
+		//System.out.println(val);
 		
 		// Store all of the variables
 		

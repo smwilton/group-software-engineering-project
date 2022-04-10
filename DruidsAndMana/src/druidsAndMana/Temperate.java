@@ -1,14 +1,14 @@
 package druidsAndMana;
 
-public class Tropical extends GrasslandBase {
+public class Temperate extends GrasslandBase{
 
-	public Tropical(GrasslandValues grasslandValues) {
+	public Temperate(GrasslandValues grasslandValues) {
 		super(grasslandValues);
 	}
 
 	@Override
 	public String description() {
-		return "The tropical grassland has a bustling and diverse ecosystem where each player will find harmony with Nature";
+		return "Temporate grasslands experience heavy rainfall but also periods of drought, giving a highly diverse ecosystem";
 	}
 	
 	@Override
