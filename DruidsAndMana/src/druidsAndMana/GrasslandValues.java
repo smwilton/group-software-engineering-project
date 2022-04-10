@@ -95,14 +95,23 @@ public class GrasslandValues {
 
 	// Constructor
 	/**
-	 * @param valueSet
+	 * Constructor with args
+	 * 
+	 * @param Realm - the realm the Grassland should be instantiated for
 	 */
 	public GrasslandValues(Realm realm) {
 		this.setValueSet(realm);
 	}
 
 	// Methods
-
+	/**
+	 * Private method used within the Class to set the values to be used for the
+	 * other methods.
+	 * <p>
+	 * Only the constructor will use this method when it is declared.
+	 * 
+	 * @param realm - the Realm the values should be for
+	 */
 	private void setValueSet(Realm realm) {
 		switch (realm) {
 		case Tropical:
