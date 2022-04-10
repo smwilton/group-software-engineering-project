@@ -16,25 +16,25 @@ public class GameBoardBuilder implements IGameBoardBuilder {
 		// This allows for a loosely coupled application
 		
 		// Create two tropical squares:
-		squares[1] = new Tropical(new GrasslandValues(Realm.TROPICAL));
-		squares[2] = new Tropical(new GrasslandValues(Realm.TROPICAL));
+		squares[1] = new Tropical(Realm.Tropical);
+		squares[2] = new Tropical(Realm.Tropical);
 		
 		// Create three sub-tropical squares:
-		squares[3] = new Subtropical(new GrasslandValues(Realm.SUBTROPICAL));
-		squares[4] = new Subtropical(new GrasslandValues(Realm.SUBTROPICAL));
-		squares[5] = new Subtropical(new GrasslandValues(Realm.SUBTROPICAL));
+		squares[3] = new Subtropical(Realm.Subtropical);
+		squares[4] = new Subtropical(Realm.Subtropical);
+		squares[5] = new Subtropical(Realm.Subtropical);
 		
 		// Add the Scenic viewpoint:
 		squares[6] = new ScenicViewpoint();
 		
 		// Add the temperate squares:
-		squares[7] = new Temperate(new GrasslandValues(Realm.TEMPERATE));
-		squares[8] = new Temperate(new GrasslandValues(Realm.TEMPERATE));
-		squares[9] = new Temperate(new GrasslandValues(Realm.TEMPERATE));
+		squares[7] = new Temperate(Realm.Temperate);
+		squares[8] = new Temperate(Realm.Temperate);
+		squares[9] = new Temperate(Realm.Temperate);
 		
 		// Add the boreal squares:
-		squares[10] = new Boreal(new GrasslandValues(Realm.BOREAL));
-		squares[11] = new Boreal(new GrasslandValues(Realm.BOREAL));
+		squares[10] = new Boreal(Realm.Boreal);
+		squares[11] = new Boreal(Realm.Boreal);
 
 		return squares;
 	}
