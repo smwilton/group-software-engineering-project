@@ -6,7 +6,18 @@ public class MockInputService implements IInputService {
 
 	//This is a test fixture without using a mocking software like MOQ etc.
 	private String userInputResponse;
+	private boolean confirmation = false;
 	
+	
+	
+	public boolean getConfirmation() {
+		return confirmation;
+	}
+
+	public void setConfirmation(boolean confirmation) {
+		this.confirmation = confirmation;
+	}
+
 	public String getUserInputResponse(){
 		return this.userInputResponse;
 	}
@@ -23,14 +34,14 @@ public class MockInputService implements IInputService {
 
 	@Override
 	public boolean GetUserConfirmation(String prompt) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return confirmation;
 	}
 
 	@Override
 	public String GetOpenUserInput(String prompt) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userInputResponse;
 	}
 
 }

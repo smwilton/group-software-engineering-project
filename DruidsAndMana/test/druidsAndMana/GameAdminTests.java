@@ -10,32 +10,34 @@ class GameAdminTests {
 	String name1, name2, duplicateName;
 	int numOfPlayersAllowed, numOfPlayersNotAllowed;
 	GameAdmin gameAdmin;
-	MockInputService inputService;
+	MockInputService inputService = new MockInputService();
 	
 	@BeforeEach
 	void setUp() throws Exception{
 		name1 = "Tester";
 		name2 = "Tester2";
 		duplicateName = "Tester";
-		numOfPlayersAllowed=2;
-		numOfPlayersNotAllowed=6;
 		gameAdmin = new GameAdmin(inputService);
 	}
+
+	@Test
+	void testNumOfPlayersConfirmed() {
+		inputService.setUserInputResponse("2");
+		inputService.setConfirmation(true);
+		assertEquals(2, gameAdmin.numOfPlayers());
+	}
 	
-
 	@Test
-	void testGameAdmin() {
-		fail("Not yet implemented");
+	void testNumOfPlayersNotConfirmed() {
+		inputService.setUserInputResponse("2");
+		assertEquals(0, gameAdmin.numOfPlayers());
 	}
-
-	@Test
-	void testNumOfPlayers() {
-		fail("Not yet implemented");
-	}
-
+	
+	/**
 	@Test
 	void testPlayerSetUp() {
 		fail("Not yet implemented");
 	}
+	**/
 
 }
