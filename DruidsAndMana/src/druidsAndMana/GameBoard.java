@@ -51,7 +51,7 @@ public class GameBoard {
 	 * @return
 	 */
 	public int manaCharge(int squareIndex) {
-		return squares[squareIndex].manaCharge();
+		return squares[squareIndex].getChargeForLandingOnSquare();
 	}
 	
 	/**

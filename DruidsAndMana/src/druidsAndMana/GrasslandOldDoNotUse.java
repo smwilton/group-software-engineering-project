@@ -1,12 +1,12 @@
 package druidsAndMana;
 
 /**
- * Class that extends tile and represents a Grassland object
+ * Class that extends tile and represents a GrasslandOldDoNotUse object
  *
  * @author Nicola Stirling 40020701
  *
  */
-public class Grassland extends Square {
+public class GrasslandOldDoNotUse extends Square {
 
 	// instance vars
 	private Realm realm;
@@ -42,21 +42,21 @@ public class Grassland extends Square {
 	private static final int[] PRICE_MAJOR_DEV = { 60, 50, 40, 30 };
 
 	/**
-	 * This is the base CO2 impact rating earned for an owned Grassland that has no
+	 * This is the base CO2 impact rating earned for an owned GrasslandOldDoNotUse that has no
 	 * developments
 	 */
 	private static final int[] CO2_IMPACT_BASE = { 60, 50, 40, 30 };
 
 	/**
 	 * This is the additional CO2 impact rating earned for each minor development on
-	 * a Grassland, i.e. for each forest that is planted a Player will earn this in
+	 * a GrasslandOldDoNotUse, i.e. for each forest that is planted a Player will earn this in
 	 * addition to the base CO2 Impact
 	 */
 	private static final int[] CO2_IMPACT_MINOR_DEV_PREMIUM = { 6, 5, 4, 3 };
 
 	/**
 	 * This is the additional CO2 impact rating earned when a major development is
-	 * made to a Grassland, This is earned in addition to 3 x the minor development
+	 * made to a GrasslandOldDoNotUse, This is earned in addition to 3 x the minor development
 	 * premium and the base amount
 	 */
 	private static final int[] CO2_IMPACT_MAJOR_DEV_PREMIUM = { 20, 15, 10, 5 };
@@ -81,13 +81,13 @@ public class Grassland extends Square {
 	/**
 	 * Constructor with Realm arg
 	 * 
-	 * When a Grassland is instantiated the owner is initially declared as an empty
+	 * When a GrasslandOldDoNotUse is instantiated the owner is initially declared as an empty
 	 * string to indicate that tehre is no owner, the number of forests planted is
 	 * set to 0 and the wildlife reserve is set to false.
 	 * 
 	 * @param realm - the realm the grassland is part of
 	 */
-	public Grassland(Realm realm) {
+	public GrasslandOldDoNotUse(Realm realm) {
 		this.setRealm(realm);
 		this.setOwner("");
 		this.setNumForestsPlanted(0);
@@ -106,7 +106,7 @@ public class Grassland extends Square {
 	/**
 	 * Method to set the realm. This method also sets the array index based on the
 	 * realm so the index can be used to access the relevant values in the
-	 * constants. Private method as realm cannot be changed after the Grassland is
+	 * constants. Private method as realm cannot be changed after the GrasslandOldDoNotUse is
 	 * instantiated.
 	 * 
 	 * @param realm - the realm to set
@@ -162,7 +162,7 @@ public class Grassland extends Square {
 	}
 
 	/**
-	 * Will return true if the Grassland has been upgraded to a wildlife reserve
+	 * Will return true if the GrasslandOldDoNotUse has been upgraded to a wildlife reserve
 	 * 
 	 * @return the isWildlifeReserve
 	 */
@@ -171,7 +171,7 @@ public class Grassland extends Square {
 	}
 
 	/**
-	 * @param isWildlifeReserve - setting the status of whether the Grassland
+	 * @param isWildlifeReserve - setting the status of whether the GrasslandOldDoNotUse
 	 *                          contains a Wildlife reserve or not
 	 */
 	private void setWildlifeReserve(boolean isWildlifeReserve) {
@@ -181,9 +181,9 @@ public class Grassland extends Square {
 	/**
 	 * Method to add a forest to the grassland
 	 * 
-	 * Validation to prevent planting a forest until a Player owns all Grassland and
+	 * Validation to prevent planting a forest until a Player owns all GrasslandOldDoNotUse and
 	 * to prevent more than 3 forests being planted is done in the class where the
-	 * Grassland is instantiated.
+	 * GrasslandOldDoNotUse is instantiated.
 	 */
 	public void plantForest() {
 		// get current number of forests and add 1
@@ -194,7 +194,7 @@ public class Grassland extends Square {
 	}
 
 	/**
-	 * Method to record the major development of upgrading the Grassland to a
+	 * Method to record the major development of upgrading the GrasslandOldDoNotUse to a
 	 * Wildlife Reserve
 	 * 
 	 * Contains validation to ensure the status can only be changed to true if there
@@ -210,9 +210,9 @@ public class Grassland extends Square {
 	}
 
 	/**
-	 * Method to get the Mana price of a vacant Grassland
+	 * Method to get the Mana price of a vacant GrasslandOldDoNotUse
 	 * 
-	 * @return - the price to buy the Grassland
+	 * @return - the price to buy the GrasslandOldDoNotUse
 	 */
 	public int getPriceToBuy() {
 		int price;
