@@ -98,6 +98,16 @@ public class GameBoard {
 		
 		GrasslandBase currGrasslandSquare = (GrasslandBase)currSquare;
 				
+		// If the grassland is vacant it can always be upgraded or owned:
+		if(currGrasslandSquare.getSquareStatus() == SquareStatus.Vacant) {
+			return true;
+		}
+		
+		// The grassland is a wildlife sanctuary it cannot be developed further:
+		if(!currGrasslandSquare.canDevelopGrassland()) {
+			return false;
+		}
+		
 		for(ISquare square : squares) {
 			
 			if(!(square instanceof GrasslandBase)) { 
@@ -138,7 +148,6 @@ public class GameBoard {
 	 * @return
 	 */
 	public SquareStatus getSquareType(int squareIndex) {
-
 		return SquareStatus.Grassland;
 	}	
 }
