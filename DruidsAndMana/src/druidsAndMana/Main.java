@@ -1,17 +1,17 @@
 package druidsAndMana;
 
-import druidsAndMana.MockInputService;
-
 public class Main {
 
 	
 	public static void main(String[] args) {
 		
-		ConsoleInputService inputService = new ConsoleInputService();
-				
-		// We can pass a mocked instance into the game engine to allow end to end testing:
-		GameEngine gameEngine = new GameEngine(inputService);
+		ConsoleInputService input = new ConsoleInputService();
+		GameAdmin admin = new GameAdmin(input);
 		
-		gameEngine.TakeTurn();
+		GameBoard board = admin.createGameBoard();
+		admin.numOfPlayers();
+		System.out.println(admin.checkIfSquareIsOwned(board, 2));
+		System.out.println(board.squareIsGrassland(2));
+		System.out.println(board.costToUpgrade("1", 2));
 	}
 }
