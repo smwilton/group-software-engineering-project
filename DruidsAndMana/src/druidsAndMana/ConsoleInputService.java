@@ -61,4 +61,14 @@ public class ConsoleInputService implements IInputService {
 	private String InputNearMatch(String userInput, String[] allowedInputs) {
 		return null;
 	}
+
+	@Override
+	public String GetOpenUserInput(String prompt) {
+		
+			System.out.println(prompt);
+			
+			String userInput = this.in.nextLine();
+				
+			return userInput;
+	}
 }
