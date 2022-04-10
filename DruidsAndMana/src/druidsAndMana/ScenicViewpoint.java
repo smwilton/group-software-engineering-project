@@ -6,7 +6,7 @@ package druidsAndMana;
  */
 public class ScenicViewpoint implements ISquare {
 
-	public int manaCharge() {
+	public int getChargeForLandingOnSquare() {
 		return 0;
 	}
 

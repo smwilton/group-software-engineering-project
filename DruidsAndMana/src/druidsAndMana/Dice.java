@@ -12,8 +12,6 @@ public class Dice {
 
 	// Declare Constant
 	/**
-	 * Number of sides on a dice can either be 4, 6, 8, 10, 12 or 20
-	 * 
 	 * Given that the boardgame consists of 12 squares the design decision has been
 	 * made to use a 4 sided dice so Players will not lap the board during their
 	 * turn.

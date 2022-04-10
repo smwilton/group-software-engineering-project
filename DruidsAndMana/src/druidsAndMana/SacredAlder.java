@@ -7,7 +7,7 @@ package druidsAndMana;
 public class SacredAlder implements ISquare {
 
 	@Override
-	public int manaCharge() {
+	public int getChargeForLandingOnSquare() {
 		return -200; // Player receives 200 mana points for landing on this square:
 	}
 

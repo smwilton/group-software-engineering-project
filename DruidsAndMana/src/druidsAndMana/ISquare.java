@@ -2,7 +2,7 @@ package druidsAndMana;
 
 public interface ISquare {
 	
-	int manaCharge();
+	int getChargeForLandingOnSquare();
 	
 	String description();
 	
