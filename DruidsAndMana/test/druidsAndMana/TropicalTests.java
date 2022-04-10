@@ -21,7 +21,7 @@ class TropicalTests {
 	Realm realm;
 	String expectedAsciiArt, expectedDescription;
 	SquareStatus status1, status2, status3, status4, status5, status6;
-	Boolean isTrue, isFalse;
+	boolean isTrue, isFalse;
 	int expectedPriceToBuy, expectedPriceToPlantForest, expectedPriceForWildlifeSanctuaryUpgrade,
 			expectedCO2ImpactVacant, expectedCO2ImpactGrassland, expectedCO2ImpactSeedling,
 			expectedCO2ImpactIntermediate, expectedCO2ImpactEstablished, expectedCO2ImpactWildlifeSanctuary,
