@@ -16,7 +16,7 @@ class TropicalTests {
 
 	Tropical squareTropicalInstance, squareVacant, squareGrassland, squareSeedlingForest, squareIntermediateForest,
 			squareEstablishedForest, squareWildlifeSanctuary;
-	GrasslandBase squareGrasslandInstance;
+	Grassland squareGrasslandInstance;
 	ISquare squareISquareInstance;
 	Realm realm;
 	String expectedAsciiArt, expectedDescription;
@@ -100,20 +100,20 @@ class TropicalTests {
 	@Test
 	void testConstructor() {
 		assertTrue(squareTropicalInstance instanceof ISquare);
-		assertTrue(squareTropicalInstance instanceof GrasslandBase);
+		assertTrue(squareTropicalInstance instanceof Grassland);
 		assertTrue(squareTropicalInstance instanceof Tropical);
 
 		assertTrue(squareGrasslandInstance instanceof ISquare);
-		assertTrue(squareGrasslandInstance instanceof GrasslandBase);
+		assertTrue(squareGrasslandInstance instanceof Grassland);
 		assertTrue(squareGrasslandInstance instanceof Tropical);
 
 		assertTrue(squareISquareInstance instanceof ISquare);
-		assertTrue(squareISquareInstance instanceof GrasslandBase);
+		assertTrue(squareISquareInstance instanceof Grassland);
 		assertTrue(squareISquareInstance instanceof Tropical);
 	}
 
 	/**
-	 * Test method for {@link druidsAndMana.GrasslandBase#developmentCost()}.
+	 * Test method for {@link druidsAndMana.Grassland#developmentCost()}.
 	 * <p>
 	 * Tests the developmentCost method returns the expected value for each stage in
 	 * the squares development
@@ -139,7 +139,7 @@ class TropicalTests {
 
 	/**
 	 * Test method for
-	 * {@link druidsAndMana.GrasslandBase#getChargeForLandingOnSquare()}.
+	 * {@link druidsAndMana.Grassland#getChargeForLandingOnSquare()}.
 	 * <p>
 	 * Tests the getChargeForLandingOnSquare method returns the expected value for
 	 * each stage in the squares development
@@ -155,7 +155,7 @@ class TropicalTests {
 	}
 
 	/**
-	 * Test method for {@link druidsAndMana.GrasslandBase#getCo2ImpactRating()}.
+	 * Test method for {@link druidsAndMana.Grassland#getCo2ImpactRating()}.
 	 * <p>
 	 * Tests the getCo2ImpactRating method returns the expected value for each stage
 	 * in the squares development
@@ -171,26 +171,26 @@ class TropicalTests {
 	}
 
 	/**
-	 * Test method for {@link druidsAndMana.GrasslandBase#getSquareStatus()} and
-	 * {@link druidsAndMana.GrasslandBase#canDevelopGrassland()} and
-	 * {@link druidsAndMana.GrasslandBase#developGrassland()}.
+	 * Test method for {@link druidsAndMana.Grassland#getSquareStatus()} and
+	 * {@link druidsAndMana.Grassland#canDevelopGrassland()} and
+	 * {@link druidsAndMana.Grassland#developGrassland()}.
 	 * <p>
 	 * Tests that the getSquareStatus, canDevelopGrassland and DevelopGrassland
 	 * methods behaves as expected as even stage throughout the squares development.
 	 * <p>
 	 * This test has been performed for each square instance to ensure the methods
 	 * behave as expected regardless of how it has been declared (i.e. using
-	 * ISquare, GrasslandBase or Tropical).
+	 * ISquare, Grassland or Tropical).
 	 */
 	@Test
 	void testGetSquareStatusAndCanDevelopGrasslandAndDevelopGrassland() {
 		// when a square instance is declared the status is set to Vacant
 		assertEquals(status1, squareTropicalInstance.getSquareStatus());
 		assertEquals(status1, squareGrasslandInstance.getSquareStatus());
-		assertEquals(status1, ((GrasslandBase) squareISquareInstance).getSquareStatus());
+		assertEquals(status1, ((Grassland) squareISquareInstance).getSquareStatus());
 		assertEquals(isTrue, squareTropicalInstance.canDevelopGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.canDevelopGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).canDevelopGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).canDevelopGrassland());
 
 		/*
 		 * When a square is developed it should update the status to the next one and
@@ -202,73 +202,73 @@ class TropicalTests {
 		// Updating from Vacant to Grassland
 		assertEquals(isTrue, squareTropicalInstance.developGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.developGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).developGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).developGrassland());
 		assertEquals(status2, squareTropicalInstance.getSquareStatus());
 		assertEquals(status2, squareGrasslandInstance.getSquareStatus());
-		assertEquals(status2, ((GrasslandBase) squareISquareInstance).getSquareStatus());
+		assertEquals(status2, ((Grassland) squareISquareInstance).getSquareStatus());
 		assertEquals(isTrue, squareTropicalInstance.canDevelopGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.canDevelopGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).canDevelopGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).canDevelopGrassland());
 
 		// Updating from Grassland to SeedlingForest
 		assertEquals(isTrue, squareTropicalInstance.developGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.developGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).developGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).developGrassland());
 		assertEquals(status3, squareTropicalInstance.getSquareStatus());
 		assertEquals(status3, squareGrasslandInstance.getSquareStatus());
-		assertEquals(status3, ((GrasslandBase) squareISquareInstance).getSquareStatus());
+		assertEquals(status3, ((Grassland) squareISquareInstance).getSquareStatus());
 		assertEquals(isTrue, squareTropicalInstance.canDevelopGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.canDevelopGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).canDevelopGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).canDevelopGrassland());
 
 		// Updating from SeedlingForest to IntermediateForest
 		assertEquals(isTrue, squareTropicalInstance.developGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.developGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).developGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).developGrassland());
 		assertEquals(status4, squareTropicalInstance.getSquareStatus());
 		assertEquals(status4, squareGrasslandInstance.getSquareStatus());
-		assertEquals(status4, ((GrasslandBase) squareISquareInstance).getSquareStatus());
+		assertEquals(status4, ((Grassland) squareISquareInstance).getSquareStatus());
 		assertEquals(isTrue, squareTropicalInstance.canDevelopGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.canDevelopGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).canDevelopGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).canDevelopGrassland());
 
 		// Updating from IntermediateForest to EstablisedForest
 		assertEquals(isTrue, squareTropicalInstance.developGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.developGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).developGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).developGrassland());
 		assertEquals(status5, squareTropicalInstance.getSquareStatus());
 		assertEquals(status5, squareGrasslandInstance.getSquareStatus());
-		assertEquals(status5, ((GrasslandBase) squareISquareInstance).getSquareStatus());
+		assertEquals(status5, ((Grassland) squareISquareInstance).getSquareStatus());
 		assertEquals(isTrue, squareTropicalInstance.canDevelopGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.canDevelopGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).canDevelopGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).canDevelopGrassland());
 
 		// Updating from EstablishedForest to WildlifeReserve
 		assertEquals(isTrue, squareTropicalInstance.developGrassland());
 		assertEquals(isTrue, squareGrasslandInstance.developGrassland());
-		assertEquals(isTrue, ((GrasslandBase) squareISquareInstance).developGrassland());
+		assertEquals(isTrue, ((Grassland) squareISquareInstance).developGrassland());
 		assertEquals(status6, squareTropicalInstance.getSquareStatus());
 		assertEquals(status6, squareGrasslandInstance.getSquareStatus());
-		assertEquals(status6, ((GrasslandBase) squareISquareInstance).getSquareStatus());
+		assertEquals(status6, ((Grassland) squareISquareInstance).getSquareStatus());
 		assertEquals(isFalse, squareTropicalInstance.canDevelopGrassland());
 		assertEquals(isFalse, squareGrasslandInstance.canDevelopGrassland());
-		assertEquals(isFalse, ((GrasslandBase) squareISquareInstance).canDevelopGrassland());
+		assertEquals(isFalse, ((Grassland) squareISquareInstance).canDevelopGrassland());
 
 		// Trying to update the WildlifeSanctuary should return false and the status
 		// should remain as WildlifeSanctuary
 		assertEquals(isFalse, squareTropicalInstance.developGrassland());
 		assertEquals(isFalse, squareGrasslandInstance.developGrassland());
-		assertEquals(isFalse, ((GrasslandBase) squareISquareInstance).developGrassland());
+		assertEquals(isFalse, ((Grassland) squareISquareInstance).developGrassland());
 		assertEquals(status6, squareTropicalInstance.getSquareStatus());
 		assertEquals(status6, squareGrasslandInstance.getSquareStatus());
-		assertEquals(status6, ((GrasslandBase) squareISquareInstance).getSquareStatus());
+		assertEquals(status6, ((Grassland) squareISquareInstance).getSquareStatus());
 	}
 
 	/**
 	 * Test method for {@link druidsAndMana.Tropical#description()}.
 	 * <p>
 	 * Tests that the description for each square instance is as expected regardless
-	 * of how it has been declared (i.e. using ISquare, GrasslandBase or Tropical.
+	 * of how it has been declared (i.e. using ISquare, Grassland or Tropical.
 	 * It has also been performed for a square at each stage of the development
 	 * cycle to ensure it behaves as expected regardless of how many developments
 	 * have been applied
@@ -290,7 +290,7 @@ class TropicalTests {
 	 * Test method for {@link druidsAndMana.Tropical#asciiArt()}.
 	 * <p>
 	 * Tests that the ascii art for each square instance is as expected regardless
-	 * of how it has been declared (i.e. using ISquare, GrasslandBase or Tropical).
+	 * of how it has been declared (i.e. using ISquare, Grassland or Tropical).
 	 * It has also been performed for a square at each stage of the development
 	 * cycle to ensure it behaves as expected regardless of how many developments
 	 * have been applied
@@ -310,8 +310,8 @@ class TropicalTests {
 
 	/**
 	 * Test method for
-	 * {@link druidsAndMana.GrasslandBase#setOwnerId(java.lang.String)} and
-	 * {@link druidsAndMana.GrasslandBase#getOwnerId()}.
+	 * {@link druidsAndMana.Grassland#setOwnerId(java.lang.String)} and
+	 * {@link druidsAndMana.Grassland#getOwnerId()}.
 	 */
 	@Test
 	void testSetAndGetOwnerId() {

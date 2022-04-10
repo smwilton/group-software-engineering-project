@@ -24,7 +24,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 */
 	public boolean squareIsGrassland(int squareIndex) {
-		return squares[squareIndex] instanceof GrasslandBase;
+		return squares[squareIndex] instanceof Grassland;
 	}
 	
 	/**
@@ -61,8 +61,8 @@ public class GameBoard {
 	 */
 	public String getSquareOwnerId(int squareIndex) {
 		ISquare square = squares[squareIndex];
-		if(square instanceof GrasslandBase) {
-			GrasslandBase grasslandSquare = (GrasslandBase)square;
+		if(square instanceof Grassland) {
+			Grassland grasslandSquare = (Grassland)square;
 			return grasslandSquare.getOwnerId();
 		}
 		return null;
@@ -74,8 +74,8 @@ public class GameBoard {
 	 */
 	public boolean setSquareOwnerId(int squareIndex, String playerId) { //Tighten this method up!
 		ISquare square = squares[squareIndex];
-		if(square instanceof GrasslandBase) {
-			GrasslandBase grasslandSquare = (GrasslandBase)square;
+		if(square instanceof Grassland) {
+			Grassland grasslandSquare = (Grassland)square;
 			grasslandSquare.setOwnerId(playerId);
 			return true;
 		}
@@ -92,11 +92,11 @@ public class GameBoard {
 		ISquare currSquare = squares[squareIndex];
 		
 		// Cannot upgrade a square that is not grass land:
-		if(!(currSquare instanceof GrasslandBase)) {
+		if(!(currSquare instanceof Grassland)) {
 			return false;
 		}
 		
-		GrasslandBase currGrasslandSquare = (GrasslandBase)currSquare;
+		Grassland currGrasslandSquare = (Grassland)currSquare;
 				
 		// If the grassland is vacant it can always be upgraded or owned:
 		if(currGrasslandSquare.getSquareStatus() == SquareStatus.Vacant) {
@@ -110,11 +110,11 @@ public class GameBoard {
 		
 		for(ISquare square : squares) {
 			
-			if(!(square instanceof GrasslandBase)) { 
+			if(!(square instanceof Grassland)) { 
 				continue; 
 			}
 
-			GrasslandBase grasslandSquare = (GrasslandBase)square;
+			Grassland grasslandSquare = (Grassland)square;
 			
 			if(currGrasslandSquare.getClass() == grasslandSquare.getClass()) {
 				if(playerId != grasslandSquare.getOwnerId()) {
@@ -134,8 +134,8 @@ public class GameBoard {
 		ISquare currSquare = squares[squareIndex];
 		
 		// Cannot upgrade a square that is not grass land:
-		if(currSquare instanceof GrasslandBase) {
-			GrasslandBase grasslandSquare = (GrasslandBase)currSquare;
+		if(currSquare instanceof Grassland) {
+			Grassland grasslandSquare = (Grassland)currSquare;
 			return grasslandSquare.developmentCost();
 		}
 

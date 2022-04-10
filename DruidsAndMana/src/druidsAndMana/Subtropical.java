@@ -5,7 +5,7 @@ package druidsAndMana;
  * @author Nicola Stirling 40020701
  *
  */
-public class Subtropical extends GrasslandBase {
+public class Subtropical extends Grassland {
 	public Subtropical(Realm realm) {
 		super(realm);
 		// TODO Auto-generated constructor stub

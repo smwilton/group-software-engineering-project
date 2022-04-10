@@ -5,7 +5,7 @@ package druidsAndMana;
  * @author Nicola Stirling 40020701
  *
  */
-public class Temperate extends GrasslandBase{
+public class Temperate extends Grassland{
 
 	public Temperate(Realm realm) {
 		super(realm);
