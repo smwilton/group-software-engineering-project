@@ -1,24 +1,25 @@
 package druidsAndMana;
 
 /**
- * Enum of the different Status's that a Grassland Square can have
+ * Enum of the different Status' that a Grassland Square can have
+ * <ol>
+ * <li>Vacant = unowned
  * 
- * 1. Vacant = unowned
+ * <li>Grassland = owned Grassland with no developments
  * 
- * 2. Grassland = owned Grassland with no developments
- * 
- * 3. SeedlingForest = owned Grassland with 1 minor development (i.e. 1 forest
+ * <li>SeedlingForest = owned Grassland with 1 minor development (i.e. 1 forest
  * planted)
  * 
- * 4. IntermediateForest = owned Grassland with 2 minor developments (i.e. 2
+ * <li>IntermediateForest = owned Grassland with 2 minor developments (i.e. 2
  * forests planted)
  * 
- * 5. EstablishedForest = owned Grassland with 3 minor developments (i.e. 3
+ * <li>EstablishedForest = owned Grassland with 3 minor developments (i.e. 3
  * forests planted)
  * 
- * 6. Wildlife Sanctuary = owned Grassland with 1 major development (i.e. a
+ * <li>Wildlife Sanctuary = owned Grassland with 1 major development (i.e. a
  * WildLife reserve)
- * 
+ * </ol>
+ * <p>
  * Contains a method to increment the status as a Player buys and develops a
  * square. It also contains a method to prevent the status exceeding Wildlife
  * Santuary
