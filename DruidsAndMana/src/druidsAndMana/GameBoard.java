@@ -2,10 +2,10 @@ package druidsAndMana;
 
 public class GameBoard {
 
-	private Square[] squares;
+	private ISquare[] squares;
 	
-	public GameBoard(IGameBoardBuilder iGameBoardBuilder, int noSquares) {
-		this.squares = iGameBoardBuilder.buildGameBoard(noSquares);
+	public GameBoard(IGameBoardBuilder iGameBoardBuilder) {
+		this.squares = iGameBoardBuilder.buildGameBoard();
 	}
 	
 	/**
@@ -20,39 +20,100 @@ public class GameBoard {
 	}
 		
 	/**
+	 * Check if the square is grassland
+	 * @param squareIndex
+	 */
+	public boolean squareIsGrassland(int squareIndex) {
+		return squares[squareIndex] instanceof GrasslandBase;
+	}
+	
+	/**
+	 * Returns a description of the current square
+	 * @param squareIndex
+	 * @return
+	 */
+	public String squareDescription(int squareIndex) {
+		return squares[squareIndex].description();
+	}
+	
+	/**
+	 * Returns ascii arts for the given square
+	 * @param squareIndex
+	 * @return
+	 */
+	public String squareAsciiArt(int squareIndex) {
+		return squares[squareIndex].asciiArt();
+	}
+	
+	/**
+	 * Charge in mana to be the player, can be +ve or -ve
+	 * @param squareIndex
+	 * @return
+	 */
+	public int manaCharge(int squareIndex) {
+		return squares[squareIndex].manaCharge();
+	}
+	
+	/**
 	 * If the square is owned returns the players id, else returns null:
 	 * @param squareIndex
 	 * @return 
 	 */
-	public String getsquareOwnerId(int squareIndex) {
-		return squares[squareIndex].ownerId;
+	public String getSquareOwnerId(int squareIndex) {
+		ISquare square = squares[squareIndex];
+		if(square instanceof GrasslandBase) {
+			GrasslandBase grasslandSquare = (GrasslandBase)square;
+			return grasslandSquare.getOwnerId();
+		}
+		return null;
 	}
 	
 	/**
 	 * If a square is not owned then a player can take ownership
 	 * @return
 	 */
-	public void setsquareOwnerId(int squareIndex, String playerId) {
-		squares[squareIndex].Name = playerId;
+	public boolean setSquareOwnerId(int squareIndex, String playerId) { //Tighten this method up!
+		ISquare square = squares[squareIndex];
+		if(square instanceof GrasslandBase) {
+			GrasslandBase grasslandSquare = (GrasslandBase)square;
+			grasslandSquare.setOwnerId(playerId);
+			return true;
+		}
+		return false;
 	}
-	
+			
 	/**
-	 * @param squareIndex
-	 * @return
-	 */
-	public int manaCharge(int squareIndex) {
-		//TODO: some calculation to determine the cost (if any) incurred by landing on this square
-		return 0;
-	}
-		
-	/**
+	 * If the player owns all the grasslands in a realm they can start upgrading the squares:
 	 * @param playerId
 	 * @param squareIndex
 	 * @return
 	 */
-	public boolean playerCanUpdate(String playerId, int squareIndex) {
-		//TODO: if the player owns this square and all the others in a realm they can upgrade it etc:
-		return false;
+	public boolean playerCanUpgrade(String playerId, int squareIndex) {
+		ISquare currSquare = squares[squareIndex];
+		
+		// Cannot upgrade a square that is not grass land:
+		if(!(currSquare instanceof GrasslandBase)) {
+			return false;
+		}
+		
+		GrasslandBase currGrasslandSquare = (GrasslandBase)currSquare;
+		
+		for(ISquare square : squares) {
+			
+			if(!(square instanceof GrasslandBase)) { 
+				continue; 
+			}
+
+			GrasslandBase grasslandSquare = (GrasslandBase)square;
+			
+			if(currGrasslandSquare.getClass() == grasslandSquare.getClass()) {
+				if(playerId != grasslandSquare.getOwnerId()) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -60,16 +121,24 @@ public class GameBoard {
 	 * @return
 	 */
 	public int costToUpgrade(String playerId, int squareIndex) {
-		//TODO: calculate the cost to upgrade the square
+		ISquare currSquare = squares[squareIndex];
+		
+		// Cannot upgrade a square that is not grass land:
+		if(currSquare instanceof GrasslandBase) {
+			GrasslandBase grasslandSquare = (GrasslandBase)currSquare;
+			return grasslandSquare.upgradeCost();
+		}
+
 		return 0;
 	}
-		
+	
+	
 	/**
 	 * @param squareIndex
 	 * @return
 	 */
-	public SquareType getSquareType(int squareIndex) {
-		// TODO: get the current square type
-		return SquareType.Grassland;
+	public SquareDevelopmentType getSquareType(int squareIndex) {
+
+		return SquareDevelopmentType.Grassland;
 	}	
 }

@@ -11,34 +11,164 @@ import druidsAndMana.IGameBoardBuilder;
 
 class GameBoardTests {
 
+	private MockGameBoardBuilder mockBoardBuilder;
+	private SacredAlder mockAlderSquare;
+	private ScenicViewpoint mockScenicViewpoint;
+	private Tropical mockTropical;
+	private Subtropical mockSubtropical;
+	private Boreal mockBoreal;
+	private Temperate mockTemporate;
+	private GameBoard mockGameBoard;
+	
 	@BeforeEach
 	void setUp() throws Exception {
+		// Create the mockGameBoard:
+		mockBoardBuilder = new MockGameBoardBuilder();
 		
+		// Create the squares:
+		mockAlderSquare = new SacredAlder();
+		mockScenicViewpoint = new ScenicViewpoint();
+		mockTropical = new Tropical(new GrasslandValues(Realm.TROPICAL));
+		mockSubtropical = new Subtropical(new GrasslandValues(Realm.SUBTROPICAL));
+		mockBoreal = new Boreal(new GrasslandValues(Realm.BOREAL));
+		mockTemporate = new Temperate(new GrasslandValues(Realm.TEMPERATE));
+		
+		// Create the mockBoardBuilder:
+		mockBoardBuilder.mockSquares = new ISquare[] { mockAlderSquare, mockScenicViewpoint, mockTropical, mockSubtropical, mockBoreal, mockTemporate };
+		
+		// Create the mock game board:
+		mockGameBoard = new GameBoard(mockBoardBuilder);
 	}
 
 	@Test
-	void test() {
+	void setsquareOwnerId_VacantSquare_SetsOwnerIdUpdatesSquareType() {
 		
 		// Arrange
-		// Create the mockGameBoard:
-		MockGameBoardBuilder mockBoardBuilder = new MockGameBoardBuilder();
-		
-		// Create the mockForestSquare:
-		Square mockForestSquare = new Square();
-		mockForestSquare.owner = "Mock";
-		
-		// Create the mockBoardBuilder:
-		mockBoardBuilder.mockSquares = new Square[] { mockForestSquare };
-		
-		GameBoard mockGameBoard = new GameBoard(mockBoardBuilder, 0);
+		String ownerId = "12345";
+		int index = 2;
 		
 		// Act
-		String owner = mockGameBoard.getsquareOwnerId(0);
+		boolean ownerIdSet = this.mockGameBoard.setSquareOwnerId(index, ownerId);
 		
 		// Assert
-		assertEquals(owner, "Mock");
+		assertTrue(ownerIdSet);
+		assertEquals(ownerId, mockTropical.getOwnerId());
+		assertEquals(SquareDevelopmentType.Grassland, mockTropical.developmentStatus());
+	}
+	
+	@Test
+	void setsquareOwnerId_NonGrassland_ReturnsFalse() {
+		
+		// Arrange
+		String ownerId = "12345";
+		int index = 0;
+		
+		// Act
+		boolean ownerIdSet = this.mockGameBoard.setSquareOwnerId(index, ownerId);
+		
+		// Assert
+		assertFalse(ownerIdSet);
+		assertEquals(null, mockTropical.getOwnerId());
+	}
+	
+	@Test
+	void setsquareOwnerId_OwnedSquare_ThrowsException() {
+		
+		// Arrange
+		String ownerId = "12345";
+		int index = 2;
+		
+		// Act
+		boolean ownerIdSet = mockGameBoard.setSquareOwnerId(index, ownerId);
+		
+		// Assert
+		assertThrows(IllegalArgumentException.class, () -> mockGameBoard.setSquareOwnerId(index, ownerId));
 	}
 	
 	
-
+	
+	@Test
+	void getSquareOwnerId_SquareHasOwner_GetsOwnerIdForGrassland() {
+		
+		// Arrange
+		String ownerId = "12345";
+		int index = 2;
+		mockTropical.setOwnerId(ownerId);
+		
+		// Act
+		String ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
+		
+		// Assert
+		assertEquals(ownerIdValue, ownerId);	
+	}
+	
+	@Test
+	void getSquareOwnerId_SquareHasNoOwner_ReturnsNull() {
+		
+		// Arrange
+		int index = 2;
+		
+		// Act
+		String ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
+		
+		// Assert
+		assertNull(ownerIdValue);
+	}
+	
+	@Test
+	void playerCanUpgrade_PlayerOwnsAllGrasslandInRealm_ReturnsTrue() {
+		
+		// Arrange
+		String ownerId = "12345";
+		int index = 2;
+		mockTropical.setOwnerId(ownerId);
+		
+		// Act
+		boolean palyerCanUpgrade = this.mockGameBoard.playerCanUpgrade(ownerId, index);
+		
+		// Assert
+		assertTrue(palyerCanUpgrade);
+	}
+	
+	@Test
+	void playerCanUpgrade_PlayerDoesNotOwnAllGrasslandInRealm_ReturnsFalse() {
+		
+		// Arrange
+		String playerId = "54321";
+		String ownerId = "12345";
+		int index = 2;
+		mockTropical.setOwnerId(ownerId);
+		
+		// Act
+		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, 2);
+		
+		// Assert
+		assertFalse(playerCanUpgrade);
+	}
+	
+	@Test
+	void playerCanUpgrade_PlayerAttemptsToUpgradeNonGrassland_ReturnsFalse() {
+		
+		// Arrange
+		String playerId = "54321";
+		
+		// Act
+		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, 0);
+		
+		// Assert
+		assertFalse(playerCanUpgrade);
+	}
+	
+	@Test
+	void playerCanUpgrade_RealmHasUnOnwedGrassland_ReturnFalse() {
+		
+		// Arrange
+		String playerId = "54321";
+		
+		// Act
+		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, 4);
+		
+		// Assert
+		assertFalse(playerCanUpgrade);
+	}
 }

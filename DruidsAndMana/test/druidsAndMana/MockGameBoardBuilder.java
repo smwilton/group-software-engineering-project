@@ -5,10 +5,10 @@ import druidsAndMana.IGameBoardBuilder;
 
 public class MockGameBoardBuilder implements IGameBoardBuilder {
 
-	public Square[] mockSquares;
+	public ISquare[] mockSquares;
 	
 	@Override
-	public Square[] buildGameBoard(int noSquares) {
+	public ISquare[] buildGameBoard() {
 		return mockSquares;
 	}
 

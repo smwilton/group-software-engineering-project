@@ -27,4 +27,10 @@ public class MockInputService implements IInputService {
 		return false;
 	}
 
+	@Override
+	public String GetOpenUserInput(String prompt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
