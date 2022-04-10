@@ -5,7 +5,7 @@ package druidsAndMana;
  * @author Nicola Stirling 40020701
  *
  */
-public class Boreal extends GrasslandBase {
+public class Boreal extends Grassland {
 
 	// Constructor
 	public Boreal(Realm realm) {

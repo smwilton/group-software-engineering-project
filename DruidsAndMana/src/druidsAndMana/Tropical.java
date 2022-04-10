@@ -5,7 +5,7 @@ package druidsAndMana;
  * @author Nicola Stirling 40020701
  *
  */
-public class Tropical extends GrasslandBase {
+public class Tropical extends Grassland {
 
 	public Tropical(Realm realm) {
 		super(realm);
