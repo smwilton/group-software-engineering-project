@@ -1,8 +1,10 @@
 package druidsAndMana;
 
 /**
- * Abstract class that implements ISquare interface and repesents a GrasslandBase
- * object NB: An abstract class cannot be instantiated
+ * Abstract class that implements ISquare interface and repesents a
+ * GrasslandBase object
+ * 
+ * NB: An abstract class cannot be instantiated
  *
  * @author Nicola Stirling 40020701
  *
@@ -60,24 +62,28 @@ public abstract class GrasslandBase implements ISquare {
 	 * Method to get the cost of developing the square depending on it's current
 	 * status.
 	 * 
-	 * @return - If the status is Vacant the price to buy the grassland will be
-	 *         returned, if the status is GrasslandBase, SeedlingForest or
-	 *         IntermediateForest the price to plant a Forest will be returned, and
-	 *         if the status if EstablishedForest the price to upgrade to a
-	 *         WildlifeSanctuary will be returned. If the status is anything other
-	 *         than this 0 will be returned as there are no development options
-	 *         available
+	 * @return
+	 *         <ul>
+	 *         <li>If the status is Vacant the price to buy the grassland will be
+	 *         returned.
+	 *         <li>If the status is GrasslandBase, SeedlingForest or
+	 *         IntermediateForest the price to plant a Forest will be returned.
+	 *         <li>If the status if EstablishedForest the price to upgrade to a
+	 *         WildlifeSanctuary will be returned.
+	 *         <li>If the status is anything other than this 0 will be returned as
+	 *         there are no development options available
+	 *         </ul>
 	 */
 	public int developmentCost() {
 		switch (squareStatus) {
 		case Vacant:
-			return grasslandValues.priceGrassland();
+			return grasslandValues.getPriceGrassland();
 		case Grassland:
 		case SeedlingForest:
 		case IntermediateForest:
-			return grasslandValues.priceForest();
+			return grasslandValues.getPriceForest();
 		case EstablishedForest:
-			return grasslandValues.priceWildlifeSanctuary();
+			return grasslandValues.getPriceWildlifeSanctuary();
 		default:
 			return 0;
 		}
@@ -91,18 +97,18 @@ public abstract class GrasslandBase implements ISquare {
 	 *         owned by another player
 	 */
 	public int getChargeForLandingOnSquare() {
-		// TODO
+		int[] charges = grasslandValues.getCostToLandOnValueSet();
 		switch (squareStatus) {
 		case Grassland:
-			return 0;
+			return charges[0];
 		case SeedlingForest:
-			return 0;
+			return (charges[0] + (1 * charges[1]));
 		case IntermediateForest:
-			return 0;
+			return (charges[0] + (2 * charges[1]));
 		case EstablishedForest:
-			return 0;
+			return (charges[0] + (3 * charges[1]));
 		case WildlifeSanctuary:
-			return 0;
+			return (charges[0] + (3 * charges[1]) + (1 * charges[2]));
 		default:
 			return 0;
 		}
@@ -115,18 +121,18 @@ public abstract class GrasslandBase implements ISquare {
 	 * @return - the CO2 Impact Rating earned for the GrasslandBase
 	 */
 	public int getCo2ImpactRating() {
-		// TODO
+		int[] co2Values = grasslandValues.getCO2ValueSet();
 		switch (squareStatus) {
 		case Grassland:
-			return 0;
+			return (co2Values[0]);
 		case SeedlingForest:
-			return 0;
+			return (co2Values[0] + (1 * co2Values[1]));
 		case IntermediateForest:
-			return 0;
+			return (co2Values[0] + (2 * co2Values[1]));
 		case EstablishedForest:
-			return 0;
+			return (co2Values[0] + (3 * co2Values[1]));
 		case WildlifeSanctuary:
-			return 0;
+			return (co2Values[0] + (3 * co2Values[1]) + (1 * co2Values[2]));
 		default:
 			return 0;
 		}
@@ -162,22 +168,24 @@ public abstract class GrasslandBase implements ISquare {
 	 * Method to get the status of the grassland. This can either be Vacant,
 	 * GrasslandBase, SeedlingForest, IntermediateForest, EstablishedForest, or
 	 * WildlifeSanctuary
+	 * <ol>
+	 * <li>Vacant = unowned
 	 * 
-	 * 1. Vacant = unowned
+	 * <li>GrasslandBase = owned GrasslandBase with no developments
 	 * 
-	 * 2. GrasslandBase = owned GrasslandBase with no developments
+	 * <li>SeedlingForest = owned GrasslandBase with 1 minor development (i.e. 1
+	 * forest planted)
 	 * 
-	 * 3. SeedlingForest = owned GrasslandBase with 1 minor development (i.e. 1 forest
-	 * planted)
+	 * <li>IntermediateForest = owned GrasslandBase with 2 minor developments (i.e.
+	 * 2 forests planted)
 	 * 
-	 * 4. IntermediateForest = owned GrasslandBase with 2 minor developments (i.e. 2
+	 * <li>EstablishedForest = owned GrasslandBase with 3 minor developments (i.e. 3
 	 * forests planted)
 	 * 
-	 * 5. EstablishedForest = owned GrasslandBase with 3 minor developments (i.e. 3
-	 * forests planted)
-	 * 
-	 * 6. Wildlife Sanctuary = owned GrasslandBase with 1 major development (i.e. a
+	 * <li>Wildlife Sanctuary = owned GrasslandBase with 1 major development (i.e. a
 	 * WildLife reserve)
+	 * </ol>
+	 * <p>
 	 * 
 	 * @return - the status of the GrasslandBase
 	 */
