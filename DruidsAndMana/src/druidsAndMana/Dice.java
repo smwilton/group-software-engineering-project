@@ -1,37 +1,46 @@
-/**
- * 
- */
 package druidsAndMana;
 
+import java.util.Random;
+
 /**
+ * Class the represents one dice object
+ * 
  * @author Nicola
  *
  */
 public class Dice {
 
-	private int numSides;
-
+	// Declare Constant
 	/**
-	 * @param numSides
+	 * Number of sides on a dice can either be 4, 6, 8, 10, 12 or 20
+	 * 
+	 * Given that the boardgame consists of 12 squares the design decision has been
+	 * made to use a 4 sided dice so Players will not lap the board during their
+	 * turn.
+	 * 
+	 * If the game was to expand this constant could be updated by the developer
 	 */
-	public Dice(int numSides) {
-		this.numSides = numSides;
+	private static final int NUM_SIDES = 4;
+
+	// Constructor
+	/**
+	 * Default Constructor
+	 */
+	public Dice() {
+
 	}
 
+	// Method
 	/**
-	 * @return the numSides
+	 * Method to Roll the Dice
+	 * 
+	 * @return - the result as an int
 	 */
-	public int getNumSides() {
-		return numSides;
+	public int rollDice() {
+		int result = 0;
+		Random random = new Random();
+		result = (random.nextInt(NUM_SIDES)) + 1;
+		return result;
 	}
 
-	/**
-	 * @param numSides the numSides to set
-	 */
-	public void setNumSides(int numSides) {
-		this.numSides = numSides;
-	}
-	
-	
-	
 }
