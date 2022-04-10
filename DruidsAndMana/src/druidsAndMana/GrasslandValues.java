@@ -1,5 +1,10 @@
 package druidsAndMana;
-
+/**
+ * Class that contains all the values relating to the types of Grassland
+ *
+ * @author Nicola Stirling 40020701
+ *
+ */
 public class GrasslandValues {
 
 	/**
@@ -91,5 +96,12 @@ public class GrasslandValues {
 			break; // design decision not to include a default case as a realm can only be one of
 					// the 4 enum values
 		}
+	}
+	
+	public int[] getValues (Realm realm) {
+		int[] values = new int[5];
+		
+		
+		return values;
 	}
 }

@@ -53,7 +53,7 @@ class GameBoardTests {
 		// Assert
 		assertTrue(ownerIdSet);
 		assertEquals(ownerId, mockTropical.getOwnerId());
-		assertEquals(SquareDevelopmentType.Grassland, mockTropical.developmentStatus());
+		assertEquals(SquareStatus.Grassland, mockTropical.getSquareStatus());
 	}
 	
 	@Test

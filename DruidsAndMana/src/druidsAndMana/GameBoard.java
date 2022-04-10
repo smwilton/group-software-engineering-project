@@ -126,7 +126,7 @@ public class GameBoard {
 		// Cannot upgrade a square that is not grass land:
 		if(currSquare instanceof GrasslandBase) {
 			GrasslandBase grasslandSquare = (GrasslandBase)currSquare;
-			return grasslandSquare.upgradeCost();
+			return grasslandSquare.developmentCost();
 		}
 
 		return 0;
@@ -137,8 +137,8 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
-	public SquareDevelopmentType getSquareType(int squareIndex) {
+	public SquareStatus getSquareType(int squareIndex) {
 
-		return SquareDevelopmentType.Grassland;
+		return SquareStatus.Grassland;
 	}	
 }

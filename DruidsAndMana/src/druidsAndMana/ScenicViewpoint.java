@@ -1,13 +1,10 @@
-/**
- * 
- */
 package druidsAndMana;
 
 /**
- * @author Nicola
+ * @author Peter McCullough 40055438
  *
  */
-public class ScenicViewpoint implements ISquare{
+public class ScenicViewpoint implements ISquare {
 
 	public int manaCharge() {
 		return 0;
@@ -20,18 +17,18 @@ public class ScenicViewpoint implements ISquare{
 
 	@Override
 	public String asciiArt() {
-		return " .    '                   .  \"   '\r\n"
+		return " .    '                   .  \"   '\r\n" 
 				+ "            .  .  .                 '      '\r\n"
-				+ "    \"`       .   .\r\n"
+				+ "    \"`       .   .\r\n" 
 				+ "                                     '     '\r\n"
-				+ "  .    '      _______________\r\n"
+				+ "  .    '      _______________\r\n" 
 				+ "          ==c(___(o(______(_()\r\n"
-				+ "                  \\=\\\r\n"
-				+ "                   )=\\\r\n"
+				+ "                  \\=\\\r\n" 
+				+ "                   )=\\\r\n" 
 				+ "                  //|\\\\\r\n"
-				+ "                 //|| \\\\\r\n"
+				+ "                 //|| \\\\\r\n" 
 				+ "                // ||  \\\\\r\n"
-				+ "               //  ||   \\\\\r\n"
+				+ "               //  ||   \\\\\r\n" 
 				+ "              //         \\\\";
 	}
 }
