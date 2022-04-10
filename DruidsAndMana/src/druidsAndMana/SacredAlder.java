@@ -1,5 +1,9 @@
 package druidsAndMana;
 
+/**
+ * @author Peter McCullough 40055438
+ *
+ */
 public class SacredAlder implements ISquare {
 
 	@Override
@@ -14,18 +18,18 @@ public class SacredAlder implements ISquare {
 
 	@Override
 	public String asciiArt() {
-		
-		return "              v .   ._, |_  .,\r\n"
+
+		return "              v .   ._, |_  .,\r\n" 
 				+ "           `-._\\/  .  \\ /    |/_\r\n"
-				+ "               \\\\  _\\, y | \\//\r\n"
+				+ "               \\\\  _\\, y | \\//\r\n" 
 				+ "         _\\_.___\\\\, \\\\/ -.\\||\r\n"
-				+ "           `7-,--.`._||  / / ,\r\n"
+				+ "           `7-,--.`._||  / / ,\r\n" 
 				+ "           /'     `-. `./ / |/_.'\r\n"
-				+ "                     |    |//\r\n"
+				+ "                     |    |//\r\n" 
 				+ "                     |_    /\r\n"
-				+ "                     |-   |\r\n"
+				+ "                     |-   |\r\n" 
 				+ "                     |   =|\r\n"
-				+ "                     |    |\r\n"
+				+ "                     |    |\r\n" 
 				+ "--------------------/ ,  . \\--------._";
 	}
 }

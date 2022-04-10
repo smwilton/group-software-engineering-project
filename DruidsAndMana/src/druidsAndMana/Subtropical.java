@@ -1,8 +1,13 @@
 package druidsAndMana;
-
+/**
+ * Class that extends Grassland and represents a Subtropical Grassland object
+ *
+ * @author Nicola Stirling 40020701
+ *
+ */
 public class Subtropical extends GrasslandBase {
-	public Subtropical(GrasslandValues grasslandValues) {
-		super(grasslandValues);
+	public Subtropical(Realm realm) {
+		super(realm);
 		// TODO Auto-generated constructor stub
 	}
 

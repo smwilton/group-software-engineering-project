@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * @author Nicola
  *
  */
-class TestDice {
+class DiceTests {
 	
 	int upperLimit, lowerLimit;
 	Dice dice;

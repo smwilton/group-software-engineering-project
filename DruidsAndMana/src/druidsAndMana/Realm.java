@@ -9,5 +9,5 @@ package druidsAndMana;
  *
  */
 public enum Realm {
-	TROPICAL, SUBTROPICAL, TEMPERATE, BOREAL
+	Tropical, Subtropical, Temperate, Boreal
 }

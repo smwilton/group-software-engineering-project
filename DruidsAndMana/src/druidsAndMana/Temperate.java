@@ -1,9 +1,14 @@
 package druidsAndMana;
-
+/**
+ * Class that extends Grassland and represents a Temperate Grassland object
+ *
+ * @author Nicola Stirling 40020701
+ *
+ */
 public class Temperate extends GrasslandBase{
 
-	public Temperate(GrasslandValues grasslandValues) {
-		super(grasslandValues);
+	public Temperate(Realm realm) {
+		super(realm);
 	}
 
 	@Override
