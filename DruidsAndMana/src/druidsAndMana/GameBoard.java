@@ -97,7 +97,7 @@ public class GameBoard {
 		}
 		
 		GrasslandBase currGrasslandSquare = (GrasslandBase)currSquare;
-		
+				
 		for(ISquare square : squares) {
 			
 			if(!(square instanceof GrasslandBase)) { 

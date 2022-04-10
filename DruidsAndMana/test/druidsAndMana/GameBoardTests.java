@@ -28,10 +28,10 @@ class GameBoardTests {
 		// Create the squares:
 		mockAlderSquare = new SacredAlder();
 		mockScenicViewpoint = new ScenicViewpoint();
-		mockTropical = new Tropical(new GrasslandValues(Realm.TROPICAL));
-		mockSubtropical = new Subtropical(new GrasslandValues(Realm.SUBTROPICAL));
-		mockBoreal = new Boreal(new GrasslandValues(Realm.BOREAL));
-		mockTemporate = new Temperate(new GrasslandValues(Realm.TEMPERATE));
+		mockTropical = new Tropical(Realm.Tropical);
+		mockSubtropical = new Subtropical(Realm.Subtropical);
+		mockBoreal = new Boreal(Realm.Boreal);
+		mockTemporate = new Temperate(Realm.Temperate);
 		
 		// Create the mockBoardBuilder:
 		mockBoardBuilder.mockSquares = new ISquare[] { mockAlderSquare, mockScenicViewpoint, mockTropical, mockSubtropical, mockBoreal, mockTemporate };
@@ -80,6 +80,7 @@ class GameBoardTests {
 		
 		// Act
 		boolean ownerIdSet = mockGameBoard.setSquareOwnerId(index, ownerId);
+		assertTrue(ownerIdSet);
 		
 		// Assert
 		assertThrows(IllegalArgumentException.class, () -> mockGameBoard.setSquareOwnerId(index, ownerId));
@@ -140,7 +141,7 @@ class GameBoardTests {
 		mockTropical.setOwnerId(ownerId);
 		
 		// Act
-		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, 2);
+		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, index);
 		
 		// Assert
 		assertFalse(playerCanUpgrade);
