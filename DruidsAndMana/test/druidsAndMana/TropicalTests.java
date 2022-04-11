@@ -9,7 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Nicola
+ * Testing of the Tropical Class (and indirectly testing of the Grassland
+ * Abstract Class)
+ * 
+ * @author Nicola Stirling 40020701
  *
  */
 class TropicalTests {
@@ -358,47 +361,110 @@ class TropicalTests {
 	 * {@link druidsAndMana.Grassland#getOwnerId()} and
 	 * {@link druidsAndMana.Grassland#transferOwnership(java.lang.String)}.
 	 * <p>
-	 * Tests the getter and setters for the OwnerId behaves as expected regardless
-	 * of how it has been declared (i.e. using ISquare, Grassland or Tropical).
+	 * Tests the getter and 2 setter methods for the OwnerId behaves as expected
+	 * regardless of how it has been declared (i.e. using ISquare, Grassland or
+	 * Tropical).
 	 * <p>
 	 * This test includes both the setInitialOwnerId setter and the
 	 * transferOwnership setter
 	 */
 	@Test
 	void testSetAndGetOwnerId() {
+		// ----------------------- PART1 - Tropical -----------------------
+
+		// An error should be thrown if the transferOwnership method is used before the
+		// OwnerId has been set
+		Exception e = assertThrows(IllegalArgumentException.class, () -> {
+			squareTropicalInstance.transferOwnership(ownerIdOption2);
+		});
+		assertEquals("A player must currently own this square to transfer the ownership to another Player",
+				e.getMessage());
+
+		// Test setting the initial owner and updating the SquareStatus from VACANT to
+		// GRASSLAND)
+		assertEquals(SquareStatus.VACANT, squareTropicalInstance.getSquareStatus()); // Status is VACANT before OwnerID
+																						// is set
 		squareTropicalInstance.setInitialOwnerId(ownerIdOption1);
 		assertEquals("1", squareTropicalInstance.getOwnerId());
+		assertEquals(SquareStatus.GRASSLAND, squareTropicalInstance.getSquareStatus()); // Status is GRASSLAND after
+																						// OwnerID is set
 
-		// check that an exception is thrown if an owner id is set when an owner id is
+		// Test that an exception is thrown if an owner id is set when an owner id is
 		// already set
-		Exception e = assertThrows(IllegalArgumentException.class, () -> {
+		e = assertThrows(IllegalArgumentException.class, () -> {
 			squareTropicalInstance.setInitialOwnerId(ownerIdOption2);
 		});
 		assertEquals("Another player already owns this square", e.getMessage());
 
+		// Test that now the Initial Owner has been set the the ownership can be
+		// transferred
+		squareTropicalInstance.transferOwnership(ownerIdOption2);
+		assertEquals("Owner Test", squareTropicalInstance.getOwnerId());
+
+		// ----------------------- PART2 - Grassland -----------------------
+
+		// An error should be thrown if the transferOwnership method is used before the
+		// OwnerId has been set
+		e = assertThrows(IllegalArgumentException.class, () -> {
+			squareGrasslandInstance.transferOwnership(ownerIdOption3);
+		});
+		assertEquals("A player must currently own this square to transfer the ownership to another Player",
+				e.getMessage());
+
+		// Test setting the initial owner and updating the SquareStatus from VACANT to
+		// GRASSLAND)
+		assertEquals(SquareStatus.VACANT, squareGrasslandInstance.getSquareStatus()); // Status is VACANT before OwnerID
+																						// is set
 		squareGrasslandInstance.setInitialOwnerId(ownerIdOption2);
 		assertEquals("Owner Test", squareGrasslandInstance.getOwnerId());
+		assertEquals(SquareStatus.GRASSLAND, squareGrasslandInstance.getSquareStatus()); // Status is GRASSLAND after
+																							// OwnerID is set
 
-		// check that an exception is thrown if an owner id is set when an owner id is
+		// Test that an exception is thrown if an owner id is set when an owner id is
 		// already set
 		e = assertThrows(IllegalArgumentException.class, () -> {
 			squareGrasslandInstance.setInitialOwnerId(ownerIdOption3);
 		});
 		assertEquals("Another player already owns this square", e.getMessage());
 
+		// Test that now the Initial Owner has been set the the ownership can be
+		// transferred
+		squareGrasslandInstance.transferOwnership(ownerIdOption3);
+		assertEquals("Owner123", squareGrasslandInstance.getOwnerId());
+
+		// ----------------------- PART3 - ISquare -----------------------
+
+		// An error should be thrown if the transferOwnership method is used before the
+		// OwnerId has been set
+		e = assertThrows(IllegalArgumentException.class, () -> {
+			((Grassland) squareISquareInstance).transferOwnership(ownerIdOption1);
+		});
+		assertEquals("A player must currently own this square to transfer the ownership to another Player",
+				e.getMessage());
+
+		// Test setting the initial owner and updating the SquareStatus from VACANT to
+		// GRASSLAND)
+		assertEquals(SquareStatus.VACANT, ((Grassland) squareISquareInstance).getSquareStatus()); // Status is VACANT
+																									// before OwnerID is
+																									// set
 		((Grassland) squareISquareInstance).setInitialOwnerId(ownerIdOption3);
 		assertEquals("Owner123", ((Grassland) squareISquareInstance).getOwnerId());
+		assertEquals(SquareStatus.GRASSLAND, ((Grassland) squareISquareInstance).getSquareStatus()); // Status is
+																										// GRASSLAND
+																										// after OwnerID
+																										// is set
 
-		// check that an exception is thrown if an owner id is set when an owner id is
+		// Test that an exception is thrown if an owner id is set when an owner id is
 		// already set
 		e = assertThrows(IllegalArgumentException.class, () -> {
 			((Grassland) squareISquareInstance).setInitialOwnerId(ownerIdOption1);
 		});
 		assertEquals("Another player already owns this square", e.getMessage());
-		/*
-		 * ownerIdOption1 = "1"; ownerIdOption2 = "Owner Test"; ownerIdOption3 =
-		 * "Owner123";
-		 */
+
+		// Test that now the Initial Owner has been set the the ownership can be
+		// transferred
+		((Grassland) squareISquareInstance).transferOwnership(ownerIdOption1);
+		assertEquals("1", ((Grassland) squareISquareInstance).getOwnerId());
 	}
 
 }

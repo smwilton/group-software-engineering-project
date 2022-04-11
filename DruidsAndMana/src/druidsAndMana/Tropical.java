@@ -1,14 +1,14 @@
 package druidsAndMana;
 /**
- * Class that extends Grassland and represents a TIER_1 Grassland object
+ * Class that extends Grassland and represents a Tropical Grassland object
  *
  * @author Nicola Stirling 40020701
  *
  */
 public class Tropical extends Grassland {
 
-	public Tropical(RealmTier realm) {
-		super(realm);
+	public Tropical(RealmTier realmTier) {
+		super(realmTier);
 	}
 
 	@Override

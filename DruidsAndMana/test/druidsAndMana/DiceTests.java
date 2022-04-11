@@ -5,15 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 /**
  * Testing of the Dice class
  * 
- * @author Nicola
+ * @author Nicola Stirling 40020701
  *
  */
 class DiceTests {
-	
+
 	int upperLimit, lowerLimit;
 	Dice dice;
 
@@ -33,8 +32,8 @@ class DiceTests {
 	@Test
 	void testRollDice() {
 		int result = dice.rollDice();
-		
-		if (result >=lowerLimit && result<=upperLimit) {
+
+		if (result >= lowerLimit && result <= upperLimit) {
 			assertTrue(true);
 		} else {
 			assertTrue(false);

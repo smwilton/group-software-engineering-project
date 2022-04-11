@@ -1,18 +1,14 @@
 package druidsAndMana;
 
-import druidsAndMana.IInputService;
-
 public class MockInputService implements IInputService {
 
-	//This is a test fixture without using a mocking software like MOQ etc.
+	// This is a test fixture without using a mocking software like MOQ etc.
 	private String userInputResponse;
 	private boolean confirmation = false;
 	private String[] responses = new String[5];
 	private String[] fewerResponses = new String[2];
-	private int arrayIteration=0;
-	
-	
-	
+	private int arrayIteration = 0;
+
 	public boolean getConfirmation() {
 		return confirmation;
 	}
@@ -21,7 +17,8 @@ public class MockInputService implements IInputService {
 		this.confirmation = confirmation;
 	}
 
-	public void setUserInputResponse4PlayerArray(String response1, String response2, String response3, String response4, String response5) {
+	public void setUserInputResponse4PlayerArray(String response1, String response2, String response3, String response4,
+			String response5) {
 		responses[0] = response1;
 		responses[1] = response2;
 		responses[2] = response3;
@@ -29,55 +26,55 @@ public class MockInputService implements IInputService {
 		responses[4] = response5;
 		setUserInputResponse(response1);
 	}
-	
+
 	public void printResponsesArray() {
 		for (String response : responses) {
 			System.out.println(response);
 		}
 	}
-	
+
 	public void printFewerResponsesArray() {
 		for (String response : fewerResponses) {
 			System.out.println(response);
 		}
 	}
-	
+
 	public void setUserInputResponse1PlayerArray(String response1, String response2) {
 		fewerResponses[0] = response1;
 		fewerResponses[1] = response2;
 		setUserInputResponse(response1);
 	}
-	
-	public String getUserInputResponse(){
+
+	public String getUserInputResponse() {
 		return this.userInputResponse;
 	}
-	
+
 	public void setUserInputResponse(String response) {
 		this.userInputResponse = response;
 	}
-	
+
 	@Override
 	public String GetUserInput(String prompt, String[] allowedInputs) {
-		
+
 		return userInputResponse;
 	}
 
 	@Override
 	public boolean GetUserConfirmation(String prompt) {
-		
+
 		return confirmation;
 	}
 
 	@Override
 	public String GetOpenUserInput(String prompt) {
-		if(arrayIteration<4) {
+		if (arrayIteration < 4) {
 			arrayIteration++;
-		}else {
-			arrayIteration =0;
+		} else {
+			arrayIteration = 0;
 		}
-		if(fewerResponses[0]==null) {
+		if (fewerResponses[0] == null) {
 			setUserInputResponse(responses[arrayIteration]);
-		}else {
+		} else {
 			setUserInputResponse(fewerResponses[arrayIteration]);
 		}
 		return userInputResponse;
