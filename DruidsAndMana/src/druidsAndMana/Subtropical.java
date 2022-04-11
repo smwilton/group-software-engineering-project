@@ -1,13 +1,13 @@
 package druidsAndMana;
 /**
- * Class that extends Grassland and represents a TIER_2 Grassland object
+ * Class that extends Grassland and represents a Subtropical Grassland object
  *
  * @author Nicola Stirling 40020701
  *
  */
 public class Subtropical extends Grassland {
-	public Subtropical(RealmTier realm) {
-		super(realm);
+	public Subtropical(RealmTier realmTier) {
+		super(realmTier);
 		// TODO Auto-generated constructor stub
 	}
 

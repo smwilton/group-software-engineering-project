@@ -28,10 +28,10 @@ public abstract class Grassland implements ISquare {
 	 * Sets the grassland values based on the RealmTier that has been defined in the
 	 * constructor
 	 * 
-	 * @param realmTier1 - the realmTier1 to get the GrasslandValues for
+	 * @param realmTier - the realmTier to get the GrasslandValues for
 	 */
-	private void setGrasslandValues(RealmTier realm) {
-		this.grasslandValues = new GrasslandValues(realm);
+	private void setGrasslandValues(RealmTier realmTier) {
+		this.grasslandValues = new GrasslandValues(realmTier);
 	}
 
 	/**

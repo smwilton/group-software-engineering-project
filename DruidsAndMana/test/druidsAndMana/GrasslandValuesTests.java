@@ -9,73 +9,75 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Nicola
+ * Testing of the GrasslandValues Class
+ * 
+ * @author Nicola Stirling 40020701
  *
  */
 class GrasslandValuesTests {
 	GrasslandValues grasslandValuesTest;
 
-	int expectedTropicalPriceToBuy, expectedSubtropicalPriceToBuy, expectedTemperatePriceToBuy,
-			expectedBorealPriceToBuy, expectedTropicalPriceToPlantForest, expectedSubtropicalPriceToPlantForest,
-			expectedTemperatePriceToPlantForest, expectedBorealPriceToPlantForest,
-			expectedTropicalPriceForWildlifeSanctuaryUpgrade, expectedSubtropicalPriceForWildlifeSanctuaryUpgrade,
-			expectedTemperatePriceForWildlifeSanctuaryUpgrade, expectedBorealPriceForWildlifeSanctuaryUpgrade;
+	int expectedTier1PriceToBuy, expectedTier2PriceToBuy, expectedTier3PriceToBuy, expectedTier4PriceToBuy,
+			expectedTier1PriceToPlantForest, expectedTier2PriceToPlantForest, expectedTier3PriceToPlantForest,
+			expectedTier4PriceToPlantForest, expectedTier1PriceForWildlifeSanctuaryUpgrade,
+			expectedTier2PriceForWildlifeSanctuaryUpgrade, expectedTier3PriceForWildlifeSanctuaryUpgrade,
+			expectedTier4PriceForWildlifeSanctuaryUpgrade;
 
-	int[] expectedTropicalCo2ValueSet, expectedSubtropicalCo2ValueSet, expectedTemperateCo2ValueSet,
-			expectedBorealCo2ValueSet, expectedTropicalLandOnCostValueSet, expectedSubtropicalLandOnCostValueSet,
-			expectedTemperateLandOnCostValueSet, expectedBorealLandOnCostValueSet;
+	int[] expectedTier1Co2ValueSet, expectedTier2Co2ValueSet, expectedTier3Co2ValueSet, expectedTier4Co2ValueSet,
+			expectedTier1LandOnCostValueSet, expectedTier2LandOnCostValueSet, expectedTier3LandOnCostValueSet,
+			expectedTier4LandOnCostValueSet;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		expectedTropicalPriceToBuy = 60;
-		expectedSubtropicalPriceToBuy = 50;
-		expectedTemperatePriceToBuy = 40;
-		expectedBorealPriceToBuy = 30;
+		expectedTier1PriceToBuy = 60;
+		expectedTier2PriceToBuy = 50;
+		expectedTier3PriceToBuy = 40;
+		expectedTier4PriceToBuy = 30;
 
-		expectedTropicalPriceToPlantForest = 12;
-		expectedSubtropicalPriceToPlantForest = 10;
-		expectedTemperatePriceToPlantForest = 8;
-		expectedBorealPriceToPlantForest = 3;
+		expectedTier1PriceToPlantForest = 12;
+		expectedTier2PriceToPlantForest = 10;
+		expectedTier3PriceToPlantForest = 8;
+		expectedTier4PriceToPlantForest = 3;
 
-		expectedTropicalPriceForWildlifeSanctuaryUpgrade = 60;
-		expectedSubtropicalPriceForWildlifeSanctuaryUpgrade = 50;
-		expectedTemperatePriceForWildlifeSanctuaryUpgrade = 40;
-		expectedBorealPriceForWildlifeSanctuaryUpgrade = 30;
+		expectedTier1PriceForWildlifeSanctuaryUpgrade = 60;
+		expectedTier2PriceForWildlifeSanctuaryUpgrade = 50;
+		expectedTier3PriceForWildlifeSanctuaryUpgrade = 40;
+		expectedTier4PriceForWildlifeSanctuaryUpgrade = 30;
 
-		expectedTropicalCo2ValueSet = new int[] { 60, 6, 20 };
-		expectedSubtropicalCo2ValueSet = new int[] { 50, 5, 15 };
-		expectedTemperateCo2ValueSet = new int[] { 40, 4, 10 };
-		expectedBorealCo2ValueSet = new int[] { 30, 3, 5 };
+		expectedTier1Co2ValueSet = new int[] { 60, 6, 20 };
+		expectedTier2Co2ValueSet = new int[] { 50, 5, 15 };
+		expectedTier3Co2ValueSet = new int[] { 40, 4, 10 };
+		expectedTier4Co2ValueSet = new int[] { 30, 3, 5 };
 
-		expectedTropicalLandOnCostValueSet = new int[] { 10, 4, 8 };
-		expectedSubtropicalLandOnCostValueSet = new int[] { 9, 3, 4 };
-		expectedTemperateLandOnCostValueSet = new int[] { 8, 2, 6 };
-		expectedBorealLandOnCostValueSet = new int[] { 7, 1, 5 };
+		expectedTier1LandOnCostValueSet = new int[] { 10, 4, 8 };
+		expectedTier2LandOnCostValueSet = new int[] { 9, 3, 4 };
+		expectedTier3LandOnCostValueSet = new int[] { 8, 2, 6 };
+		expectedTier4LandOnCostValueSet = new int[] { 7, 1, 5 };
 	}
 
 	/**
 	 * Test method for
 	 * {@link druidsAndMana.GrasslandValues#GrasslandValues(druidsAndMana.RealmTier)}.
 	 * 
-	 * Tests that the use of the constructor with each Reealm enum instantiates an
-	 * instance of GrasslandValues
+	 * Tests that the use of the constructor with each RealmTier enum instantiates
+	 * an instance of GrasslandValues
 	 */
 	@Test
 	void testGrasslandValuesConstructor() {
-		GrasslandValues tropicalValues = new GrasslandValues(RealmTier.TIER_1);
-		assertTrue(tropicalValues instanceof GrasslandValues);
+		GrasslandValues tier1Values = new GrasslandValues(RealmTier.TIER_1);
+		assertTrue(tier1Values instanceof GrasslandValues);
 
-		GrasslandValues subtropicalValues = new GrasslandValues(RealmTier.TIER_2);
-		assertTrue(tropicalValues instanceof GrasslandValues);
+		GrasslandValues tier2Values = new GrasslandValues(RealmTier.TIER_2);
+		assertTrue(tier2Values instanceof GrasslandValues);
 
-		GrasslandValues temperateValues = new GrasslandValues(RealmTier.TIER_3);
-		assertTrue(tropicalValues instanceof GrasslandValues);
+		GrasslandValues tier3Values = new GrasslandValues(RealmTier.TIER_3);
+		assertTrue(tier1Values instanceof GrasslandValues);
 
-		GrasslandValues borealValues = new GrasslandValues(RealmTier.TIER_4);
-		assertTrue(tropicalValues instanceof GrasslandValues);
+		GrasslandValues tier4Values = new GrasslandValues(RealmTier.TIER_4);
+		assertTrue(tier4Values instanceof GrasslandValues);
 	}
 
 	// Testing of the TIER_1 RealmTier Values
@@ -86,9 +88,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceGrassland method for the TIER_1 RealmTier
 	 */
 	@Test
-	void testGetPriceGrasslandTropical() {
+	void testGetPriceGrasslandTier1() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
-		assertEquals(expectedTropicalPriceToBuy, grasslandValuesTest.getPriceGrassland());
+		assertEquals(expectedTier1PriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
@@ -97,9 +99,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceForest method for the TIER_1 RealmTier
 	 */
 	@Test
-	void testGetPriceForestTropical() {
+	void testGetPriceForestTier1() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
-		assertEquals(expectedTropicalPriceToPlantForest, grasslandValuesTest.getPriceForest());
+		assertEquals(expectedTier1PriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
 	/**
@@ -109,9 +111,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceWildlifeSanctuary method for the TIER_1 RealmTier
 	 */
 	@Test
-	void testGetPriceWildlifeSanctuaryTropical() {
+	void testGetPriceWildlifeSanctuaryTier1() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
-		assertEquals(expectedTropicalPriceForWildlifeSanctuaryUpgrade, grasslandValuesTest.getPriceWildlifeSanctuary());
+		assertEquals(expectedTier1PriceForWildlifeSanctuaryUpgrade, grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
 
 	/**
@@ -120,9 +122,9 @@ class GrasslandValuesTests {
 	 * Tests the getCO2ValueSet method for the TIER_1 RealmTier
 	 */
 	@Test
-	void testGetCO2ValueSetTropical() {
+	void testGetCO2ValueSetTier1() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
-		assertArrayEquals(expectedTropicalCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
+		assertArrayEquals(expectedTier1Co2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
 	/**
@@ -132,9 +134,9 @@ class GrasslandValuesTests {
 	 * Tests the getCostToLandOnValueSet method for the TIER_1 RealmTier
 	 */
 	@Test
-	void testGetCostToLandOnValueSetTropical() {
+	void testGetCostToLandOnValueSetTier1() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
-		assertArrayEquals(expectedTropicalLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
+		assertArrayEquals(expectedTier1LandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 
 	// Testing of the TIER_2 RealmTier Values
@@ -145,9 +147,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceGrassland method for the TIER_2 RealmTier
 	 */
 	@Test
-	void testGetPriceGrasslandSubtropical() {
+	void testGetPriceGrasslandTier2() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
-		assertEquals(expectedSubtropicalPriceToBuy, grasslandValuesTest.getPriceGrassland());
+		assertEquals(expectedTier2PriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
@@ -156,9 +158,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceForest method for the TIER_2 RealmTier
 	 */
 	@Test
-	void testGetPriceForestSubtropical() {
+	void testGetPriceForestTier2() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
-		assertEquals(expectedSubtropicalPriceToPlantForest, grasslandValuesTest.getPriceForest());
+		assertEquals(expectedTier2PriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
 	/**
@@ -168,10 +170,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceWildlifeSanctuary method for the TIER_2 RealmTier
 	 */
 	@Test
-	void testGetPriceWildlifeSanctuarySubtropical() {
+	void testGetPriceWildlifeSanctuaryTier2() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
-		assertEquals(expectedSubtropicalPriceForWildlifeSanctuaryUpgrade,
-				grasslandValuesTest.getPriceWildlifeSanctuary());
+		assertEquals(expectedTier2PriceForWildlifeSanctuaryUpgrade, grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
 
 	/**
@@ -180,9 +181,9 @@ class GrasslandValuesTests {
 	 * Tests the getCO2ValueSet method for the TIER_2 RealmTier
 	 */
 	@Test
-	void testGetCO2ValueSetSubtropical() {
+	void testGetCO2ValueSetTier2() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
-		assertArrayEquals(expectedSubtropicalCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
+		assertArrayEquals(expectedTier2Co2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
 	/**
@@ -192,9 +193,9 @@ class GrasslandValuesTests {
 	 * Tests the getCostToLandOnValueSet method for the TIER_2 RealmTier
 	 */
 	@Test
-	void testGetCostToLandOnValueSetSubtropical() {
+	void testGetCostToLandOnValueSetTier2() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
-		assertArrayEquals(expectedSubtropicalLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
+		assertArrayEquals(expectedTier2LandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 
 	// Testing of the TIER_3 RealmTier Values
@@ -205,9 +206,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceGrassland method for the TIER_3 RealmTier
 	 */
 	@Test
-	void testGetPriceGrasslandTemperate() {
+	void testGetPriceGrasslandTier3() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
-		assertEquals(expectedTemperatePriceToBuy, grasslandValuesTest.getPriceGrassland());
+		assertEquals(expectedTier3PriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
@@ -216,9 +217,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceForest method for the TIER_3 RealmTier
 	 */
 	@Test
-	void testGetPriceForestTemperate() {
+	void testGetPriceForestTier3() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
-		assertEquals(expectedTemperatePriceToPlantForest, grasslandValuesTest.getPriceForest());
+		assertEquals(expectedTier3PriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
 	/**
@@ -228,10 +229,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceWildlifeSanctuary method for the TIER_3 RealmTier
 	 */
 	@Test
-	void testGetPriceWildlifeSanctuaryTemperate() {
+	void testGetPriceWildlifeSanctuaryTier3() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
-		assertEquals(expectedTemperatePriceForWildlifeSanctuaryUpgrade,
-				grasslandValuesTest.getPriceWildlifeSanctuary());
+		assertEquals(expectedTier3PriceForWildlifeSanctuaryUpgrade, grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
 
 	/**
@@ -240,9 +240,9 @@ class GrasslandValuesTests {
 	 * Tests the getCO2ValueSet method for the TIER_3 RealmTier
 	 */
 	@Test
-	void testGetCO2ValueSetTemperate() {
+	void testGetCO2ValueSetTier3() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
-		assertArrayEquals(expectedTemperateCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
+		assertArrayEquals(expectedTier3Co2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
 	/**
@@ -252,9 +252,9 @@ class GrasslandValuesTests {
 	 * Tests the getCostToLandOnValueSet method for the TIER_3 RealmTier
 	 */
 	@Test
-	void testGetCostToLandOnValueSetTemperate() {
+	void testGetCostToLandOnValueSetTier3() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
-		assertArrayEquals(expectedTemperateLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
+		assertArrayEquals(expectedTier3LandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 
 	// Testing of the TIER_4 RealmTier Values
@@ -265,9 +265,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceGrassland method for the TIER_4 RealmTier
 	 */
 	@Test
-	void testGetPriceGrasslandBoreal() {
+	void testGetPriceGrasslandTier4() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
-		assertEquals(expectedBorealPriceToBuy, grasslandValuesTest.getPriceGrassland());
+		assertEquals(expectedTier4PriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
@@ -276,9 +276,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceForest method for the TIER_4 RealmTier
 	 */
 	@Test
-	void testGetPriceForestBoreal() {
+	void testGetPriceForestTier4() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
-		assertEquals(expectedBorealPriceToPlantForest, grasslandValuesTest.getPriceForest());
+		assertEquals(expectedTier4PriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
 	/**
@@ -288,10 +288,9 @@ class GrasslandValuesTests {
 	 * Tests the getPriceWildlifeSanctuary method for the TIER_4 RealmTier
 	 */
 	@Test
-	void testGetPriceWildlifeSanctuaryBoreal() {
+	void testGetPriceWildlifeSanctuaryTier4() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
-		assertEquals(expectedBorealPriceForWildlifeSanctuaryUpgrade,
-				grasslandValuesTest.getPriceWildlifeSanctuary());
+		assertEquals(expectedTier4PriceForWildlifeSanctuaryUpgrade, grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
 
 	/**
@@ -300,9 +299,9 @@ class GrasslandValuesTests {
 	 * Tests the getCO2ValueSet method for the TIER_4 RealmTier
 	 */
 	@Test
-	void testGetCO2ValueSetBoreal() {
+	void testGetCO2ValueSetTier4() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
-		assertArrayEquals(expectedBorealCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
+		assertArrayEquals(expectedTier4Co2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
 	/**
@@ -312,10 +311,9 @@ class GrasslandValuesTests {
 	 * Tests the getCostToLandOnValueSet method for the TIER_4 RealmTier
 	 */
 	@Test
-	void testGetCostToLandOnValueSetBoreal() {
+	void testGetCostToLandOnValueSetTier4() {
 		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
-		assertArrayEquals(expectedBorealLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
+		assertArrayEquals(expectedTier4LandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 
-	
 }

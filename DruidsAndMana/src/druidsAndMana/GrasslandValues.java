@@ -9,10 +9,10 @@ package druidsAndMana;
 public class GrasslandValues {
 
 	/**
-	 * A 2D Array that contains all the values needed for each realmTier1.
+	 * A 2D Array that contains all the values needed for each RealmTier.
 	 * <p>
 	 * <p>
-	 * The first dimension of the allValues array represents the realmTier1 the array of
+	 * The first dimension of the allValues array represents the RealmTier the array of
 	 * values is for.
 	 * <ul>
 	 * <li>Index 0: This is the TIER_1 RealmTier Values. It is the most expensive.
@@ -27,7 +27,7 @@ public class GrasslandValues {
 	 * </ul>
 	 * <p>
 	 * For the second dimension of the allValues array provides the values for each
-	 * realmTier1, each value represents a different value requires as follows:
+	 * realmTier, each value represents a different value requires as follows:
 	 * <p>
 	 * Index 0: Price to Buy Grassland - This is the initial Mana price that a
 	 * Player will pay to purchase a grassland
@@ -97,10 +97,10 @@ public class GrasslandValues {
 	/**
 	 * Constructor with args
 	 * 
-	 * @param RealmTier - the realmTier1 the Grassland should be instantiated for
+	 * @param realmTier - the RealmTier the Grassland should be instantiated for
 	 */
-	public GrasslandValues(RealmTier realm) {
-		this.setValueSet(realm);
+	public GrasslandValues(RealmTier realmTier) {
+		this.setValueSet(realmTier);
 	}
 
 	// Methods
@@ -110,10 +110,10 @@ public class GrasslandValues {
 	 * <p>
 	 * Only the constructor will use this method when it is declared.
 	 * 
-	 * @param realmTier1 - the RealmTier the values should be for
+	 * @param realmTier - the RealmTier the values should be for
 	 */
-	private void setValueSet(RealmTier realm) {
-		switch (realm) {
+	private void setValueSet(RealmTier realmTier) {
+		switch (realmTier) {
 		case TIER_1:
 			this.valueSet = ALL_VALUES[0];
 			break;
@@ -125,13 +125,13 @@ public class GrasslandValues {
 			break;
 		case TIER_4:
 			this.valueSet = ALL_VALUES[3];
-			break; // design decision not to include a default case as a realmTier1 can only be one of
+			break; // design decision not to include a default case as a RealmTier can only be one of
 					// the 4 enum values
 		}
 	}
 
 	/**
-	 * Gets the price to land on the Grassland of the given realmTier1
+	 * Gets the price to land on the Grassland of the given RealmTier
 	 * 
 	 * @return - the Mana price to buy the Grassland
 	 */
@@ -140,7 +140,7 @@ public class GrasslandValues {
 	}
 
 	/**
-	 * Gets the price to plant a forest on the Grassland of the given realmTier1
+	 * Gets the price to plant a forest on the Grassland of the given RealmTier
 	 * 
 	 * @return - the Mana price to plant 1 forest
 	 */
@@ -149,7 +149,7 @@ public class GrasslandValues {
 	}
 
 	/**
-	 * Gets the price to upgrade to a Wildlife Sanctuary of the given realmTier1
+	 * Gets the price to upgrade to a Wildlife Sanctuary of the given RealmTier
 	 * 
 	 * @return - the Mana price to upgrade to a Wildlife Sanctuary
 	 */

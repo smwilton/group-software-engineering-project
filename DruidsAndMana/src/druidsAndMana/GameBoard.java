@@ -83,7 +83,7 @@ public class GameBoard {
 	}
 			
 	/**
-	 * If the player owns all the grasslands in a realmTier1 they can start upgrading the squares:
+	 * If the player owns all the grasslands in a realm they can start upgrading the squares:
 	 * @param playerId
 	 * @param squareIndex
 	 * @return
