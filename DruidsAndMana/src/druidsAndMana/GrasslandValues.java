@@ -1,7 +1,7 @@
 package druidsAndMana;
 
 /**
- * Class that contains all the values relating to the types of GRASSLAND
+ * Class that contains all the values relating to the types of Grassland
  * 
  * @author Nicola Stirling 40020701
  *
@@ -29,7 +29,7 @@ public class GrasslandValues {
 	 * For the second dimension of the allValues array provides the values for each
 	 * realm1, each value represents a different value requires as follows:
 	 * <p>
-	 * Index 0: Price to Buy GRASSLAND - This is the initial Mana price that a
+	 * Index 0: Price to Buy Grassland - This is the initial Mana price that a
 	 * Player will pay to purchase a grassland
 	 * <ul>
 	 * <li>Index 1: Price to plant a forest (i.e. make a minor development)- This is
@@ -40,29 +40,29 @@ public class GrasslandValues {
 	 * Wildlife Reserve
 	 * 
 	 * <li>Index 3: CO2 impact base - This is the base CO2 impact rating earned for
-	 * an owned GRASSLAND that has no developments
+	 * an owned Grassland that has no developments
 	 * 
 	 * <li>Index 4: CO2 minor development premium - This is the additional CO2
-	 * impact rating earned for each minor development on a GRASSLAND, i.e. for each
+	 * impact rating earned for each minor development on a Grassland, i.e. for each
 	 * forest that is planted a Player will earn this in addition to the base CO2
 	 * Impact.
 	 * 
 	 * <li>Index 5: CO2 major development premium - This is the additional CO2
-	 * impact rating earned when a major development is made to a GRASSLAND, This is
+	 * impact rating earned when a major development is made to a Grassland, This is
 	 * earned in addition to 3 x the minor development premium and the base amount
 	 * 
-	 * <li>Index 6: Base cost to a player landing on a GRASSLAND not owned by them -
+	 * <li>Index 6: Base cost to a player landing on a Grassland not owned by them -
 	 * This is the Mana charge to a player for landing on the grassland if it is
 	 * owned by another player and has no developments made to it
 	 * 
-	 * <li>Index 7: Minor development premium to a player landing on a GRASSLAND not
+	 * <li>Index 7: Minor development premium to a player landing on a Grassland not
 	 * owned by them - This is the additional Mana charge per forest planted in
 	 * addition to the base cost to a player for landing on the grassland if it is
 	 * owned by another player, e.g. if a grassland has 2 forests planted on it the
 	 * cost of landing on the grassland is the base cost + 2 x this minor
 	 * development premium
 	 * 
-	 * <li>Index 8: Major development premium to a player landing on a GRASSLAND not
+	 * <li>Index 8: Major development premium to a player landing on a Grassland not
 	 * owned by them - This is the additional Mana charge for landing on a grassland
 	 * that has been upgraded to a Wildlife Sanctuary if it is owned by another
 	 * player. This is added to the base costs and 3 x the Minor development premium
@@ -76,7 +76,7 @@ public class GrasslandValues {
 			{ 40, 8, 40, 40, 4, 10, 8, 2, 6 }, // RealmTier 3 - TIER_3 @ index 2
 			{ 30, 3, 30, 30, 3, 5, 7, 1, 5 } // RealmTier 4 - TIER_4 @ index 3
 			/*
-			 * { Value 1 - GRASSLAND Price @ index 0, Value 2 - Plant Forest Price @ index
+			 * { Value 1 - Grassland Price @ index 0, Value 2 - Plant Forest Price @ index
 			 * 1, Value 3 - Wildlife Sanctuary Price @ index 2, Value 4 - CO2 base @ index
 			 * 3, Value 5 - CO2 minor development premium @ index 4, Value 6 - CO2 major
 			 * development premium @ index 5, Value 7 - Price to Land on base @ index 6,
@@ -97,7 +97,7 @@ public class GrasslandValues {
 	/**
 	 * Constructor with args
 	 * 
-	 * @param RealmTier - the realm1 the GRASSLAND should be instantiated for
+	 * @param RealmTier - the realm1 the Grassland should be instantiated for
 	 */
 	public GrasslandValues(RealmTier realm) {
 		this.setValueSet(realm);
@@ -131,16 +131,16 @@ public class GrasslandValues {
 	}
 
 	/**
-	 * Gets the price to land on the GRASSLAND of the given realm1
+	 * Gets the price to land on the Grassland of the given realm1
 	 * 
-	 * @return - the Mana price to buy the GRASSLAND
+	 * @return - the Mana price to buy the Grassland
 	 */
 	public int getPriceGrassland() {
 		return valueSet[0];
 	}
 
 	/**
-	 * Gets the price to plant a forest on the GRASSLAND of the given realm1
+	 * Gets the price to plant a forest on the Grassland of the given realm1
 	 * 
 	 * @return - the Mana price to plant 1 forest
 	 */
@@ -159,7 +159,7 @@ public class GrasslandValues {
 
 	/**
 	 * Gets the 3 CO2 Impact Rating tiers in order to calculate the total CO2 Impact
-	 * Rating depending on the SquareStatus of a GRASSLAND.
+	 * Rating depending on the SquareStatus of a Grassland.
 	 * 
 	 * @return - an int[] of values where index 0 is the base CO2 impact rating,
 	 *         index 1 is the additional impact rating of each forest that is
@@ -168,13 +168,13 @@ public class GrasslandValues {
 	 *         <p>
 	 *         Example usage of this value Set:
 	 *         <ul>
-	 *         <li>Example 1: For a GRASSLAND with no developments use only the
+	 *         <li>Example 1: For a Grassland with no developments use only the
 	 *         value at index 0.
 	 * 
-	 *         <li>Example 2: For a GRASSLAND with 2 forests planted take the value
+	 *         <li>Example 2: For a Grassland with 2 forests planted take the value
 	 *         at index 0 + 2x the value at index 1.
 	 * 
-	 *         <li>Example 3: For a GRASSLAND that has been upgraded to a Wildlife
+	 *         <li>Example 3: For a Grassland that has been upgraded to a Wildlife
 	 *         Sanctuary take the value at index 0 + 3x the value at index 1 + 1x
 	 *         the value at index 2 (this is the maximum CO2 rating that should be
 	 *         calculated using this value set).
@@ -187,24 +187,24 @@ public class GrasslandValues {
 	}
 
 	/**
-	 * Gets the 3 Cost tiers of a Player landing on a GRASSLAND that is owned by
+	 * Gets the 3 Cost tiers of a Player landing on a Grassland that is owned by
 	 * another player so the total cost can be calculated depending on the
-	 * SquareStatus of a GRASSLAND.
+	 * SquareStatus of a Grassland.
 	 * 
 	 * @return - an int[] of values where index 0 is the base Cost of landing on an
-	 *         empty GRASSLAND, index 1 is the additional cost for each forest that
-	 *         is planted on that GRASSLAND, and index 2 is the additional cost
-	 *         where the GRASSLAND has been upgraded to a Wildlife Sanctuary.
+	 *         empty Grassland, index 1 is the additional cost for each forest that
+	 *         is planted on that Grassland, and index 2 is the additional cost
+	 *         where the Grassland has been upgraded to a Wildlife Sanctuary.
 	 *         <p>
 	 *         Example usage of this value Set:
 	 *         <ul>
-	 *         <li>Example 1: For a GRASSLAND with no developments use only the
+	 *         <li>Example 1: For a Grassland with no developments use only the
 	 *         value at index 0.
 	 * 
-	 *         <li>Example 2: For a GRASSLAND with 2 forests planted take the value
+	 *         <li>Example 2: For a Grassland with 2 forests planted take the value
 	 *         at index 0 + 2x the value at index 1.
 	 * 
-	 *         <li>Example 3: For a GRASSLAND that has been upgraded to a Wildlife
+	 *         <li>Example 3: For a Grassland that has been upgraded to a Wildlife
 	 *         Sanctuary take the value at index 0 + 3x the value at index 1 + 1x
 	 *         the value at index 2 (this is the maximum cost that should be
 	 *         calculated using this value set).
