@@ -2,7 +2,7 @@ package druidsAndMana;
 
 /**
  * Abstract class that implements ISquare interface and repesents a
- * GRASSLAND object
+ * Grassland object
  * 
  * NB: An abstract class cannot be instantiated
  *
@@ -45,7 +45,7 @@ public abstract class Grassland implements ISquare {
 	}
 
 	/**
-	 * Sets the Owner of the GRASSLAND once it is purchased
+	 * Sets the Owner of the Grassland once it is purchased
 	 * 
 	 * @param ownerId - the ID of the owner who is purchasing the grassland
 	 * @throws IllegalArgumentException if the grassland is already owned
@@ -115,10 +115,10 @@ public abstract class Grassland implements ISquare {
 	}
 
 	/**
-	 * Method to get the positive CO2 impact the GRASSLAND is having on the
+	 * Method to get the positive CO2 impact the Grassland is having on the
 	 * environment. The rating varies depending on the SquareStatus
 	 * 
-	 * @return - the CO2 Impact Rating earned for the GRASSLAND
+	 * @return - the CO2 Impact Rating earned for the Grassland
 	 */
 	public int getCo2ImpactRating() {
 		int[] co2Values = grasslandValues.getCO2ValueSet();
@@ -150,7 +150,7 @@ public abstract class Grassland implements ISquare {
 
 	/**
 	 * Method to update the SquareStatus to the next available option when a
-	 * development is added to the GRASSLAND square
+	 * development is added to the Grassland square
 	 * 
 	 * @return - true if the status has been successfully updated and false if the
 	 *         status of the square is null and can not be developed further
@@ -171,23 +171,23 @@ public abstract class Grassland implements ISquare {
 	 * <ol>
 	 * <li>VACANT = unowned
 	 * 
-	 * <li>GRASSLAND = owned GRASSLAND with no developments
+	 * <li>GRASSLAND = owned Grassland with no developments
 	 * 
-	 * <li>SEEDLING_FOREST = owned GRASSLAND with 1 minor development (i.e. 1
+	 * <li>SEEDLING_FOREST = owned Grassland with 1 minor development (i.e. 1
 	 * forest planted)
 	 * 
-	 * <li>INTERMEDIATE_FOREST = owned GRASSLAND with 2 minor developments (i.e.
+	 * <li>INTERMEDIATE_FOREST = owned Grassland with 2 minor developments (i.e.
 	 * 2 forests planted)
 	 * 
-	 * <li>ESTABLISHED_FOREST = owned GRASSLAND with 3 minor developments (i.e. 3
+	 * <li>ESTABLISHED_FOREST = owned Grassland with 3 minor developments (i.e. 3
 	 * forests planted)
 	 * 
-	 * <li>Wildlife Sanctuary = owned GRASSLAND with 1 major development (i.e. a
+	 * <li>Wildlife Sanctuary = owned Grassland with 1 major development (i.e. a
 	 * WildLife reserve)
 	 * </ol>
 	 * <p>
 	 * 
-	 * @return - the status of the GRASSLAND
+	 * @return - the status of the Grassland
 	 */
 	public SquareStatus getSquareStatus() {
 		return squareStatus;

@@ -1,6 +1,6 @@
 package druidsAndMana;
 /**
- * Class that extends GRASSLAND and represents a TIER_1 GRASSLAND object
+ * Class that extends Grassland and represents a TIER_1 Grassland object
  *
  * @author Nicola Stirling 40020701
  *
