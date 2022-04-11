@@ -1,6 +1,6 @@
 package druidsAndMana;
 /**
- * Class that extends Grassland and represents a Boreal Grassland object
+ * Class that extends GRASSLAND and represents a TIER_4 GRASSLAND object
  *
  * @author Nicola Stirling 40020701
  *
@@ -8,7 +8,7 @@ package druidsAndMana;
 public class Boreal extends Grassland {
 
 	// Constructor
-	public Boreal(Realm realm) {
+	public Boreal(RealmTier realm) {
 		super(realm);
 	}
 

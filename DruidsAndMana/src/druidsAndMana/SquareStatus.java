@@ -1,22 +1,22 @@
 package druidsAndMana;
 
 /**
- * Enum of the different Status' that a Grassland Square can have
+ * Enum of the different Status' that a GRASSLAND Square can have
  * <ol>
- * <li>Vacant = unowned
+ * <li>VACANT = unowned
  * 
- * <li>Grassland = owned Grassland with no developments
+ * <li>GRASSLAND = owned GRASSLAND with no developments
  * 
- * <li>SeedlingForest = owned Grassland with 1 minor development (i.e. 1 forest
+ * <li>SEEDLING_FOREST = owned GRASSLAND with 1 minor development (i.e. 1 forest
  * planted)
  * 
- * <li>IntermediateForest = owned Grassland with 2 minor developments (i.e. 2
+ * <li>INTERMEDIATE_FOREST = owned GRASSLAND with 2 minor developments (i.e. 2
  * forests planted)
  * 
- * <li>EstablishedForest = owned Grassland with 3 minor developments (i.e. 3
+ * <li>ESTABLISHED_FOREST = owned GRASSLAND with 3 minor developments (i.e. 3
  * forests planted)
  * 
- * <li>Wildlife Sanctuary = owned Grassland with 1 major development (i.e. a
+ * <li>Wildlife Sanctuary = owned GRASSLAND with 1 major development (i.e. a
  * WildLife reserve)
  * </ol>
  * <p>
@@ -29,7 +29,7 @@ package druidsAndMana;
  */
 public enum SquareStatus {
 
-	Vacant(1), Grassland(2), SeedlingForest(3), IntermediateForest(4), EstablishedForest(5), WildlifeSanctuary(6) {
+	VACANT(1), GRASSLAND(2), SEEDLING_FOREST(3), INTERMEDIATE_FOREST(4), ESTABLISHED_FOREST(5), WILDLIFE_SANCTUARY(6) {
 		@Override
 		public SquareStatus next() {
 			return null;

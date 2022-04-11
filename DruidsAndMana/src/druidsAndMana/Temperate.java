@@ -1,13 +1,13 @@
 package druidsAndMana;
 /**
- * Class that extends Grassland and represents a Temperate Grassland object
+ * Class that extends GRASSLAND and represents a TIER_3 GRASSLAND object
  *
  * @author Nicola Stirling 40020701
  *
  */
 public class Temperate extends Grassland{
 
-	public Temperate(Realm realm) {
+	public Temperate(RealmTier realm) {
 		super(realm);
 	}
 

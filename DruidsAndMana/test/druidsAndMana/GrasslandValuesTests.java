@@ -58,47 +58,47 @@ class GrasslandValuesTests {
 
 	/**
 	 * Test method for
-	 * {@link druidsAndMana.GrasslandValues#GrasslandValues(druidsAndMana.Realm)}.
+	 * {@link druidsAndMana.GrasslandValues#GrasslandValues(druidsAndMana.RealmTier)}.
 	 * 
 	 * Tests that the use of the constructor with each Reealm enum instantiates an
 	 * instance of GrasslandValues
 	 */
 	@Test
 	void testGrasslandValuesConstructor() {
-		GrasslandValues tropicalValues = new GrasslandValues(Realm.Tropical);
+		GrasslandValues tropicalValues = new GrasslandValues(RealmTier.TIER_1);
 		assertTrue(tropicalValues instanceof GrasslandValues);
 
-		GrasslandValues subtropicalValues = new GrasslandValues(Realm.Subtropical);
+		GrasslandValues subtropicalValues = new GrasslandValues(RealmTier.TIER_2);
 		assertTrue(tropicalValues instanceof GrasslandValues);
 
-		GrasslandValues temperateValues = new GrasslandValues(Realm.Temperate);
+		GrasslandValues temperateValues = new GrasslandValues(RealmTier.TIER_3);
 		assertTrue(tropicalValues instanceof GrasslandValues);
 
-		GrasslandValues borealValues = new GrasslandValues(Realm.Boreal);
+		GrasslandValues borealValues = new GrasslandValues(RealmTier.TIER_4);
 		assertTrue(tropicalValues instanceof GrasslandValues);
 	}
 
-	// Testing of the Tropical Realm Values
+	// Testing of the TIER_1 RealmTier Values
 
 	/**
 	 * Test method 1 for {@link druidsAndMana.GrasslandValues#getPriceGrassland()}.
 	 * 
-	 * Tests the getPriceGrassland method for the Tropical Realm
+	 * Tests the getPriceGrassland method for the TIER_1 RealmTier
 	 */
 	@Test
 	void testGetPriceGrasslandTropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Tropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
 		assertEquals(expectedTropicalPriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
 	 * Test method 1 for {@link druidsAndMana.GrasslandValues#getPriceForest()}.
 	 * 
-	 * Tests the getPriceForest method for the Tropical Realm
+	 * Tests the getPriceForest method for the TIER_1 RealmTier
 	 */
 	@Test
 	void testGetPriceForestTropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Tropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
 		assertEquals(expectedTropicalPriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
@@ -106,22 +106,22 @@ class GrasslandValuesTests {
 	 * Test method 1 for
 	 * {@link druidsAndMana.GrasslandValues#getPriceWildlifeSanctuary()}.
 	 * 
-	 * Tests the getPriceWildlifeSanctuary method for the Tropical Realm
+	 * Tests the getPriceWildlifeSanctuary method for the TIER_1 RealmTier
 	 */
 	@Test
 	void testGetPriceWildlifeSanctuaryTropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Tropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
 		assertEquals(expectedTropicalPriceForWildlifeSanctuaryUpgrade, grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
 
 	/**
 	 * Test method 1 for {@link druidsAndMana.GrasslandValues#getCO2ValueSet()}.
 	 * 
-	 * Tests the getCO2ValueSet method for the Tropical Realm
+	 * Tests the getCO2ValueSet method for the TIER_1 RealmTier
 	 */
 	@Test
 	void testGetCO2ValueSetTropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Tropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
 		assertArrayEquals(expectedTropicalCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
@@ -129,35 +129,35 @@ class GrasslandValuesTests {
 	 * Test method 1 for
 	 * {@link druidsAndMana.GrasslandValues#getCostToLandOnValueSet()}.
 	 * 
-	 * Tests the getCostToLandOnValueSet method for the Tropical Realm
+	 * Tests the getCostToLandOnValueSet method for the TIER_1 RealmTier
 	 */
 	@Test
 	void testGetCostToLandOnValueSetTropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Tropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_1);
 		assertArrayEquals(expectedTropicalLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 
-	// Testing of the Subtropical Realm Values
+	// Testing of the TIER_2 RealmTier Values
 
 	/**
 	 * Test method 2 for {@link druidsAndMana.GrasslandValues#getPriceGrassland()}.
 	 * 
-	 * Tests the getPriceGrassland method for the Subtropical Realm
+	 * Tests the getPriceGrassland method for the TIER_2 RealmTier
 	 */
 	@Test
 	void testGetPriceGrasslandSubtropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Subtropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
 		assertEquals(expectedSubtropicalPriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
 	 * Test method 2 for {@link druidsAndMana.GrasslandValues#getPriceForest()}.
 	 * 
-	 * Tests the getPriceForest method for the Subtropical Realm
+	 * Tests the getPriceForest method for the TIER_2 RealmTier
 	 */
 	@Test
 	void testGetPriceForestSubtropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Subtropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
 		assertEquals(expectedSubtropicalPriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
@@ -165,11 +165,11 @@ class GrasslandValuesTests {
 	 * Test method 2 for
 	 * {@link druidsAndMana.GrasslandValues#getPriceWildlifeSanctuary()}.
 	 * 
-	 * Tests the getPriceWildlifeSanctuary method for the Subtropical Realm
+	 * Tests the getPriceWildlifeSanctuary method for the TIER_2 RealmTier
 	 */
 	@Test
 	void testGetPriceWildlifeSanctuarySubtropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Subtropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
 		assertEquals(expectedSubtropicalPriceForWildlifeSanctuaryUpgrade,
 				grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
@@ -177,11 +177,11 @@ class GrasslandValuesTests {
 	/**
 	 * Test method 2 for {@link druidsAndMana.GrasslandValues#getCO2ValueSet()}.
 	 * 
-	 * Tests the getCO2ValueSet method for the Subtropical Realm
+	 * Tests the getCO2ValueSet method for the TIER_2 RealmTier
 	 */
 	@Test
 	void testGetCO2ValueSetSubtropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Subtropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
 		assertArrayEquals(expectedSubtropicalCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
@@ -189,35 +189,35 @@ class GrasslandValuesTests {
 	 * Test method 2 for
 	 * {@link druidsAndMana.GrasslandValues#getCostToLandOnValueSet()}.
 	 * 
-	 * Tests the getCostToLandOnValueSet method for the Subtropical Realm
+	 * Tests the getCostToLandOnValueSet method for the TIER_2 RealmTier
 	 */
 	@Test
 	void testGetCostToLandOnValueSetSubtropical() {
-		grasslandValuesTest = new GrasslandValues(Realm.Subtropical);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_2);
 		assertArrayEquals(expectedSubtropicalLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 
-	// Testing of the Temperate Realm Values
+	// Testing of the TIER_3 RealmTier Values
 
 	/**
 	 * Test method 3 for {@link druidsAndMana.GrasslandValues#getPriceGrassland()}.
 	 * 
-	 * Tests the getPriceGrassland method for the Temperate Realm
+	 * Tests the getPriceGrassland method for the TIER_3 RealmTier
 	 */
 	@Test
 	void testGetPriceGrasslandTemperate() {
-		grasslandValuesTest = new GrasslandValues(Realm.Temperate);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
 		assertEquals(expectedTemperatePriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
 	 * Test method 3 for {@link druidsAndMana.GrasslandValues#getPriceForest()}.
 	 * 
-	 * Tests the getPriceForest method for the Temperate Realm
+	 * Tests the getPriceForest method for the TIER_3 RealmTier
 	 */
 	@Test
 	void testGetPriceForestTemperate() {
-		grasslandValuesTest = new GrasslandValues(Realm.Temperate);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
 		assertEquals(expectedTemperatePriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
@@ -225,11 +225,11 @@ class GrasslandValuesTests {
 	 * Test method 3 for
 	 * {@link druidsAndMana.GrasslandValues#getPriceWildlifeSanctuary()}.
 	 * 
-	 * Tests the getPriceWildlifeSanctuary method for the Temperate Realm
+	 * Tests the getPriceWildlifeSanctuary method for the TIER_3 RealmTier
 	 */
 	@Test
 	void testGetPriceWildlifeSanctuaryTemperate() {
-		grasslandValuesTest = new GrasslandValues(Realm.Temperate);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
 		assertEquals(expectedTemperatePriceForWildlifeSanctuaryUpgrade,
 				grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
@@ -237,11 +237,11 @@ class GrasslandValuesTests {
 	/**
 	 * Test method 3 for {@link druidsAndMana.GrasslandValues#getCO2ValueSet()}.
 	 * 
-	 * Tests the getCO2ValueSet method for the Temperate Realm
+	 * Tests the getCO2ValueSet method for the TIER_3 RealmTier
 	 */
 	@Test
 	void testGetCO2ValueSetTemperate() {
-		grasslandValuesTest = new GrasslandValues(Realm.Temperate);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
 		assertArrayEquals(expectedTemperateCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
@@ -249,35 +249,35 @@ class GrasslandValuesTests {
 	 * Test method 3 for
 	 * {@link druidsAndMana.GrasslandValues#getCostToLandOnValueSet()}.
 	 * 
-	 * Tests the getCostToLandOnValueSet method for the Temperate Realm
+	 * Tests the getCostToLandOnValueSet method for the TIER_3 RealmTier
 	 */
 	@Test
 	void testGetCostToLandOnValueSetTemperate() {
-		grasslandValuesTest = new GrasslandValues(Realm.Temperate);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_3);
 		assertArrayEquals(expectedTemperateLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 
-	// Testing of the Boreal Realm Values
+	// Testing of the TIER_4 RealmTier Values
 
 	/**
 	 * Test method 4 for {@link druidsAndMana.GrasslandValues#getPriceGrassland()}.
 	 * 
-	 * Tests the getPriceGrassland method for the Boreal Realm
+	 * Tests the getPriceGrassland method for the TIER_4 RealmTier
 	 */
 	@Test
 	void testGetPriceGrasslandBoreal() {
-		grasslandValuesTest = new GrasslandValues(Realm.Boreal);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
 		assertEquals(expectedBorealPriceToBuy, grasslandValuesTest.getPriceGrassland());
 	}
 
 	/**
 	 * Test method 4 for {@link druidsAndMana.GrasslandValues#getPriceForest()}.
 	 * 
-	 * Tests the getPriceForest method for the Boreal Realm
+	 * Tests the getPriceForest method for the TIER_4 RealmTier
 	 */
 	@Test
 	void testGetPriceForestBoreal() {
-		grasslandValuesTest = new GrasslandValues(Realm.Boreal);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
 		assertEquals(expectedBorealPriceToPlantForest, grasslandValuesTest.getPriceForest());
 	}
 
@@ -285,11 +285,11 @@ class GrasslandValuesTests {
 	 * Test method 4 for
 	 * {@link druidsAndMana.GrasslandValues#getPriceWildlifeSanctuary()}.
 	 * 
-	 * Tests the getPriceWildlifeSanctuary method for the Boreal Realm
+	 * Tests the getPriceWildlifeSanctuary method for the TIER_4 RealmTier
 	 */
 	@Test
 	void testGetPriceWildlifeSanctuaryBoreal() {
-		grasslandValuesTest = new GrasslandValues(Realm.Boreal);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
 		assertEquals(expectedBorealPriceForWildlifeSanctuaryUpgrade,
 				grasslandValuesTest.getPriceWildlifeSanctuary());
 	}
@@ -297,11 +297,11 @@ class GrasslandValuesTests {
 	/**
 	 * Test method 4 for {@link druidsAndMana.GrasslandValues#getCO2ValueSet()}.
 	 * 
-	 * Tests the getCO2ValueSet method for the Boreal Realm
+	 * Tests the getCO2ValueSet method for the TIER_4 RealmTier
 	 */
 	@Test
 	void testGetCO2ValueSetBoreal() {
-		grasslandValuesTest = new GrasslandValues(Realm.Boreal);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
 		assertArrayEquals(expectedBorealCo2ValueSet, grasslandValuesTest.getCO2ValueSet());
 	}
 
@@ -309,11 +309,11 @@ class GrasslandValuesTests {
 	 * Test method 4 for
 	 * {@link druidsAndMana.GrasslandValues#getCostToLandOnValueSet()}.
 	 * 
-	 * Tests the getCostToLandOnValueSet method for the Boreal Realm
+	 * Tests the getCostToLandOnValueSet method for the TIER_4 RealmTier
 	 */
 	@Test
 	void testGetCostToLandOnValueSetBoreal() {
-		grasslandValuesTest = new GrasslandValues(Realm.Boreal);
+		grasslandValuesTest = new GrasslandValues(RealmTier.TIER_4);
 		assertArrayEquals(expectedBorealLandOnCostValueSet, grasslandValuesTest.getCostToLandOnValueSet());
 	}
 

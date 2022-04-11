@@ -29,11 +29,11 @@ class GameBoardTests {
 		// Create the squares:
 		mockAlderSquare = new SacredAlder();
 		mockScenicViewpoint = new ScenicViewpoint();
-		mockTropical_1 = new Tropical(Realm.Tropical);
-		mockTropical_2 = new Tropical(Realm.Tropical);
-		mockSubtropical = new Subtropical(Realm.Subtropical);
-		mockBoreal = new Boreal(Realm.Boreal);
-		mockTemporate = new Temperate(Realm.Temperate);
+		mockTropical_1 = new Tropical(RealmTier.TIER_1);
+		mockTropical_2 = new Tropical(RealmTier.TIER_1);
+		mockSubtropical = new Subtropical(RealmTier.TIER_2);
+		mockBoreal = new Boreal(RealmTier.TIER_4);
+		mockTemporate = new Temperate(RealmTier.TIER_3);
 		
 		// Create the mockBoardBuilder:
 		mockBoardBuilder.mockSquares = new ISquare[] { mockAlderSquare, mockScenicViewpoint, mockTropical_1, mockTropical_2, mockSubtropical, mockBoreal, mockTemporate };
@@ -55,7 +55,7 @@ class GameBoardTests {
 		// Assert
 		assertTrue(ownerIdSet);
 		assertEquals(ownerId, mockTropical_1.getOwnerId());
-		assertEquals(SquareStatus.Grassland, mockTropical_1.getSquareStatus());
+		assertEquals(SquareStatus.GRASSLAND, mockTropical_1.getSquareStatus());
 	}
 	
 	@Test
@@ -203,7 +203,7 @@ class GameBoardTests {
 			mockTropical_1.developGrassland();
 		}
 		
-		assertEquals(SquareStatus.WildlifeSanctuary, mockTropical_1.getSquareStatus());
+		assertEquals(SquareStatus.WILDLIFE_SANCTUARY, mockTropical_1.getSquareStatus());
 		
 		// Act
 		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, index);
