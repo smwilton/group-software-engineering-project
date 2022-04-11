@@ -96,7 +96,7 @@ class GameBoardTests {
 		// Arrange
 		String ownerId = "12345";
 		int index = 2;
-		mockTropical_1.setOwnerId(ownerId);
+		mockTropical_1.setInitialOwnerId(ownerId);
 		
 		// Act
 		String ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
@@ -124,8 +124,8 @@ class GameBoardTests {
 		// Arrange
 		String playerId = "12345";
 		int index = 2;
-		mockTropical_1.setOwnerId(playerId);
-		mockTropical_2.setOwnerId(playerId);
+		mockTropical_1.setInitialOwnerId(playerId);
+		mockTropical_2.setInitialOwnerId(playerId);
 		
 		// Act
 		boolean palyerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, index);
@@ -141,8 +141,8 @@ class GameBoardTests {
 		String playerId_1 = "54321";
 		String playerId_2 = "12345";
 		int index = 2;
-		mockTropical_1.setOwnerId(playerId_1);
-		mockTropical_2.setOwnerId(playerId_2);
+		mockTropical_1.setInitialOwnerId(playerId_1);
+		mockTropical_2.setInitialOwnerId(playerId_2);
 		
 		// Act
 		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId_1, index);
@@ -156,7 +156,7 @@ class GameBoardTests {
 		// Arrange
 		String playerId = "54321";
 		int index = 2;
-		mockTropical_1.setOwnerId(playerId);
+		mockTropical_1.setInitialOwnerId(playerId);
 		
 		// Act
 		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, index);
@@ -196,8 +196,8 @@ class GameBoardTests {
 		// Arrange
 		String playerId = "12345";
 		int index = 2;
-		mockTropical_1.setOwnerId(playerId);
-		mockTropical_2.setOwnerId(playerId);
+		mockTropical_1.setInitialOwnerId(playerId);
+		mockTropical_2.setInitialOwnerId(playerId);
 		
 		while(mockTropical_1.developGrassland()) {
 			mockTropical_1.developGrassland();
