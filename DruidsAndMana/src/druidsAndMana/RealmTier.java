@@ -8,6 +8,6 @@ package druidsAndMana;
  * @author Nicola
  *
  */
-public enum Realm {
-	Tropical, Subtropical, Temperate, Boreal
+public enum RealmTier {
+	TIER_1, TIER_2, TIER_3, TIER_4
 }

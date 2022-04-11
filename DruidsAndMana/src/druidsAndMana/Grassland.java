@@ -2,7 +2,7 @@ package druidsAndMana;
 
 /**
  * Abstract class that implements ISquare interface and repesents a
- * Grassland object
+ * GRASSLAND object
  * 
  * NB: An abstract class cannot be instantiated
  *
@@ -18,19 +18,19 @@ public abstract class Grassland implements ISquare {
 	private SquareStatus squareStatus;
 
 	// Constructor
-	public Grassland(Realm realm) {
+	public Grassland(RealmTier realm) {
 		this.setGrasslandValues(realm);
-		this.squareStatus = SquareStatus.Vacant;
+		this.squareStatus = SquareStatus.VACANT;
 	}
 
 	// Methods
 	/**
-	 * Sets the grassland values based on the Realm that has been defined in the
+	 * Sets the grassland values based on the RealmTier that has been defined in the
 	 * constructor
 	 * 
-	 * @param realm - the realm to get the GrasslandValues for
+	 * @param realm1 - the realm1 to get the GrasslandValues for
 	 */
-	private void setGrasslandValues(Realm realm) {
+	private void setGrasslandValues(RealmTier realm) {
 		this.grasslandValues = new GrasslandValues(realm);
 	}
 
@@ -45,7 +45,7 @@ public abstract class Grassland implements ISquare {
 	}
 
 	/**
-	 * Sets the Owner of the Grassland once it is purchased
+	 * Sets the Owner of the GRASSLAND once it is purchased
 	 * 
 	 * @param ownerId - the ID of the owner who is purchasing the grassland
 	 * @throws IllegalArgumentException if the grassland is already owned
@@ -64,25 +64,25 @@ public abstract class Grassland implements ISquare {
 	 * 
 	 * @return
 	 *         <ul>
-	 *         <li>If the status is Vacant the price to buy the grassland will be
+	 *         <li>If the status is VACANT the price to buy the grassland will be
 	 *         returned.
-	 *         <li>If the status is Grassland, SeedlingForest or
-	 *         IntermediateForest the price to plant a Forest will be returned.
-	 *         <li>If the status if EstablishedForest the price to upgrade to a
-	 *         WildlifeSanctuary will be returned.
+	 *         <li>If the status is GRASSLAND, SEEDLING_FOREST or
+	 *         INTERMEDIATE_FOREST the price to plant a Forest will be returned.
+	 *         <li>If the status if ESTABLISHED_FOREST the price to upgrade to a
+	 *         WILDLIFE_SANCTUARY will be returned.
 	 *         <li>If the status is anything other than this 0 will be returned as
 	 *         there are no development options available
 	 *         </ul>
 	 */
 	public int developmentCost() {
 		switch (squareStatus) {
-		case Vacant:
+		case VACANT:
 			return grasslandValues.getPriceGrassland();
-		case Grassland:
-		case SeedlingForest:
-		case IntermediateForest:
+		case GRASSLAND:
+		case SEEDLING_FOREST:
+		case INTERMEDIATE_FOREST:
 			return grasslandValues.getPriceForest();
-		case EstablishedForest:
+		case ESTABLISHED_FOREST:
 			return grasslandValues.getPriceWildlifeSanctuary();
 		default:
 			return 0;
@@ -99,15 +99,15 @@ public abstract class Grassland implements ISquare {
 	public int getChargeForLandingOnSquare() {
 		int[] charges = grasslandValues.getCostToLandOnValueSet();
 		switch (squareStatus) {
-		case Grassland:
+		case GRASSLAND:
 			return charges[0];
-		case SeedlingForest:
+		case SEEDLING_FOREST:
 			return (charges[0] + (1 * charges[1]));
-		case IntermediateForest:
+		case INTERMEDIATE_FOREST:
 			return (charges[0] + (2 * charges[1]));
-		case EstablishedForest:
+		case ESTABLISHED_FOREST:
 			return (charges[0] + (3 * charges[1]));
-		case WildlifeSanctuary:
+		case WILDLIFE_SANCTUARY:
 			return (charges[0] + (3 * charges[1]) + (1 * charges[2]));
 		default:
 			return 0;
@@ -115,23 +115,23 @@ public abstract class Grassland implements ISquare {
 	}
 
 	/**
-	 * Method to get the positive CO2 impact the Grassland is having on the
+	 * Method to get the positive CO2 impact the GRASSLAND is having on the
 	 * environment. The rating varies depending on the SquareStatus
 	 * 
-	 * @return - the CO2 Impact Rating earned for the Grassland
+	 * @return - the CO2 Impact Rating earned for the GRASSLAND
 	 */
 	public int getCo2ImpactRating() {
 		int[] co2Values = grasslandValues.getCO2ValueSet();
 		switch (squareStatus) {
-		case Grassland:
+		case GRASSLAND:
 			return (co2Values[0]);
-		case SeedlingForest:
+		case SEEDLING_FOREST:
 			return (co2Values[0] + (1 * co2Values[1]));
-		case IntermediateForest:
+		case INTERMEDIATE_FOREST:
 			return (co2Values[0] + (2 * co2Values[1]));
-		case EstablishedForest:
+		case ESTABLISHED_FOREST:
 			return (co2Values[0] + (3 * co2Values[1]));
-		case WildlifeSanctuary:
+		case WILDLIFE_SANCTUARY:
 			return (co2Values[0] + (3 * co2Values[1]) + (1 * co2Values[2]));
 		default:
 			return 0;
@@ -150,7 +150,7 @@ public abstract class Grassland implements ISquare {
 
 	/**
 	 * Method to update the SquareStatus to the next available option when a
-	 * development is added to the Grassland square
+	 * development is added to the GRASSLAND square
 	 * 
 	 * @return - true if the status has been successfully updated and false if the
 	 *         status of the square is null and can not be developed further
@@ -165,29 +165,29 @@ public abstract class Grassland implements ISquare {
 	}
 
 	/**
-	 * Method to get the status of the grassland. This can either be Vacant,
-	 * Grassland, SeedlingForest, IntermediateForest, EstablishedForest, or
-	 * WildlifeSanctuary
+	 * Method to get the status of the grassland. This can either be VACANT,
+	 * GRASSLAND, SEEDLING_FOREST, INTERMEDIATE_FOREST, ESTABLISHED_FOREST, or
+	 * WILDLIFE_SANCTUARY
 	 * <ol>
-	 * <li>Vacant = unowned
+	 * <li>VACANT = unowned
 	 * 
-	 * <li>Grassland = owned Grassland with no developments
+	 * <li>GRASSLAND = owned GRASSLAND with no developments
 	 * 
-	 * <li>SeedlingForest = owned Grassland with 1 minor development (i.e. 1
+	 * <li>SEEDLING_FOREST = owned GRASSLAND with 1 minor development (i.e. 1
 	 * forest planted)
 	 * 
-	 * <li>IntermediateForest = owned Grassland with 2 minor developments (i.e.
+	 * <li>INTERMEDIATE_FOREST = owned GRASSLAND with 2 minor developments (i.e.
 	 * 2 forests planted)
 	 * 
-	 * <li>EstablishedForest = owned Grassland with 3 minor developments (i.e. 3
+	 * <li>ESTABLISHED_FOREST = owned GRASSLAND with 3 minor developments (i.e. 3
 	 * forests planted)
 	 * 
-	 * <li>Wildlife Sanctuary = owned Grassland with 1 major development (i.e. a
+	 * <li>Wildlife Sanctuary = owned GRASSLAND with 1 major development (i.e. a
 	 * WildLife reserve)
 	 * </ol>
 	 * <p>
 	 * 
-	 * @return - the status of the Grassland
+	 * @return - the status of the GRASSLAND
 	 */
 	public SquareStatus getSquareStatus() {
 		return squareStatus;

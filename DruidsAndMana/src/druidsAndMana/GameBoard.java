@@ -83,7 +83,7 @@ public class GameBoard {
 	}
 			
 	/**
-	 * If the player owns all the grasslands in a realm they can start upgrading the squares:
+	 * If the player owns all the grasslands in a realm1 they can start upgrading the squares:
 	 * @param playerId
 	 * @param squareIndex
 	 * @return
@@ -99,7 +99,7 @@ public class GameBoard {
 		Grassland currGrasslandSquare = (Grassland)currSquare;
 				
 		// If the grassland is vacant it can always be upgraded or owned:
-		if(currGrasslandSquare.getSquareStatus() == SquareStatus.Vacant) {
+		if(currGrasslandSquare.getSquareStatus() == SquareStatus.VACANT) {
 			return true;
 		}
 		
@@ -148,6 +148,6 @@ public class GameBoard {
 	 * @return
 	 */
 	public SquareStatus getSquareType(int squareIndex) {
-		return SquareStatus.Grassland;
+		return SquareStatus.GRASSLAND;
 	}	
 }
