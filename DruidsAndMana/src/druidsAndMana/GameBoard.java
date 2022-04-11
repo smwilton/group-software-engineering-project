@@ -76,14 +76,14 @@ public class GameBoard {
 		ISquare square = squares[squareIndex];
 		if(square instanceof Grassland) {
 			Grassland grasslandSquare = (Grassland)square;
-			grasslandSquare.setOwnerId(playerId);
+			grasslandSquare.setInitialOwnerId(playerId);
 			return true;
 		}
 		return false;
 	}
 			
 	/**
-	 * If the player owns all the grasslands in a realm1 they can start upgrading the squares:
+	 * If the player owns all the grasslands in a realmTier1 they can start upgrading the squares:
 	 * @param playerId
 	 * @param squareIndex
 	 * @return
@@ -136,7 +136,7 @@ public class GameBoard {
 		// Cannot upgrade a square that is not grass land:
 		if(currSquare instanceof Grassland) {
 			Grassland grasslandSquare = (Grassland)currSquare;
-			return grasslandSquare.developmentCost();
+			return grasslandSquare.getDevelopmentCost();
 		}
 
 		return 0;

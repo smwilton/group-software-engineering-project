@@ -51,7 +51,7 @@ public class GameEngine {
 		
 		// Board class contains an array of 12 tiles 
 		
-		// Each turn tile abstact generic -> different types grassland, realm1 -> enum -> need const values
+		// Each turn tile abstact generic -> different types grassland, realmTier1 -> enum -> need const values
 		
 		// Turn - player existing position and dice roll -> [2, 6], Player < - class
 		

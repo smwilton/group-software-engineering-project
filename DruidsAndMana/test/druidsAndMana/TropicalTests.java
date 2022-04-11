@@ -18,25 +18,26 @@ class TropicalTests {
 			squareEstablishedForest, squareWildlifeSanctuary;
 	Grassland squareGrasslandInstance;
 	ISquare squareISquareInstance;
-	RealmTier realm1;
-	String expectedAsciiArt, expectedDescription;
+	RealmTier realmTier1, realmTier2;
+	String expectedAsciiArt, expectedDescription, ownerIdOption1, ownerIdOption2, ownerIdOption3;
 	SquareStatus status1, status2, status3, status4, status5, status6;
-	boolean isTrue, isFalse;
-	int expectedPriceToBuy, expectedPriceToPlantForest, expectedPriceForWildlifeSanctuaryUpgrade,
-			expectedCO2ImpactVacant, expectedCO2ImpactGrassland, expectedCO2ImpactSeedling,
-			expectedCO2ImpactIntermediate, expectedCO2ImpactEstablished, expectedCO2ImpactWildlifeSanctuary,
-			expectedLandOnCostVacant, expectedLandOnCostGrassland, expectedLandOnCostSeedling,
-			expectedLandOnCostIntermediate, expectedLandOnCostEstablished, expectedLandOnCostWildlifeSanctuary;
+	int expectedPriceToBuyTier1, expectedPriceToBuyTier2, expectedPriceToPlantForestTier1,
+			expectedPriceForWildlifeSanctuaryUpgradeTier1, expectedCO2ImpactVacantTier1,
+			expectedCO2ImpactGrasslandTier1, expectedCO2ImpactSeedlingTier1, expectedCO2ImpactIntermediateTier1,
+			expectedCO2ImpactEstablishedTier1, expectedCO2ImpactWildlifeSanctuaryTier1, expectedLandOnCostVacantTier1,
+			expectedLandOnCostGrasslandTier1, expectedLandOnCostSeedlingTier1, expectedLandOnCostIntermediateTier1,
+			expectedLandOnCostEstablishedTier1, expectedLandOnCostWildlifeSanctuaryTier1;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		realm1 = RealmTier.TIER_1;
-		squareTropicalInstance = new Tropical(realm1);
-		squareGrasslandInstance = new Tropical(realm1);
-		squareISquareInstance = new Tropical(realm1);
+		realmTier1 = RealmTier.TIER_1;
+		realmTier2 = RealmTier.TIER_2;
+		squareTropicalInstance = new Tropical(realmTier1);
+		squareGrasslandInstance = new Tropical(realmTier1);
+		squareISquareInstance = new Tropical(realmTier1);
 		expectedAsciiArt = "^   ^   ^    ^         ___I_    ^   ^    ^   ^   ^    ^   ^\r\n"
 				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\  /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
 				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\ /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
@@ -48,50 +49,56 @@ class TropicalTests {
 		status4 = SquareStatus.INTERMEDIATE_FOREST;
 		status5 = SquareStatus.ESTABLISHED_FOREST;
 		status6 = SquareStatus.WILDLIFE_SANCTUARY;
-		isTrue = true;
-		isFalse = false;
 
-		squareVacant = new Tropical(realm1);
-		squareGrassland = new Tropical(realm1);
+		squareVacant = new Tropical(realmTier1);
+		squareGrassland = new Tropical(realmTier1);
 		squareGrassland.developGrassland(); // developing the square once to convert to a GRASSLAND
-		squareSeedlingForest = new Tropical(realm1);
+		squareSeedlingForest = new Tropical(realmTier1);
 		squareSeedlingForest.developGrassland();
 		squareSeedlingForest.developGrassland(); // developing the square twice to convert to a SEEDLING_FOREST (1 minor
 													// development)
-		squareIntermediateForest = new Tropical(realm1);
+		squareIntermediateForest = new Tropical(realmTier1);
 		squareIntermediateForest.developGrassland();
 		squareIntermediateForest.developGrassland();
 		squareIntermediateForest.developGrassland();// developing the square three times to convert to a
 													// INTERMEDIATE_FOREST (2 minor developments)
-		squareEstablishedForest = new Tropical(realm1);
+		squareEstablishedForest = new Tropical(realmTier1);
 		squareEstablishedForest.developGrassland();
 		squareEstablishedForest.developGrassland();
 		squareEstablishedForest.developGrassland();
 		squareEstablishedForest.developGrassland(); // developing the square four times to convert to a
 													// ESTABLISHED_FOREST (3 minor developments)
-		squareWildlifeSanctuary = new Tropical(realm1);
+		squareWildlifeSanctuary = new Tropical(realmTier1);
 		squareWildlifeSanctuary.developGrassland();
 		squareWildlifeSanctuary.developGrassland();
 		squareWildlifeSanctuary.developGrassland();
 		squareWildlifeSanctuary.developGrassland();
 		squareWildlifeSanctuary.developGrassland(); // developing the square five times to convert to a
 													// ESTABLISHED_FOREST (1 major development)
+		// This is the Tier 1 values
+		expectedPriceToBuyTier1 = 60;
+		expectedPriceToPlantForestTier1 = 12;
+		expectedPriceForWildlifeSanctuaryUpgradeTier1 = 60;
+		expectedCO2ImpactVacantTier1 = 0;
+		expectedCO2ImpactGrasslandTier1 = 60;
+		expectedCO2ImpactSeedlingTier1 = 66;
+		expectedCO2ImpactIntermediateTier1 = 72;
+		expectedCO2ImpactEstablishedTier1 = 78;
+		expectedCO2ImpactWildlifeSanctuaryTier1 = 98;
+		expectedLandOnCostVacantTier1 = 0;
+		expectedLandOnCostGrasslandTier1 = 10;
+		expectedLandOnCostSeedlingTier1 = 14;
+		expectedLandOnCostIntermediateTier1 = 18;
+		expectedLandOnCostEstablishedTier1 = 22;
+		expectedLandOnCostWildlifeSanctuaryTier1 = 30;
 
-		expectedPriceToBuy = 60;
-		expectedPriceToPlantForest = 12;
-		expectedPriceForWildlifeSanctuaryUpgrade = 60;
-		expectedCO2ImpactVacant = 0;
-		expectedCO2ImpactGrassland = 60;
-		expectedCO2ImpactSeedling = 66;
-		expectedCO2ImpactIntermediate = 72;
-		expectedCO2ImpactEstablished = 78;
-		expectedCO2ImpactWildlifeSanctuary = 98;
-		expectedLandOnCostVacant = 0;
-		expectedLandOnCostGrassland = 10;
-		expectedLandOnCostSeedling = 14;
-		expectedLandOnCostIntermediate = 18;
-		expectedLandOnCostEstablished = 22;
-		expectedLandOnCostWildlifeSanctuary = 30;
+		// This is the Tier 2 expected Price to Buy value. It is used to test that the
+		// constructor can be used with different RealmTier enum's
+		expectedPriceToBuyTier2 = 50;
+
+		ownerIdOption1 = "1";
+		ownerIdOption2 = "Owner Test";
+		ownerIdOption3 = "Owner123";
 	}
 
 	/**
@@ -100,21 +107,55 @@ class TropicalTests {
 	 */
 	@Test
 	void testConstructor() {
+		Tropical squareTropicalInstance = new Tropical(realmTier1);
+		// Testing constructor is an instance of the ISquare interface, Grassland Class
+		// and Tropical Class
 		assertTrue(squareTropicalInstance instanceof ISquare);
 		assertTrue(squareTropicalInstance instanceof Grassland);
 		assertTrue(squareTropicalInstance instanceof Tropical);
+		// Testing constructor set the status to VACANT
+		assertEquals(status1, squareTropicalInstance.getSquareStatus());
+		// Testing the constructor set the Values using the private method by getting
+		// the price to buy
+		assertEquals(expectedPriceToBuyTier1, squareTropicalInstance.getDevelopmentCost());
+		// Testing that owner's id is null initially
+		assertNull(squareTropicalInstance.getOwnerId());
 
+		Grassland squareGrasslandInstance = new Tropical(realmTier1);
+		// Testing constructor is an instance of the ISquare interface, Grassland Class
+		// and Tropical Class
 		assertTrue(squareGrasslandInstance instanceof ISquare);
 		assertTrue(squareGrasslandInstance instanceof Grassland);
 		assertTrue(squareGrasslandInstance instanceof Tropical);
+		// Testing constructor set the status to VACANT
+		assertEquals(status1, squareGrasslandInstance.getSquareStatus());
+		// Testing the constructor set the Values using the private method by getting
+		// the price to buy
+		assertEquals(expectedPriceToBuyTier1, squareGrasslandInstance.getDevelopmentCost());
+		// Testing that owner's id is null initially
+		assertNull(squareGrasslandInstance.getOwnerId());
 
+		ISquare squareISquareInstance = new Tropical(realmTier1);
+		// Testing constructor is an instance of the ISquare interface, Grassland Class
+		// and Tropical Class
 		assertTrue(squareISquareInstance instanceof ISquare);
 		assertTrue(squareISquareInstance instanceof Grassland);
 		assertTrue(squareISquareInstance instanceof Tropical);
+		// Testing constructor set the status to VACANT
+		assertEquals(status1, ((Grassland) squareISquareInstance).getSquareStatus());
+		// Testing the constructor set the Values using the private method by getting
+		// the price to buy
+		assertEquals(expectedPriceToBuyTier1, ((Grassland) squareISquareInstance).getDevelopmentCost());
+		// Testing that owner's id is null initially
+		assertNull(((Grassland) squareISquareInstance).getOwnerId());
+
+		// Testing the constructor can be used with different RealmTier enums
+		Tropical tier2Tropical = new Tropical(realmTier2);
+		assertEquals(expectedPriceToBuyTier2, tier2Tropical.getDevelopmentCost());
 	}
 
 	/**
-	 * Test method for {@link druidsAndMana.Grassland#developmentCost()}.
+	 * Test method for {@link druidsAndMana.Grassland#getDevelopmentCost()}.
 	 * <p>
 	 * Tests the developmentCost method returns the expected value for each stage in
 	 * the squares development
@@ -122,21 +163,21 @@ class TropicalTests {
 	@Test
 	void testDevelopmentCost() {
 		// VACANT square should return the price to buy
-		assertEquals(expectedPriceToBuy, squareVacant.developmentCost());
+		assertEquals(expectedPriceToBuyTier1, squareVacant.getDevelopmentCost());
 
 		// GRASSLAND, SEEDLING_FOREST, and INTERMEDIATE_FOREST should return the price
 		// to
 		// plant a forest
-		assertEquals(expectedPriceToPlantForest, squareGrassland.developmentCost());
-		assertEquals(expectedPriceToPlantForest, squareSeedlingForest.developmentCost());
-		assertEquals(expectedPriceToPlantForest, squareIntermediateForest.developmentCost());
+		assertEquals(expectedPriceToPlantForestTier1, squareGrassland.getDevelopmentCost());
+		assertEquals(expectedPriceToPlantForestTier1, squareSeedlingForest.getDevelopmentCost());
+		assertEquals(expectedPriceToPlantForestTier1, squareIntermediateForest.getDevelopmentCost());
 
 		// ESTABLISHED_FOREST should return the price to upgrade to a WILDLIFE_SANCTUARY
-		assertEquals(expectedPriceForWildlifeSanctuaryUpgrade, squareEstablishedForest.developmentCost());
+		assertEquals(expectedPriceForWildlifeSanctuaryUpgradeTier1, squareEstablishedForest.getDevelopmentCost());
 
 		// WILDLIFE_SANCTUARY should return 0 as development option have been fully
 		// exhausted
-		assertEquals(0, squareWildlifeSanctuary.developmentCost());
+		assertEquals(0, squareWildlifeSanctuary.getDevelopmentCost());
 	}
 
 	/**
@@ -148,12 +189,12 @@ class TropicalTests {
 	 */
 	@Test
 	void testGetChargeForLandingOnSquare() {
-		assertEquals(expectedLandOnCostVacant, squareVacant.getChargeForLandingOnSquare());
-		assertEquals(expectedLandOnCostGrassland, squareGrassland.getChargeForLandingOnSquare());
-		assertEquals(expectedLandOnCostSeedling, squareSeedlingForest.getChargeForLandingOnSquare());
-		assertEquals(expectedLandOnCostIntermediate, squareIntermediateForest.getChargeForLandingOnSquare());
-		assertEquals(expectedLandOnCostEstablished, squareEstablishedForest.getChargeForLandingOnSquare());
-		assertEquals(expectedLandOnCostWildlifeSanctuary, squareWildlifeSanctuary.getChargeForLandingOnSquare());
+		assertEquals(expectedLandOnCostVacantTier1, squareVacant.getChargeForLandingOnSquare());
+		assertEquals(expectedLandOnCostGrasslandTier1, squareGrassland.getChargeForLandingOnSquare());
+		assertEquals(expectedLandOnCostSeedlingTier1, squareSeedlingForest.getChargeForLandingOnSquare());
+		assertEquals(expectedLandOnCostIntermediateTier1, squareIntermediateForest.getChargeForLandingOnSquare());
+		assertEquals(expectedLandOnCostEstablishedTier1, squareEstablishedForest.getChargeForLandingOnSquare());
+		assertEquals(expectedLandOnCostWildlifeSanctuaryTier1, squareWildlifeSanctuary.getChargeForLandingOnSquare());
 	}
 
 	/**
@@ -164,12 +205,12 @@ class TropicalTests {
 	 */
 	@Test
 	void testGetCo2ImpactRating() {
-		assertEquals(expectedCO2ImpactVacant, squareVacant.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactGrassland, squareGrassland.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactSeedling, squareSeedlingForest.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactIntermediate, squareIntermediateForest.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactEstablished, squareEstablishedForest.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactWildlifeSanctuary, squareWildlifeSanctuary.getCo2ImpactRating());
+		assertEquals(expectedCO2ImpactVacantTier1, squareVacant.getCo2ImpactRating());
+		assertEquals(expectedCO2ImpactGrasslandTier1, squareGrassland.getCo2ImpactRating());
+		assertEquals(expectedCO2ImpactSeedlingTier1, squareSeedlingForest.getCo2ImpactRating());
+		assertEquals(expectedCO2ImpactIntermediateTier1, squareIntermediateForest.getCo2ImpactRating());
+		assertEquals(expectedCO2ImpactEstablishedTier1, squareEstablishedForest.getCo2ImpactRating());
+		assertEquals(expectedCO2ImpactWildlifeSanctuaryTier1, squareWildlifeSanctuary.getCo2ImpactRating());
 	}
 
 	/**
@@ -178,14 +219,15 @@ class TropicalTests {
 	 * {@link druidsAndMana.Grassland#developGrassland()}.
 	 * <p>
 	 * Tests that the getSquareStatus, canDevelopGrassland and DevelopGrassland
-	 * methods behaves as expected as even stage throughout the squares development.
+	 * methods behaves as expected as each stage throughout the squares development
+	 * and that the square development is applied as expected.
 	 * <p>
 	 * This test has been performed for each square instance to ensure the methods
 	 * behave as expected regardless of how it has been declared (i.e. using
-	 * ISquare, GRASSLAND or TIER_1).
+	 * ISquare, Grassland or Tropical).
 	 */
 	@Test
-	void testGetSquareStatusAndCanDevelopGrasslandAndDevelopGrassland() {
+	void testSquareDevelopment() {
 		// when a square instance is declared the status is set to VACANT
 		assertEquals(status1, squareTropicalInstance.getSquareStatus());
 		assertEquals(status1, squareGrasslandInstance.getSquareStatus());
@@ -270,10 +312,10 @@ class TropicalTests {
 	 * Test method for {@link druidsAndMana.Tropical#description()}.
 	 * <p>
 	 * Tests that the description for each square instance is as expected regardless
-	 * of how it has been declared (i.e. using ISquare, GRASSLAND or TIER_1. It has
-	 * also been performed for a square at each stage of the development cycle to
-	 * ensure it behaves as expected regardless of how many developments have been
-	 * applied
+	 * of how it has been declared (i.e. using ISquare, Grassland or Tropical. It
+	 * has also been performed for a square at each stage of the development cycle
+	 * to ensure it behaves as expected regardless of how many developments have
+	 * been applied
 	 */
 	@Test
 	void testDescription() {
@@ -292,10 +334,10 @@ class TropicalTests {
 	 * Test method for {@link druidsAndMana.Tropical#asciiArt()}.
 	 * <p>
 	 * Tests that the ascii art for each square instance is as expected regardless
-	 * of how it has been declared (i.e. using ISquare, GRASSLAND or TIER_1). It has
-	 * also been performed for a square at each stage of the development cycle to
-	 * ensure it behaves as expected regardless of how many developments have been
-	 * applied
+	 * of how it has been declared (i.e. using ISquare, Grassland or Tropical). It
+	 * has also been performed for a square at each stage of the development cycle
+	 * to ensure it behaves as expected regardless of how many developments have
+	 * been applied
 	 */
 	@Test
 	void testAsciiArt() {
@@ -311,13 +353,52 @@ class TropicalTests {
 	}
 
 	/**
-	 * Test method for {@link druidsAndMana.Grassland#setOwnerId(java.lang.String)}
-	 * and {@link druidsAndMana.Grassland#getOwnerId()}.
+	 * Test method for
+	 * {@link druidsAndMana.Grassland#setInitialOwnerId(java.lang.String)} and
+	 * {@link druidsAndMana.Grassland#getOwnerId()} and
+	 * {@link druidsAndMana.Grassland#transferOwnership(java.lang.String)}.
+	 * <p>
+	 * Tests the getter and setters for the OwnerId behaves as expected regardless
+	 * of how it has been declared (i.e. using ISquare, Grassland or Tropical).
+	 * <p>
+	 * This test includes both the setInitialOwnerId setter and the
+	 * transferOwnership setter
 	 */
 	@Test
 	void testSetAndGetOwnerId() {
-		// TODO
-		fail("Not yet implemented");
+		squareTropicalInstance.setInitialOwnerId(ownerIdOption1);
+		assertEquals("1", squareTropicalInstance.getOwnerId());
+
+		// check that an exception is thrown if an owner id is set when an owner id is
+		// already set
+		Exception e = assertThrows(IllegalArgumentException.class, () -> {
+			squareTropicalInstance.setInitialOwnerId(ownerIdOption2);
+		});
+		assertEquals("Another player already owns this square", e.getMessage());
+
+		squareGrasslandInstance.setInitialOwnerId(ownerIdOption2);
+		assertEquals("Owner Test", squareGrasslandInstance.getOwnerId());
+
+		// check that an exception is thrown if an owner id is set when an owner id is
+		// already set
+		e = assertThrows(IllegalArgumentException.class, () -> {
+			squareGrasslandInstance.setInitialOwnerId(ownerIdOption3);
+		});
+		assertEquals("Another player already owns this square", e.getMessage());
+
+		((Grassland) squareISquareInstance).setInitialOwnerId(ownerIdOption3);
+		assertEquals("Owner123", ((Grassland) squareISquareInstance).getOwnerId());
+
+		// check that an exception is thrown if an owner id is set when an owner id is
+		// already set
+		e = assertThrows(IllegalArgumentException.class, () -> {
+			((Grassland) squareISquareInstance).setInitialOwnerId(ownerIdOption1);
+		});
+		assertEquals("Another player already owns this square", e.getMessage());
+		/*
+		 * ownerIdOption1 = "1"; ownerIdOption2 = "Owner Test"; ownerIdOption3 =
+		 * "Owner123";
+		 */
 	}
 
 }

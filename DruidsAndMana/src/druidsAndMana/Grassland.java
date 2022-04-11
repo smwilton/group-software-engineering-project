@@ -1,8 +1,8 @@
 package druidsAndMana;
 
 /**
- * Abstract class that implements ISquare interface and repesents a
- * Grassland object
+ * Abstract class that implements ISquare interface and repesents a Grassland
+ * object
  * 
  * NB: An abstract class cannot be instantiated
  *
@@ -28,7 +28,7 @@ public abstract class Grassland implements ISquare {
 	 * Sets the grassland values based on the RealmTier that has been defined in the
 	 * constructor
 	 * 
-	 * @param realm1 - the realm1 to get the GrasslandValues for
+	 * @param realmTier1 - the realmTier1 to get the GrasslandValues for
 	 */
 	private void setGrasslandValues(RealmTier realm) {
 		this.grasslandValues = new GrasslandValues(realm);
@@ -45,16 +45,31 @@ public abstract class Grassland implements ISquare {
 	}
 
 	/**
-	 * Sets the Owner of the Grassland once it is purchased
+	 * Sets the Initial Owner of the Square once it is purchased and updates the
+	 * status of the Square from Vacant to Grassland
 	 * 
-	 * @param ownerId - the ID of the owner who is purchasing the grassland
+	 * @param ownerId - the ID of the Player who is purchasing the grassland
 	 * @throws IllegalArgumentException if the grassland is already owned
 	 */
-	public void setOwnerId(String ownerId) {
+	public void setInitialOwnerId(String ownerId) {
 		if (this.ownerId != null) {
 			throw new IllegalArgumentException("Another player already owns this square");
 		}
 		this.developGrassland();
+		this.ownerId = ownerId;
+	}
+
+	/**
+	 * Trasnfers the ownership of a square from one player to another
+	 * 
+	 * @param ownerId - the ID of the Player who the ownership is transferring to
+	 * @throws IlledgalArgumentException if the grassland is not already owned
+	 */
+	public void transferOwnership(String ownerId) {
+		if (this.ownerId == null) {
+			throw new IllegalArgumentException(
+					"A player must currently own this square to transfer the ownership to another Player");
+		}
 		this.ownerId = ownerId;
 	}
 
@@ -74,7 +89,7 @@ public abstract class Grassland implements ISquare {
 	 *         there are no development options available
 	 *         </ul>
 	 */
-	public int developmentCost() {
+	public int getDevelopmentCost() {
 		switch (squareStatus) {
 		case VACANT:
 			return grasslandValues.getPriceGrassland();
@@ -146,6 +161,11 @@ public abstract class Grassland implements ISquare {
 	 */
 	public boolean canDevelopGrassland() {
 		return squareStatus.next() != null;
+		/*
+		 * Design decision not to include any additional checks to ensure ownerId is set
+		 * before developments beyond vacant are made as this is handled in the
+		 * GameBoard
+		 */
 	}
 
 	/**
@@ -173,11 +193,11 @@ public abstract class Grassland implements ISquare {
 	 * 
 	 * <li>GRASSLAND = owned Grassland with no developments
 	 * 
-	 * <li>SEEDLING_FOREST = owned Grassland with 1 minor development (i.e. 1
-	 * forest planted)
+	 * <li>SEEDLING_FOREST = owned Grassland with 1 minor development (i.e. 1 forest
+	 * planted)
 	 * 
-	 * <li>INTERMEDIATE_FOREST = owned Grassland with 2 minor developments (i.e.
-	 * 2 forests planted)
+	 * <li>INTERMEDIATE_FOREST = owned Grassland with 2 minor developments (i.e. 2
+	 * forests planted)
 	 * 
 	 * <li>ESTABLISHED_FOREST = owned Grassland with 3 minor developments (i.e. 3
 	 * forests planted)
