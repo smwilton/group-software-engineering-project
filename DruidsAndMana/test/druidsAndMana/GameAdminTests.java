@@ -33,11 +33,19 @@ class GameAdminTests {
 		assertEquals(0, gameAdmin.numOfPlayers());
 	}
 	
-	/**
+	
 	@Test
-	void testPlayerSetUp() {
-		fail("Not yet implemented");
+	void testPlayerSetUpAllowed() {
+		assertEquals(0, gameAdmin.players.size());
+		inputService.setUserInputResponse("1");
+		inputService.setConfirmation(true);
+		gameAdmin.playerSetUp(gameAdmin.numOfPlayers());
+		assertEquals(1, gameAdmin.players.size());
+		assertEquals("1", gameAdmin.players.get(0).getPlayerName());
+		assertEquals(0, gameAdmin.players.get(0).getCo2());
+		assertEquals(1500, gameAdmin.players.get(0).getMana());
+		assertEquals(1, gameAdmin.players.get(0).getPlayerNumber());
 	}
-	**/
+	
 
 }
