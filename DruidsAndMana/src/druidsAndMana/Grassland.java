@@ -51,8 +51,8 @@ public abstract class Grassland implements ISquare {
 	 * @param ownerId - the ID of the Player who is purchasing the grassland
 	 * @throws IllegalArgumentException if the grassland is already owned
 	 */
-	public void setInitialOwnerId(String ownerId) throws IllegalArgumentException {
-		if (this.ownerId != null) {
+	public void setInitialOwnerId(int ownerId) throws IllegalArgumentException {
+		if (this.ownerId != 0) {
 			throw new IllegalArgumentException("Another player already owns this square");
 		}
 		this.developGrassland();
@@ -65,8 +65,8 @@ public abstract class Grassland implements ISquare {
 	 * @param ownerId - the ID of the Player who the ownership is transferring to
 	 * @throws IlledgalArgumentException if the grassland is not already owned
 	 */
-	public void transferOwnership(String ownerId) throws IllegalArgumentException {
-		if (this.ownerId == null) {
+	public void transferOwnership(int ownerId) throws IllegalArgumentException {
+		if (this.ownerId == 0) {
 			throw new IllegalArgumentException(
 					"A player must currently own this square to transfer the ownership to another Player");
 		}
