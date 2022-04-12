@@ -13,7 +13,7 @@ public abstract class Grassland implements ISquare {
 
 	// Instance Vars
 	private GrasslandValues grasslandValues;
-	private String ownerId; // String var type used to allow the use of null to indicate that a grassland
+	private int ownerId; // String var type used to allow the use of null to indicate that a grassland
 							// square is not owned
 	private SquareStatus squareStatus;
 
@@ -40,7 +40,7 @@ public abstract class Grassland implements ISquare {
 	 * @return - the owner id if the grassland is owned or null if it is still
 	 *         vacant and eligible to be bought by a player
 	 */
-	public String getOwnerId() {
+	public int getOwnerId() {
 		return ownerId;
 	}
 
@@ -51,8 +51,8 @@ public abstract class Grassland implements ISquare {
 	 * @param ownerId - the ID of the Player who is purchasing the grassland
 	 * @throws IllegalArgumentException if the grassland is already owned
 	 */
-	public void setInitialOwnerId(String ownerId) {
-		if (this.ownerId != null) {
+	public void setInitialOwnerId(int ownerId) {
+		if (this.ownerId != 0) {
 			throw new IllegalArgumentException("Another player already owns this square");
 		}
 		this.developGrassland();
@@ -65,8 +65,8 @@ public abstract class Grassland implements ISquare {
 	 * @param ownerId - the ID of the Player who the ownership is transferring to
 	 * @throws IlledgalArgumentException if the grassland is not already owned
 	 */
-	public void transferOwnership(String ownerId) {
-		if (this.ownerId == null) {
+	public void transferOwnership(int ownerId) {
+		if (this.ownerId == 0) {
 			throw new IllegalArgumentException(
 					"A player must currently own this square to transfer the ownership to another Player");
 		}

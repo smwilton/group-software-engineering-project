@@ -14,6 +14,9 @@ public class GameAdmin {
 	private IInputService inputService;
 	ArrayList<Player> players = new ArrayList<Player>();
 	boolean gameOn = false;
+	int currentPlayer;
+	GameBoardBuilder builder;
+	GameBoard board;
 
 	public GameAdmin(IInputService inputService) {
 		this.inputService = inputService;
@@ -27,6 +30,7 @@ public class GameAdmin {
 	public void startGame() throws Exception {
 		gameOn = true;
 		playerSetUp(numOfPlayers());
+		currentPlayer=0;
 	}
 
 	/**
@@ -119,9 +123,47 @@ public class GameAdmin {
 	 */
 	public GameBoard createGameBoard() {
 
-		GameBoardBuilder builder = new GameBoardBuilder();
-		GameBoard board = new GameBoard(builder);
+		builder = new GameBoardBuilder();
+		board = new GameBoard(builder);
 		return board;
+	}
+	/**
+	 * A method to return the Square Index that the current player is currently on
+	 * @return
+	 */
+	public int getCurrentPlayerPosition() {
+		Player player = players.get(currentPlayer);
+		int position = player.getPlayerPosition();
+		return position;
+	}
+	
+	/**
+	 * This method will update the position of the current player on the game board.
+	 * It will also update the Player's mana if they pass or land on the Alder Square
+	 * It will also
+	 * @param diceRoll : the total dice roll of the current player
+	 */
+	public void movePlayer(int diceRoll) {
+		Player player = players.get(currentPlayer);
+		int position = player.getPlayerPosition();
+		int newPosition = position+diceRoll;
+		if(newPosition>=12) {
+			player.setMana(player.getMana()+100);
+			newPosition -=12;
+			if(newPosition==0) {
+				player.setMana(player.getMana()+100);
+			}
+		}
+		player.setPlayerPosition(newPosition);
+	}
+	
+	/**
+	 * A method to display the current square Ascii art and description
+	 */
+	public void displaySquareDetails() {
+		int position = getCurrentPlayerPosition();
+		System.out.println(board.squareAsciiArt(position));
+		System.out.println(board.squareDescription(position));
 	}
 
 	/**
@@ -131,8 +173,8 @@ public class GameAdmin {
 	 * @param squareIndex : the index of the square to check
 	 * @return boolean : true if square has an owner, false if it is unowned
 	 */
-	public boolean checkIfSquareIsOwned(GameBoard board, int squareIndex) {
-		if (board.getSquareOwnerId(squareIndex) == null) {
+	public boolean isSquareOwned(GameBoard board, int squareIndex) {
+		if (board.getSquareOwnerId(squareIndex) == 0) {
 			return false;
 		} else {
 			return true;
@@ -148,11 +190,11 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void buyUnownedGrassland(GameBoard board, int squareIndex, String playerNumber) {
+	public void buyUnownedGrassland(GameBoard board, int squareIndex, int playerNumber) {
 		// Retrieve Player object
-		Player player = players.get(Integer.parseInt(playerNumber));
+		Player player = players.get(playerNumber);
 
-		int manaCost = board.costToUpgrade(playerNumber, squareIndex);
+		int manaCost = board.costToUpgrade(squareIndex);
 		int mana = player.getMana();
 		// Check if Player can afford the manaCost and commit the purchase if possible
 		if (mana > manaCost) {
@@ -172,12 +214,12 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void payForLandingOnOwnedGrassland(GameBoard board, int squareIndex, String playerNumber,
-			String ownerPlayerNumber) {
+	public void payForLandingOnOwnedGrassland(GameBoard board, int squareIndex, int playerNumber,
+			int ownerPlayerNumber) {
 		int feeOwed = board.manaCharge(squareIndex);
-		Player player = players.get(Integer.parseInt(playerNumber));
+		Player player = players.get(playerNumber);
 		int buyerMana = player.getMana();
-		Player owner = players.get(Integer.parseInt(ownerPlayerNumber));
+		Player owner = players.get(ownerPlayerNumber);
 		int ownerMana = owner.getMana();
 		if (buyerMana > feeOwed) {
 			player.setMana(buyerMana - feeOwed);

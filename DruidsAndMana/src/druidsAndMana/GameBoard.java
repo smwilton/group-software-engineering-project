@@ -59,20 +59,20 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return 
 	 */
-	public String getSquareOwnerId(int squareIndex) {
+	public int getSquareOwnerId(int squareIndex) {
 		ISquare square = squares[squareIndex];
 		if(square instanceof Grassland) {
 			Grassland grasslandSquare = (Grassland)square;
 			return grasslandSquare.getOwnerId();
 		}
-		return null;
+		return 0;
 	}
 	
 	/**
 	 * If a square is not owned then a player can take ownership
 	 * @return
 	 */
-	public boolean setSquareOwnerId(int squareIndex, String playerId) { //Tighten this method up!
+	public boolean setSquareOwnerId(int squareIndex, int playerId) { //Tighten this method up!
 		ISquare square = squares[squareIndex];
 		if(square instanceof Grassland) {
 			Grassland grasslandSquare = (Grassland)square;
@@ -88,7 +88,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
-	public boolean playerCanUpgrade(String playerId, int squareIndex) {
+	public boolean playerCanUpgrade(int playerId, int squareIndex) {
 		ISquare currSquare = squares[squareIndex];
 		
 		// Cannot upgrade a square that is not grass land:
@@ -130,7 +130,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
-	public int costToUpgrade(String playerId, int squareIndex) {
+	public int costToUpgrade(int squareIndex) {
 		ISquare currSquare = squares[squareIndex];
 		
 		// Cannot upgrade a square that is not grass land:
