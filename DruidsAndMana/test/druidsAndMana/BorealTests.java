@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * See TropicalTest where the implementation has been tested as ISquare and
  * Grassland.
  * 
- * @author Nicola Stirling 40020701
+ * @author Nicola
  *
  */
 class BorealTests {

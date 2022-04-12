@@ -3,7 +3,7 @@ package druidsAndMana;
 /**
  * Class that contains all the values relating to the types of Grassland
  * 
- * @author Nicola Stirling 40020701
+ * @author Nicola
  *
  */
 public class GrasslandValues {

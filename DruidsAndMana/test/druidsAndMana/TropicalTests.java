@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * Testing of the Tropical Class as an implementation of the ISquare Interface,
  * Grassland Abstract Class and Tropical Class
  * 
- * @author Nicola Stirling 40020701
+ * @author Nicola
  *
  */
 class TropicalTests {
