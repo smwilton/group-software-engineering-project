@@ -127,25 +127,45 @@ public class GameAdmin {
 		board = new GameBoard(builder);
 		return board;
 	}
+	
 	/**
-	 * A method to return the Square Index that the current player is currently on
+	 * a method to return the current player from the players ArrayList.
+	 * @return
+	 */
+	public Player getCurrentPlayer() {
+		Player player = players.get(currentPlayer);
+		return player;
+	}
+	/**
+	 * A method to return the Square Index that the current player is on
 	 * @return
 	 */
 	public int getCurrentPlayerPosition() {
-		Player player = players.get(currentPlayer);
+		Player player = getCurrentPlayer();
 		int position = player.getPlayerPosition();
 		return position;
 	}
 	
 	/**
+	 * A method to return the current players details
+	 * @return
+	 */
+	public String getCurrentPlayerDetails() {
+		Player player = getCurrentPlayer();
+		return player.toString();
+	}
+	
+	/**
 	 * This method will update the position of the current player on the game board.
-	 * It will also update the Player's mana if they pass or land on the Alder Square
+	 * It will also update the Player's mana if they pass or land on the Alder Square	
 	 * It will also
 	 * @param diceRoll : the total dice roll of the current player
 	 */
 	public void movePlayer(int diceRoll) {
-		Player player = players.get(currentPlayer);
+		Player player = getCurrentPlayer();
+		System.out.println(player.toString());
 		int position = player.getPlayerPosition();
+		System.out.println("The starting position of this player is: "+position);
 		int newPosition = position+diceRoll;
 		if(newPosition>=12) {
 			player.setMana(player.getMana()+100);
@@ -192,13 +212,17 @@ public class GameAdmin {
 	 */
 	public void buyUnownedGrassland(GameBoard board, int squareIndex, int playerNumber) {
 		// Retrieve Player object
-		Player player = players.get(playerNumber);
+		Player player = players.get(playerNumber-1);
 
 		int manaCost = board.costToUpgrade(squareIndex);
+		System.out.println(player.toString());
+		System.out.println("It will cost "+manaCost);
 		int mana = player.getMana();
+		System.out.println("Player has "+mana+" mana");
 		// Check if Player can afford the manaCost and commit the purchase if possible
 		if (mana > manaCost) {
 			player.setMana(mana - manaCost);
+			System.out.println("Player now has "+player.getMana()+" mana");
 			board.setSquareOwnerId(squareIndex, playerNumber);
 		} else {
 			System.out.println("Sorry " + player.getPlayerName() + ", but you cannot afford to buy this "
@@ -226,6 +250,13 @@ public class GameAdmin {
 			owner.setMana(ownerMana + feeOwed);
 		} else {
 			System.out.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
+		}
+	}
+	
+	public void endTurn() {
+		currentPlayer++;
+		if(currentPlayer>=players.size()) {
+			currentPlayer-=players.size();
 		}
 	}
 

@@ -37,7 +37,7 @@ public class Player {
 	}
 
 	public int getPlayerPosition() {
-		return playerNumber;
+		return playerPosition;
 	}
 
 	public void setPlayerPosition(int playerPosition) {
