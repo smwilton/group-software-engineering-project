@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Testing of the Tropical Class (and indirectly testing of the Grassland
- * Abstract Class)
+ * Testing of the Tropical Class as an implementation of the ISquare Interface,
+ * Grassland Abstract Class and Tropical Class
  * 
  * @author Nicola Stirling 40020701
  *
