@@ -74,7 +74,7 @@ class GrasslandValuesTests {
 		assertTrue(tier2Values instanceof GrasslandValues);
 
 		GrasslandValues tier3Values = new GrasslandValues(RealmTier.TIER_3);
-		assertTrue(tier1Values instanceof GrasslandValues);
+		assertTrue(tier3Values instanceof GrasslandValues);
 
 		GrasslandValues tier4Values = new GrasslandValues(RealmTier.TIER_4);
 		assertTrue(tier4Values instanceof GrasslandValues);
