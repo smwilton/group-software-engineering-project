@@ -1,7 +1,7 @@
 package druidsAndMana;
 
 /**
- * @author Peter McCullough 40055438
+ * @author pete
  *
  */
 public class ScenicViewpoint implements ISquare {

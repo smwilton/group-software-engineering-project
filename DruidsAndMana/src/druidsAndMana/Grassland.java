@@ -6,7 +6,7 @@ package druidsAndMana;
  * 
  * NB: An abstract class cannot be instantiated
  *
- * @author Nicola Stirling 40020701
+ * @author Nicola
  *
  */
 public abstract class Grassland implements ISquare {
@@ -35,10 +35,11 @@ public abstract class Grassland implements ISquare {
 	}
 
 	/**
-	 * Gets the owner id
+	 * Gets the player number of the player who owns the grassland (i.e. the
+	 * ownerId)
 	 * 
-	 * @return - the owner id if the grassland is owned or null if it is still
-	 *         vacant and eligible to be bought by a player
+	 * @return - the owner id if the grassland is owned or 0 if it is still vacant
+	 *         and eligible to be bought by a player
 	 */
 	public int getOwnerId() {
 		return ownerId;
@@ -48,7 +49,8 @@ public abstract class Grassland implements ISquare {
 	 * Sets the Initial Owner of the Square once it is purchased and updates the
 	 * status of the Square from Vacant to Grassland
 	 * 
-	 * @param ownerId - the ID of the Player who is purchasing the grassland
+	 * @param ownerId - the player number of the Player who is purchasing the
+	 *                grassland
 	 * @throws IllegalArgumentException if the grassland is already owned
 	 */
 	public void setInitialOwnerId(int ownerId) throws IllegalArgumentException {

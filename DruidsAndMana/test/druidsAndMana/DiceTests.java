@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Testing of the Dice class
  * 
- * @author Nicola Stirling 40020701
+ * @author Nicola
  *
  */
 class DiceTests {
