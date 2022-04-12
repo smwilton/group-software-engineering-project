@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  */
 
-public class GameBoard {
+public class GameBoard implements IGameBoard {
 
 	private ISquare[] squares;
 	
@@ -22,6 +22,7 @@ public class GameBoard {
 	 * @param placesToMove
 	 * @return 
 	 */
+	@Override
 	public int newsquarePosition(int playerCurrentPosition, int placesToMove) {
 		int total = playerCurrentPosition + placesToMove;
 		return total > squares.length ? total - 14 : total;
@@ -31,6 +32,7 @@ public class GameBoard {
 	 * Check if the square is grassland
 	 * @param squareIndex
 	 */
+	@Override
 	public boolean squareIsGrassland(int squareIndex) {
 		return squares[squareIndex] instanceof Grassland;
 	}
@@ -40,6 +42,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
+	@Override
 	public String squareDescription(int squareIndex) {
 		return squares[squareIndex].description();
 	}
@@ -49,6 +52,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
+	@Override
 	public String squareAsciiArt(int squareIndex) {
 		return squares[squareIndex].asciiArt();
 	}
@@ -58,6 +62,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
+	@Override
 	public int manaCharge(int squareIndex) {
 		return squares[squareIndex].getChargeForLandingOnSquare();
 	}
@@ -67,6 +72,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return 
 	 */
+	@Override
 	public int getSquareOwnerId(int squareIndex) {
 		ISquare square = squares[squareIndex];
 		if(square instanceof Grassland) {
@@ -81,6 +87,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return 
 	 */
+	@Override
 	public int getCO2Modifier(int squareIndex) {
 		ISquare square = squares[squareIndex];
 		if(square instanceof Grassland) {
@@ -95,6 +102,7 @@ public class GameBoard {
 	 * @param playerNumber
 	 * @return
 	 */
+	@Override
 	public ArrayList<Grassland> getAllPlayerOwnedGrasslands(Player currentPlayer) {
 		ArrayList<Grassland> ownedGrasslands = new ArrayList<Grassland>();
 		for (ISquare square : squares) {
@@ -112,6 +120,7 @@ public class GameBoard {
 	 * If a square is not owned then a player can take ownership
 	 * @return
 	 */
+	@Override
 	public boolean setSquareOwnerId(int squareIndex, int playerId) { //Tighten this method up!
 		ISquare square = squares[squareIndex];
 		if(square instanceof Grassland) {
@@ -128,6 +137,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
+	@Override
 	public boolean playerCanUpgrade(int playerId, int squareIndex) {
 		ISquare currSquare = squares[squareIndex];
 		
@@ -170,6 +180,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
+	@Override
 	public int costToUpgrade(int squareIndex) {
 		ISquare currSquare = squares[squareIndex];
 		
@@ -187,6 +198,7 @@ public class GameBoard {
 	 * @param squareIndex
 	 * @return
 	 */
+	@Override
 	public SquareStatus getSquareType(int squareIndex) {
 		return SquareStatus.GRASSLAND;
 	}	
