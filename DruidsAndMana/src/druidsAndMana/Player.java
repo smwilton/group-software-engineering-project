@@ -36,11 +36,11 @@ public class Player {
 		this.playerNumber = playerNumber;
 	}
 
-	public int playerPosition() {
+	public int getPlayerPosition() {
 		return playerNumber;
 	}
 
-	public void playerPosition(int playerPosition) {
+	public void setPlayerPosition(int playerPosition) {
 		this.playerPosition = playerPosition;
 	}
 

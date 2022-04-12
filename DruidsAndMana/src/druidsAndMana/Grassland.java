@@ -13,7 +13,7 @@ public abstract class Grassland implements ISquare {
 
 	// Instance Vars
 	private GrasslandValues grasslandValues;
-	private String ownerId; // String var type used to allow the use of null to indicate that a grassland
+	private int ownerId; // String var type used to allow the use of null to indicate that a grassland
 							// square is not owned
 	private SquareStatus squareStatus;
 
@@ -40,7 +40,7 @@ public abstract class Grassland implements ISquare {
 	 * @return - the owner id if the grassland is owned or null if it is still
 	 *         vacant and eligible to be bought by a player
 	 */
-	public String getOwnerId() {
+	public int getOwnerId() {
 		return ownerId;
 	}
 

@@ -100,15 +100,15 @@ class GameAdminTests {
 	@Test
 	void testGetSetSquareOWnerId() {
 		assertNull(board.getSquareOwnerId(2));
-		board.setSquareOwnerId(2, "1");
+		board.setSquareOwnerId(2, 1);
 		assertEquals("1", board.getSquareOwnerId(2));
 	}
 	
 	@Test
-	void testCheckIfSquareIsOWned() {
-		assertFalse(gameAdmin.checkIfSquareIsOwned(board, 2));
-		board.setSquareOwnerId(2, "1");
-		assertTrue(gameAdmin.checkIfSquareIsOwned(board, 2));
+	void testIsSquareOwned() {
+		assertFalse(gameAdmin.isSquareOwned(board, 2));
+		board.setSquareOwnerId(2, 1);
+		assertTrue(gameAdmin.isSquareOwned(board, 2));
 	}
 	
 	@Test
