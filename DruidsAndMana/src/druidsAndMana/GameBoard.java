@@ -2,6 +2,12 @@ package druidsAndMana;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author pete
+ *
+ */
+
 public class GameBoard {
 
 	private ISquare[] squares;

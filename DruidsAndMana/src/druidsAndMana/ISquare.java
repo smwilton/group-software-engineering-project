@@ -1,5 +1,11 @@
 package druidsAndMana;
 
+/**
+ * 
+ * @author pete
+ *
+ */
+
 public interface ISquare {
 	
 	int getChargeForLandingOnSquare();
