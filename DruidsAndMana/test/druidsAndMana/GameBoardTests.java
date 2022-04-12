@@ -106,7 +106,7 @@ class GameBoardTests {
 	}
 
 	@Test
-	void getSquareOwnerId_SquareHasNoOwner_ReturnsNull() {
+	void getSquareOwnerId_SquareHasNoOwner_Returns0() {
 
 		// Arrange
 		int index = 2;
@@ -115,7 +115,7 @@ class GameBoardTests {
 		int ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
 
 		// Assert
-		assertNull(ownerIdValue);
+		assertEquals(0,ownerIdValue);
 	}
 
 	@Test
