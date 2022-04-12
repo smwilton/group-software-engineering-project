@@ -3,7 +3,7 @@ package druidsAndMana;
 import java.util.Random;
 
 /**
- * Class the represents one dice object
+ * Class the represents a Dice object. This can be 1 dice or multiple dice.
  * 
  * @author Nicola
  *
@@ -27,7 +27,7 @@ public class Dice {
 	/**
 	 * Default Constructor
 	 * <p>
-	 * This constructor will create 1 single dice
+	 * This constructor sets the number of dice to 1 when it is declared
 	 */
 	public Dice() {
 		this.setNumDice(1);

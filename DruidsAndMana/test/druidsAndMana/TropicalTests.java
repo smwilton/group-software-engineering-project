@@ -1,12 +1,11 @@
-/**
- * 
- */
 package druidsAndMana;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 /**
  * Testing of the Tropical Class as an implementation of the ISquare Interface,
@@ -21,10 +20,10 @@ class TropicalTests {
 			squareEstablishedForest, squareWildlifeSanctuary;
 	Grassland squareGrasslandInstance;
 	ISquare squareISquareInstance;
-	RealmTier realmTier1, realmTier2;
-	String expectedAsciiArt, expectedDescription;
+	RealmTier realmTier1;
+	String expectedAsciiArt, expectedDescription, ownerIdOption1, ownerIdOption2, ownerIdOption3;
 	SquareStatus status1, status2, status3, status4, status5, status6;
-	int expectedPriceToBuyTier1, expectedPriceToBuyTier2, expectedPriceToPlantForestTier1,
+	int expectedPriceToBuyTier1, expectedPriceToPlantForestTier1,
 			expectedPriceForWildlifeSanctuaryUpgradeTier1, expectedCO2ImpactVacantTier1,
 			expectedCO2ImpactGrasslandTier1, expectedCO2ImpactSeedlingTier1, expectedCO2ImpactIntermediateTier1,
 			expectedCO2ImpactEstablishedTier1, expectedCO2ImpactWildlifeSanctuaryTier1, expectedLandOnCostVacantTier1,
@@ -37,7 +36,7 @@ class TropicalTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		realmTier1 = RealmTier.TIER_1;
-		realmTier2 = RealmTier.TIER_2;
+
 		squareTropicalInstance = new Tropical(realmTier1);
 		squareGrasslandInstance = new Tropical(realmTier1);
 		squareISquareInstance = new Tropical(realmTier1);
@@ -95,22 +94,23 @@ class TropicalTests {
 		expectedLandOnCostEstablishedTier1 = 22;
 		expectedLandOnCostWildlifeSanctuaryTier1 = 30;
 
-		// This is the Tier 2 expected Price to Buy value. It is used to test that the
-		// constructor can be used with different RealmTier enum's
-		expectedPriceToBuyTier2 = 50;
-
-		ownerIdOption1 = 1;
-		ownerIdOption2 = 12345;
-		ownerIdOption3 = 123;
+		ownerIdOption1 = "1";
+		ownerIdOption2 = "Owner Test";
+		ownerIdOption3 = "Owner123";
 	}
 
 	/**
 	 * Test method for
 	 * {@link druidsAndMana.Tropical#Tropical(druidsAndMana.RealmTier)}.
+	 * <p>
+	 * Tests that the constructor sets the initial square status as VACANT, that the
+	 * ownerId is null and that for each RealmTier the correct the correct
+	 * priceToBuy is set
 	 */
-	@Test
-	void testConstructor() {
-		Tropical squareTropicalInstance = new Tropical(realmTier1);
+	@ParameterizedTest(name = "{index} => a={0}, b={1}")
+	@CsvSource({ "TIER_1 , 60", "TIER_2 , 50", "TIER_3 , 40", "TIER_4 , 30" })
+	void testConstructor(RealmTier realmTier, int expectedPriceToBuy) {
+		Tropical squareTropicalInstance = new Tropical(realmTier);
 		// Testing constructor is an instance of the ISquare interface, Grassland Class
 		// and Tropical Class
 		assertTrue(squareTropicalInstance instanceof ISquare);
@@ -120,11 +120,11 @@ class TropicalTests {
 		assertEquals(status1, squareTropicalInstance.getSquareStatus());
 		// Testing the constructor set the Values using the private method by getting
 		// the price to buy
-		assertEquals(expectedPriceToBuyTier1, squareTropicalInstance.getDevelopmentCost());
+		assertEquals(expectedPriceToBuy, squareTropicalInstance.getDevelopmentCost());
 		// Testing that owner's id is null initially
 		assertEquals(0,squareTropicalInstance.getOwnerId());
 
-		Grassland squareGrasslandInstance = new Tropical(realmTier1);
+		Grassland squareGrasslandInstance = new Tropical(realmTier);
 		// Testing constructor is an instance of the ISquare interface, Grassland Class
 		// and Tropical Class
 		assertTrue(squareGrasslandInstance instanceof ISquare);
@@ -134,11 +134,11 @@ class TropicalTests {
 		assertEquals(status1, squareGrasslandInstance.getSquareStatus());
 		// Testing the constructor set the Values using the private method by getting
 		// the price to buy
-		assertEquals(expectedPriceToBuyTier1, squareGrasslandInstance.getDevelopmentCost());
+		assertEquals(expectedPriceToBuy, squareGrasslandInstance.getDevelopmentCost());
 		// Testing that owner's id is null initially
 		assertEquals(0,squareGrasslandInstance.getOwnerId());
 
-		ISquare squareISquareInstance = new Tropical(realmTier1);
+		ISquare squareISquareInstance = new Tropical(realmTier);
 		// Testing constructor is an instance of the ISquare interface, Grassland Class
 		// and Tropical Class
 		assertTrue(squareISquareInstance instanceof ISquare);
@@ -148,13 +148,10 @@ class TropicalTests {
 		assertEquals(status1, ((Grassland) squareISquareInstance).getSquareStatus());
 		// Testing the constructor set the Values using the private method by getting
 		// the price to buy
-		assertEquals(expectedPriceToBuyTier1, ((Grassland) squareISquareInstance).getDevelopmentCost());
+		assertEquals(expectedPriceToBuy, ((Grassland) squareISquareInstance).getDevelopmentCost());
 		// Testing that owner's id is null initially
 		assertEquals(0,((Grassland) squareISquareInstance).getOwnerId());
 
-		// Testing the constructor can be used with different RealmTier enums
-		Tropical tier2Tropical = new Tropical(realmTier2);
-		assertEquals(expectedPriceToBuyTier2, tier2Tropical.getDevelopmentCost());
 	}
 
 	/**
@@ -164,7 +161,7 @@ class TropicalTests {
 	 * the squares development
 	 */
 	@Test
-	void testDevelopmentCost() {
+	void testGetDevelopmentCost() {
 		// VACANT square should return the price to buy
 		assertEquals(expectedPriceToBuyTier1, squareVacant.getDevelopmentCost());
 
