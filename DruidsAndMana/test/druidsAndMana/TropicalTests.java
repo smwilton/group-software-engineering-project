@@ -21,14 +21,14 @@ class TropicalTests {
 	Grassland squareGrasslandInstance;
 	ISquare squareISquareInstance;
 	RealmTier realmTier1;
-	String expectedAsciiArt, expectedDescription, ownerIdOption1, ownerIdOption2, ownerIdOption3;
+	String expectedAsciiArt, expectedDescription;
 	SquareStatus status1, status2, status3, status4, status5, status6;
-	int expectedPriceToBuyTier1, expectedPriceToPlantForestTier1,
-			expectedPriceForWildlifeSanctuaryUpgradeTier1, expectedCO2ImpactVacantTier1,
-			expectedCO2ImpactGrasslandTier1, expectedCO2ImpactSeedlingTier1, expectedCO2ImpactIntermediateTier1,
-			expectedCO2ImpactEstablishedTier1, expectedCO2ImpactWildlifeSanctuaryTier1, expectedLandOnCostVacantTier1,
-			expectedLandOnCostGrasslandTier1, expectedLandOnCostSeedlingTier1, expectedLandOnCostIntermediateTier1,
-			expectedLandOnCostEstablishedTier1, expectedLandOnCostWildlifeSanctuaryTier1, ownerIdOption1, ownerIdOption2, ownerIdOption3;
+	int expectedPriceToBuyTier1, expectedPriceToPlantForestTier1, expectedPriceForWildlifeSanctuaryUpgradeTier1,
+			expectedCO2ImpactVacantTier1, expectedCO2ImpactGrasslandTier1, expectedCO2ImpactSeedlingTier1,
+			expectedCO2ImpactIntermediateTier1, expectedCO2ImpactEstablishedTier1,
+			expectedCO2ImpactWildlifeSanctuaryTier1, expectedLandOnCostVacantTier1, expectedLandOnCostGrasslandTier1,
+			expectedLandOnCostSeedlingTier1, expectedLandOnCostIntermediateTier1, expectedLandOnCostEstablishedTier1,
+			expectedLandOnCostWildlifeSanctuaryTier1, ownerIdOption1, ownerIdOption2, ownerIdOption3;
 
 	/**
 	 * @throws java.lang.Exception
@@ -40,9 +40,9 @@ class TropicalTests {
 		squareTropicalInstance = new Tropical(realmTier1);
 		squareGrasslandInstance = new Tropical(realmTier1);
 		squareISquareInstance = new Tropical(realmTier1);
-		expectedAsciiArt = "^   ^   ^    ^         ___I_    ^   ^    ^   ^   ^    ^   ^\r\n"
-				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\  /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
-				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\ /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+		expectedAsciiArt = " ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^\r\n"
+				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\    /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
 				+ "/|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\";
 		expectedDescription = "The tropical grassland has a bustling and diverse ecosystem where each player will find harmony with Nature";
 		status1 = SquareStatus.VACANT;
@@ -94,9 +94,9 @@ class TropicalTests {
 		expectedLandOnCostEstablishedTier1 = 22;
 		expectedLandOnCostWildlifeSanctuaryTier1 = 30;
 
-		ownerIdOption1 = "1";
-		ownerIdOption2 = "Owner Test";
-		ownerIdOption3 = "Owner123";
+		ownerIdOption1 = 1;
+		ownerIdOption2 = 123;
+		ownerIdOption3 = -96;
 	}
 
 	/**
@@ -122,7 +122,7 @@ class TropicalTests {
 		// the price to buy
 		assertEquals(expectedPriceToBuy, squareTropicalInstance.getDevelopmentCost());
 		// Testing that owner's id is null initially
-		assertEquals(0,squareTropicalInstance.getOwnerId());
+		assertEquals(0, squareTropicalInstance.getOwnerId());
 
 		Grassland squareGrasslandInstance = new Tropical(realmTier);
 		// Testing constructor is an instance of the ISquare interface, Grassland Class
@@ -136,7 +136,7 @@ class TropicalTests {
 		// the price to buy
 		assertEquals(expectedPriceToBuy, squareGrasslandInstance.getDevelopmentCost());
 		// Testing that owner's id is null initially
-		assertEquals(0,squareGrasslandInstance.getOwnerId());
+		assertEquals(0, squareGrasslandInstance.getOwnerId());
 
 		ISquare squareISquareInstance = new Tropical(realmTier);
 		// Testing constructor is an instance of the ISquare interface, Grassland Class
@@ -150,7 +150,7 @@ class TropicalTests {
 		// the price to buy
 		assertEquals(expectedPriceToBuy, ((Grassland) squareISquareInstance).getDevelopmentCost());
 		// Testing that owner's id is null initially
-		assertEquals(0,((Grassland) squareISquareInstance).getOwnerId());
+		assertEquals(0, ((Grassland) squareISquareInstance).getOwnerId());
 
 	}
 
@@ -396,7 +396,7 @@ class TropicalTests {
 		// Test that now the Initial Owner has been set the the ownership can be
 		// transferred
 		squareTropicalInstance.transferOwnership(ownerIdOption2);
-		assertEquals(12345, squareTropicalInstance.getOwnerId());
+		assertEquals(123, squareTropicalInstance.getOwnerId());
 
 		// ----------------------- PART2 - Grassland -----------------------
 
@@ -413,7 +413,7 @@ class TropicalTests {
 		assertEquals(SquareStatus.VACANT, squareGrasslandInstance.getSquareStatus()); // Status is VACANT before OwnerID
 																						// is set
 		squareGrasslandInstance.setInitialOwnerId(ownerIdOption2);
-		assertEquals(12345, squareGrasslandInstance.getOwnerId());
+		assertEquals(123, squareGrasslandInstance.getOwnerId());
 		assertEquals(SquareStatus.GRASSLAND, squareGrasslandInstance.getSquareStatus()); // Status is GRASSLAND after
 																							// OwnerID is set
 
@@ -427,7 +427,7 @@ class TropicalTests {
 		// Test that now the Initial Owner has been set the the ownership can be
 		// transferred
 		squareGrasslandInstance.transferOwnership(ownerIdOption3);
-		assertEquals(123, squareGrasslandInstance.getOwnerId());
+		assertEquals(-96, squareGrasslandInstance.getOwnerId());
 
 		// ----------------------- PART3 - ISquare -----------------------
 
@@ -445,7 +445,7 @@ class TropicalTests {
 																									// before OwnerID is
 																									// set
 		((Grassland) squareISquareInstance).setInitialOwnerId(ownerIdOption3);
-		assertEquals(123, ((Grassland) squareISquareInstance).getOwnerId());
+		assertEquals(-96, ((Grassland) squareISquareInstance).getOwnerId());
 		assertEquals(SquareStatus.GRASSLAND, ((Grassland) squareISquareInstance).getSquareStatus()); // Status is
 																										// GRASSLAND
 																										// after OwnerID

@@ -21,14 +21,14 @@ class SubtropicalTests {
 	Subtropical squareVacant, squareGrassland, squareSeedlingForest, squareIntermediateForest, squareEstablishedForest,
 			squareWildlifeSanctuary;
 	RealmTier realmTier2;
-	String expectedAsciiArt, expectedDescription, ownerIdOption1, ownerIdOption2, ownerIdOption3;
+	String expectedAsciiArt, expectedDescription;
 	SquareStatus status1, status2, status3, status4, status5, status6;
 	int expectedPriceToBuyTier2, expectedPriceToPlantForestTier2, expectedPriceForWildlifeSanctuaryUpgradeTier2,
 			expectedCO2ImpactVacantTier2, expectedCO2ImpactGrasslandTier2, expectedCO2ImpactSeedlingTier2,
 			expectedCO2ImpactIntermediateTier2, expectedCO2ImpactEstablishedTier2,
 			expectedCO2ImpactWildlifeSanctuaryTier2, expectedLandOnCostVacantTier2, expectedLandOnCostGrasslandTier2,
 			expectedLandOnCostSeedlingTier2, expectedLandOnCostIntermediateTier2, expectedLandOnCostEstablishedTier2,
-			expectedLandOnCostWildlifeSanctuaryTier2;
+			expectedLandOnCostWildlifeSanctuaryTier2, ownerIdOption1, ownerIdOption2;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,9 +37,9 @@ class SubtropicalTests {
 	void setUp() throws Exception {
 		realmTier2 = RealmTier.TIER_2;
 
-		expectedAsciiArt = "^   ^   ^    ^         ___I_    ^   ^    ^   ^   ^    ^   ^\r\n"
-				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\  /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
-				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\ /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+		expectedAsciiArt = " ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^\r\n"
+				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\    /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
 				+ "/|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\";
 		expectedDescription = "The sub-tropical grasslands have a warm and humid climate, with cooler winters";
 		status1 = SquareStatus.VACANT;
@@ -93,9 +93,8 @@ class SubtropicalTests {
 		expectedLandOnCostEstablishedTier2 = 18;
 		expectedLandOnCostWildlifeSanctuaryTier2 = 22;
 
-		ownerIdOption1 = "1";
-		ownerIdOption2 = "Owner Test";
-		ownerIdOption3 = "Owner123";
+		ownerIdOption1 = 1;
+		ownerIdOption2 = 123;
 	}
 
 	/**
@@ -153,7 +152,7 @@ class SubtropicalTests {
 		// the price to buy
 		assertEquals(expectedPriceToBuy, square1.getDevelopmentCost());
 		// Testing that owner's id is null initially
-		assertNull(square1.getOwnerId());
+		assertEquals(0,square1.getOwnerId());
 	}
 
 	/**
@@ -185,7 +184,7 @@ class SubtropicalTests {
 		assertEquals(SquareStatus.VACANT, squareVacant.getSquareStatus()); // Status is VACANT before OwnerID
 																			// is set
 		squareVacant.setInitialOwnerId(ownerIdOption1);
-		assertEquals("1", squareVacant.getOwnerId());
+		assertEquals(1, squareVacant.getOwnerId());
 		assertEquals(SquareStatus.GRASSLAND, squareVacant.getSquareStatus()); // Status is GRASSLAND after
 																				// OwnerID is set
 
@@ -199,7 +198,7 @@ class SubtropicalTests {
 		// Test that now the Initial Owner has been set the the ownership can be
 		// transferred
 		squareVacant.transferOwnership(ownerIdOption2);
-		assertEquals("Owner Test", squareVacant.getOwnerId());
+		assertEquals(123, squareVacant.getOwnerId());
 
 	}
 

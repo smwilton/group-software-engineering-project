@@ -21,14 +21,14 @@ class BorealTests {
 	Boreal squareVacant, squareGrassland, squareSeedlingForest, squareIntermediateForest, squareEstablishedForest,
 			squareWildlifeSanctuary;
 	RealmTier realmTier4;
-	String expectedAsciiArt, expectedDescription, ownerIdOption1, ownerIdOption2, ownerIdOption3;
+	String expectedAsciiArt, expectedDescription;
 	SquareStatus status1, status2, status3, status4, status5, status6;
 	int expectedPriceToBuyTier4, expectedPriceToPlantForestTier4, expectedPriceForWildlifeSanctuaryUpgradeTier4,
 			expectedCO2ImpactVacantTier4, expectedCO2ImpactGrasslandTier4, expectedCO2ImpactSeedlingTier4,
 			expectedCO2ImpactIntermediateTier4, expectedCO2ImpactEstablishedTier4,
 			expectedCO2ImpactWildlifeSanctuaryTier4, expectedLandOnCostVacantTier4, expectedLandOnCostGrasslandTier4,
 			expectedLandOnCostSeedlingTier4, expectedLandOnCostIntermediateTier4, expectedLandOnCostEstablishedTier4,
-			expectedLandOnCostWildlifeSanctuaryTier4;
+			expectedLandOnCostWildlifeSanctuaryTier4,ownerIdOption1, ownerIdOption2;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,9 +37,9 @@ class BorealTests {
 	void setUp() throws Exception {
 		realmTier4 = RealmTier.TIER_4;
 
-		expectedAsciiArt = "^   ^   ^    ^         ___I_    ^   ^    ^   ^   ^    ^   ^\r\n"
-				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\  /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
-				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\ /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+		expectedAsciiArt = " ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^\r\n"
+				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\    /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
 				+ "/|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\";
 		expectedDescription = "Cold and dry, boreal grasslands have long, cool winters and short summers";
 		status1 = SquareStatus.VACANT;
@@ -93,9 +93,9 @@ class BorealTests {
 		expectedLandOnCostEstablishedTier4 = 10;
 		expectedLandOnCostWildlifeSanctuaryTier4 = 15;
 
-		ownerIdOption1 = "1";
-		ownerIdOption2 = "Owner Test";
-		ownerIdOption3 = "Owner123";
+		ownerIdOption1 = 1;
+		ownerIdOption2 = 123;
+
 	}
 
 	/**
@@ -152,7 +152,7 @@ class BorealTests {
 		// the price to buy
 		assertEquals(expectedPriceToBuy, square1.getDevelopmentCost());
 		// Testing that owner's id is null initially
-		assertNull(square1.getOwnerId());
+		assertEquals(0,square1.getOwnerId());
 	}
 
 	/**
@@ -184,7 +184,7 @@ class BorealTests {
 		assertEquals(SquareStatus.VACANT, squareVacant.getSquareStatus()); // Status is VACANT before OwnerID
 																			// is set
 		squareVacant.setInitialOwnerId(ownerIdOption1);
-		assertEquals("1", squareVacant.getOwnerId());
+		assertEquals(1, squareVacant.getOwnerId());
 		assertEquals(SquareStatus.GRASSLAND, squareVacant.getSquareStatus()); // Status is GRASSLAND after
 																				// OwnerID is set
 
@@ -198,7 +198,7 @@ class BorealTests {
 		// Test that now the Initial Owner has been set the the ownership can be
 		// transferred
 		squareVacant.transferOwnership(ownerIdOption2);
-		assertEquals("Owner Test", squareVacant.getOwnerId());
+		assertEquals(123, squareVacant.getOwnerId());
 
 	}
 
