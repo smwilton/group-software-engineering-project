@@ -48,7 +48,7 @@ class GameBoardTests {
 	void setsquareOwnerId_VacantSquare_SetsOwnerIdUpdatesSquareType() {
 
 		// Arrange
-		String ownerId = "12345";
+		int ownerId = 12345;
 		int index = 2;
 
 		// Act
@@ -64,7 +64,7 @@ class GameBoardTests {
 	void setsquareOwnerId_NonGrassland_ReturnsFalse() {
 
 		// Arrange
-		String ownerId = "12345";
+		int ownerId = 12345;
 		int index = 0;
 
 		// Act
@@ -72,14 +72,14 @@ class GameBoardTests {
 
 		// Assert
 		assertFalse(ownerIdSet);
-		assertEquals(null, mockTropical_1.getOwnerId());
+		assertEquals(0, mockTropical_1.getOwnerId());
 	}
 
 	@Test
 	void setsquareOwnerId_OwnedSquare_ThrowsException() {
 
 		// Arrange
-		String ownerId = "12345";
+		int ownerId = 12345;
 		int index = 2;
 
 		// Act
@@ -94,12 +94,12 @@ class GameBoardTests {
 	void getSquareOwnerId_SquareHasOwner_GetsOwnerIdForGrassland() {
 
 		// Arrange
-		String ownerId = "12345";
+		int ownerId = 12345;
 		int index = 2;
 		mockTropical_1.setInitialOwnerId(ownerId);
 
 		// Act
-		String ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
+		int ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
 
 		// Assert
 		assertEquals(ownerIdValue, ownerId);
@@ -112,7 +112,7 @@ class GameBoardTests {
 		int index = 2;
 
 		// Act
-		String ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
+		int ownerIdValue = this.mockGameBoard.getSquareOwnerId(index);
 
 		// Assert
 		assertNull(ownerIdValue);
@@ -122,7 +122,7 @@ class GameBoardTests {
 	void playerCanUpgrade_PlayerOwnsAllGrasslandInRealm_ReturnsTrue() {
 
 		// Arrange
-		String playerId = "12345";
+		int playerId = 12345;
 		int index = 2;
 		mockTropical_1.setInitialOwnerId(playerId);
 		mockTropical_2.setInitialOwnerId(playerId);
@@ -138,8 +138,8 @@ class GameBoardTests {
 	void playerCanUpgrade_PlayerDoesNotOwnAllGrasslandInRealm_ReturnsFalse() {
 
 		// Arrange
-		String playerId_1 = "54321";
-		String playerId_2 = "12345";
+		int playerId_1 = 54321;
+		int playerId_2 = 12345;
 		int index = 2;
 		mockTropical_1.setInitialOwnerId(playerId_1);
 		mockTropical_2.setInitialOwnerId(playerId_2);
@@ -154,7 +154,7 @@ class GameBoardTests {
 	@Test
 	void playerCanUpgrade_RealmHasAVacantSquare_ReturnsFalse() {
 		// Arrange
-		String playerId = "54321";
+		int playerId = 54321;
 		int index = 2;
 		mockTropical_1.setInitialOwnerId(playerId);
 
@@ -169,7 +169,7 @@ class GameBoardTests {
 	void playerCanUpgrade_PlayerAttemptsToUpgradeNonGrassland_ReturnsFalse() {
 
 		// Arrange
-		String playerId = "54321";
+		int playerId = 54321;
 
 		// Act
 		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, 0);
@@ -182,7 +182,7 @@ class GameBoardTests {
 	void playerCanUpgrade_SquareIsVacant_ReturnTrue() {
 
 		// Arrange
-		String playerId = "54321";
+		int playerId = 54321;
 
 		// Act
 		boolean playerCanUpgrade = this.mockGameBoard.playerCanUpgrade(playerId, 4);
@@ -194,7 +194,7 @@ class GameBoardTests {
 	@Test
 	void playerCanUpgrade_SquareIsAWildlifeSanctuary_ReturnFalse() {
 		// Arrange
-		String playerId = "12345";
+		int playerId = 12345;
 		int index = 2;
 		mockTropical_1.setInitialOwnerId(playerId);
 		mockTropical_2.setInitialOwnerId(playerId);
