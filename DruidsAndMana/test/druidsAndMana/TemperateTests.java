@@ -21,14 +21,14 @@ class TemperateTests {
 	Temperate squareVacant, squareGrassland, squareSeedlingForest, squareIntermediateForest, squareEstablishedForest,
 			squareWildlifeSanctuary;
 	RealmTier realmTier3;
-	String expectedAsciiArt, expectedDescription, ownerIdOption1, ownerIdOption2, ownerIdOption3;
+	String expectedAsciiArt, expectedDescription;
 	SquareStatus status1, status2, status3, status4, status5, status6;
 	int expectedPriceToBuyTier3, expectedPriceToPlantForestTier3, expectedPriceForWildlifeSanctuaryUpgradeTier3,
 			expectedCO2ImpactVacantTier3, expectedCO2ImpactGrasslandTier3, expectedCO2ImpactSeedlingTier3,
 			expectedCO2ImpactIntermediateTier3, expectedCO2ImpactEstablishedTier3,
 			expectedCO2ImpactWildlifeSanctuaryTier3, expectedLandOnCostVacantTier3, expectedLandOnCostGrasslandTier3,
 			expectedLandOnCostSeedlingTier3, expectedLandOnCostIntermediateTier3, expectedLandOnCostEstablishedTier3,
-			expectedLandOnCostWildlifeSanctuaryTier3;
+			expectedLandOnCostWildlifeSanctuaryTier3,ownerIdOption1, ownerIdOption2;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,9 +37,9 @@ class TemperateTests {
 	void setUp() throws Exception {
 		realmTier3 = RealmTier.TIER_3;
 
-		expectedAsciiArt = "^   ^   ^    ^         ___I_    ^   ^    ^   ^   ^    ^   ^\r\n"
-				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\  /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
-				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\ /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+		expectedAsciiArt = " ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^\r\n"
+				+ "/|\\/|\\/|\\ /|\\    /\\-_--\\    /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
+				+ "/|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n"
 				+ "/|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\";
 		expectedDescription = "Temperate grasslands experience heavy rainfall but also periods of drought, giving a highly diverse ecosystem";
 		status1 = SquareStatus.VACANT;
@@ -93,9 +93,9 @@ class TemperateTests {
 		expectedLandOnCostEstablishedTier3 = 14;
 		expectedLandOnCostWildlifeSanctuaryTier3 = 20;
 
-		ownerIdOption1 = "1";
-		ownerIdOption2 = "Owner Test";
-		ownerIdOption3 = "Owner123";
+		ownerIdOption1 = 1;
+		ownerIdOption2 = 123;
+
 	}
 
 	/**
@@ -153,7 +153,7 @@ class TemperateTests {
 		// the price to buy
 		assertEquals(expectedPriceToBuy, square1.getDevelopmentCost());
 		// Testing that owner's id is null initially
-		assertNull(square1.getOwnerId());
+		assertEquals(0,square1.getOwnerId());
 	}
 
 	/**
@@ -185,7 +185,7 @@ class TemperateTests {
 		assertEquals(SquareStatus.VACANT, squareVacant.getSquareStatus()); // Status is VACANT before OwnerID
 																			// is set
 		squareVacant.setInitialOwnerId(ownerIdOption1);
-		assertEquals("1", squareVacant.getOwnerId());
+		assertEquals(1, squareVacant.getOwnerId());
 		assertEquals(SquareStatus.GRASSLAND, squareVacant.getSquareStatus()); // Status is GRASSLAND after
 																				// OwnerID is set
 
@@ -199,7 +199,7 @@ class TemperateTests {
 		// Test that now the Initial Owner has been set the the ownership can be
 		// transferred
 		squareVacant.transferOwnership(ownerIdOption2);
-		assertEquals("Owner Test", squareVacant.getOwnerId());
+		assertEquals(123, squareVacant.getOwnerId());
 
 	}
 
