@@ -8,7 +8,7 @@ public class SacredAlder implements ISquare {
 
 	@Override
 	public int getChargeForLandingOnSquare() {
-		return -200; // Player receives 200 mana points for landing on this square:
+		return -100; // Player receives 100 bonus mana points for landing on this square rather than passing by:
 	}
 
 	@Override

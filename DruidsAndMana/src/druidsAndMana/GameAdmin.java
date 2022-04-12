@@ -17,6 +17,7 @@ public class GameAdmin {
 	int currentPlayer;
 	GameBoardBuilder builder;
 	GameBoard board;
+	Dice dice1, dice2;
 
 	public GameAdmin(IInputService inputService) {
 		this.inputService = inputService;
@@ -58,7 +59,7 @@ public class GameAdmin {
 			//Ask number of players
 			int loops = 1;
 			while(loops<=3) {
-				String numOfPlayers = this.inputService.GetUserInput("How many players are joining the game? 1-4", new String[] {"1","2","3","4"});
+				String numOfPlayers = this.inputService.GetUserInput("How many players are joining the game? 2-4", new String[] {"2","3","4"});
 				
 				//confirm selection
 				boolean check = this.inputService.GetUserConfirmation("Are you sure?");
@@ -155,6 +156,13 @@ public class GameAdmin {
 		return player.toString();
 	}
 	
+	public int roll() {
+		int total=0;
+		Dice dice = new Dice(2);
+		total+=dice.rollDice();
+		return total;
+	}
+	
 	/**
 	 * This method will update the position of the current player on the game board.
 	 * It will also update the Player's mana if they pass or land on the Alder Square	
@@ -163,9 +171,7 @@ public class GameAdmin {
 	 */
 	public void movePlayer(int diceRoll) {
 		Player player = getCurrentPlayer();
-		System.out.println(player.toString());
 		int position = player.getPlayerPosition();
-		System.out.println("The starting position of this player is: "+position);
 		int newPosition = position+diceRoll;
 		if(newPosition>=12) {
 			player.setMana(player.getMana()+100);
@@ -182,8 +188,18 @@ public class GameAdmin {
 	 */
 	public void displaySquareDetails() {
 		int position = getCurrentPlayerPosition();
-		System.out.println(board.squareAsciiArt(position));
-		System.out.println(board.squareDescription(position));
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		System.out.println(board.squareAsciiArt(position)+"\n");
+		System.out.println(board.squareDescription(position)+"\n");
+		int ownerId = board.getSquareOwnerId(getCurrentPlayerPosition());
+		if (ownerId!=0) {
+			System.out.println("Owned by: "+players.get(ownerId-1).getPlayerName());
+			System.out.println("Mana Charge: "+ board.manaCharge(position));
+		}else {
+			System.out.println("Currently Unowned");
+			System.out.println("Cost to buy: "+ board.costToUpgrade(position));
+		}
+		System.out.println();
 	}
 
 	/**
@@ -215,14 +231,10 @@ public class GameAdmin {
 		Player player = players.get(playerNumber-1);
 
 		int manaCost = board.costToUpgrade(squareIndex);
-		System.out.println(player.toString());
-		System.out.println("It will cost "+manaCost);
 		int mana = player.getMana();
-		System.out.println("Player has "+mana+" mana");
 		// Check if Player can afford the manaCost and commit the purchase if possible
 		if (mana > manaCost) {
 			player.setMana(mana - manaCost);
-			System.out.println("Player now has "+player.getMana()+" mana");
 			board.setSquareOwnerId(squareIndex, playerNumber);
 		} else {
 			System.out.println("Sorry " + player.getPlayerName() + ", but you cannot afford to buy this "
@@ -241,9 +253,9 @@ public class GameAdmin {
 	public void payForLandingOnOwnedGrassland(GameBoard board, int squareIndex, int playerNumber,
 			int ownerPlayerNumber) {
 		int feeOwed = board.manaCharge(squareIndex);
-		Player player = players.get(playerNumber);
+		Player player = players.get(playerNumber-1);
 		int buyerMana = player.getMana();
-		Player owner = players.get(ownerPlayerNumber);
+		Player owner = players.get(ownerPlayerNumber-1);
 		int ownerMana = owner.getMana();
 		if (buyerMana > feeOwed) {
 			player.setMana(buyerMana - feeOwed);
@@ -253,11 +265,20 @@ public class GameAdmin {
 		}
 	}
 	
+	/**
+	 * A method to end current player turn by moving currentPlayer int by 1.
+	 */
 	public void endTurn() {
+		System.out.printf("That's "+getCurrentPlayer().getPlayerName()+"'s turn over.");
+		ArrayList<Grassland> owned = board.getAllPlayerOwnedGrasslands(getCurrentPlayer());
+		for (Grassland square: owned) {
+			getCurrentPlayer().setCo2(getCurrentPlayer().getCo2()+square.getCo2ImpactRating());
+		}
 		currentPlayer++;
 		if(currentPlayer>=players.size()) {
 			currentPlayer-=players.size();
 		}
+		System.out.println(" Next up it's "+getCurrentPlayer().getPlayerName()+"'s turn!");
 	}
 
 }
