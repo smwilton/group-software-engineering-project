@@ -1,5 +1,7 @@
 package druidsAndMana;
 
+import java.util.ArrayList;
+
 public class GameBoard {
 
 	private ISquare[] squares;
@@ -66,6 +68,38 @@ public class GameBoard {
 			return grasslandSquare.getOwnerId();
 		}
 		return 0;
+	}
+	
+	/**
+	 * Returns the CO2 impact rating for the given square
+	 * @param squareIndex
+	 * @return 
+	 */
+	public int getCO2Modifier(int squareIndex) {
+		ISquare square = squares[squareIndex];
+		if(square instanceof Grassland) {
+			Grassland grasslandSquare = (Grassland)square;
+			return grasslandSquare.getCo2ImpactRating();
+		}
+		return 0;
+	}
+	
+	/**
+	 * Returns an ArrayList of all squares owned by given player.
+	 * @param playerNumber
+	 * @return
+	 */
+	public ArrayList<Grassland> getAllPlayerOwnedGrasslands(Player currentPlayer) {
+		ArrayList<Grassland> ownedGrasslands = new ArrayList<Grassland>();
+		for (ISquare square : squares) {
+			if(square instanceof Grassland) {
+				Grassland grasslandSquare = (Grassland)square;
+				if (grasslandSquare.getOwnerId()==currentPlayer.getPlayerNumber()) {
+					ownedGrasslands.add(grasslandSquare);
+				}
+			}
+		}
+		return ownedGrasslands;
 	}
 	
 	/**
