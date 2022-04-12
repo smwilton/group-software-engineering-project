@@ -12,17 +12,28 @@ import java.util.ArrayList;
 public class GameAdmin {
 
 	private IInputService inputService;
+	private IOutputService outputService;
 	ArrayList<Player> players = new ArrayList<Player>();
 	boolean gameOn = false;
 	int currentPlayer;
 	GameBoardBuilder builder;
-	GameBoard board;
+	IGameBoard board;
 	Dice dice1, dice2;
 
-	public GameAdmin(IInputService inputService) {
+	public GameAdmin(IInputService inputService, IOutputService outputService, IGameBoard board) {
 		this.inputService = inputService;
+		this.outputService = outputService;
+		this.board = board;
 	}
 
+	/**
+	 * Returns the IGameBoard instance
+	 * @return
+	 */
+	public IGameBoard getGameBoard() {
+		return board;
+	}
+	
 	/**
 	 * A method to signify the beginning of the game and proceed to set up players
 	 * Array
@@ -75,7 +86,7 @@ public class GameAdmin {
 			throw new Exception("Number of failed confirmations has reached the limit. Resetting game.");
 			
 		}catch(Exception exception){
-			System.out.println(exception.getMessage());
+			outputService.println(exception.getMessage());
 			endGame();
 			return 0;
 			
@@ -111,22 +122,10 @@ public class GameAdmin {
 					players.add(player);
 				} else {
 					// Display error message on repeated name input
-					System.out.println("This player name already exists. Please choose a unique name.");
+					outputService.println("This player name already exists. Please choose a unique name.");
 				}
 			}
 		}
-	}
-
-	/**
-	 * A method to create a game board at the beginning of the game.
-	 * 
-	 * @return new GameBoard object
-	 */
-	public GameBoard createGameBoard() {
-
-		builder = new GameBoardBuilder();
-		board = new GameBoard(builder);
-		return board;
 	}
 	
 	/**
@@ -188,18 +187,18 @@ public class GameAdmin {
 	 */
 	public void displaySquareDetails() {
 		int position = getCurrentPlayerPosition();
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-		System.out.println(board.squareAsciiArt(position)+"\n");
-		System.out.println(board.squareDescription(position)+"\n");
+		outputService.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		outputService.println(board.squareAsciiArt(position)+"\n");
+		outputService.println(board.squareDescription(position)+"\n");
 		int ownerId = board.getSquareOwnerId(getCurrentPlayerPosition());
 		if (ownerId!=0) {
-			System.out.println("Owned by: "+players.get(ownerId-1).getPlayerName());
-			System.out.println("Mana Charge: "+ board.manaCharge(position));
+			outputService.println("Owned by: "+players.get(ownerId-1).getPlayerName());
+			outputService.println("Mana Charge: "+ board.manaCharge(position));
 		}else {
-			System.out.println("Currently Unowned");
-			System.out.println("Cost to buy: "+ board.costToUpgrade(position));
+			outputService.println("Currently Unowned");
+			outputService.println("Cost to buy: "+ board.costToUpgrade(position));
 		}
-		System.out.println();
+		outputService.println("");
 	}
 
 	/**
@@ -209,7 +208,7 @@ public class GameAdmin {
 	 * @param squareIndex : the index of the square to check
 	 * @return boolean : true if square has an owner, false if it is unowned
 	 */
-	public boolean isSquareOwned(GameBoard board, int squareIndex) {
+	public boolean isSquareOwned(IGameBoard board, int squareIndex) {
 		if (board.getSquareOwnerId(squareIndex) == 0) {
 			return false;
 		} else {
@@ -226,7 +225,7 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void buyUnownedGrassland(GameBoard board, int squareIndex, int playerNumber) {
+	public void buyUnownedGrassland(IGameBoard board, int squareIndex, int playerNumber) {
 		// Retrieve Player object
 		Player player = players.get(playerNumber-1);
 
@@ -237,7 +236,7 @@ public class GameAdmin {
 			player.setMana(mana - manaCost);
 			board.setSquareOwnerId(squareIndex, playerNumber);
 		} else {
-			System.out.println("Sorry " + player.getPlayerName() + ", but you cannot afford to buy this "
+			outputService.println("Sorry " + player.getPlayerName() + ", but you cannot afford to buy this "
 					+ board.getSquareType(squareIndex) + " Grassland");
 		}
 	}
@@ -250,7 +249,7 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void payForLandingOnOwnedGrassland(GameBoard board, int squareIndex, int playerNumber,
+	public void payForLandingOnOwnedGrassland(IGameBoard board, int squareIndex, int playerNumber,
 			int ownerPlayerNumber) {
 		int feeOwed = board.manaCharge(squareIndex);
 		Player player = players.get(playerNumber-1);
@@ -261,7 +260,7 @@ public class GameAdmin {
 			player.setMana(buyerMana - feeOwed);
 			owner.setMana(ownerMana + feeOwed);
 		} else {
-			System.out.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
+			outputService.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
 		}
 	}
 	
@@ -278,7 +277,7 @@ public class GameAdmin {
 		if(currentPlayer>=players.size()) {
 			currentPlayer-=players.size();
 		}
-		System.out.println(" Next up it's "+getCurrentPlayer().getPlayerName()+"'s turn!");
+		outputService.println(" Next up it's "+getCurrentPlayer().getPlayerName()+"'s turn!");
 	}
 
 }

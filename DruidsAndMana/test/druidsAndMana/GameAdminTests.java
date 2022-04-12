@@ -13,20 +13,21 @@ class GameAdminTests {
 	int numOfPlayersAllowed, numOfPlayersNotAllowed;
 	GameAdmin gameAdmin;
 	MockInputService inputService;
-	GameBoard board;
+	MockOutputService outputService;
+	IGameBoard board;
 	
 	@BeforeEach
 	void setUp() throws Exception{
 		
 		inputService = new MockInputService();
+		outputService = new MockOutputService();
 		
-		gameAdmin = new GameAdmin(inputService);
+		IGameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+		IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
 		
-		board = gameAdmin.createGameBoard();
+		gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
 		
-		
-		
-		
+		board = gameAdmin.getGameBoard();
 	}
 
 	@Test
@@ -44,6 +45,21 @@ class GameAdminTests {
 		assertEquals(0, gameAdmin.numOfPlayers());
 	}
 	
+	@Test
+	void numOfPlayers_PlayerDoesNotConfirm_OutputsMessageToConsole() throws Exception {
+		
+		// Arrange
+		String expectedOutput = "Number of failed confirmations has reached the limit. Resetting game.";
+		inputService.setUserInputResponse("2");
+		inputService.setConfirmation(false);
+		
+		// Act
+		gameAdmin.numOfPlayers();
+		String actualOutput = outputService.getLastOutput();
+		
+		// Assert
+		assertEquals(expectedOutput, actualOutput);
+	}
 	
 	@Test
 	void testPlayerSetUpAllowed() throws Exception {
@@ -100,10 +116,10 @@ class GameAdminTests {
 	}
 	
 	@Test
-	void testGetSetSquareOWnerId() {
-		assertNull(board.getSquareOwnerId(2));
+	void testGetSetSquareOwnerId() {
+		assertEquals(0, board.getSquareOwnerId(2));
 		board.setSquareOwnerId(2, 1);
-		assertEquals("1", board.getSquareOwnerId(2));
+		assertEquals(1, board.getSquareOwnerId(2));
 	}
 	
 	@Test
@@ -115,10 +131,52 @@ class GameAdminTests {
 	
 	@Test
 	void testPayForLandingOnOwnedGrassland() {
-		fail();
+		// Peter will implement
+	}
 		
+	@Test
+	void playerSetUp_AddNameThatAlreadyExists_OutputsMessageToConsole() throws Exception {
+		
+		// Arrange
+		String expectedOutput = "This player name already exists. Please choose a unique name.";
+		inputService.setUserInputResponse4PlayerArray("4", "Clive", "Clive", "Tom", "David");
+		inputService.setConfirmation(true);
+		
+		// Act
+		gameAdmin.startGame();
+		
+		// Assert
+		String actualOutput = outputService.getLastOutput();	
+		assertEquals(expectedOutput, actualOutput);
 	}
 	
+	@Test
+	void displaySquareDetails_SquareUnonwed_OutputsCorrectContentToConsole() throws Exception {
+		
+		// Arrange
+		inputService = new MockInputService();
+		outputService = new MockOutputService();
+		
+		// Setting up the players and starting the game
+		inputService.setUserInputResponse4PlayerArray("4", "David", "Peter", "Nicola", "Sandra");
+		inputService.setConfirmation(true);
+		
+		// Creating a mock GameBoard
+		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
+		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
+		gameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		gameAdmin.playerSetUp(4);
+				
+		// Act
+		gameAdmin.displaySquareDetails();
+		
+		// Assert
+		String allOutput = outputService.getAllOutput();
+		assertTrue(allOutput.contains(mockTropical.description()));
+		assertTrue(allOutput.contains("Currently Unowned"));
+		assertTrue(allOutput.contains("Cost to buy: 0"));
+	}
+
 	@ParameterizedTest
 	@ValueSource(strings = {"Peter", "Alfred", "Daniel", "Joe"})
 	void example(String input) {

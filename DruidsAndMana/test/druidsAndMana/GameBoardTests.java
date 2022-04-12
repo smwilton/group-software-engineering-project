@@ -20,7 +20,7 @@ class GameBoardTests {
 	private Subtropical mockSubtropical;
 	private Boreal mockBoreal;
 	private Temperate mockTemporate;
-	private GameBoard mockGameBoard;
+	private IGameBoard mockGameBoard;
 
 	@BeforeEach
 	void setUp() throws Exception {

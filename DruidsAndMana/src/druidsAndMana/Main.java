@@ -5,11 +5,18 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		
-		ConsoleInputService input = new ConsoleInputService();
-		GameAdmin admin = new GameAdmin(input);
+		// Creating Services:
+		ConsoleInputService inputService = new ConsoleInputService();
+		ConsoleOutputService outputService = new ConsoleOutputService();
+		IGameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+		IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
 		
+		GameAdmin admin = new GameAdmin(inputService, outputService, gameBoard);
+
 		admin.playerSetUp(admin.numOfPlayers());
-		admin.createGameBoard();
+		
+		//admin.createGameBoard();
+		
 		System.out.println("\n\n\nUp first is "+admin.getCurrentPlayer().getPlayerName());
 		for (Player player : admin.players) {
 			System.out.println(player.toString());
