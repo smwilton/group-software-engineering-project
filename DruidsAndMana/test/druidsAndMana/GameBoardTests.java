@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * 
- * @author Peter McCullough 40055438
+ * @author pete
  * 
  */
 class GameBoardTests {

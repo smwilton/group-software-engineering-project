@@ -24,7 +24,7 @@ package druidsAndMana;
  * square. It also contains a method to prevent the status exceeding Wildlife
  * Santuary
  * 
- * @author Peter McCullough 40055438
+ * @author pete
  *
  */
 public enum SquareStatus {

@@ -1,5 +1,11 @@
 package druidsAndMana;
 
+/**
+ * 
+ * @author pete
+ *
+ */
+
 public class MockGameBoardBuilder implements IGameBoardBuilder {
 
 	public ISquare[] mockSquares;

@@ -4,6 +4,7 @@ package druidsAndMana;
  * Class that extends Grassland and represents a Tropical Grassland object
  *
  * @author Nicola Stirling 40020701
+ * @author Pete
  *
  */
 public class Tropical extends Grassland {

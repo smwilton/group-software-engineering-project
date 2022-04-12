@@ -1,5 +1,11 @@
 package druidsAndMana;
 
+/**
+ * 
+ * @author pete
+ *
+ */
+
 public interface IInputService {
 
 	String GetUserInput(String prompt, String[] allowedInputs);

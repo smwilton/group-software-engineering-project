@@ -2,6 +2,10 @@ package druidsAndMana;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * @author pete
+ */
+
 public class ConsoleInputService implements IInputService {
 
 	private Scanner in;

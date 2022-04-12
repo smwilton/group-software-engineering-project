@@ -4,6 +4,7 @@ package druidsAndMana;
  * Class that extends Grassland and represents a Boreal Grassland object
  *
  * @author Nicola Stirling 40020701
+ * @pete
  *
  */
 public class Boreal extends Grassland {
