@@ -276,7 +276,11 @@ public class GameAdmin {
 		for (Grassland square: owned) {
 			getCurrentPlayer().setCo2(getCurrentPlayer().getCo2()+square.getCo2ImpactRating());
 		}
+		
+		do {
 		currentPlayer++;
+		}while(!getCurrentPlayer().isActive());
+		
 		if(currentPlayer>=players.size()) {
 			currentPlayer-=players.size();
 		}
@@ -341,10 +345,23 @@ public class GameAdmin {
 			outputService.print("with a total CO2 impact rating of "+winners.get(0).getCo2()+"m^3!");
 		}else {
 			outputService.println("Congratulations "+winners.get(0).getPlayerName()+"! You are the winner with a total CO2 impact rating of "+winners.get(0).getCo2()+"m^3!");
-		}
-		
-		
-		
+		}		
 	}
+	
+	/**
+	 * This method will deactivate a Player so they no longer get a turn
+	 */
+	public void deactivateCurrentPlayer() {
+		getCurrentPlayer().setIsActive(false);
+	}
+	
+	/**
+	 * This method will deactivate a Player so they no longer get a turn and transfer their properties to the player to which they owe a mana debt.
+	 */
+	public void deactivateCurrentPlayer(int ownerId) {
+		getCurrentPlayer().setIsActive(false);
+	}
+	
+	
 
 }
