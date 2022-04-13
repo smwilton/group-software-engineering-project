@@ -11,6 +11,7 @@ public class Player {
 	private int co2;
 	private int playerNumber;
 	private int playerPosition;
+	private boolean isActive;
 
 	public Player(String playerName, int playerNumber, int playerPosition, int mana, int co2) {
 		this.playerName = playerName;
@@ -18,6 +19,7 @@ public class Player {
 		this.playerPosition = playerPosition;
 		this.mana = mana;
 		this.co2 = co2;
+		this.isActive=true;
 	}
 
 	public String getPlayerName() {
@@ -58,6 +60,14 @@ public class Player {
 
 	public void setCo2(int co2) {
 		this.co2 = co2;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
