@@ -2,6 +2,8 @@ package druidsAndMana;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -156,19 +158,23 @@ class GameAdminTests {
 		// Arrange
 		inputService = new MockInputService();
 		outputService = new MockOutputService();
-		
-		// Setting up the players and starting the game
-		inputService.setUserInputResponse4PlayerArray("4", "David", "Peter", "Nicola", "Sandra");
-		inputService.setConfirmation(true);
-		
+				
 		// Creating a mock GameBoard
 		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
 		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
-		gameAdmin = new GameAdmin(inputService, outputService, mockBoard);
-		gameAdmin.playerSetUp(4);
+		
+		// Create mock players
+		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		localGameAdmin.players = new ArrayList<Player>();
+		localGameAdmin.players.add(mockPlayer1);
+		localGameAdmin.players.add(mockPlayer2);
+		localGameAdmin.currentPlayer = 1;
 				
 		// Act
-		gameAdmin.displaySquareDetails();
+		localGameAdmin.displaySquareDetails();
 		
 		// Assert
 		String allOutput = outputService.getAllOutput();
@@ -177,6 +183,177 @@ class GameAdminTests {
 		assertTrue(allOutput.contains("Cost to buy: 0"));
 	}
 
+	@Test
+	void displaySquareDetails_SquareOwned_OutputsCorrectContentToConsole() throws Exception {
+		
+		// Arrange
+		inputService = new MockInputService();
+		outputService = new MockOutputService();
+				
+		// Creating a mock GameBoard
+		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
+		mockTropical.setInitialOwnerId(1);
+		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
+		
+		// Create mock players
+		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		localGameAdmin.players = new ArrayList<Player>();
+		localGameAdmin.players.add(mockPlayer1);
+		localGameAdmin.players.add(mockPlayer2);
+		localGameAdmin.currentPlayer = 1;
+				
+		// Act
+		localGameAdmin.displaySquareDetails();
+		
+		// Assert
+		String allOutput = outputService.getAllOutput();
+		assertTrue(allOutput.contains(mockTropical.description()));
+		assertTrue(allOutput.contains("Owned by: Mock"));
+		assertTrue(allOutput.contains("Mana Charge: 0"));
+	}
+	
+	@Test
+	void buyUnownedGrassland_SufficientMana_PlayerBecomesOwner() throws Exception {
+		
+		// Arrange
+		inputService = new MockInputService();
+		outputService = new MockOutputService();
+		
+		// Creating a mock GameBoard
+		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
+		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
+		mockBoard.setManaCharge(100);
+		
+		// Ensure the grass land is not owned
+		assertEquals(0, mockTropical.getOwnerId());
+		
+		// Create mock players
+		int expectedPlayerNumber = 1;
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 999, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 999, 0);
+		
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		localGameAdmin.players = new ArrayList<Player>();
+		localGameAdmin.players.add(mockPlayer1);
+		localGameAdmin.players.add(mockPlayer2);
+		localGameAdmin.currentPlayer = 1;
+	
+		// Act
+		localGameAdmin.buyUnownedGrassland(mockBoard, 0, expectedPlayerNumber);
+		
+		// Assert		
+		assertEquals(expectedPlayerNumber, mockTropical.getOwnerId());
+	}
+	
+	@Test
+	void buyUnownedGrassland_InsufficientMana_PlayerDoesNotBecomeOwner() throws Exception {
+		
+		// Arrange
+		inputService = new MockInputService();
+		outputService = new MockOutputService();
+		
+		// Creating a mock GameBoard
+		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
+		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
+		mockBoard.setManaCharge(100);
+		
+		// Ensure the grass land is not owned
+		assertEquals(0, mockTropical.getOwnerId());
+		
+		// Create mock players
+		int expectedPlayerNumber = 1;
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		localGameAdmin.players = new ArrayList<Player>();
+		localGameAdmin.players.add(mockPlayer1);
+		localGameAdmin.players.add(mockPlayer2);
+		localGameAdmin.currentPlayer = 1;
+	
+		// Act
+		localGameAdmin.buyUnownedGrassland(mockBoard, 0, expectedPlayerNumber);
+		
+		// Assert		
+		assertEquals(0, mockTropical.getOwnerId());
+		String allOutput = outputService.getAllOutput();
+		
+		// This test will fail once the GameBoard is fixed.
+		assertTrue(allOutput.contains("Sorry Mock, but you cannot afford to buy this null Grassland"));
+	}
+	
+	@Test
+	void payForLandingOnOwnedGrassland_InsufficientMana_PlayerCannotPayDebt() {
+		
+		// Arrange
+		inputService = new MockInputService();
+		outputService = new MockOutputService();
+		
+		// Creating a mock GameBoard
+		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
+		mockTropical.setInitialOwnerId(2);
+		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
+		mockBoard.setManaCharge(100);
+		
+		// Create mock players
+		int expectedPlayerNumber = 1;
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		localGameAdmin.players = new ArrayList<Player>();
+		localGameAdmin.players.add(mockPlayer1);
+		localGameAdmin.players.add(mockPlayer2);
+		localGameAdmin.currentPlayer = 1;
+		
+		// Act
+		localGameAdmin.payForLandingOnOwnedGrassland(mockBoard, 0, 1, 2);
+		
+		// Assert
+		String allOutput = outputService.getAllOutput();
+		assertTrue(allOutput.contains("Oh no Mock! You cannot afford to pay this mana debt!"));
+	}
+	
+	@Test
+	void payForLandingOnOwnedGrassland_SufficientMana_PlayerPaysDebtToOwner() {
+		
+		// Arrange
+		inputService = new MockInputService();
+		outputService = new MockOutputService();
+		
+		// Creating a mock GameBoard
+		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
+		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
+		
+		// Ensure the grass land is not owned
+		assertEquals(0, mockTropical.getOwnerId());
+		
+		// Setting the mana charge:
+		int manaCharge = 100;
+		mockBoard.setManaCharge(manaCharge);
+		
+		// Create mock players
+		int expectedPlayerNumber = 1;
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, manaCharge, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		localGameAdmin.players = new ArrayList<Player>();
+		localGameAdmin.players.add(mockPlayer1);
+		localGameAdmin.players.add(mockPlayer2);
+		localGameAdmin.currentPlayer = 1;
+		
+		// Act
+		localGameAdmin.payForLandingOnOwnedGrassland(mockBoard, 0, 1, 2);
+		
+		assertEquals(0,mockPlayer1.getMana());
+		assertEquals(manaCharge, mockPlayer2.getMana());
+	}
+	
+	
 	@ParameterizedTest
 	@ValueSource(strings = {"Peter", "Alfred", "Daniel", "Joe"})
 	void example(String input) {

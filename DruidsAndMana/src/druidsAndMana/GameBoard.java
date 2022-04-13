@@ -200,6 +200,7 @@ public class GameBoard implements IGameBoard {
 	 */
 	@Override
 	public SquareStatus getSquareType(int squareIndex) {
+		// TODO add reflection to get the type of grassland:
 		return SquareStatus.GRASSLAND;
 	}	
 }

@@ -34,6 +34,8 @@ public class GameAdmin {
 		return board;
 	}
 	
+	
+	
 	/**
 	 * A method to signify the beginning of the game and proceed to set up players
 	 * Array
@@ -259,7 +261,7 @@ public class GameAdmin {
 		int buyerMana = player.getMana();
 		Player owner = players.get(ownerPlayerNumber-1);
 		int ownerMana = owner.getMana();
-		if (buyerMana > feeOwed) {
+		if (buyerMana >= feeOwed) {
 			player.setMana(buyerMana - feeOwed);
 			owner.setMana(ownerMana + feeOwed);
 		} else {
