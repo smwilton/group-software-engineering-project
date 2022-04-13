@@ -36,5 +36,11 @@ public class Main {
 		for (Player player : admin.players) {
 			System.out.println(player.toString());
 		}
+		admin.players.get(1).setCo2(50);
+		admin.players.get(0).setCo2(50);
+		for (Player player : admin.players) {
+			System.out.println(player.toString()+"\n");
+		}
+		admin.declareWinner();
 	}
 }
