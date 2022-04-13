@@ -9,7 +9,7 @@ package druidsAndMana;
 public class MockOutputService implements IOutputService {
 
 	private String lastOutput;
-	private String allOutput;
+	private String allOutput = "";
 	
 	public String getLastOutput() {
 		return lastOutput;

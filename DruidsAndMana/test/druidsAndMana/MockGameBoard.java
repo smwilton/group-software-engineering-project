@@ -14,6 +14,15 @@ public class MockGameBoard implements IGameBoard {
 		return mockSquare;
 	}
 	
+	public void setManaCharge(int charge) {
+		this.manaCharge = charge;
+	}
+	
+	public int getManaCharge() {
+		return this.manaCharge;
+	}
+	
+	private int manaCharge;
 	private ISquare mockSquare;
 	
 	public MockGameBoard(ISquare mockSquare) {
@@ -42,7 +51,7 @@ public class MockGameBoard implements IGameBoard {
 
 	@Override
 	public int manaCharge(int squareIndex) {
-		return mockSquare.getChargeForLandingOnSquare();
+		return manaCharge;
 	}
 
 	@Override
@@ -70,7 +79,11 @@ public class MockGameBoard implements IGameBoard {
 
 	@Override
 	public boolean setSquareOwnerId(int squareIndex, int playerId) {
-		// TODO Auto-generated method stub
+		if(mockSquare instanceof Grassland) {
+			Grassland mockSquareGrassland = (Grassland)mockSquare;
+			mockSquareGrassland.setInitialOwnerId(1);
+			return true;
+		}
 		return false;
 	}
 
