@@ -279,5 +279,12 @@ public class GameAdmin {
 		}
 		outputService.println(" Next up it's "+getCurrentPlayer().getPlayerName()+"'s turn!");
 	}
+	
+	/**
+	 * Method to remove the current player from the list of players
+	 */
+	public void removeCurrentPlayer() {
+		players.remove(getCurrentPlayer());
+	}
 
 }
