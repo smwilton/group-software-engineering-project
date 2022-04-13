@@ -280,6 +280,66 @@ public class GameAdmin {
 		outputService.println(" Next up it's "+getCurrentPlayer().getPlayerName()+"'s turn!");
 	}
 	
+	public void transferOwnedGrasslands(int newOwnerId) {
+		ArrayList<Grassland> owned = board.getAllPlayerOwnedGrasslands(getCurrentPlayer());
+		for (Grassland square: owned) {
+			square.transferOwnership(newOwnerId);
+		}
+	}
+	
+	/**
+	 * This method will calculate the winner(s) of the game and display their names and CO2 Impact Ratings with an ASCII art celebration design
+	 */
+	public void declareWinner() {
+		//Creating arrayList of winners in case of a draw
+		ArrayList<Player> winners = new ArrayList<Player>();
+		//Adding first player as benchmark score
+		winners.add(players.get(0));
+		//Setting first players Co2 score as benchmark
+		int maxCo2= players.get(0).getCo2();
+		//Creating a boolean to track whether the game has ended in a draw or not
+		boolean draw=false;
+		//Cycle through all players replacing the winner, or adding to the ArrayList if a draw is found 
+		for (Player player : players) {
+			if(player.getCo2()>maxCo2) {
+				maxCo2 = player.getCo2();
+				winners.clear();
+				winners.add(player);
+				draw=false;
+			}else if(player.getCo2()==maxCo2 && player.getPlayerNumber()!=1) {
+				draw=true;
+				winners.add(player);
+			}
+		}
+		//Display to screen who has won with Ascii art celebration.
+		outputService.print("                                   .''.       \r\n"
+				+ "       .''.      .        *''*    :_\\/_:     . \r\n"
+				+ "      :_\\/_:   _\\(/_  .:.*_\\/_*   : /\\ :  .'.:.'.\r\n"
+				+ "  .''.: /\\ :   ./)\\   ':'* /\\ * :  '..'.  -=:o:=-\r\n"
+				+ " :_\\/_:'.:::.    ' *''*    * '.\\'/.' _\\(/_'.':'.'\r\n"
+				+ " : /\\ : :::::     *_\\/_*     -= o =-  /)\\    '  *\r\n"
+				+ "  '..'  ':::'     * /\\ *     .'/.\\'.   '\r\n"
+				+ "      *            *..*         :\n\n");
+		if(draw) {
+			int check = winners.size();
+			outputService.println("There is a draw! The winners are:\n");
+			for(Player winner:winners) {
+				outputService.print(winner.getPlayerName()+" ");
+				if(check>1) {
+					outputService.print("and ");
+					check--;
+				}
+			}
+			outputService.print("with a total CO2 impact rating of "+winners.get(0).getCo2()+"m^3!");
+		}else {
+			outputService.println("Congratulations "+winners.get(0).getPlayerName()+"! You are the winner with a total CO2 impact rating of "+winners.get(0).getCo2()+"m^3!");
+		}
+		
+		
+		
+	}
+
+	
 	/**
 	 * Method to remove the current player from the list of players
 	 */
