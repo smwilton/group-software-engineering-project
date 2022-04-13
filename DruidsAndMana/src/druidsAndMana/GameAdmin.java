@@ -359,6 +359,7 @@ public class GameAdmin {
 	 * This method will deactivate a Player so they no longer get a turn and transfer their properties to the player to which they owe a mana debt.
 	 */
 	public void deactivateCurrentPlayer(int ownerId) {
+		transferOwnedGrasslands(ownerId);
 		getCurrentPlayer().setIsActive(false);
 	}
 	
