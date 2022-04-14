@@ -13,10 +13,7 @@ public class Main {
 		
 		GameAdmin admin = new GameAdmin(inputService, outputService, gameBoard);
 
-		admin.playerSetUp(admin.numOfPlayers());
-		
-		//admin.createGameBoard();
-		
+		admin.playerSetUp(admin.numOfPlayers());		
 		System.out.println("\n\n\nUp first is "+admin.getCurrentPlayer().getPlayerName());
 		for (Player player : admin.players) {
 			System.out.println(player.toString());
@@ -24,8 +21,8 @@ public class Main {
 		int roll=admin.roll();
 		admin.movePlayer(roll);
 		admin.displaySquareDetails();
-		admin.buyUnownedGrassland(admin.board, roll, 1);
-		System.out.println("\n\n\n" +admin.isSquareOwned(admin.board, roll));
+		admin.buyUnownedGrassland(roll, 1);
+		System.out.println("\n\n\n" +admin.isSquareOwned(roll));
 		System.out.println(admin.board.getCO2Modifier(roll));
 		int owner = admin.board.getSquareOwnerId(roll);
 		System.out.println(admin.players.get(owner-1).toString()+"\n\n");
@@ -36,11 +33,10 @@ public class Main {
 		for (Player player : admin.players) {
 			System.out.println(player.toString());
 		}
-		admin.players.get(1).setCo2(50);
-		admin.players.get(0).setCo2(50);
 		for (Player player : admin.players) {
 			System.out.println(player.toString()+"\n");
 		}
 		admin.declareWinner();
+		
 	}
 }

@@ -9,17 +9,27 @@ public class Player {
 	private String playerName;
 	private int mana;
 	private int co2;
+	private int roll;
 	private int playerNumber;
 	private int playerPosition;
 	private boolean isActive;
 
-	public Player(String playerName, int playerNumber, int playerPosition, int mana, int co2) {
+	public Player(String playerName, int playerNumber, int playerPosition, int mana, int co2, int roll) {
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
 		this.playerPosition = playerPosition;
 		this.mana = mana;
 		this.co2 = co2;
 		this.isActive=true;
+		this.roll = roll;
+	}
+
+	public int getRoll() {
+		return roll;
+	}
+
+	public void setRoll(int roll) {
+		this.roll = roll;
 	}
 
 	public String getPlayerName() {

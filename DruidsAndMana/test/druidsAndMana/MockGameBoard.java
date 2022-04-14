@@ -105,4 +105,10 @@ public class MockGameBoard implements IGameBoard {
 		return null;
 	}
 
+	@Override
+	public void upgradeGrassland(int squareIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

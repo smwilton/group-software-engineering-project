@@ -126,9 +126,9 @@ class GameAdminTests {
 	
 	@Test
 	void testIsSquareOwned() {
-		assertFalse(gameAdmin.isSquareOwned(board, 2));
+		assertFalse(gameAdmin.isSquareOwned(2));
 		board.setSquareOwnerId(2, 1);
-		assertTrue(gameAdmin.isSquareOwned(board, 2));
+		assertTrue(gameAdmin.isSquareOwned(2));
 	}
 	
 	@Test
@@ -164,8 +164,8 @@ class GameAdminTests {
 		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
 		
 		// Create mock players
-		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0);
-		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.players = new ArrayList<Player>();
@@ -196,8 +196,8 @@ class GameAdminTests {
 		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
 		
 		// Create mock players
-		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0);
-		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.players = new ArrayList<Player>();
@@ -232,8 +232,8 @@ class GameAdminTests {
 		
 		// Create mock players
 		int expectedPlayerNumber = 1;
-		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 999, 0);
-		Player mockPlayer2 = new Player("Mock", 2, 1, 999, 0);
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 999, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 999, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.players = new ArrayList<Player>();
@@ -242,7 +242,7 @@ class GameAdminTests {
 		localGameAdmin.currentPlayer = 1;
 	
 		// Act
-		localGameAdmin.buyUnownedGrassland(mockBoard, 0, expectedPlayerNumber);
+		localGameAdmin.buyUnownedGrassland(0, expectedPlayerNumber);
 		
 		// Assert		
 		assertEquals(expectedPlayerNumber, mockTropical.getOwnerId());
@@ -265,8 +265,8 @@ class GameAdminTests {
 		
 		// Create mock players
 		int expectedPlayerNumber = 1;
-		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0);
-		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.players = new ArrayList<Player>();
@@ -275,7 +275,7 @@ class GameAdminTests {
 		localGameAdmin.currentPlayer = 1;
 	
 		// Act
-		localGameAdmin.buyUnownedGrassland(mockBoard, 0, expectedPlayerNumber);
+		localGameAdmin.buyUnownedGrassland(0, expectedPlayerNumber);
 		
 		// Assert		
 		assertEquals(0, mockTropical.getOwnerId());
@@ -300,8 +300,8 @@ class GameAdminTests {
 		
 		// Create mock players
 		int expectedPlayerNumber = 1;
-		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0);
-		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.players = new ArrayList<Player>();
@@ -310,7 +310,7 @@ class GameAdminTests {
 		localGameAdmin.currentPlayer = 1;
 		
 		// Act
-		localGameAdmin.payForLandingOnOwnedGrassland(mockBoard, 0, 1, 2);
+		localGameAdmin.payForLandingOnOwnedGrassland(0, 1, 2);
 		
 		// Assert
 		String allOutput = outputService.getAllOutput();
@@ -337,8 +337,8 @@ class GameAdminTests {
 		
 		// Create mock players
 		int expectedPlayerNumber = 1;
-		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, manaCharge, 0);
-		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0);
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, manaCharge, 0, 0);
+		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.players = new ArrayList<Player>();
@@ -347,7 +347,7 @@ class GameAdminTests {
 		localGameAdmin.currentPlayer = 1;
 		
 		// Act
-		localGameAdmin.payForLandingOnOwnedGrassland(mockBoard, 0, 1, 2);
+		localGameAdmin.payForLandingOnOwnedGrassland(0, 1, 2);
 		
 		assertEquals(0,mockPlayer1.getMana());
 		assertEquals(manaCharge, mockPlayer2.getMana());
