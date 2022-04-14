@@ -13,12 +13,12 @@ public class GameAdmin {
 
 	private IInputService inputService;
 	private IOutputService outputService;
-	ArrayList<Player> players = new ArrayList<Player>();
-	boolean gameOn = false;
-	int currentPlayer;
-	GameBoardBuilder builder;
-	IGameBoard board;
-	Dice dice = new Dice(2);
+	public ArrayList<Player> players = new ArrayList<Player>();
+	public boolean gameOn = false;
+	public int currentPlayer;
+	public GameBoardBuilder builder;
+	public IGameBoard board;
+	private Dice dice = new Dice(2);
 
 	public GameAdmin(IInputService inputService, IOutputService outputService, IGameBoard board) {
 		this.inputService = inputService;
@@ -106,7 +106,6 @@ public class GameAdmin {
 	public void playerSetUp(int numOfPlayers) {
 		// Create an ArrayList to add Player names to
 		ArrayList<String> playerNames = new ArrayList<String>();
-
 		// Get Player names
 		for (int i = 0; i < numOfPlayers; i++) {
 
@@ -119,8 +118,10 @@ public class GameAdmin {
 				if (!playerNames.contains(playerName)) {
 					nameCheck = true;
 					playerNames.add(playerName);
+					//Roll a dice to see which player goes first
+					int roll = roll();
 					// If unique name chosen, creates a Player object with defualt starting values.
-					Player player = new Player(playerName, i + 1, 0, 1500, 0);
+					Player player = new Player(playerName,0, 0, 1500, 0, roll);
 					players.add(player);
 				} else {
 					// Display error message on repeated name input
@@ -128,6 +129,16 @@ public class GameAdmin {
 				}
 			}
 		}
+		//Uses the CombareByRoll comparator to sort the players ArrayList by their rolls
+		players.sort(new CompareByRoll());
+		int playerNum = 1;
+		//Set player number and display to screen the order of the players
+		for (Player player : players) {
+			player.setPlayerNumber(playerNum);
+			outputService.println("Player " + player.getPlayerName()+ " rolled a "+player.getRoll()+ " so they are now player "+player.getPlayerNumber());
+			playerNum++;
+		}
+		
 	}
 	
 	/**
@@ -188,7 +199,7 @@ public class GameAdmin {
 	}
 	
 	/**
-	 * A method to display the current square Ascii art and description
+	 * A method to display the current square Ascii art and description. Places a large gap in the console to effectively clear the screen
 	 */
 	public void displaySquareDetails() {
 		int position = getCurrentPlayerPosition();
@@ -200,8 +211,12 @@ public class GameAdmin {
 			outputService.println("Owned by: "+players.get(ownerId-1).getPlayerName());
 			outputService.println("Mana Charge: "+ board.manaCharge(position));
 		}else {
+			if(board.squareIsGrassland(getCurrentPlayerPosition())) {
 			outputService.println("Currently Unowned");
 			outputService.println("Cost to buy: "+ board.costToUpgrade(position));
+			}else {
+				outputService.println("This square cannot be purchased");
+			}
 		}
 		outputService.println("");
 	}
@@ -213,7 +228,7 @@ public class GameAdmin {
 	 * @param squareIndex : the index of the square to check
 	 * @return boolean : true if square has an owner, false if it is unowned
 	 */
-	public boolean isSquareOwned(IGameBoard board, int squareIndex) {
+	public boolean isSquareOwned(int squareIndex) {
 		if (board.getSquareOwnerId(squareIndex) == 0) {
 			return false;
 		} else {
@@ -230,7 +245,7 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void buyUnownedGrassland(IGameBoard board, int squareIndex, int playerNumber) {
+	public void buyUnownedGrassland(int squareIndex, int playerNumber) {
 		// Retrieve Player object
 		Player player = players.get(playerNumber-1);
 
@@ -254,7 +269,7 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void payForLandingOnOwnedGrassland(IGameBoard board, int squareIndex, int playerNumber,
+	public void payForLandingOnOwnedGrassland(int squareIndex, int playerNumber,
 			int ownerPlayerNumber) {
 		int feeOwed = board.manaCharge(squareIndex);
 		Player player = players.get(playerNumber-1);
@@ -270,7 +285,22 @@ public class GameAdmin {
 	}
 	
 	/**
-	 * A method to end current player turn by moving currentPlayer int by 1.
+	 * This method will upgrade a Player's Grassland and deduct the mana from them appropriately.
+	 * @param squareIndex
+	 */
+	public void upgradeOwnedGrassland(int squareIndex) {
+		if(board.playerCanUpgrade(currentPlayer+1, squareIndex)) {
+			int charge = board.costToUpgrade(squareIndex);
+			int balance = getCurrentPlayer().getMana();
+			if(balance>charge) {
+				getCurrentPlayer().setMana(balance-charge);
+				board.upgradeGrassland(squareIndex);
+			}
+		}
+	}
+	
+	/**
+	 * A method to end current player turn by moving currentPlayer int by 1. It will skip any deactivated Players
 	 */
 	public void endTurn() {
 		System.out.printf("That's "+getCurrentPlayer().getPlayerName()+"'s turn over.");

@@ -193,6 +193,17 @@ public class GameBoard implements IGameBoard {
 		return 0;
 	}
 	
+	/**
+	 * Method to develop Grassland to it's next tier
+	 * @param squareIndex
+	 */
+	@Override
+	public void upgradeGrassland(int squareIndex) {
+		ISquare currSquare = squares[squareIndex];
+		if(currSquare instanceof Grassland) {
+			((Grassland) currSquare).developGrassland();
+		}
+	}
 	
 	/**
 	 * @param squareIndex
