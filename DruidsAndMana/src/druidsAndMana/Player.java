@@ -14,16 +14,27 @@ public class Player {
 	private int playerPosition;
 	private boolean isActive;
 
+	/**
+	 * Constructor with args
+	 * 
+	 * @param playerName
+	 * @param playerNumber
+	 * @param playerPosition
+	 * @param mana
+	 * @param co2
+	 * @param roll
+	 */
 	public Player(String playerName, int playerNumber, int playerPosition, int mana, int co2, int roll) {
-		this.playerName = playerName;
-		this.playerNumber = playerNumber;
-		this.playerPosition = playerPosition;
-		this.mana = mana;
-		this.co2 = co2;
-		this.isActive=true;
-		this.roll = roll;
+		this.setPlayerName(playerName);
+		this.setPlayerNumber(playerNumber);
+		this.setPlayerPosition(playerPosition);
+		this.setMana(mana);
+		this.setCo2(co2);
+		this.setIsActive(true);
+		this.setRoll(roll);
 	}
 
+	// Getters and Setters
 	public int getRoll() {
 		return roll;
 	}

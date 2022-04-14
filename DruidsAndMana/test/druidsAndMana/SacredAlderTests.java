@@ -24,7 +24,7 @@ class SacredAlderTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		square = new SacredAlder();
-		expectedCharge = 0;
+		expectedCharge = -100;
 		expectedDescription = "The Sacred Alder square is the birthplace of all druids";
 		expectedAsciiArt = "              v .   ._, |_  .,\r\n" 
 				+ "           `-._\\/  .  \\ /    |/_\r\n"
