@@ -15,11 +15,13 @@ public class Main {
 
 		admin.playerSetUp(admin.numOfPlayers());		
 		System.out.println("\n\n\nUp first is "+admin.getCurrentPlayer().getPlayerName());
+		System.out.println(admin.getCurrentPlayer().toString());
 		for (Player player : admin.players) {
 			System.out.println(player.toString());
 		}
 		int roll=admin.roll();
 		admin.movePlayer(roll);
+		System.out.println(admin.getCurrentPlayer().toString());
 		admin.displaySquareDetails();
 		admin.buyUnownedGrassland(roll, 1);
 		System.out.println("\n\n\n" +admin.isSquareOwned(roll));

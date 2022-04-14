@@ -290,6 +290,7 @@ public class GameAdmin {
 			owner.setMana(ownerMana + feeOwed);
 		} else {
 			outputService.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
+			deactivateCurrentPlayer(ownerPlayerNumber);
 		}
 	}
 	
