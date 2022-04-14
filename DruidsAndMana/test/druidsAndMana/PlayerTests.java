@@ -38,7 +38,7 @@ class PlayerTests {
 	 * Tests the constructor sets all the expected balances.
 	 */
 	@Test
-	void testPlayer() {
+	void testPlayerConstructor() {
 		Player testPlayer = new Player("Jack", 4, 10, 1000, 50, 5);
 		assertTrue(testPlayer instanceof Player);
 		assertTrue(testPlayer.isActive());
