@@ -12,8 +12,8 @@ public class GrasslandValues {
 	 * A 2D Array that contains all the values needed for each RealmTier.
 	 * <p>
 	 * <p>
-	 * The first dimension of the allValues array represents the RealmTier the array of
-	 * values is for.
+	 * The first dimension of the allValues array represents the RealmTier the array
+	 * of values is for.
 	 * <ul>
 	 * <li>Index 0: This is the TIER_1 RealmTier Values. It is the most expensive.
 	 * 
@@ -71,10 +71,10 @@ public class GrasslandValues {
 	 * premium + 1 x the major development premium
 	 * </ul>
 	 */
-	private static final int[][] ALL_VALUES = { { 60, 12, 60, 60, 6, 20, 10, 4, 8 }, // RealmTier 1 - TIER_1 @ index 0
-			{ 50, 10, 50, 50, 5, 15, 9, 3, 4 }, // RealmTier 2 - TIER_2 @ index 1
-			{ 40, 8, 40, 40, 4, 10, 8, 2, 6 }, // RealmTier 3 - TIER_3 @ index 2
-			{ 30, 3, 30, 30, 3, 5, 7, 1, 5 } // RealmTier 4 - TIER_4 @ index 3
+	private static final int[][] ALL_VALUES = { { 300, 150, 300, 25, 200, 400, 25, 150, 400 }, // RealmTier 1 - TIER_1 @ index 0
+			{ 220, 110, 220, 20, 150, 300, 20, 110, 330 }, // RealmTier 2 - TIER_2 @ index 1
+			{ 140, 70, 140, 15, 100, 200, 10, 70, 240 }, // RealmTier 3 - TIER_3 @ index 2
+			{ 60, 30, 60, 10, 50, 100, 5, 30, 120 } // RealmTier 4 - TIER_4 @ index 3
 			/*
 			 * { Value 1 - Grassland Price @ index 0, Value 2 - Plant Forest Price @ index
 			 * 1, Value 3 - Wildlife Sanctuary Price @ index 2, Value 4 - CO2 base @ index
@@ -125,7 +125,8 @@ public class GrasslandValues {
 			break;
 		case TIER_4:
 			this.valueSet = ALL_VALUES[3];
-			break; // design decision not to include a default case as a RealmTier can only be one of
+			break; // design decision not to include a default case as a RealmTier can only be one
+					// of
 					// the 4 enum values
 		}
 	}
