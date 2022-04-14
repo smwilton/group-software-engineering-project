@@ -45,6 +45,7 @@ public class GameAdmin {
 		gameOn = true;
 		playerSetUp(numOfPlayers());
 		currentPlayer=0;
+		sortPlayersByRoll(players);
 	}
 
 	/**
@@ -121,7 +122,7 @@ public class GameAdmin {
 					//Roll a dice to see which player goes first
 					int roll = roll();
 					// If unique name chosen, creates a Player object with defualt starting values.
-					Player player = new Player(playerName,0, 0, 1500, 0, roll);
+					Player player = new Player(playerName,i+1, 0, 1500, 0, roll);
 					players.add(player);
 				} else {
 					// Display error message on repeated name input
@@ -129,16 +130,24 @@ public class GameAdmin {
 				}
 			}
 		}
-		//Uses the CombareByRoll comparator to sort the players ArrayList by their rolls
-		players.sort(new CompareByRoll());
-		int playerNum = 1;
-		//Set player number and display to screen the order of the players
-		for (Player player : players) {
-			player.setPlayerNumber(playerNum);
-			outputService.println("Player " + player.getPlayerName()+ " rolled a "+player.getRoll()+ " so they are now player "+player.getPlayerNumber());
-			playerNum++;
-		}
 		
+		
+	}
+	
+	/**
+	 * A method at the beginning of a game to sort the players ArrayList by their dice rolls.
+	 * @param players
+	 */
+	public void sortPlayersByRoll(ArrayList<Player> players) {
+		//Uses the CombareByRoll comparator to sort the players ArrayList by their rolls
+				players.sort(new CompareByRoll());
+				int playerNum = 1;
+				//Set player number and display to screen the order of the players
+				for (Player player : players) {
+					player.setPlayerNumber(playerNum);
+					outputService.println("Player " + player.getPlayerName()+ " rolled a "+player.getRoll()+ " so they are now player "+player.getPlayerNumber());
+					playerNum++;
+				}
 	}
 	
 	/**
@@ -281,6 +290,7 @@ public class GameAdmin {
 			owner.setMana(ownerMana + feeOwed);
 		} else {
 			outputService.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
+			deactivateCurrentPlayer(ownerPlayerNumber);
 		}
 	}
 	

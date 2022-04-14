@@ -80,7 +80,7 @@ class GameAdminTests {
 	void testPlayerSetUpMaxAllowed() throws Exception {
 		inputService.setUserInputResponse4PlayerArray("4", "David", "Peter", "Nicola", "Sandra");
 		inputService.setConfirmation(true);
-		gameAdmin.startGame();		
+		gameAdmin.playerSetUp(4);		
 		
 		assertEquals(4, gameAdmin.players.size());
 		assertEquals("David", gameAdmin.players.get(0).getPlayerName());
@@ -145,7 +145,7 @@ class GameAdminTests {
 		inputService.setConfirmation(true);
 		
 		// Act
-		gameAdmin.startGame();
+		gameAdmin.playerSetUp(4);
 		
 		// Assert
 		String actualOutput = outputService.getLastOutput();	
