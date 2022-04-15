@@ -140,6 +140,7 @@ public class GameBoard implements IGameBoard {
 	@Override
 	public boolean playerCanUpgrade(int playerId, int squareIndex) {
 		ISquare currSquare = squares[squareIndex];
+	
 		
 		// Cannot upgrade a square that is not grass land:
 		if(!(currSquare instanceof Grassland)) {
@@ -159,7 +160,7 @@ public class GameBoard implements IGameBoard {
 		}
 		
 		for(ISquare square : squares) {
-			
+	
 			if(!(square instanceof Grassland)) { 
 				continue; 
 			}
@@ -175,6 +176,7 @@ public class GameBoard implements IGameBoard {
 		
 		return true;
 	}
+	
 	
 	/**
 	 * @param squareIndex
