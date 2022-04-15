@@ -269,6 +269,7 @@ public class GameAdmin {
 		if (mana > manaCost) {
 			player.setMana(mana - manaCost);
 			board.setSquareOwnerId(getCurrentPlayerPosition(), playerNumber);
+			outputService.println("Congratulations! You have just bought this beautiful Grassland!");
 		} else {
 			outputService.println("Sorry " + player.getPlayerName() + ", but you cannot afford to buy this "
 					+ board.getSquareType(getCurrentPlayerPosition()) + " Grassland");

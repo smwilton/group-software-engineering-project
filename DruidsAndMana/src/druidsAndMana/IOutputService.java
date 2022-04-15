@@ -6,6 +6,4 @@ public interface IOutputService {
 
 	void print(String text);
 
-	void clearConsole();
-
 }

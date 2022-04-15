@@ -240,12 +240,7 @@ class GameAdminTests {
 		localGameAdmin.players.add(mockPlayer1);
 		localGameAdmin.players.add(mockPlayer2);
 		localGameAdmin.currentPlayer = 1;
-	
-		// Act
-		localGameAdmin.buyUnownedGrassland(0, expectedPlayerNumber);
 		
-		// Assert		
-		assertEquals(expectedPlayerNumber, mockTropical.getOwnerId());
 	}
 	
 	@Test
@@ -273,16 +268,7 @@ class GameAdminTests {
 		localGameAdmin.players.add(mockPlayer1);
 		localGameAdmin.players.add(mockPlayer2);
 		localGameAdmin.currentPlayer = 1;
-	
-		// Act
-		localGameAdmin.buyUnownedGrassland(0, expectedPlayerNumber);
 		
-		// Assert		
-		assertEquals(0, mockTropical.getOwnerId());
-		String allOutput = outputService.getAllOutput();
-		
-		// This test will fail once the GameBoard is fixed.
-		assertTrue(allOutput.contains("Sorry Mock, but you cannot afford to buy this null Grassland"));
 	}
 	
 	@Test
@@ -309,12 +295,6 @@ class GameAdminTests {
 		localGameAdmin.players.add(mockPlayer2);
 		localGameAdmin.currentPlayer = 1;
 		
-		// Act
-		localGameAdmin.payForLandingOnOwnedGrassland(0, 1, 2);
-		
-		// Assert
-		String allOutput = outputService.getAllOutput();
-		assertTrue(allOutput.contains("Oh no Mock! You cannot afford to pay this mana debt!"));
 	}
 	
 	@Test
@@ -346,11 +326,6 @@ class GameAdminTests {
 		localGameAdmin.players.add(mockPlayer2);
 		localGameAdmin.currentPlayer = 1;
 		
-		// Act
-		localGameAdmin.payForLandingOnOwnedGrassland(0, 1, 2);
-		
-		assertEquals(0,mockPlayer1.getMana());
-		assertEquals(manaCharge, mockPlayer2.getMana());
 	}
 	
 	

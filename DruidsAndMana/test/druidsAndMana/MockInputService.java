@@ -80,4 +80,10 @@ public class MockInputService implements IInputService {
 		return userInputResponse;
 	}
 
+	@Override
+	public int GetUserIntInput(String prompt, int[] allowedInputs) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
