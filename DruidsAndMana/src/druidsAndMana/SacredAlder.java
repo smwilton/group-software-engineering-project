@@ -13,7 +13,7 @@ public class SacredAlder implements ISquare {
 
 	@Override
 	public String description() {
-		return "The Sacred Alder square is the birthplace of all druids";
+		return "The Sacred Alder square is the birthplace of all druids. By staying here for a while you have gained a BONUS 100 mana!";
 	}
 
 	@Override
