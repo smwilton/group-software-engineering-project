@@ -11,28 +11,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GameEngineTests {
-
-	String welcomeMessage, startNewGame, viewRules;
 	
-	private MockInputService inputService = new MockInputService();
 	private GameEngine gameEngine;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		welcomeMessage = "";
-		startNewGame = "1. Start new game";
-		viewRules = "2. View Rules";
-		gameEngine = new GameEngine(inputService);
+		gameEngine = new GameEngine();
 	}
-	
+
 	
 	@Test
-	void testDisplayStartScreen() {
-		String displayStartScreen = gameEngine.displayStartScreen();
-		assertTrue(displayStartScreen.equals(welcomeMessage));		
-		assertTrue(displayStartScreen.equals(startNewGame));
-		assertTrue(displayStartScreen.equals(viewRules));
-
+	void testDisplayGoodbyeMessage() {
+		String goodbyeMessage = gameEngine.displayGoodbyeMessage();
+		assertTrue(goodbyeMessage.equals("Thanks for playing! - Team 31"));		
+	}
+	
+	@Test
+	void testDisplayWelcomeMessage() {
+		String welcomeMessage = gameEngine.displayWelcomeMessage();
+		assertTrue(welcomeMessage.contains("|_______/"));		
 	}
 
 }

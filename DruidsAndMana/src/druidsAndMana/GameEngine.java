@@ -9,126 +9,63 @@ public class GameEngine {
 
 	private IInputService inputService;
 	private IOutputService outputService;
-	private IGameBoard gameBoard;
-	private Rules rules;
+	private Menu menu;
 
-	public GameEngine(IInputService inputService) {
-		this.inputService = inputService;
+	public GameEngine() {
+		this.menu = new Menu();
 	}
-
-	public String displayStartScreen() {
-		String welcomeMesage = "";
-		
-		// Display options
-		String startNewGame = "1. Start new game";
-		String viewRules = "2. View rules";
-		System.out.println(welcomeMesage + "\n\n");
-		System.out.println(startNewGame + "\n" + viewRules);
-		
-		String optionChoice = this.inputService.GetUserInput("WHat would you like to do?", new String[] {"1", "2"});
-		
 	
-		// if player chooses option 1, a new GmeAdmin is instantiated within a while
-		// loop that's asking GameAdmin if the game is still on.
-		// if GameAdmin return false then.... (figure this out)
-
-		// if player chooses option 2, the Rules are displayed and a prompt asks if they
-		// want to return to the previous page.
+	/**
+	 * Shows welcome message and rules, then creates the game loop
+	 */
+	public void startGameEngine() {
 		
-		return optionChoice;
+		// Display welcome message and ask user if they want to see rules or play game
+		displayWelcomeMessage();
+		String userInput = menu.homeMenu();
+		while(!userInput.equals("1")) {
+			userInput = menu.homeMenu();
+		}
+		
+		// Start game via Game Admin
+		GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+		GameBoard gameBoard = new GameBoard(gameBoardBuilder);
+		GameAdmin gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
+		
+		// Play game until it is over
+		while(gameAdmin.gameOn) {
+		}
+		
+		// Display good bye message after game ends
+		displayGoodbyeMessage();
+		
 	}
-
-	public void handleMenuOptions() throws Exception {
-//		do {
-			// displayStartScreen();
-			// } while (
-			// displayStartScreen()
-			// );
-			//
-			//
-			// GameAdmin gameAdmin = new GameAdmin(inputService);
-			//
-
-			String result = displayStartScreen();
-
-			while (!result.equals("1")){
-			rules = new Rules(inputService);
-			rules.displayRules();
-			result = displayStartScreen();
-			}
-
-			// Create GameAdmin and loop until gameAdmin.isGameOn == false
-			GameAdmin gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
-
-			gameAdmin.startGame();
-
-			while(gameAdmin.gameIsOn()) {
-			// Game is on, do nothing
-			}
-
-			System.out.println("Thanks for playing!");
-
+	
+	/**
+	 * Displays goodbye message
+	 */
+	public String displayGoodbyeMessage() {
+		String message = "Thanks for playing! - Team 31";
+		System.out.println(message);
+		return message;
 	}
-
-	public void TakeTurn() {
-
-		// Lots of logic here:
-
-		// Getting some user input:
-		// String selectedValue = this.inputService.GetUserInput("Please enter your
-		// pokemon type", new String[] { "Earth", "Wind", "Fire", "Water" });
-
-		// Create a new game board... just for fun
-		IGameBoard testGameBoard = new GameBoard(new GameBoardBuilder());
-
-		String art = testGameBoard.squareAsciiArt(6);
-		String description = testGameBoard.squareDescription(6);
-
-		System.out.println(art);
-		System.out.println();
-		System.out.println(description);
-
-		//
-		// boolean val = this.inputService.GetUserConfirmation("test");
-
-		// Printing the userInput
-		// System.out.println(val);
-
-		// Store all of the variables
-
-		// Game engine -> wraps the turn engine
-
-		// Game engine -> persists state
-
-		// Turn engine -> runs in a game
-
-		// Game engine creates players before the game starts
-
-		// passed into the turn engine:
-
-		// Turn engine encapsulates
-
-		// --------------------------------------------
-
-		// Game admin -> putting in the players names, knows who playing:
-
-		// Board class contains an array of 12 tiles
-
-		// Each turn tile abstact generic -> different types grassland, realmTier1 ->
-		// enum -> need const values
-
-		// Turn - player existing position and dice roll -> [2, 6], Player < - class
-
-		// Player set new position.
-
-		// dice roll service -> mock out dice roll for testing
-
-		// dice object - number of sides -> two dice need two instances. Dice dice = new
-		// Dice(6) - int result = dice.roll() + dice.roll()
-
-		// Player score and co2 balance and owned grassland is part of the player class
-
-		//
-
+	
+	/**
+	 * Displays welcome message
+	 */
+	public String displayWelcomeMessage() {
+		
+		String welcomeMessage = "\n\n\n"
+				
+				+ "              _______  .______       __    __   __   _______       _______.             .___  ___.      ___      .__   __.      ___      \n"
+				+ "             |       \\ |   _  \\     |  |  |  | |  | |       \\     /       |      _      |   \\/   |     /   \\     |  \\ |  |     /   \\     \n"
+				+ "             |  .--.  ||  |_)  |    |  |  |  | |  | |  .--.  |   |   (----`    _| |_    |  \\  /  |    /  ^  \\    |   \\|  |    /  ^  \\    \n"
+				+ "             |  |  |  ||      /     |  |  |  | |  | |  |  |  |    \\   \\       |_   _|   |  |\\/|  |   /  /_\\  \\   |  . `  |   /  /_\\  \\   \n"
+				+ "             |  '--'  ||  |\\  \\----.|  `--'  | |  | |  '--'  |.----)   |        |_|     |  |  |  |  /  _____  \\  |  |\\   |  /  _____  \\  \n"
+				+ "             |_______/ | _| `._____| \\______/  |__| |_______/ |_______/                 |__|  |__| /__/     \\__\\ |__| \\__| /__/     \\__\\ \n"
+				+ "                                                                                                                                        \n\n ";
+		
+		System.out.println(welcomeMessage);
+		return welcomeMessage;
 	}
 }
