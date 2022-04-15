@@ -14,6 +14,7 @@ public class GameAdmin {
 	private IInputService inputService;
 	private IOutputService outputService;
 	public ArrayList<Player> players = new ArrayList<Player>();
+	public ArrayList<Integer> upgradable = new ArrayList<Integer>();
 	public boolean gameOn = false;
 	public int currentPlayer;
 	public GameBoardBuilder builder;
@@ -29,23 +30,23 @@ public class GameAdmin {
 
 	/**
 	 * Returns the IGameBoard instance
+	 * 
 	 * @return
 	 */
 	public IGameBoard getGameBoard() {
 		return board;
 	}
-	
-	
-	
+
 	/**
 	 * A method to signify the beginning of the game and proceed to set up players
 	 * Array
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public void startGame() throws Exception {
 		gameOn = true;
 		playerSetUp(numOfPlayers());
-		currentPlayer=0;
+		currentPlayer = 0;
 		sortPlayersByRoll(players);
 	}
 
@@ -67,33 +68,34 @@ public class GameAdmin {
 
 	/**
 	 * This method gets user input for how many Players are joining the game
+	 * 
 	 * @return int : number of Players
 	 */
-	public int numOfPlayers() throws Exception{
+	public int numOfPlayers() throws Exception {
 		try {
-			//Ask number of players
+			// Ask number of players
 			int loops = 1;
-			while(loops<=3) {
-				String numOfPlayers = this.inputService.GetUserInput("How many players are joining the game? 2-4", new String[] {"2","3","4"});
-				
-				//confirm selection
+			while (loops <= 3) {
+				String numOfPlayers = this.inputService.GetUserInput("How many players are joining the game? 2-4",
+						new String[] { "2", "3", "4" });
+
+				// confirm selection
 				boolean check = this.inputService.GetUserConfirmation("Are you sure?");
-				
-	
-				//if confirmed, return number of players
-				if(check) {
+
+				// if confirmed, return number of players
+				if (check) {
 					return Integer.parseInt(numOfPlayers);
 				}
-				//If not confirmed, repeats the question up to 5 times.
+				// If not confirmed, repeats the question up to 5 times.
 				loops++;
 			}
 			throw new Exception("Number of failed confirmations has reached the limit. Resetting game.");
-			
-		}catch(Exception exception){
+
+		} catch (Exception exception) {
 			outputService.println(exception.getMessage());
 			endGame();
 			return 0;
-			
+
 		}
 	}
 
@@ -114,16 +116,16 @@ public class GameAdmin {
 			boolean nameCheck = false;
 			// Check if each Player name is unique and repeat until they are.
 			while (!nameCheck) {
-				
+
 				String playerName = this.inputService.GetOpenUserInput("What is the name of player " + (i + 1) + "?");
 
 				if (!playerNames.contains(playerName)) {
 					nameCheck = true;
 					playerNames.add(playerName);
-					//Roll a dice to see which player goes first
+					// Roll a dice to see which player goes first
 					int roll = roll();
 					// If unique name chosen, creates a Player object with defualt starting values.
-					Player player = new Player(playerName,i+1, 0, 1500, 0, roll);
+					Player player = new Player(playerName, i + 1, 0, 1500, 0, roll);
 					players.add(player);
 				} else {
 					// Display error message on repeated name input
@@ -131,36 +133,42 @@ public class GameAdmin {
 				}
 			}
 		}
-		
-		
+
 	}
-	
+
 	/**
-	 * A method at the beginning of a game to sort the players ArrayList by their dice rolls.
+	 * A method at the beginning of a game to sort the players ArrayList by their
+	 * dice rolls.
+	 * 
 	 * @param players
 	 */
 	public void sortPlayersByRoll(ArrayList<Player> players) {
-		//Uses the CombareByRoll comparator to sort the players ArrayList by their rolls
-				players.sort(new CompareByRoll());
-				int playerNum = 1;
-				//Set player number and display to screen the order of the players
-				for (Player player : players) {
-					player.setPlayerNumber(playerNum);
-					outputService.println("Player " + player.getPlayerName()+ " rolled a "+player.getRoll()+ " so they are now player "+player.getPlayerNumber());
-					playerNum++;
-				}
+		// Uses the CombareByRoll comparator to sort the players ArrayList by their
+		// rolls
+		players.sort(new CompareByRoll());
+		int playerNum = 1;
+		// Set player number and display to screen the order of the players
+		for (Player player : players) {
+			player.setPlayerNumber(playerNum);
+			outputService.println("Player " + player.getPlayerName() + " rolled a " + player.getRoll()
+					+ " so they are now player " + player.getPlayerNumber());
+			playerNum++;
+		}
 	}
-	
+
 	/**
 	 * a method to return the current player from the players ArrayList.
+	 * 
 	 * @return
 	 */
 	public Player getCurrentPlayer() {
 		Player player = players.get(currentPlayer);
 		return player;
 	}
+
 	/**
 	 * A method to return the Square Index that the current player is on
+	 * 
 	 * @return
 	 */
 	public int getCurrentPlayerPosition() {
@@ -168,66 +176,71 @@ public class GameAdmin {
 		int position = player.getPlayerPosition();
 		return position;
 	}
-	
+
 	/**
 	 * A method to return the current players details
+	 * 
 	 * @return
 	 */
 	public String getCurrentPlayerDetails() {
 		Player player = getCurrentPlayer();
 		return player.toString();
 	}
-	
+
 	/**
 	 * This method rolls the dice and returns the total of all the requested dice.
+	 * 
 	 * @return
 	 */
 	public int roll() {
-		int total=0;
-		total+=dice.rollDice();
+		int total = 0;
+		total += dice.rollDice();
 		return total;
 	}
-	
+
 	/**
 	 * This method will update the position of the current player on the game board.
-	 * It will also update the Player's mana if they pass or land on the Alder Square	
-	 * It will also
+	 * It will also update the Player's mana if they pass or land on the Alder
+	 * Square It will also
+	 * 
 	 * @param diceRoll : the total dice roll of the current player
 	 */
 	public void movePlayer(int diceRoll) {
 		Player player = getCurrentPlayer();
 		int position = player.getPlayerPosition();
-		int newPosition = position+diceRoll;
-		if(newPosition>=12) {
-			player.setMana(player.getMana()+100);
-			newPosition -=12;
-			if(newPosition==0) {
-				player.setMana(player.getMana()+100);
-				outputService.println("You have just paid a visit to the Sacred Alder Tree. You have received 100 mana");
+		int newPosition = position + diceRoll;
+		if (newPosition >= 12) {
+			player.setMana(player.getMana() + 100);
+			newPosition -= 12;
+			outputService.println("You have just paid a visit to the Sacred Alder Tree. You have received 100 mana");
+			if (newPosition == 0) {
+				player.setMana(player.getMana() + 100);
 			}
 		}
-		outputService.println("You rolled a "+diceRoll+", landing on square "+board.newsquarePosition(getCurrentPlayerPosition(), diceRoll));
+		outputService.println("You rolled a " + diceRoll + ", landing on square "
+				+ board.newsquarePosition(getCurrentPlayerPosition(), diceRoll));
 		player.setPlayerPosition(newPosition);
 		hasMoved = true;
 	}
-	
+
 	/**
-	 * A method to display the current square Ascii art and description. Places a large gap in the console to effectively clear the screen
+	 * A method to display the current square Ascii art and description. Places a
+	 * large gap in the console to effectively clear the screen
 	 */
 	public void displaySquareDetails() {
 		int position = getCurrentPlayerPosition();
 		outputService.println("\n\n");
-		outputService.println(board.squareAsciiArt(position)+"\n");
-		outputService.println(board.squareDescription(position)+"\n");
+		outputService.println(board.squareAsciiArt(position) + "\n");
+		outputService.println(board.squareDescription(position) + "\n");
 		int ownerId = board.getSquareOwnerId(getCurrentPlayerPosition());
-		if (ownerId!=0) {
-			outputService.println("Owned by: "+players.get(ownerId-1).getPlayerName());
-			outputService.println("Mana Charge: "+ board.manaCharge(position));
-		}else {
-			if(board.squareIsGrassland(getCurrentPlayerPosition())) {
-			outputService.println("Currently Unowned");
-			outputService.println("Cost to buy: "+ board.costToUpgrade(position));
-			}else {
+		if (ownerId != 0) {
+			outputService.println("Owned by: " + players.get(ownerId - 1).getPlayerName());
+			outputService.println("Mana Charge: " + board.manaCharge(position));
+		} else {
+			if (board.squareIsGrassland(getCurrentPlayerPosition())) {
+				outputService.println("Currently Unowned");
+				outputService.println("Cost to buy: " + board.costToUpgrade(position));
+			} else {
 				outputService.println("This square cannot be purchased");
 			}
 		}
@@ -288,146 +301,210 @@ public class GameAdmin {
 		int feeOwed = board.manaCharge(getCurrentPlayerPosition());
 		Player player = getCurrentPlayer();
 		int buyerMana = player.getMana();
-		Player owner = players.get(board.getSquareOwnerId(getCurrentPlayerPosition())-1);
+		Player owner = players.get(board.getSquareOwnerId(getCurrentPlayerPosition()) - 1);
 		int ownerMana = owner.getMana();
-		if (buyerMana >= feeOwed) {
-			player.setMana(buyerMana - feeOwed);
-			owner.setMana(ownerMana + feeOwed);
-			outputService.println("You have had to donate "+feeOwed+" mana to "+owner.getPlayerName()+" for landing on their Grassland!");
+		if (player == owner) {
+			outputService.println("You already own this Grassland. Kick back and admire the scenery!");
 		} else {
-			outputService.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
-			deactivateCurrentPlayer(board.getSquareOwnerId(getCurrentPlayerPosition()));
+			if (buyerMana >= feeOwed) {
+				player.setMana(buyerMana - feeOwed);
+				owner.setMana(ownerMana + feeOwed);
+				outputService.println("You have had to donate " + feeOwed + " mana to " + owner.getPlayerName()
+						+ " for landing on their Grassland!");
+			} else {
+				outputService.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
+				deactivateCurrentPlayer(board.getSquareOwnerId(getCurrentPlayerPosition()));
+			}
 		}
 	}
-	
+
 	/**
 	 * A method to check if the current Player has any upgradable Grasslands
+	 * 
 	 * @return true if any upgrades are available, otherwise returns false
 	 */
 	public boolean canUpgradeGrasslands() {
+		
 		boolean canUpgrade = false;
-		//ArrayList<Grassland> owned = board.getAllPlayerOwnedGrasslands(getCurrentPlayer());
-		for(int i=0;i<12;i++) {
-			if(board.playerCanUpgrade(currentPlayer+1, i)) {
-				canUpgrade = true;
+		if(board.getSquareOwnerId(1)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(2)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(3)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 1) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 2) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 3)) {
+				canUpgrade =true;
 			}
 		}
+		if(board.getSquareOwnerId(4)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(5)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 4) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 5)) {
+				canUpgrade =true;
+			}
+		}
+		if(board.getSquareOwnerId(7)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(8)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 7) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 8)) {
+				canUpgrade =true;
+			}
+		}
+		if(board.getSquareOwnerId(9)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(10)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(11)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 9) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 10) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 11)) {
+				canUpgrade =true;
+			}
+		}
+		
 		return canUpgrade;
 	}
 	
 	/**
-	 * This method will upgrade a Player's Grassland and deduct the mana from them appropriately.
+	 * A method to add the square index of upgradable Grasslands to the upgradable ArryaList
+	 */
+	public void listUpgradableGrasslands() {
+		
+		if(board.getSquareOwnerId(1)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(2)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(3)==players.get(currentPlayer).getPlayerNumber()) {
+			for (int i=1; i<=3; i++) {
+				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+					upgradable.add((Integer)i);
+				}
+			}
+		}
+		if(board.getSquareOwnerId(4)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(5)==players.get(currentPlayer).getPlayerNumber()) {
+			for (int i=4; i<=5; i++) {
+				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+					upgradable.add((Integer)i);
+				}
+			}
+		}
+		if(board.getSquareOwnerId(7)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(8)==players.get(currentPlayer).getPlayerNumber()) {
+			for (int i=7; i<=8; i++) {
+				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+					upgradable.add((Integer)i);
+				}
+			}
+		}
+		if(board.getSquareOwnerId(9)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(10)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(11)==players.get(currentPlayer).getPlayerNumber()) {
+			for (int i=9; i<=11; i++) {
+				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+					upgradable.add((Integer)i);
+				}
+			}
+		}
+		
+	}
+
+	/**
+	 * This method will upgrade a Player's Grassland and deduct the mana from them
+	 * appropriately.
+	 * 
 	 * @param squareIndex
 	 */
 	public void upgradeOwnedGrassland(int squareIndex) {
-		if(board.playerCanUpgrade(currentPlayer+1, squareIndex)) {
+		if (board.playerCanUpgrade(currentPlayer + 1, squareIndex)) {
 			int charge = board.costToUpgrade(squareIndex);
 			int balance = getCurrentPlayer().getMana();
-			if(balance>charge) {
-				getCurrentPlayer().setMana(balance-charge);
+			if (balance > charge) {
+				getCurrentPlayer().setMana(balance - charge);
 				board.upgradeGrassland(squareIndex);
 			}
 		}
 	}
-	
+
 	/**
-	 * A method to end current player turn by moving currentPlayer int by 1. It will skip any deactivated Players
+	 * A method to end current player turn by moving currentPlayer int by 1. It will
+	 * skip any deactivated Players
 	 */
 	public void endTurn() {
-		System.out.printf("That's "+getCurrentPlayer().getPlayerName()+"'s turn over.");
+		System.out.printf("That's " + getCurrentPlayer().getPlayerName() + "'s turn over.");
 		ArrayList<Grassland> owned = board.getAllPlayerOwnedGrasslands(getCurrentPlayer());
-		for (Grassland square: owned) {
-			getCurrentPlayer().setCo2(getCurrentPlayer().getCo2()+square.getCo2ImpactRating());
+		for (Grassland square : owned) {
+			getCurrentPlayer().setCo2(getCurrentPlayer().getCo2() + square.getCo2ImpactRating());
 		}
-		
+
 		do {
-		currentPlayer++;
-		
-		
-		if(currentPlayer>=players.size()) {
-			currentPlayer-=players.size();
-		}
-		}while(!getCurrentPlayer().isActive());
-		outputService.println(" Next up it's "+getCurrentPlayer().getPlayerName()+"'s turn!");
+			currentPlayer++;
+
+			if (currentPlayer >= players.size()) {
+				currentPlayer -= players.size();
+			}
+		} while (!getCurrentPlayer().isActive());
+		outputService.println(" Next up it's " + getCurrentPlayer().getPlayerName() + "'s turn!");
 		hasMoved = false;
+		upgradable.clear();
 	}
-	
+
 	/**
-	 * This method will transfer all Grasslands owned by the current Player to another player.
-	 * Specifically meant for when a player loses the game and their owned properties are tranferred to their rival
+	 * This method will transfer all Grasslands owned by the current Player to
+	 * another player. Specifically meant for when a player loses the game and their
+	 * owned properties are tranferred to their rival
+	 * 
 	 * @param newOwnerId
 	 */
 	public void transferOwnedGrasslands(int newOwnerId) {
 		ArrayList<Grassland> owned = board.getAllPlayerOwnedGrasslands(getCurrentPlayer());
-		for (Grassland square: owned) {
+		for (Grassland square : owned) {
 			square.transferOwnership(newOwnerId);
 		}
 	}
-	
+
 	/**
-	 * This method will calculate the winner(s) of the game and display their names and CO2 Impact Ratings with an ASCII art celebration design
+	 * This method will calculate the winner(s) of the game and display their names
+	 * and CO2 Impact Ratings with an ASCII art celebration design
 	 */
 	public void declareWinner() {
-		//Creating arrayList of winners in case of a draw
+		// Creating arrayList of winners in case of a draw
 		ArrayList<Player> winners = new ArrayList<Player>();
-		//Adding first player as benchmark score
+		// Adding first player as benchmark score
 		winners.add(players.get(0));
-		//Setting first players Co2 score as benchmark
-		int maxCo2= players.get(0).getCo2();
-		//Creating a boolean to track whether the game has ended in a draw or not
-		boolean draw=false;
-		//Cycle through all players replacing the winner, or adding to the ArrayList if a draw is found 
+		// Setting first players Co2 score as benchmark
+		int maxCo2 = players.get(0).getCo2();
+		// Creating a boolean to track whether the game has ended in a draw or not
+		boolean draw = false;
+		// Cycle through all players replacing the winner, or adding to the ArrayList if
+		// a draw is found
 		for (Player player : players) {
-			if(player.getCo2()>maxCo2) {
+			if (player.getCo2() > maxCo2) {
 				maxCo2 = player.getCo2();
 				winners.clear();
 				winners.add(player);
-				draw=false;
-			}else if(player.getCo2()==maxCo2 && player.getPlayerNumber()!=1) {
-				draw=true;
+				draw = false;
+			} else if (player.getCo2() == maxCo2 && player.getPlayerNumber() != 1) {
+				draw = true;
 				winners.add(player);
 			}
 		}
-		//Display to screen who has won with Ascii art celebration.
+		// Display to screen who has won with Ascii art celebration.
 		outputService.print("                                   .''.       \r\n"
 				+ "       .''.      .        *''*    :_\\/_:     . \r\n"
 				+ "      :_\\/_:   _\\(/_  .:.*_\\/_*   : /\\ :  .'.:.'.\r\n"
 				+ "  .''.: /\\ :   ./)\\   ':'* /\\ * :  '..'.  -=:o:=-\r\n"
 				+ " :_\\/_:'.:::.    ' *''*    * '.\\'/.' _\\(/_'.':'.'\r\n"
 				+ " : /\\ : :::::     *_\\/_*     -= o =-  /)\\    '  *\r\n"
-				+ "  '..'  ':::'     * /\\ *     .'/.\\'.   '\r\n"
-				+ "      *            *..*         :\n\n");
-		if(draw) {
+				+ "  '..'  ':::'     * /\\ *     .'/.\\'.   '\r\n" + "      *            *..*         :\n\n");
+		if (draw) {
 			int check = winners.size();
 			outputService.println("There is a draw! The winners are:\n");
-			for(Player winner:winners) {
-				outputService.print(winner.getPlayerName()+" ");
-				if(check>1) {
+			for (Player winner : winners) {
+				outputService.print(winner.getPlayerName() + " ");
+				if (check > 1) {
 					outputService.print("and ");
 					check--;
 				}
 			}
-			outputService.print("with a total CO2 impact rating of "+winners.get(0).getCo2()+"m^3!");
-		}else {
-			outputService.println("Congratulations "+winners.get(0).getPlayerName()+"! You are the winner with a total CO2 impact rating of "+winners.get(0).getCo2()+"m^3!");
-		}		
+			outputService.print("with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+		} else {
+			outputService.println("Congratulations " + winners.get(0).getPlayerName()
+					+ "! You are the winner with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+		}
 	}
-	
+
 	/**
 	 * This method will deactivate a Player so they no longer get a turn
 	 */
 	public void deactivateCurrentPlayer() {
 		getCurrentPlayer().setIsActive(false);
 	}
-	
+
 	/**
-	 * This method will deactivate a Player so they no longer get a turn and transfer their properties to the player to which they owe a mana debt.
+	 * This method will deactivate a Player so they no longer get a turn and
+	 * transfer their properties to the player to which they owe a mana debt.
 	 */
 	public void deactivateCurrentPlayer(int ownerId) {
 		transferOwnedGrasslands(ownerId);
 		getCurrentPlayer().setIsActive(false);
 	}
-	
-	
 
 }
