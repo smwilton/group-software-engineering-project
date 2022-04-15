@@ -14,4 +14,6 @@ public interface IInputService {
 
 	boolean GetUserConfirmation(String prompt);
 
+	int GetUserIntInput(String prompt, int[] allowedInputs);
+
 }

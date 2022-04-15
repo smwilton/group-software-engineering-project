@@ -50,6 +50,46 @@ public class ConsoleInputService implements IInputService {
 	}
 	
 	@Override
+	public int GetUserIntInput(String prompt, int[] allowedInputs) {
+		
+		boolean validInput = false;
+		
+		do
+		{
+			String [] strings = new String[allowedInputs.length];
+			for (int i=0; i<strings.length; i++) {
+				strings[i] = ""+allowedInputs[i]+"";
+			}
+			
+			System.out.println(prompt);
+			
+			String userInput = this.in.nextLine();
+			
+			String match = this.InputMatch(userInput, strings);
+			
+			if (match == null) {
+				
+				String nearMatch = this.InputNearMatch(userInput, strings);
+				
+				if (nearMatch == null) {
+					continue;
+				}
+				
+				if (GetUserConfirmation("Do did you mean " + nearMatch + " ?")) {
+					return Integer.parseInt(nearMatch);
+				}
+				
+				continue;
+			}
+				
+			return Integer.parseInt(match);
+		}
+		while(!validInput);
+		
+		return 0;
+	}
+	
+	@Override
 	public boolean GetUserConfirmation(String prompt) {
 		System.out.println(prompt + " [ Yes | No ]");
 		return this.in.nextLine().equalsIgnoreCase("yes");

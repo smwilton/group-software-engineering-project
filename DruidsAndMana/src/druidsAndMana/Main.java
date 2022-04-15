@@ -12,7 +12,19 @@ public class Main {
 		IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
 		
 		GameAdmin admin = new GameAdmin(inputService, outputService, gameBoard);
-
+		Menu menu = new Menu(admin, inputService, outputService);
+		
+		menu.displayMenu();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**
 		admin.playerSetUp(admin.numOfPlayers());		
 		System.out.println("\n\n\nUp first is "+admin.getCurrentPlayer().getPlayerName());
 		System.out.println(admin.getCurrentPlayer().toString());
@@ -39,6 +51,6 @@ public class Main {
 			System.out.println(player.toString()+"\n");
 		}
 		admin.declareWinner();
-		
+		**/
 	}
 }

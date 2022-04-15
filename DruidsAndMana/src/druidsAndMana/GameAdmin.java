@@ -19,6 +19,7 @@ public class GameAdmin {
 	public GameBoardBuilder builder;
 	public IGameBoard board;
 	private Dice dice = new Dice(2);
+	public boolean hasMoved = false;
 
 	public GameAdmin(IInputService inputService, IOutputService outputService, IGameBoard board) {
 		this.inputService = inputService;
@@ -202,9 +203,12 @@ public class GameAdmin {
 			newPosition -=12;
 			if(newPosition==0) {
 				player.setMana(player.getMana()+100);
+				outputService.println("You have just paid a visit to the Sacred Alder Tree. You have received 100 mana");
 			}
 		}
+		outputService.println("You rolled a "+diceRoll+", landing on square "+board.newsquarePosition(getCurrentPlayerPosition(), diceRoll));
 		player.setPlayerPosition(newPosition);
+		hasMoved = true;
 	}
 	
 	/**
@@ -212,7 +216,7 @@ public class GameAdmin {
 	 */
 	public void displaySquareDetails() {
 		int position = getCurrentPlayerPosition();
-		outputService.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		outputService.println("\n\n");
 		outputService.println(board.squareAsciiArt(position)+"\n");
 		outputService.println(board.squareDescription(position)+"\n");
 		int ownerId = board.getSquareOwnerId(getCurrentPlayerPosition());
@@ -254,19 +258,20 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void buyUnownedGrassland(int squareIndex, int playerNumber) {
+	public void buyUnownedGrassland() {
 		// Retrieve Player object
-		Player player = players.get(playerNumber-1);
+		Player player = getCurrentPlayer();
+		int playerNumber = player.getPlayerNumber();
 
-		int manaCost = board.costToUpgrade(squareIndex);
+		int manaCost = board.costToUpgrade(getCurrentPlayerPosition());
 		int mana = player.getMana();
 		// Check if Player can afford the manaCost and commit the purchase if possible
 		if (mana > manaCost) {
 			player.setMana(mana - manaCost);
-			board.setSquareOwnerId(squareIndex, playerNumber);
+			board.setSquareOwnerId(getCurrentPlayerPosition(), playerNumber);
 		} else {
 			outputService.println("Sorry " + player.getPlayerName() + ", but you cannot afford to buy this "
-					+ board.getSquareType(squareIndex) + " Grassland");
+					+ board.getSquareType(getCurrentPlayerPosition()) + " Grassland");
 		}
 	}
 
@@ -278,20 +283,35 @@ public class GameAdmin {
 	 * @param squareIndex
 	 * @param playerNumber
 	 */
-	public void payForLandingOnOwnedGrassland(int squareIndex, int playerNumber,
-			int ownerPlayerNumber) {
-		int feeOwed = board.manaCharge(squareIndex);
-		Player player = players.get(playerNumber-1);
+	public void payForLandingOnOwnedGrassland() {
+		int feeOwed = board.manaCharge(getCurrentPlayerPosition());
+		Player player = getCurrentPlayer();
 		int buyerMana = player.getMana();
-		Player owner = players.get(ownerPlayerNumber-1);
+		Player owner = players.get(board.getSquareOwnerId(getCurrentPlayerPosition())-1);
 		int ownerMana = owner.getMana();
 		if (buyerMana >= feeOwed) {
 			player.setMana(buyerMana - feeOwed);
 			owner.setMana(ownerMana + feeOwed);
+			outputService.println("You have had to donate "+feeOwed+" mana to "+owner.getPlayerName()+" for landing on their Grassland!");
 		} else {
 			outputService.println("Oh no " + player.getPlayerName() + "! You cannot afford to pay this mana debt!");
-			deactivateCurrentPlayer(ownerPlayerNumber);
+			deactivateCurrentPlayer(board.getSquareOwnerId(getCurrentPlayerPosition()));
 		}
+	}
+	
+	/**
+	 * A method to check if the current Player has any upgradable Grasslands
+	 * @return true if any upgrades are available, otherwise returns false
+	 */
+	public boolean canUpgradeGrasslands() {
+		boolean canUpgrade = false;
+		//ArrayList<Grassland> owned = board.getAllPlayerOwnedGrasslands(getCurrentPlayer());
+		for(int i=0;i<12;i++) {
+			if(board.playerCanUpgrade(currentPlayer+1, i)) {
+				canUpgrade = true;
+			}
+		}
+		return canUpgrade;
 	}
 	
 	/**
@@ -321,12 +341,14 @@ public class GameAdmin {
 		
 		do {
 		currentPlayer++;
-		}while(!getCurrentPlayer().isActive());
+		
 		
 		if(currentPlayer>=players.size()) {
 			currentPlayer-=players.size();
 		}
+		}while(!getCurrentPlayer().isActive());
 		outputService.println(" Next up it's "+getCurrentPlayer().getPlayerName()+"'s turn!");
+		hasMoved = false;
 	}
 	
 	/**
