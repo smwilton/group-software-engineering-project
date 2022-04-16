@@ -1,69 +1,71 @@
 package druidsAndMana;
 
+/**
+ * 
+ * @author sandra
+ *
+ */
 public class GameEngine {
 
 	private IInputService inputService;
-	
-	public GameEngine(IInputService inputService) {
-		this.inputService = inputService;
+	private IOutputService outputService;
+	private Menu menu;
+
+	public GameEngine() {
+		this.menu = new Menu();
 	}
 	
-	public void TakeTurn() {
+	/**
+	 * Shows welcome message and rules, then creates the game loop
+	 */
+	public void startGameEngine() {
 		
-		// Lots of logic here:
+		// Display welcome message and ask user if they want to see rules or play game
+		displayWelcomeMessage();
+		String userInput = menu.homeMenu();
+		while(!userInput.equals("1")) {
+			userInput = menu.homeMenu();
+		}
 		
-		//Getting some user input:
-		//String selectedValue = this.inputService.GetUserInput("Please enter your pokemon type", new String[] { "Earth", "Wind", "Fire", "Water" });
+		// Start game via Game Admin
+		GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+		GameBoard gameBoard = new GameBoard(gameBoardBuilder);
+		GameAdmin gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
 		
-		//Create a new game board... just for fun
-		IGameBoard testGameBoard = new GameBoard(new GameBoardBuilder());
+		// Play game until it is over
+		while(gameAdmin.gameOn) {
+		}
 		
-		String art = testGameBoard.squareAsciiArt(6);
-		String description = testGameBoard.squareDescription(6);
+		// Display good bye message after game ends
+		displayGoodbyeMessage();
 		
-		System.out.println(art);
-		System.out.println();
-		System.out.println(description);
+	}
+	
+	/**
+	 * Displays goodbye message
+	 */
+	public String displayGoodbyeMessage() {
+		String message = "Thanks for playing! - Team 31";
+		System.out.println(message);
+		return message;
+	}
+	
+	/**
+	 * Displays welcome message
+	 */
+	public String displayWelcomeMessage() {
 		
-		// 
-		//boolean val = this.inputService.GetUserConfirmation("test");
-		
-		// Printing the userInput
-		//System.out.println(val);
-		
-		// Store all of the variables
-		
-		// Game engine -> wraps the turn engine
-		
-		// Game engine -> persists state 
-		
-		// Turn engine -> runs in a game
-		
-		// Game engine creates players before the game starts
-		
-		// passed into the turn engine:
-		
-		// Turn engine encapsulates 
-		
-		//--------------------------------------------
-		
-		// Game admin -> putting in the players names, knows who playing:
-		
-		// Board class contains an array of 12 tiles 
-		
-		// Each turn tile abstact generic -> different types grassland, realmTier1 -> enum -> need const values
-		
-		// Turn - player existing position and dice roll -> [2, 6], Player < - class
-		
-		// Player set new position.
-		
-		// dice roll service -> mock out dice roll for testing
+		String welcomeMessage = "\n\n\n"
 				
-		// dice object - number of sides -> two dice need two instances. Dice dice = new Dice(6) - int result = dice.roll() + dice.roll()
+				+ "              _______  .______       __    __   __   _______       _______.             .___  ___.      ___      .__   __.      ___      \n"
+				+ "             |       \\ |   _  \\     |  |  |  | |  | |       \\     /       |      _      |   \\/   |     /   \\     |  \\ |  |     /   \\     \n"
+				+ "             |  .--.  ||  |_)  |    |  |  |  | |  | |  .--.  |   |   (----`    _| |_    |  \\  /  |    /  ^  \\    |   \\|  |    /  ^  \\    \n"
+				+ "             |  |  |  ||      /     |  |  |  | |  | |  |  |  |    \\   \\       |_   _|   |  |\\/|  |   /  /_\\  \\   |  . `  |   /  /_\\  \\   \n"
+				+ "             |  '--'  ||  |\\  \\----.|  `--'  | |  | |  '--'  |.----)   |        |_|     |  |  |  |  /  _____  \\  |  |\\   |  /  _____  \\  \n"
+				+ "             |_______/ | _| `._____| \\______/  |__| |_______/ |_______/                 |__|  |__| /__/     \\__\\ |__| \\__| /__/     \\__\\ \n"
+				+ "                                                                                                                                        \n\n ";
 		
-		// Player score and co2 balance and owned grassland is part of the player class
-		
-		// 
-		
+		System.out.println(welcomeMessage);
+		return welcomeMessage;
 	}
 }
