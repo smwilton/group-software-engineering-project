@@ -12,20 +12,31 @@ public class Main {
 		IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
 		
 		GameAdmin admin = new GameAdmin(inputService, outputService, gameBoard);
-
-		admin.playerSetUp(admin.numOfPlayers());
+		Menu menu = new Menu(admin, inputService, outputService);
 		
-		//admin.createGameBoard();
+		menu.displayMenu();
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**
+		admin.playerSetUp(admin.numOfPlayers());		
 		System.out.println("\n\n\nUp first is "+admin.getCurrentPlayer().getPlayerName());
+		System.out.println(admin.getCurrentPlayer().toString());
 		for (Player player : admin.players) {
 			System.out.println(player.toString());
 		}
 		int roll=admin.roll();
 		admin.movePlayer(roll);
+		System.out.println(admin.getCurrentPlayer().toString());
 		admin.displaySquareDetails();
-		admin.buyUnownedGrassland(admin.board, roll, 1);
-		System.out.println("\n\n\n" +admin.isSquareOwned(admin.board, roll));
+		admin.buyUnownedGrassland(roll, 1);
+		System.out.println("\n\n\n" +admin.isSquareOwned(roll));
 		System.out.println(admin.board.getCO2Modifier(roll));
 		int owner = admin.board.getSquareOwnerId(roll);
 		System.out.println(admin.players.get(owner-1).toString()+"\n\n");
@@ -36,5 +47,10 @@ public class Main {
 		for (Player player : admin.players) {
 			System.out.println(player.toString());
 		}
+		for (Player player : admin.players) {
+			System.out.println(player.toString()+"\n");
+		}
+		admin.declareWinner();
+		**/
 	}
 }

@@ -92,4 +92,10 @@ public interface IGameBoard {
 	 */
 	SquareStatus getSquareType(int squareIndex);
 
+	/**
+	 * Method to develop Grassland to it's next tier
+	 * @param squareIndex
+	 */
+	void upgradeGrassland(int squareIndex);
+
 }

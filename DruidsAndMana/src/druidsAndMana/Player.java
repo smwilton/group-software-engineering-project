@@ -9,15 +9,38 @@ public class Player {
 	private String playerName;
 	private int mana;
 	private int co2;
+	private int roll;
 	private int playerNumber;
 	private int playerPosition;
+	private boolean isActive;
 
-	public Player(String playerName, int playerNumber, int playerPosition, int mana, int co2) {
-		this.playerName = playerName;
-		this.playerNumber = playerNumber;
-		this.playerPosition = playerPosition;
-		this.mana = mana;
-		this.co2 = co2;
+	/**
+	 * Constructor with args
+	 * 
+	 * @param playerName
+	 * @param playerNumber
+	 * @param playerPosition
+	 * @param mana
+	 * @param co2
+	 * @param roll
+	 */
+	public Player(String playerName, int playerNumber, int playerPosition, int mana, int co2, int roll) {
+		this.setPlayerName(playerName);
+		this.setPlayerNumber(playerNumber);
+		this.setPlayerPosition(playerPosition);
+		this.setMana(mana);
+		this.setCo2(co2);
+		this.setIsActive(true);
+		this.setRoll(roll);
+	}
+
+	// Getters and Setters
+	public int getRoll() {
+		return roll;
+	}
+
+	public void setRoll(int roll) {
+		this.roll = roll;
 	}
 
 	public String getPlayerName() {
@@ -58,6 +81,14 @@ public class Player {
 
 	public void setCo2(int co2) {
 		this.co2 = co2;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override

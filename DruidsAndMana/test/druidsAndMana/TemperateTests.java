@@ -29,6 +29,7 @@ class TemperateTests {
 			expectedCO2ImpactWildlifeSanctuaryTier3, expectedLandOnCostVacantTier3, expectedLandOnCostGrasslandTier3,
 			expectedLandOnCostSeedlingTier3, expectedLandOnCostIntermediateTier3, expectedLandOnCostEstablishedTier3,
 			expectedLandOnCostWildlifeSanctuaryTier3,ownerIdOption1, ownerIdOption2;
+	int[] values;
 
 	/**
 	 * @throws java.lang.Exception
@@ -77,21 +78,22 @@ class TemperateTests {
 		squareWildlifeSanctuary.developGrassland(); // developing the square five times to convert to a
 													// ESTABLISHED_FOREST (1 major development)
 		// This is the Tier 3 values
-		expectedPriceToBuyTier3 = 40;
-		expectedPriceToPlantForestTier3 = 8;
-		expectedPriceForWildlifeSanctuaryUpgradeTier3 = 40;
+		values = new int[] { 140, 70, 140, 15, 100, 200, 10, 70, 240 };
+		expectedPriceToBuyTier3 = values[0];
+		expectedPriceToPlantForestTier3 = values[1];
+		expectedPriceForWildlifeSanctuaryUpgradeTier3 = values[2];
 		expectedCO2ImpactVacantTier3 = 0;
-		expectedCO2ImpactGrasslandTier3 = 40;
-		expectedCO2ImpactSeedlingTier3 = 44;
-		expectedCO2ImpactIntermediateTier3 = 48;
-		expectedCO2ImpactEstablishedTier3 = 52;
-		expectedCO2ImpactWildlifeSanctuaryTier3 = 62;
+		expectedCO2ImpactGrasslandTier3 = values[3];
+		expectedCO2ImpactSeedlingTier3 = (values[3]+values[4]);
+		expectedCO2ImpactIntermediateTier3 = (values[3]+(2*values[4]));
+		expectedCO2ImpactEstablishedTier3 = (values[3]+(3*values[4]));
+		expectedCO2ImpactWildlifeSanctuaryTier3 = (values[3]+(3*values[4])+ values[5]);
 		expectedLandOnCostVacantTier3 = 0;
-		expectedLandOnCostGrasslandTier3 = 8;
-		expectedLandOnCostSeedlingTier3 = 10;
-		expectedLandOnCostIntermediateTier3 = 12;
-		expectedLandOnCostEstablishedTier3 = 14;
-		expectedLandOnCostWildlifeSanctuaryTier3 = 20;
+		expectedLandOnCostGrasslandTier3 = values[6];
+		expectedLandOnCostSeedlingTier3 = (values[6]+values[7]);
+		expectedLandOnCostIntermediateTier3 = (values[6]+(2*values[7]));
+		expectedLandOnCostEstablishedTier3 = (values[6]+(3*values[7]));
+		expectedLandOnCostWildlifeSanctuaryTier3 = (values[6]+(3*values[7])+values[8]);
 
 		ownerIdOption1 = 1;
 		ownerIdOption2 = 123;
@@ -139,7 +141,7 @@ class TemperateTests {
 	 * priceToBuy is set
 	 */
 	@ParameterizedTest(name = "{index} => a={0}, b={1}")
-	@CsvSource({ "TIER_1 , 60", "TIER_2 , 50", "TIER_3 , 40", "TIER_4 , 30" })
+	@CsvSource({ "TIER_1 , 300", "TIER_2 , 220", "TIER_3 , 140", "TIER_4 , 60" })
 	void testConstructor(RealmTier realmTier, int expectedPriceToBuy) {
 		Temperate square1 = new Temperate(realmTier);
 		// Testing constructor is an instance of the ISquare interface, Grassland Class

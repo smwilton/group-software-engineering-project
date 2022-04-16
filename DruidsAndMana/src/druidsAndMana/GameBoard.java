@@ -140,6 +140,7 @@ public class GameBoard implements IGameBoard {
 	@Override
 	public boolean playerCanUpgrade(int playerId, int squareIndex) {
 		ISquare currSquare = squares[squareIndex];
+	
 		
 		// Cannot upgrade a square that is not grass land:
 		if(!(currSquare instanceof Grassland)) {
@@ -159,7 +160,7 @@ public class GameBoard implements IGameBoard {
 		}
 		
 		for(ISquare square : squares) {
-			
+	
 			if(!(square instanceof Grassland)) { 
 				continue; 
 			}
@@ -175,6 +176,7 @@ public class GameBoard implements IGameBoard {
 		
 		return true;
 	}
+	
 	
 	/**
 	 * @param squareIndex
@@ -193,6 +195,17 @@ public class GameBoard implements IGameBoard {
 		return 0;
 	}
 	
+	/**
+	 * Method to develop Grassland to it's next tier
+	 * @param squareIndex
+	 */
+	@Override
+	public void upgradeGrassland(int squareIndex) {
+		ISquare currSquare = squares[squareIndex];
+		if(currSquare instanceof Grassland) {
+			((Grassland) currSquare).developGrassland();
+		}
+	}
 	
 	/**
 	 * @param squareIndex
@@ -200,6 +213,7 @@ public class GameBoard implements IGameBoard {
 	 */
 	@Override
 	public SquareStatus getSquareType(int squareIndex) {
+		// TODO add reflection to get the type of grassland:
 		return SquareStatus.GRASSLAND;
 	}	
 }

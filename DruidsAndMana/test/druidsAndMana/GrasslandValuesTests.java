@@ -32,30 +32,31 @@ class GrasslandValuesTests {
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		expectedTier1PriceToBuy = 60;
-		expectedTier2PriceToBuy = 50;
-		expectedTier3PriceToBuy = 40;
-		expectedTier4PriceToBuy = 30;
+		expectedTier1PriceToBuy = 300;
+		expectedTier2PriceToBuy = 220;
+		expectedTier3PriceToBuy = 140;
+		expectedTier4PriceToBuy = 60;
 
-		expectedTier1PriceToPlantForest = 12;
-		expectedTier2PriceToPlantForest = 10;
-		expectedTier3PriceToPlantForest = 8;
-		expectedTier4PriceToPlantForest = 3;
+		expectedTier1PriceToPlantForest = 150;
+		expectedTier2PriceToPlantForest = 110;
+		expectedTier3PriceToPlantForest = 70;
+		expectedTier4PriceToPlantForest = 30;
 
-		expectedTier1PriceForWildlifeSanctuaryUpgrade = 60;
-		expectedTier2PriceForWildlifeSanctuaryUpgrade = 50;
-		expectedTier3PriceForWildlifeSanctuaryUpgrade = 40;
-		expectedTier4PriceForWildlifeSanctuaryUpgrade = 30;
+		expectedTier1PriceForWildlifeSanctuaryUpgrade = 300;
+		expectedTier2PriceForWildlifeSanctuaryUpgrade = 220;
+		expectedTier3PriceForWildlifeSanctuaryUpgrade = 140;
+		expectedTier4PriceForWildlifeSanctuaryUpgrade = 60;
 
-		expectedTier1Co2ValueSet = new int[] { 60, 6, 20 };
-		expectedTier2Co2ValueSet = new int[] { 50, 5, 15 };
-		expectedTier3Co2ValueSet = new int[] { 40, 4, 10 };
-		expectedTier4Co2ValueSet = new int[] { 30, 3, 5 };
+		expectedTier1Co2ValueSet = new int[] { 25, 200, 400 };
+		expectedTier2Co2ValueSet = new int[] { 20, 150, 300 };
+		expectedTier3Co2ValueSet = new int[] { 15, 100, 200 };
+		expectedTier4Co2ValueSet = new int[] { 10, 50, 100 };
 
-		expectedTier1LandOnCostValueSet = new int[] { 10, 4, 8 };
-		expectedTier2LandOnCostValueSet = new int[] { 9, 3, 4 };
-		expectedTier3LandOnCostValueSet = new int[] { 8, 2, 6 };
-		expectedTier4LandOnCostValueSet = new int[] { 7, 1, 5 };
+		expectedTier1LandOnCostValueSet = new int[] { 25, 150, 400 };
+		expectedTier2LandOnCostValueSet = new int[] { 20, 110, 330 };
+		expectedTier3LandOnCostValueSet = new int[] { 10, 70, 240 };
+		expectedTier4LandOnCostValueSet = new int[] { 5, 30, 120 };
+		
 	}
 
 	/**
