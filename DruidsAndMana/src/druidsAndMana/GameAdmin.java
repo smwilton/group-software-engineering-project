@@ -13,20 +13,113 @@ public class GameAdmin {
 
 	private IInputService inputService;
 	private IOutputService outputService;
-	public ArrayList<Player> players = new ArrayList<Player>();
-	public ArrayList<Integer> upgradable = new ArrayList<Integer>();
-	public boolean gameOn = false;
-	public int currentPlayer;
-	public GameBoardBuilder builder;
-	public IGameBoard board;
+	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Integer> upgradable = new ArrayList<Integer>();
+	private boolean gameOn = false;
+	private int currentPlayer;
+	private GameBoardBuilder builder;
+	private IGameBoard board;
 	private Dice dice = new Dice(2);
-	public boolean hasMoved = false;
+	private boolean hasMoved = false;
 
 	public GameAdmin(IInputService inputService, IOutputService outputService, IGameBoard board) {
 		this.inputService = inputService;
 		this.outputService = outputService;
 		this.board = board;
 	}
+	
+	
+	
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+
+
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
+
+
+
+
+	public ArrayList<Integer> getUpgradable() {
+		return upgradable;
+	}
+
+
+
+
+	public void setUpgradable(ArrayList<Integer> upgradable) {
+		this.upgradable = upgradable;
+	}
+
+
+
+
+	public boolean getGameOn() {
+		return gameOn;
+	}
+
+
+
+
+	public void setGameOn(boolean gameOn) {
+		this.gameOn = gameOn;
+	}
+
+
+
+
+	public GameBoardBuilder getBuilder() {
+		return builder;
+	}
+
+
+
+
+	public void setBuilder(GameBoardBuilder builder) {
+		this.builder = builder;
+	}
+
+
+
+
+	public IGameBoard getBoard() {
+		return board;
+	}
+
+
+
+
+	public void setBoard(IGameBoard board) {
+		this.board = board;
+	}
+
+
+
+	public boolean getHasMoved() {
+		return hasMoved;
+	}
+
+
+
+
+	public void setHasMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
+	}
+
+
+
+
+	public void setCurrentPlayer(int currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
+
+
+
 
 	/**
 	 * Returns the IGameBoard instance
@@ -46,7 +139,7 @@ public class GameAdmin {
 	public void startGame() throws Exception {
 		gameOn = true;
 		playerSetUp(numOfPlayers());
-		currentPlayer = 0;
+		setCurrentPlayer(0);
 		sortPlayersByRoll(players);
 	}
 
@@ -220,7 +313,7 @@ public class GameAdmin {
 		outputService.println("You rolled a " + diceRoll + ", landing on square "
 				+ board.newsquarePosition(getCurrentPlayerPosition(), diceRoll));
 		player.setPlayerPosition(newPosition);
-		hasMoved = true;
+		setHasMoved(true);
 	}
 
 	/**
@@ -316,6 +409,9 @@ public class GameAdmin {
 				deactivateCurrentPlayer(board.getSquareOwnerId(getCurrentPlayerPosition()));
 			}
 		}
+		if(players.size()==1) {
+			declareWinner();
+		}
 	}
 
 	/**
@@ -326,26 +422,42 @@ public class GameAdmin {
 	public boolean canUpgradeGrasslands() {
 		
 		boolean canUpgrade = false;
-		if(board.getSquareOwnerId(1)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(2)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(3)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 1) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 2) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 3)) {
+		if(board.getSquareOwnerId(1)==players.get(currentPlayer).getPlayerNumber() 
+				&& board.getSquareOwnerId(2)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 1) 
+					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 2)) {
 				canUpgrade =true;
 			}
 		}
-		if(board.getSquareOwnerId(4)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(5)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 4) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 5)) {
+		
+		if(board.getSquareOwnerId(3)==players.get(currentPlayer).getPlayerNumber() 
+				&& board.getSquareOwnerId(4)==players.get(currentPlayer).getPlayerNumber() 
+				&& board.getSquareOwnerId(5)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 3) 
+					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 4) 
+					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 5)) {
 				canUpgrade =true;
 			}
 		}
-		if(board.getSquareOwnerId(7)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(8)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 7) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 8)) {
+
+		if(board.getSquareOwnerId(7)==players.get(currentPlayer).getPlayerNumber() 
+				&& board.getSquareOwnerId(8)==players.get(currentPlayer).getPlayerNumber() 
+				&& board.getSquareOwnerId(9)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 7) 
+					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 8) 
+					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 9)) {
 				canUpgrade =true;
 			}
 		}
-		if(board.getSquareOwnerId(9)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(10)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(11)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 9) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 10) || board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 11)) {
+		
+		if(board.getSquareOwnerId(10)==players.get(currentPlayer).getPlayerNumber() 
+				&& board.getSquareOwnerId(11)==players.get(currentPlayer).getPlayerNumber()) {
+			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 10) 
+					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 11)) {
 				canUpgrade =true;
 			}
 		}
+		
 		
 		return canUpgrade;
 	}
@@ -393,6 +505,7 @@ public class GameAdmin {
 	 * @param squareIndex
 	 */
 	public void upgradeOwnedGrassland(int squareIndex) {
+		int currentLandingCharge= board.manaCharge(squareIndex);
 		if (board.playerCanUpgrade(currentPlayer + 1, squareIndex)) {
 			int charge = board.costToUpgrade(squareIndex);
 			int balance = getCurrentPlayer().getMana();
@@ -400,6 +513,9 @@ public class GameAdmin {
 				getCurrentPlayer().setMana(balance - charge);
 				board.upgradeGrassland(squareIndex);
 			}
+			outputService.println("Congratulations! You have upgraded this Grassland!");
+			outputService.println("The mana charge for landing on this Grassland has increased from "+currentLandingCharge+" mana, to "+board.manaCharge(squareIndex)+" mana.");
+			displaySquareDetails();
 		}
 	}
 
@@ -422,7 +538,7 @@ public class GameAdmin {
 			}
 		} while (!getCurrentPlayer().isActive());
 		outputService.println(" Next up it's " + getCurrentPlayer().getPlayerName() + "'s turn!");
-		hasMoved = false;
+		setHasMoved(false);
 		upgradable.clear();
 	}
 
@@ -489,6 +605,7 @@ public class GameAdmin {
 			outputService.println("Congratulations " + winners.get(0).getPlayerName()
 					+ "! You are the winner with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
 		}
+		endGame();
 	}
 
 	/**
