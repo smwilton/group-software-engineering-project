@@ -45,7 +45,7 @@ public class GameEngine {
 		GameAdmin gameAdmin = startGame();
 		
 		// Play game until it is over
-		while (gameAdmin.gameOn) {
+		while (gameAdmin.gameIsOn()) {
 		}
 
 		// Display good bye message after game ends
