@@ -9,38 +9,58 @@ public class GameEngine {
 
 	private IInputService inputService;
 	private IOutputService outputService;
-	private Menu menu;
+	Rules rules;
 
-	public GameEngine() {
-		this.menu = new Menu();
+	public GameEngine(IInputService inputService, IOutputService outputService) {
+		this.inputService = inputService;
+		this.outputService = outputService;
 	}
-	
+
 	/**
 	 * Shows welcome message and rules, then creates the game loop
 	 */
 	public void startGameEngine() {
-		
+
 		// Display welcome message and ask user if they want to see rules or play game
 		displayWelcomeMessage();
-		String userInput = menu.homeMenu();
-		while(!userInput.equals("1")) {
-			userInput = menu.homeMenu();
+		String userInput = homeMenu();
+
+		// User chooses option 2 (Rules)
+		while (!userInput.equals("1")) {
+			// Rules are displayed
+			rules.displayRules();
+			// User inputs response
+			boolean exitRules = rules.exitRules();
+			// If user is still reading the rules ask if they are finished, again.
+			while (exitRules == false) {
+				rules.displayRules();
+			}
+			// User has finished reading rules and they return to welcome message and menu
+			displayWelcomeMessage();
+			// If user again chooses rules, the loop starts again
+			userInput = homeMenu();
 		}
+
+		// Start game via GameAdmin
+		GameAdmin gameAdmin = startGame();
 		
-		// Start game via Game Admin
+		// Play game until it is over
+		while (gameAdmin.gameOn) {
+		}
+
+		// Display good bye message after game ends
+		displayGoodbyeMessage();
+
+	}
+	
+	public GameAdmin startGame() {
 		GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
 		GameBoard gameBoard = new GameBoard(gameBoardBuilder);
 		GameAdmin gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
-		
-		// Play game until it is over
-		while(gameAdmin.gameOn) {
-		}
-		
-		// Display good bye message after game ends
-		displayGoodbyeMessage();
-		
+
+		return gameAdmin;
 	}
-	
+
 	/**
 	 * Displays goodbye message
 	 */
@@ -49,14 +69,14 @@ public class GameEngine {
 		System.out.println(message);
 		return message;
 	}
-	
+
 	/**
 	 * Displays welcome message
 	 */
 	public String displayWelcomeMessage() {
-		
+
 		String welcomeMessage = "\n\n\n"
-				
+
 				+ "              _______  .______       __    __   __   _______       _______.             .___  ___.      ___      .__   __.      ___      \n"
 				+ "             |       \\ |   _  \\     |  |  |  | |  | |       \\     /       |      _      |   \\/   |     /   \\     |  \\ |  |     /   \\     \n"
 				+ "             |  .--.  ||  |_)  |    |  |  |  | |  | |  .--.  |   |   (----`    _| |_    |  \\  /  |    /  ^  \\    |   \\|  |    /  ^  \\    \n"
@@ -64,8 +84,19 @@ public class GameEngine {
 				+ "             |  '--'  ||  |\\  \\----.|  `--'  | |  | |  '--'  |.----)   |        |_|     |  |  |  |  /  _____  \\  |  |\\   |  /  _____  \\  \n"
 				+ "             |_______/ | _| `._____| \\______/  |__| |_______/ |_______/                 |__|  |__| /__/     \\__\\ |__| \\__| /__/     \\__\\ \n"
 				+ "                                                                                                                                        \n\n ";
-		
+
 		System.out.println(welcomeMessage);
 		return welcomeMessage;
+	}
+
+	public String homeMenu() {
+
+		String startNewGame = "1. Start new game";
+		String viewRules = "2. View rules";
+		System.out.println("Choose an option from below :\n\n");
+		System.out.println(startNewGame + "\n" + viewRules);
+
+		String optionChoice = this.inputService.GetUserInput("What would you like to do?", new String[] { "1", "2" });
+		return optionChoice;
 	}
 }
