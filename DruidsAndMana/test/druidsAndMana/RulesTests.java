@@ -16,7 +16,10 @@ class RulesTests {
 	@Test
 	void testDisplayRules() {
 		String displayRules = rules.displayRules();
-		assertTrue(displayRules.contains("la"));
+		assertTrue(displayRules.contains("Game"));
+		assertTrue(displayRules.contains("Grassland with 2 forests"));
+		assertTrue(displayRules.contains("The game has 2 to 4 druids"));
+		
 	}
 
 }
