@@ -9,18 +9,19 @@ public class GameEngine {
 
 	private IInputService inputService;
 	private IOutputService outputService;
-	Rules rules;
+	private Rules rules;
 
 	public GameEngine(IInputService inputService, IOutputService outputService) {
 		this.inputService = inputService;
 		this.outputService = outputService;
+		this.rules = new Rules(inputService);
 	}
 
 	/**
 	 * Shows welcome message and rules, then creates the game loop
 	 */
 	public void startGameEngine() {
-
+		
 		// Display welcome message and ask user if they want to see rules or play game
 		displayWelcomeMessage();
 		String userInput = homeMenu();
@@ -32,13 +33,14 @@ public class GameEngine {
 			// User inputs response
 			boolean exitRules = rules.exitRules();
 			// If user is still reading the rules ask if they are finished, again.
-			while (exitRules == false) {
+			if (exitRules == false) {
 				rules.displayRules();
+			} else {
+				// User has finished reading rules and they return to welcome message and menu
+				displayWelcomeMessage();
+				// If user again chooses rules, the loop starts again
+				userInput = homeMenu();
 			}
-			// User has finished reading rules and they return to welcome message and menu
-			displayWelcomeMessage();
-			// If user again chooses rules, the loop starts again
-			userInput = homeMenu();
 		}
 
 		// Start game via GameAdmin
