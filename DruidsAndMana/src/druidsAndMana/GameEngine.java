@@ -19,8 +19,9 @@ public class GameEngine {
 
 	/**
 	 * Shows welcome message and rules, then creates the game loop
+	 * @throws Exception 
 	 */
-	public void startGameEngine() {
+	public void startGameEngine() throws Exception {
 		
 		// Display welcome message and ask user if they want to see rules or play game
 		displayWelcomeMessage();
@@ -45,8 +46,9 @@ public class GameEngine {
 
 		// Start game via GameAdmin
 		GameAdmin gameAdmin = startGame();
-		
+		gameAdmin.startGame();
 		// Play game until it is over
+		gameAdmin.setGameOn(true);
 		while (gameAdmin.gameIsOn()) {
 		}
 
