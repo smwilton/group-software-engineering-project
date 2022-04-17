@@ -112,7 +112,9 @@ public class GameAdmin {
 	}
 
 
-
+	public int getCurrentPlayerNumber() {
+		return currentPlayer;
+	}
 
 	public void setCurrentPlayer(int currentPlayer) {
 		this.currentPlayer = currentPlayer;

@@ -69,11 +69,11 @@ class GameAdminTests {
 		inputService.setConfirmation(true);
 		gameAdmin.startGame();
 		
-		assertEquals(1, gameAdmin.players.size());
-		assertEquals("David", gameAdmin.players.get(0).getPlayerName());
-		assertEquals(0, gameAdmin.players.get(0).getCo2());
-		assertEquals(1500, gameAdmin.players.get(0).getMana());
-		assertEquals(1, gameAdmin.players.get(0).getPlayerNumber());
+		assertEquals(1, gameAdmin.getPlayers().size());
+		assertEquals("David", gameAdmin.getPlayers().get(0).getPlayerName());
+		assertEquals(0, gameAdmin.getPlayers().get(0).getCo2());
+		assertEquals(1500, gameAdmin.getPlayers().get(0).getMana());
+		assertEquals(1, gameAdmin.getPlayers().get(0).getPlayerNumber());
 	}
 	
 	@Test
@@ -82,23 +82,23 @@ class GameAdminTests {
 		inputService.setConfirmation(true);
 		gameAdmin.playerSetUp(4);		
 		
-		assertEquals(4, gameAdmin.players.size());
-		assertEquals("David", gameAdmin.players.get(0).getPlayerName());
-		assertEquals(0, gameAdmin.players.get(0).getCo2());
-		assertEquals(1500, gameAdmin.players.get(0).getMana());
-		assertEquals(1, gameAdmin.players.get(0).getPlayerNumber());
-		assertEquals("Peter", gameAdmin.players.get(1).getPlayerName());
-		assertEquals(0, gameAdmin.players.get(1).getCo2());
-		assertEquals(1500, gameAdmin.players.get(1).getMana());
-		assertEquals(2, gameAdmin.players.get(1).getPlayerNumber());
-		assertEquals("Nicola", gameAdmin.players.get(2).getPlayerName());
-		assertEquals(0, gameAdmin.players.get(2).getCo2());
-		assertEquals(1500, gameAdmin.players.get(2).getMana());
-		assertEquals(3, gameAdmin.players.get(2).getPlayerNumber());
-		assertEquals("Sandra", gameAdmin.players.get(3).getPlayerName());
-		assertEquals(0, gameAdmin.players.get(3).getCo2());
-		assertEquals(1500, gameAdmin.players.get(3).getMana());
-		assertEquals(4, gameAdmin.players.get(3).getPlayerNumber());
+		assertEquals(4, gameAdmin.getPlayers().size());
+		assertEquals("David", gameAdmin.getPlayers().get(0).getPlayerName());
+		assertEquals(0, gameAdmin.getPlayers().get(0).getCo2());
+		assertEquals(1500, gameAdmin.getPlayers().get(0).getMana());
+		assertEquals(1, gameAdmin.getPlayers().get(0).getPlayerNumber());
+		assertEquals("Peter", gameAdmin.getPlayers().get(1).getPlayerName());
+		assertEquals(0, gameAdmin.getPlayers().get(1).getCo2());
+		assertEquals(1500, gameAdmin.getPlayers().get(1).getMana());
+		assertEquals(2, gameAdmin.getPlayers().get(1).getPlayerNumber());
+		assertEquals("Nicola", gameAdmin.getPlayers().get(2).getPlayerName());
+		assertEquals(0, gameAdmin.getPlayers().get(2).getCo2());
+		assertEquals(1500, gameAdmin.getPlayers().get(2).getMana());
+		assertEquals(3, gameAdmin.getPlayers().get(2).getPlayerNumber());
+		assertEquals("Sandra", gameAdmin.getPlayers().get(3).getPlayerName());
+		assertEquals(0, gameAdmin.getPlayers().get(3).getCo2());
+		assertEquals(1500, gameAdmin.getPlayers().get(3).getMana());
+		assertEquals(4, gameAdmin.getPlayers().get(3).getPlayerNumber());
 	}
 	
 	@Test
@@ -168,10 +168,10 @@ class GameAdminTests {
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
-		localGameAdmin.players = new ArrayList<Player>();
-		localGameAdmin.players.add(mockPlayer1);
-		localGameAdmin.players.add(mockPlayer2);
-		localGameAdmin.currentPlayer = 1;
+		localGameAdmin.setPlayers(new ArrayList<Player>());
+		localGameAdmin.getPlayers().add(mockPlayer1);
+		localGameAdmin.getPlayers().add(mockPlayer2);
+		localGameAdmin.setCurrentPlayer(1);
 				
 		// Act
 		localGameAdmin.displaySquareDetails();
@@ -200,10 +200,10 @@ class GameAdminTests {
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
-		localGameAdmin.players = new ArrayList<Player>();
-		localGameAdmin.players.add(mockPlayer1);
-		localGameAdmin.players.add(mockPlayer2);
-		localGameAdmin.currentPlayer = 1;
+		localGameAdmin.setPlayers(new ArrayList<Player>());
+		localGameAdmin.getPlayers().add(mockPlayer1);
+		localGameAdmin.getPlayers().add(mockPlayer2);
+		localGameAdmin.setCurrentPlayer(1);
 				
 		// Act
 		localGameAdmin.displaySquareDetails();
@@ -236,10 +236,10 @@ class GameAdminTests {
 		Player mockPlayer2 = new Player("Mock", 2, 1, 999, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
-		localGameAdmin.players = new ArrayList<Player>();
-		localGameAdmin.players.add(mockPlayer1);
-		localGameAdmin.players.add(mockPlayer2);
-		localGameAdmin.currentPlayer = 1;
+		localGameAdmin.setPlayers(new ArrayList<Player>());
+		localGameAdmin.getPlayers().add(mockPlayer1);
+		localGameAdmin.getPlayers().add(mockPlayer2);
+		localGameAdmin.setCurrentPlayer(1);
 		
 	}
 	
@@ -264,10 +264,10 @@ class GameAdminTests {
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
-		localGameAdmin.players = new ArrayList<Player>();
-		localGameAdmin.players.add(mockPlayer1);
-		localGameAdmin.players.add(mockPlayer2);
-		localGameAdmin.currentPlayer = 1;
+		localGameAdmin.setPlayers(new ArrayList<Player>());
+		localGameAdmin.getPlayers().add(mockPlayer1);
+		localGameAdmin.getPlayers().add(mockPlayer2);
+		localGameAdmin.setCurrentPlayer(1);
 		
 	}
 	
@@ -290,10 +290,10 @@ class GameAdminTests {
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
-		localGameAdmin.players = new ArrayList<Player>();
-		localGameAdmin.players.add(mockPlayer1);
-		localGameAdmin.players.add(mockPlayer2);
-		localGameAdmin.currentPlayer = 1;
+		localGameAdmin.setPlayers(new ArrayList<Player>());
+		localGameAdmin.getPlayers().add(mockPlayer1);
+		localGameAdmin.getPlayers().add(mockPlayer2);
+		localGameAdmin.setCurrentPlayer(1);
 		
 	}
 	
@@ -321,10 +321,10 @@ class GameAdminTests {
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
 		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
-		localGameAdmin.players = new ArrayList<Player>();
-		localGameAdmin.players.add(mockPlayer1);
-		localGameAdmin.players.add(mockPlayer2);
-		localGameAdmin.currentPlayer = 1;
+		localGameAdmin.setPlayers(new ArrayList<Player>());
+		localGameAdmin.getPlayers().add(mockPlayer1);
+		localGameAdmin.getPlayers().add(mockPlayer2);
+		localGameAdmin.setCurrentPlayer(1);
 		
 	}
 	
