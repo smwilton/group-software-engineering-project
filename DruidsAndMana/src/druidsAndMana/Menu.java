@@ -93,7 +93,7 @@ public class Menu {
 			admin.buyUnownedGrassland();
 			displayMenu();
 		} else if (playerChoice == stats) {
-			outputService.println(admin.getCurrentPlayerDetails());
+			admin.getCurrentPlayer().printStats();
 			displayMenu();
 		} else if (playerChoice == endTurn) {
 			inputService.GetUserConfirmation("Are you sure you want to end your turn?");

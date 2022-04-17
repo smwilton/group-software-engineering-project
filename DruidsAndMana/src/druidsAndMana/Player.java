@@ -96,5 +96,12 @@ public class Player {
 		return "Player [playerName=" + playerName + ", mana=" + mana + ", co2=" + co2 + ", playerNumber=" + playerNumber
 				+ ", playerPosition=" + playerPosition + "]";
 	}
+	
+	public void printStats() {
+		System.out.printf("Player %d:\t\t%s",playerNumber, playerName);
+		System.out.printf("\nCurrent mana reserves:\t%d",mana);
+		System.out.printf("\nCurrent CO2 impact:\t%d",co2);
+		System.out.printf("\nCurrent board position:\t%d",playerPosition);
+	}
 
 }

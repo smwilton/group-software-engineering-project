@@ -9,12 +9,12 @@ public class GameEngine {
 
 	private IInputService inputService;
 	private IOutputService outputService;
-	private Rules rules;
+	//private Rules rules;
 
 	public GameEngine(IInputService inputService, IOutputService outputService) {
 		this.inputService = inputService;
 		this.outputService = outputService;
-		this.rules = new Rules(inputService);
+		//this.rules = new Rules(inputService);
 	}
 
 	/**
@@ -26,7 +26,7 @@ public class GameEngine {
 		// Display welcome message and ask user if they want to see rules or play game
 		displayWelcomeMessage();
 		String userInput = homeMenu();
-
+/**
 		// User chooses option 2 (Rules)
 		while (!userInput.equals("1")) {
 			// Rules are displayed
@@ -43,7 +43,7 @@ public class GameEngine {
 				userInput = homeMenu();
 			}
 		}
-
+**/
 		// Start game via GameAdmin
 		GameAdmin gameAdmin = startGame();
 		gameAdmin.startGame();
