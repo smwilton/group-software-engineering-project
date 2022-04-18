@@ -563,6 +563,7 @@ public class GameAdmin {
 	 * and CO2 Impact Ratings with an ASCII art celebration design
 	 */
 	public void declareWinner() {
+		if(gameOn) {
 		// Creating arrayList of winners in case of a draw
 		ArrayList<Player> winners = new ArrayList<Player>();
 		// Adding first player as benchmark score
@@ -608,6 +609,7 @@ public class GameAdmin {
 					+ "! You are the winner with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
 		}
 		endGame();
+		}
 	}
 
 	/**
