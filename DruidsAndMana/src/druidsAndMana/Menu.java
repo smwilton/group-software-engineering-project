@@ -5,6 +5,7 @@ public class Menu {
 	GameAdmin admin;
 	private IInputService inputService;
 	private IOutputService outputService;
+	private Rules rules = new Rules(inputService);
 
 	public Menu(GameAdmin admin, IInputService inputService, IOutputService outputService) {
 		this.admin = admin;
@@ -14,7 +15,7 @@ public class Menu {
 
 	public void displayMenu() throws Exception {
 		int option = 1;
-		int playerChoice, start = -1, upgrade = -1, move = -1, purchase = -1, stats = -1, endTurn = -1, rules = -1, endGame=-1;
+		int playerChoice, start = -1, upgrade = -1, move = -1, purchase = -1, stats = -1, endTurn = -1, showRules = -1, endGame=-1;
 		int highestOptionNumber = 1;
 		// outputService.clearConsole();
 
@@ -64,7 +65,7 @@ public class Menu {
 			}
 		}
 		outputService.println(option + ") View Rules");
-		rules = option;
+		showRules = option;
 		highestOptionNumber = option;
 		option++;
 		outputService.println(option + ") End Game");
@@ -99,12 +100,16 @@ public class Menu {
 			inputService.GetUserConfirmation("Are you sure you want to end your turn?");
 			admin.endTurn();
 			displayMenu();
-		} else if (playerChoice == rules) {
+		} else if (playerChoice == showRules) {
+			outputService.println(rules.displayRules());
 			displayMenu();
 		} else if (playerChoice == endGame) {
-			inputService.GetUserConfirmation("Are you sure you want to end the game and declare a winner?");
+			if(inputService.GetUserConfirmation("Are you sure you want to end the game and declare a winner?")) {
 			admin.declareWinner();
 			if(inputService.GetUserConfirmation("Would you like to return to the main menu?")) {
+				displayMenu();
+			}
+			}else {
 				displayMenu();
 			}
 		}
