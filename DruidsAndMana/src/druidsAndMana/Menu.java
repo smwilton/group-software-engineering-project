@@ -2,15 +2,16 @@ package druidsAndMana;
 
 public class Menu {
 
-	GameAdmin admin;
+	private GameAdmin admin;
 	private IInputService inputService;
 	private IOutputService outputService;
-	private Rules rules = new Rules(inputService);
+	private Rules rules;
 
-	public Menu(GameAdmin admin, IInputService inputService, IOutputService outputService) {
-		this.admin = admin;
+	public Menu(IInputService inputService, IOutputService outputService) {
+		this.admin = new GameAdmin(inputService, outputService);
 		this.inputService = inputService;
 		this.outputService = outputService;
+		this.rules = new Rules(inputService);
 	}
 
 	/**
@@ -118,7 +119,7 @@ public class Menu {
 			getUpgradableChoice();
 			displayMenu();
 		} else if (playerChoice == move) {
-			admin.movePlayer(admin.roll());
+			admin.movePlayer();
 			admin.displaySquareDetails();
 			if (admin.getBoard().getSquareOwnerId(admin.getCurrentPlayerPosition()) != 0) {
 				admin.payForLandingOnOwnedGrassland();
@@ -235,7 +236,7 @@ public class Menu {
 	}
 	
 	/**
-	 * A method to create an array of sequential ints, used in the inputService methods.
+	 * A method to create an array of sequential ints, used in the inputServ
 	 * @param numOfValues
 	 * @return
 	 */
