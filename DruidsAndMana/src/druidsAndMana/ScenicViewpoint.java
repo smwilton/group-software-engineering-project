@@ -12,7 +12,8 @@ public class ScenicViewpoint implements ISquare {
 
 	@Override
 	public String description() {
-		return "The scenic viewpoint represents a safe place for the druids to stop. There are no consequences for landing on this square";
+		return "The scenic viewpoint represents a safe place for the druids to stop. There are no consequences for landing on this square.\n"
+				+ "So take a seat and gaze upon the landscape as the druids replenish it's splendour!";
 	}
 
 	@Override
