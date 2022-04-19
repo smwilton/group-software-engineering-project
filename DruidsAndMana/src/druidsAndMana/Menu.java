@@ -18,10 +18,9 @@ public class Menu {
 		int playerChoice, start = -1, upgrade = -1, move = -1, purchase = -1, stats = -1, owned = -1, endTurn = -1,
 				showRules = -1, endGame = -1;
 		int highestOptionNumber = 1;
-		// outputService.clearConsole();
 
 		if (!admin.gameIsOn()) {
-			outputService.println("Welcome to Druids and Mana!");
+			outputService.println("Welcome to Druids and Mana!\n");
 			outputService.println("Please choose from the following options:");
 			outputService.println(option + ") Start Game");
 			start = option;
@@ -30,13 +29,6 @@ public class Menu {
 		} else {
 
 			outputService.println("\n" + admin.getCurrentPlayer().getPlayerName() + ", your current options are: ");
-
-			if (admin.canUpgradeGrasslands()) {
-				outputService.println(option + ") Plant a Forest on Grasslands");
-				upgrade = option;
-				highestOptionNumber = option;
-				option++;
-			}
 
 			if (!admin.getHasMoved()) {
 				outputService.println(option + ") Roll Dice and Move");
@@ -47,8 +39,16 @@ public class Menu {
 
 			if (admin.getHasMoved() && admin.getBoard().squareIsGrassland(admin.getCurrentPlayerPosition())
 					&& !admin.isSquareOwned(admin.getCurrentPlayerPosition())) {
-				outputService.println(option + ") Buy Grassland");
+				outputService.println(option + ") Rejuvenate arid, vacant land");
 				purchase = option;
+				highestOptionNumber = option;
+				option++;
+			}
+			
+			if (admin.canUpgradeGrasslands() && !admin.getUpgradable().isEmpty()) {
+				admin.getUpgradable().clear();
+				outputService.println(option + ") Plant a Forest on Grasslands");
+				upgrade = option;
 				highestOptionNumber = option;
 				option++;
 			}
@@ -57,7 +57,7 @@ public class Menu {
 			stats = option;
 			highestOptionNumber = option;
 			option++;
-			
+
 			if (!admin.getBoard().getAllPlayerOwnedGrasslands(admin.getCurrentPlayer()).isEmpty()) {
 				outputService.println(option + ") Show all owned Grasslands");
 				owned = option;
@@ -99,7 +99,7 @@ public class Menu {
 			displayMenu();
 		} else if (playerChoice == purchase) {
 			inputService.GetUserConfirmation("Are you sure you want to invest "
-					+ admin.getBoard().costToUpgrade(admin.getCurrentPlayerPosition()) + " to buy this Grassland?");
+					+ admin.getBoard().costToUpgrade(admin.getCurrentPlayerPosition()) + " mana to rejuvenate this arid land?");
 			admin.buyUnownedGrassland();
 			displayMenu();
 		} else if (playerChoice == stats) {
@@ -158,33 +158,52 @@ public class Menu {
 
 		for (int i : admin.getUpgradable()) {
 			if (i == 1 || i == 2) {
-				outputService.println(upgradableOption + ") Upgrade Tropical Grassland " + i + " from a "
-						+ admin.getBoard().getSquareType(i) + " for " + admin.getBoard().costToUpgrade(i));
+				outputService.println(upgradableOption + ") On Tropical Grassland region" + i + "/2, transforming it from a "
+						+ admin.convertSquareTypeToString(admin.getBoard().getSquareType(i)) + " to a "+ 
+						admin.convertSquareTypeToString(admin.convertSquareTypeToInt(admin.getBoard().getSquareType(i))+1) 
+						+", for " + admin.getBoard().costToUpgrade(i));
 				upgradableOption++;
 			}
 			if (i >= 3 && i <= 5) {
-				outputService.println(upgradableOption + ") Subtropical Grassland " + i + " from a "
-						+ admin.getBoard().getSquareType(i) + " for " + admin.getBoard().costToUpgrade(i));
+				outputService.println(upgradableOption + ") On Subtropical Grassland region" + (i-2) + "/3, transforming it from a "
+						+ admin.convertSquareTypeToString(admin.getBoard().getSquareType(i)) + " to a "+ 
+						admin.convertSquareTypeToString(admin.convertSquareTypeToInt(admin.getBoard().getSquareType(i))+1) 
+						+", for " + admin.getBoard().costToUpgrade(i));
 				upgradableOption++;
 			}
 			if (i >= 7 && i <= 9) {
-				outputService.println(upgradableOption + ") Temperate Grassland " + i + " from a "
-						+ admin.getBoard().getSquareType(i) + " for " + admin.getBoard().costToUpgrade(i));
+				outputService.println(upgradableOption + ") On Temperate Grassland region" + (i-6) + "/3, transforming it from a "
+						+ admin.convertSquareTypeToString(admin.getBoard().getSquareType(i)) + " to a "+ 
+						admin.convertSquareTypeToString(admin.convertSquareTypeToInt(admin.getBoard().getSquareType(i))+1) 
+						+", for " + admin.getBoard().costToUpgrade(i));
 				upgradableOption++;
 			}
 			if (i == 10 || i == 11) {
-				outputService.println(upgradableOption + ") Boreal Grassland " + i + " from a "
-						+ admin.getBoard().getSquareType(i) + " for " + admin.getBoard().costToUpgrade(i));
+				outputService.println(upgradableOption + ") On Boreal Grassland region" + (i-9) + "/2, transforming it from a "
+						+ admin.convertSquareTypeToString(admin.getBoard().getSquareType(i)) + " to a "+ 
+						admin.convertSquareTypeToString(admin.convertSquareTypeToInt(admin.getBoard().getSquareType(i))+1) 
+						+", for " + admin.getBoard().costToUpgrade(i));
 				upgradableOption++;
 			}
 
 		}
-		int playerChoice = inputService.GetUserIntInput("Enter your upgrade choice:",
-				new int[] { 1, 2, admin.getUpgradable().size() }) - 1;
-		chosenGrassland = admin.getUpgradable().get(playerChoice);
-
-		admin.upgradeOwnedGrassland(chosenGrassland);
+		outputService.println("Or enter 0 to cancel upgrading.");
+		int playerChoice = inputService.GetUserIntInput("Enter your choice:",
+				createArray(upgradableOption-1)) - 1;
+		if (playerChoice != -1) {
+			chosenGrassland = admin.getUpgradable().get(playerChoice);
+			admin.upgradeOwnedGrassland(chosenGrassland);
+		}
 		admin.getUpgradable().clear();
+	}
+	
+	public int[] createArray(int numOfValues) {
+		int[] array = new int[numOfValues+1];
+		for (int i=numOfValues; i>=0; i--) {
+			array[i] = i;
+		}
+		return array;
+		
 	}
 
 }
