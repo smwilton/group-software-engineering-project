@@ -17,15 +17,17 @@ public class GameAdmin {
 	private ArrayList<Integer> upgradable = new ArrayList<Integer>();
 	private boolean gameOn = false;
 	private int currentPlayer;
-	private GameBoardBuilder builder;
+	private IGameBoardBuilder builder;
 	private IGameBoard board;
-	private Dice dice = new Dice(2);
+	private Dice dice;
 	private boolean hasMoved = false;
 
-	public GameAdmin(IInputService inputService, IOutputService outputService, IGameBoard board) {
+	public GameAdmin(IInputService inputService, IOutputService outputService) {
 		this.inputService = inputService;
 		this.outputService = outputService;
-		this.board = board;
+		this.builder = new GameBoardBuilder();
+		this.board = new GameBoard(builder);
+		this.dice = new Dice(2);
 	}
 
 	public ArrayList<Player> getPlayers() {
@@ -52,7 +54,7 @@ public class GameAdmin {
 		this.gameOn = gameOn;
 	}
 
-	public GameBoardBuilder getBuilder() {
+	public IGameBoardBuilder getBuilder() {
 		return builder;
 	}
 
@@ -179,7 +181,7 @@ public class GameAdmin {
 					nameCheck = true;
 					playerNames.add(playerName);
 					// Roll a dice to see which player goes first
-					int roll = roll();
+					int roll = dice.rollDice();
 					// If unique name chosen, creates a Player object with defualt starting values.
 					Player player = new Player(playerName, i + 1, 0, 1500, 0, roll);
 					players.add(player);
@@ -242,16 +244,7 @@ public class GameAdmin {
 		return player.toString();
 	}
 
-	/**
-	 * This method rolls the dice and returns the total of all the requested dice.
-	 * 
-	 * @return
-	 */
-	public int roll() {
-		int total = 0;
-		total += dice.rollDice();
-		return total;
-	}
+	
 
 	/**
 	 * This method will update the position of the current player on the game board.
@@ -260,7 +253,8 @@ public class GameAdmin {
 	 * 
 	 * @param diceRoll : the total dice roll of the current player
 	 */
-	public void movePlayer(int diceRoll) {
+	public void movePlayer() {
+		int diceRoll = dice.rollDice();
 		Player player = getCurrentPlayer();
 		int position = player.getPlayerPosition();
 		int newPosition = position + diceRoll;

@@ -11,10 +11,10 @@ public class GameEngine {
 	private IOutputService outputService;
 	private Menu menu;
 
-	public GameEngine(IInputService inputService, IOutputService outputService, Menu menu) {
-		this.inputService = inputService;
-		this.outputService = outputService;
-		this.menu = menu;
+	public GameEngine() {
+		this.inputService = new ConsoleInputService();
+		this.outputService = new ConsoleOutputService();
+		this.menu = new Menu(inputService, outputService);
 
 	}
 
@@ -26,46 +26,13 @@ public class GameEngine {
 		
 		// Display welcome message and ask user if they want to see rules or play game
 		displayWelcomeMessage();
+		
+		//Access Menu class to run game within
 		menu.displayMenu();
-/**		
-		String userInput = homeMenu();
-
-		// User chooses option 2 (Rules)
-		while (!userInput.equals("1")) {
-			// Rules are displayed
-			rules.displayRules();
-			// User inputs response
-			boolean exitRules = rules.exitRules();
-			// If user is still reading the rules ask if they are finished, again.
-			if (exitRules == false) {
-				rules.displayRules();
-			} else {
-				// User has finished reading rules and they return to welcome message and menu
-				displayWelcomeMessage();
-				// If user again chooses rules, the loop starts again
-				userInput = homeMenu();
-			}
-		}
-
-		// Start game via GameAdmin
-		GameAdmin gameAdmin = startGame();
-		gameAdmin.startGame();
-		// Play game until it is over
-		gameAdmin.setGameOn(true);
-		while (gameAdmin.gameIsOn()) {
-		}
-**/
+		
 		// Display good bye message after game ends
 		displayGoodbyeMessage();
 
-	}
-	
-	public GameAdmin startGame() {
-		GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
-		GameBoard gameBoard = new GameBoard(gameBoardBuilder);
-		GameAdmin gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
-
-		return gameAdmin;
 	}
 
 	/**
@@ -96,14 +63,4 @@ public class GameEngine {
 		return welcomeMessage;
 	}
 
-	public String homeMenu() {
-
-		String startNewGame = "1. Start new game";
-		String viewRules = "2. View rules";
-		outputService.println("Choose an option from below :\n\n");
-		outputService.println(startNewGame + "\n" + viewRules);
-
-		String optionChoice = this.inputService.GetUserInput("What would you like to do?", new String[] { "1", "2" });
-		return optionChoice;
-	}
 }
