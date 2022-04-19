@@ -11,7 +11,7 @@ public class Menu {
 		this.admin = new GameAdmin(inputService, outputService);
 		this.inputService = inputService;
 		this.outputService = outputService;
-		this.rules = new Rules(inputService);
+		this.rules = new Rules();
 	}
 
 	/**
