@@ -26,13 +26,9 @@ public class Rules {
 	wildlifeSCo2Tropical, wildlifeSCo2Subtropical, wildlifeSCo2Temperate, wildlifeSCo2Boreal,
 	wildlifeSLandingTropical, wildlifeSLandingSubtropical, wildlifeSLandingTemperate, wildlifeSLandingBoreal;
 
-	
-	private IInputService inputService;
-	//private IOutputService outputService;
 	private String ruleText;
 	
-	public Rules(IInputService inputService) {
-		this.inputService = inputService;
+	public Rules() {
 		this.setRuleValues();
 	}
 	
@@ -345,9 +341,4 @@ public class Rules {
 		return ruleText;
 	}
 	
-	//Wait for user input		
-
-	public boolean exitRules() {
-		return this.inputService.GetUserConfirmation("Have you finished reading the rules?");		
-	}
 }
