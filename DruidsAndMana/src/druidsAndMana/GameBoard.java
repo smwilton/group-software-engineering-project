@@ -16,6 +16,11 @@ public class GameBoard implements IGameBoard {
 		this.squares = iGameBoardBuilder.buildGameBoard();
 	}
 	
+	@Override
+	public ISquare[] getSquares() {
+		return this.squares;
+	}
+	
 	/**
 	 * Returns the index of the square the player must move to.
 	 * @param playerCurrentPosition
@@ -213,7 +218,12 @@ public class GameBoard implements IGameBoard {
 	 */
 	@Override
 	public SquareStatus getSquareType(int squareIndex) {
-		// TODO add reflection to get the type of grassland:
-		return SquareStatus.GRASSLAND;
+		ISquare square = squares[squareIndex];
+		if(square instanceof Grassland) {
+			Grassland grasslandSquare = (Grassland)square;
+			return grasslandSquare.getSquareStatus();
+		}
+		
+		return null;
 	}	
 }

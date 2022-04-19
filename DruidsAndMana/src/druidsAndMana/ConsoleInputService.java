@@ -92,7 +92,8 @@ public class ConsoleInputService implements IInputService {
 	@Override
 	public boolean GetUserConfirmation(String prompt) {
 		System.out.println(prompt + " [ Yes | No ]");
-		return this.in.nextLine().equalsIgnoreCase("yes");
+		String response = this.in.nextLine().substring(0, 1);
+		return response.equalsIgnoreCase("y");
 	}
 	
 	private String InputMatch(String userInput, String[] allowedInputs){

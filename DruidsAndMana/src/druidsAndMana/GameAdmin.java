@@ -28,8 +28,6 @@ public class GameAdmin {
 		this.board = board;
 	}
 	
-	
-	
 
 	public ArrayList<Player> getPlayers() {
 		return players;
@@ -113,7 +111,7 @@ public class GameAdmin {
 
 
 	public int getCurrentPlayerNumber() {
-		return currentPlayer;
+		return getCurrentPlayer().getPlayerNumber();
 	}
 
 	public void setCurrentPlayer(int currentPlayer) {
@@ -257,8 +255,7 @@ public class GameAdmin {
 	 * @return
 	 */
 	public Player getCurrentPlayer() {
-		Player player = players.get(currentPlayer);
-		return player;
+		return players.get(currentPlayer);
 	}
 
 	/**
@@ -415,6 +412,45 @@ public class GameAdmin {
 			declareWinner();
 		}
 	}
+	
+	public void showAllOwnedGrasslands(){
+		
+		ISquare[] squares = board.getSquares();
+		int tropical=0, subtropical=0, temperate=0, boreal=0;
+		for (int i=0;i<squares.length;i++) {
+			if(squares[i] instanceof Grassland && ((Grassland)squares[i]).getOwnerId()==getCurrentPlayerNumber()) {
+				if(squares[i] instanceof Tropical) {
+					if(tropical ==0) {
+						outputService.println("TROPICAL REALM: \n\n");
+					}
+					tropical++;
+					outputService.println("Tropical realm, Grassland "+i+"/2 in this realm. A "+board.getSquareType(i)+" currently costing rival druids "+board.manaCharge(i)+" to land on. It removes "+board.getCO2Modifier(i)+"m^3 of CO2 at the end of each turn!");
+				}
+				if(squares[i] instanceof Subtropical) {
+					if(subtropical ==0) {
+						outputService.println("\nSUBTROPICAL REALM: \n\n");
+					}
+					subtropical++;
+					outputService.println("Subtropical realm, Grassland "+(i-2)+"/3 in this realm. A "+board.getSquareType(i)+" currently costing rival druids "+board.manaCharge(i)+" to land on. It removes "+board.getCO2Modifier(i)+"m^3 of CO2 at the end of each turn!");
+				}
+				if(squares[i] instanceof Temperate) {
+					if(temperate ==0) {
+						outputService.println("\nTEMPERATE REALM: \n\n");
+					}
+					temperate++;
+					outputService.println("Temperate realm, Grassland "+(i-6)+"/3 in this realm. A "+board.getSquareType(i)+" currently costing rival druids "+board.manaCharge(i)+" to land on. It removes "+board.getCO2Modifier(i)+"m^3 of CO2 at the end of each turn!");
+				}
+				if(squares[i] instanceof Boreal) {
+					if(boreal ==0) {
+						outputService.println("\nBOREAL REALM: \n\n");
+					}
+					boreal++;
+					outputService.println("Boreal realm, Grassland "+(i-9)+"/2 in this realm. A "+board.getSquareType(i)+" currently costing rival druids "+board.manaCharge(i)+" to land on. It removes "+board.getCO2Modifier(i)+"m^3 of CO2 at the end of each turn!");
+				}
+			}
+		}
+		
+	}
 
 	/**
 	 * A method to check if the current Player has any upgradable Grasslands
@@ -424,38 +460,38 @@ public class GameAdmin {
 	public boolean canUpgradeGrasslands() {
 		
 		boolean canUpgrade = false;
-		if(board.getSquareOwnerId(1)==players.get(currentPlayer).getPlayerNumber() 
-				&& board.getSquareOwnerId(2)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 1) 
-					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 2)) {
+		if(board.getSquareOwnerId(1)==getCurrentPlayerNumber() 
+				&& board.getSquareOwnerId(2)==getCurrentPlayerNumber()) {
+			if(board.playerCanUpgrade(getCurrentPlayerNumber(), 1) 
+					|| board.playerCanUpgrade(getCurrentPlayerNumber(), 2)) {
 				canUpgrade =true;
 			}
 		}
 		
-		if(board.getSquareOwnerId(3)==players.get(currentPlayer).getPlayerNumber() 
-				&& board.getSquareOwnerId(4)==players.get(currentPlayer).getPlayerNumber() 
-				&& board.getSquareOwnerId(5)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 3) 
-					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 4) 
-					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 5)) {
+		if(board.getSquareOwnerId(3)==getCurrentPlayerNumber() 
+				&& board.getSquareOwnerId(4)==getCurrentPlayerNumber() 
+				&& board.getSquareOwnerId(5)==getCurrentPlayerNumber()) {
+			if(board.playerCanUpgrade(getCurrentPlayerNumber(), 3) 
+					|| board.playerCanUpgrade(getCurrentPlayerNumber(), 4) 
+					|| board.playerCanUpgrade(getCurrentPlayerNumber(), 5)) {
 				canUpgrade =true;
 			}
 		}
 
-		if(board.getSquareOwnerId(7)==players.get(currentPlayer).getPlayerNumber() 
-				&& board.getSquareOwnerId(8)==players.get(currentPlayer).getPlayerNumber() 
-				&& board.getSquareOwnerId(9)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 7) 
-					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 8) 
-					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 9)) {
+		if(board.getSquareOwnerId(7)==getCurrentPlayerNumber() 
+				&& board.getSquareOwnerId(8)==getCurrentPlayerNumber() 
+				&& board.getSquareOwnerId(9)==getCurrentPlayerNumber()) {
+			if(board.playerCanUpgrade(getCurrentPlayerNumber(), 7) 
+					|| board.playerCanUpgrade(getCurrentPlayerNumber(), 8) 
+					|| board.playerCanUpgrade(getCurrentPlayerNumber(), 9)) {
 				canUpgrade =true;
 			}
 		}
 		
-		if(board.getSquareOwnerId(10)==players.get(currentPlayer).getPlayerNumber() 
-				&& board.getSquareOwnerId(11)==players.get(currentPlayer).getPlayerNumber()) {
-			if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 10) 
-					|| board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), 11)) {
+		if(board.getSquareOwnerId(10)==getCurrentPlayerNumber() 
+				&& board.getSquareOwnerId(11)==getCurrentPlayerNumber()) {
+			if(board.playerCanUpgrade(getCurrentPlayerNumber(), 10) 
+					|| board.playerCanUpgrade(getCurrentPlayerNumber(), 11)) {
 				canUpgrade =true;
 			}
 		}
@@ -469,34 +505,36 @@ public class GameAdmin {
 	 */
 	public void listUpgradableGrasslands() {
 		
-		if(board.getSquareOwnerId(1)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(2)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(3)==players.get(currentPlayer).getPlayerNumber()) {
-			for (int i=1; i<=3; i++) {
-				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+		
+		if(board.getSquareOwnerId(1)==getCurrentPlayerNumber() && board.getSquareOwnerId(2)==getCurrentPlayerNumber()) {
+			for (int i=1; i<=2; i++) {
+				if(board.playerCanUpgrade(getCurrentPlayerNumber(), i)) {
 					upgradable.add((Integer)i);
 				}
 			}
 		}
-		if(board.getSquareOwnerId(4)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(5)==players.get(currentPlayer).getPlayerNumber()) {
-			for (int i=4; i<=5; i++) {
-				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+		if(board.getSquareOwnerId(3)==getCurrentPlayerNumber() && board.getSquareOwnerId(4)==getCurrentPlayerNumber() && board.getSquareOwnerId(5)==getCurrentPlayerNumber()) {
+			for (int i=3; i<=5; i++) {
+				if(board.playerCanUpgrade(getCurrentPlayerNumber(), i)) {
 					upgradable.add((Integer)i);
 				}
 			}
 		}
-		if(board.getSquareOwnerId(7)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(8)==players.get(currentPlayer).getPlayerNumber()) {
-			for (int i=7; i<=8; i++) {
-				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+		if(board.getSquareOwnerId(7)==getCurrentPlayerNumber() && board.getSquareOwnerId(8)==getCurrentPlayerNumber() && board.getSquareOwnerId(9)==getCurrentPlayerNumber()) {
+			for (int i=7; i<=9; i++) {
+				if(board.playerCanUpgrade(getCurrentPlayerNumber(), i)) {
 					upgradable.add((Integer)i);
 				}
 			}
 		}
-		if(board.getSquareOwnerId(9)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(10)==players.get(currentPlayer).getPlayerNumber() && board.getSquareOwnerId(11)==players.get(currentPlayer).getPlayerNumber()) {
-			for (int i=9; i<=11; i++) {
-				if(board.playerCanUpgrade(players.get(currentPlayer).getPlayerNumber(), i)) {
+		if(board.getSquareOwnerId(10)==getCurrentPlayerNumber() && board.getSquareOwnerId(11)==getCurrentPlayerNumber()) {
+			for (int i=10; i<=11; i++) {
+				if(board.playerCanUpgrade(getCurrentPlayerNumber(), i)) {
 					upgradable.add((Integer)i);
 				}
 			}
 		}
+		
 		
 	}
 
@@ -603,7 +641,7 @@ public class GameAdmin {
 					check--;
 				}
 			}
-			outputService.print("with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+			outputService.println("with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
 		} else {
 			outputService.println("Congratulations " + winners.get(0).getPlayerName()
 					+ "! You are the winner with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");

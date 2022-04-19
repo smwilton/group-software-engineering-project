@@ -18,10 +18,16 @@ class GameEngineTests {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		
+		
 		MockInputService inputService = new MockInputService();
 		inputService.setUserInputResponse("1");
 		MockOutputService outputService = new MockOutputService();
-		gameEngine = new GameEngine(inputService, outputService);
+		IGameBoardBuilder builder = new GameBoardBuilder();
+		GameBoard board = new GameBoard(builder);
+		GameAdmin admin = new GameAdmin(inputService, outputService, board);
+		Menu menu = new Menu(admin, inputService, outputService);
+		gameEngine = new GameEngine(inputService, outputService, menu);
 	}
 
 	@Test

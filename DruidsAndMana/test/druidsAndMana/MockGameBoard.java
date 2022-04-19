@@ -111,4 +111,10 @@ public class MockGameBoard implements IGameBoard {
 		
 	}
 
+	@Override
+	public ISquare[] getSquares() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
