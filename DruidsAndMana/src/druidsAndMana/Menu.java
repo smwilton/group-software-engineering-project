@@ -13,12 +13,18 @@ public class Menu {
 		this.outputService = outputService;
 	}
 
+	/**
+	 * A single method, fully responsive menu. This menu assesses what actions a Player is able to perform from their given position
+	 * @throws Exception
+	 */
 	public void displayMenu() throws Exception {
 		int option = 1;
 		int playerChoice, start = -1, upgrade = -1, move = -1, purchase = -1, stats = -1, owned = -1, endTurn = -1,
 				showRules = -1, endGame = -1;
 		int highestOptionNumber = 1;
-
+		
+		//Check to see if game has started. If not, display initial Start game menu.
+		
 		if (!admin.gameIsOn()) {
 			outputService.println("Welcome to Druids and Mana!\n");
 			outputService.println("Please choose from the following options:");
@@ -29,7 +35,9 @@ public class Menu {
 		} else {
 
 			outputService.println("\n" + admin.getCurrentPlayer().getPlayerName() + ", your current options are: ");
-
+			
+			//Check if player has already moved. If not, offer the option to roll dice and move
+			
 			if (!admin.getHasMoved()) {
 				outputService.println(option + ") Roll Dice and Move");
 				move = option;
@@ -37,13 +45,18 @@ public class Menu {
 				option++;
 			}
 
+			//Check if the new square is owned or not and offer the Player the option to buy if it is still vacant
+			
 			if (admin.getHasMoved() && admin.getBoard().squareIsGrassland(admin.getCurrentPlayerPosition())
-					&& !admin.isSquareOwned(admin.getCurrentPlayerPosition())) {
+					&& !admin.isSquareOwned(admin.getCurrentPlayerPosition()) 
+					&& admin.getCurrentPlayer().getMana()>=admin.getBoard().costToUpgrade(admin.getCurrentPlayerPosition())) {
 				outputService.println(option + ") Rejuvenate arid, vacant land");
 				purchase = option;
 				highestOptionNumber = option;
 				option++;
 			}
+			
+			//Check if the Player has land that can be upgraded and if they can afford to so. If so, give them the option
 			
 			if (admin.canUpgradeGrasslands() && !admin.getUpgradable().isEmpty()) {
 				admin.getUpgradable().clear();
@@ -52,11 +65,15 @@ public class Menu {
 				highestOptionNumber = option;
 				option++;
 			}
+			
+			//Always offer the option to see current player stats.
 
 			outputService.println(option + ") Show current mana and CO2 stats");
 			stats = option;
 			highestOptionNumber = option;
 			option++;
+			
+			//If the Player owns any Grasslands, offer them the option to view them all.
 
 			if (!admin.getBoard().getAllPlayerOwnedGrasslands(admin.getCurrentPlayer()).isEmpty()) {
 				outputService.println(option + ") Show all owned Grasslands");
@@ -64,6 +81,8 @@ public class Menu {
 				highestOptionNumber = option;
 				option++;
 			}
+			
+			//Offer the option to end turn, provided the player has moved already.
 
 			if (admin.getHasMoved()) {
 				outputService.println(option + ") End Turn");
@@ -72,10 +91,16 @@ public class Menu {
 				option++;
 			}
 		}
+		
+		//Always give the option to view the rules
+		
 		outputService.println(option + ") View Rules");
 		showRules = option;
 		highestOptionNumber = option;
 		option++;
+		
+		//Always give the option to end the game
+		
 		outputService.println(option + ") End Game");
 		endGame = option;
 		highestOptionNumber = option;
@@ -83,6 +108,8 @@ public class Menu {
 
 		playerChoice = getPlayerChoice(highestOptionNumber);
 
+		//Long if-else statement to process the players choice, allowing for all the possible options they were presented with
+		
 		if (playerChoice == start) {
 			admin.startGame();
 			displayMenu();
@@ -135,6 +162,12 @@ public class Menu {
 
 	}
 
+	/**
+	 * This method takes an int and creates an int[] of sequential numbers from 1 up to that int. These are then fed into the inputService as the specific options for the user.
+	 * A selection outside this int range will be rejected until a suitable int is provided
+	 * @param highestOptionNumber : an int taken from the menu class of how many options the user has
+	 * @return int : the users chosen option number
+	 */
 	public int getPlayerChoice(int highestOptionNumber) {
 		int chosen;
 
@@ -151,6 +184,10 @@ public class Menu {
 
 	}
 
+	/**
+	 * A method to display all of the available upgradable regions to a Player. They can then select which option numbe they wish to take and the upgrade is completed
+	 * and mana ammended appropriately
+	 */
 	public void getUpgradableChoice() {
 		int upgradableOption = 1;
 		int chosenGrassland;
@@ -197,6 +234,11 @@ public class Menu {
 		admin.getUpgradable().clear();
 	}
 	
+	/**
+	 * A method to create an array of sequential ints, used in the inputService methods.
+	 * @param numOfValues
+	 * @return
+	 */
 	public int[] createArray(int numOfValues) {
 		int[] array = new int[numOfValues+1];
 		for (int i=numOfValues; i>=0; i--) {

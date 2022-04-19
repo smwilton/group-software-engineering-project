@@ -384,6 +384,11 @@ public class GameAdmin {
 		}
 	}
 
+	/**
+	 * A method to convert the Enum SquareStatus into a more display friendly version
+	 * @param type : the SquareStatus Enum value
+	 * @return a user friendly string to convey the SquareStatus information
+	 */
 	public String convertSquareTypeToString(SquareStatus type) {
 		String stringType = type.toString();
 		if (stringType == "VACANT") {
@@ -404,6 +409,11 @@ public class GameAdmin {
 
 	}
 
+	/**
+	 * A method to convert the SquareStatus int into a String . Useful for checking the status of the square if it were to be upgraded (+1)
+	 * @param type : an int of the SquareStatus value
+	 * @return a console friendly String of the SquareStatus
+	 */
 	public String convertSquareTypeToString(int type) {
 		String stringType = null;
 		if (type == 1) {
@@ -424,6 +434,11 @@ public class GameAdmin {
 
 	}
 
+	/**
+	 * A method to convert the SquareStatus Enum into an int denoting it's position in the status hierarchy
+	 * @param type : the SquareStatus Enum value
+	 * @return an int from 1-6 denoting the status of the square according to its natural hierarchy
+	 */
 	public int convertSquareTypeToInt(SquareStatus type) {
 		int squareStatus = 0;
 		if (type.toString() == "VACANT") {
@@ -444,6 +459,9 @@ public class GameAdmin {
 
 	}
 
+	/**
+	 * A method to print to console a formatted list of all a players owned Grasslands with their most important statistics
+	 */
 	public void showAllOwnedGrasslands() {
 
 		ISquare[] squares = board.getSquares();
