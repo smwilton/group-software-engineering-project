@@ -25,16 +25,11 @@ class GameEngineTests {
 		MockOutputService outputService = new MockOutputService();
 		IGameBoardBuilder builder = new GameBoardBuilder();
 		GameBoard board = new GameBoard(builder);
-		GameAdmin admin = new GameAdmin(inputService, outputService, board);
-		Menu menu = new Menu(admin, inputService, outputService);
-		gameEngine = new GameEngine(inputService, outputService, menu);
+		GameAdmin admin = new GameAdmin(inputService, outputService);
+		Menu menu = new Menu(inputService, outputService);
+		gameEngine = new GameEngine();
 	}
 
-	@Test
-	void testHomeMenu() {
-		String optionChoice = gameEngine.homeMenu();
-		assertTrue(optionChoice.equals("1"));
-	}
 
 	@Test
 	void testDisplayWelcomeMessage() {

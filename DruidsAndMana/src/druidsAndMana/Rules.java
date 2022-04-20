@@ -177,7 +177,7 @@ public class Rules {
 					+ "\n"
 					+ "The combined number of the dice dictates how many grasslands the druid can pass through. \n"
 					+ "\n"
-					+ "Each druid has a starting mana balance of 1,500 mana points and a CO2 impact rating of 0. \n"
+					+ "Each druid has a starting mana balance of 1,000 mana points and a CO2 impact rating of 0. \n"
 					+ "\n"
 					+ "Before the game commences, druids will each roll the dice. Turns will be taken in order of dice roll from the highest to lowest dice roll, in the event of a tie dice will be rolled again. \n"
 					+ "\n"

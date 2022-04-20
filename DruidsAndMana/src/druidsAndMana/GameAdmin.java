@@ -54,14 +54,6 @@ public class GameAdmin {
 		this.gameOn = gameOn;
 	}
 
-	public IGameBoardBuilder getBuilder() {
-		return builder;
-	}
-
-	public void setBuilder(GameBoardBuilder builder) {
-		this.builder = builder;
-	}
-
 	public IGameBoard getBoard() {
 		return board;
 	}
@@ -84,15 +76,6 @@ public class GameAdmin {
 
 	public void setCurrentPlayer(int currentPlayer) {
 		this.currentPlayer = currentPlayer;
-	}
-
-	/**
-	 * Returns the IGameBoard instance
-	 * 
-	 * @return
-	 */
-	public IGameBoard getGameBoard() {
-		return board;
 	}
 
 	/**
@@ -183,7 +166,7 @@ public class GameAdmin {
 					// Roll a dice to see which player goes first
 					int roll = dice.rollDice();
 					// If unique name chosen, creates a Player object with defualt starting values.
-					Player player = new Player(playerName, i + 1, 0, 1500, 0, roll);
+					Player player = new Player(playerName, i + 1, 0, 1000, 0, roll);
 					players.add(player);
 				} else {
 					// Display error message on repeated name input
