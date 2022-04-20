@@ -100,7 +100,7 @@ public class Player {
 	public void printStats() {
 		System.out.printf("Player %d:\t\t%s",playerNumber, playerName);
 		System.out.printf("\nCurrent mana reserves:\t%d",mana);
-		System.out.printf("\nCurrent CO2 impact:\t%d",co2);
+		System.out.printf("\nCurrent CO2 reduction rating:\t%d",co2);
 		System.out.printf("\nCurrent board position:\t%d\n",playerPosition);
 	}
 

@@ -88,7 +88,7 @@ public class GameBoard implements IGameBoard {
 	}
 	
 	/**
-	 * Returns the CO2 impact rating for the given square
+	 * Returns the CO2 reduction rating for the given square
 	 * @param squareIndex
 	 * @return 
 	 */
@@ -97,7 +97,7 @@ public class GameBoard implements IGameBoard {
 		ISquare square = squares[squareIndex];
 		if(square instanceof Grassland) {
 			Grassland grasslandSquare = (Grassland)square;
-			return grasslandSquare.getCo2ImpactRating();
+			return grasslandSquare.getCo2ReductionRating();
 		}
 		return 0;
 	}

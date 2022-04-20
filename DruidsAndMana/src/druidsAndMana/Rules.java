@@ -72,10 +72,10 @@ public class Rules {
 		this.costForestTemperate = temperate.getDevelopmentCost();
 		this.costForestBoreal = boreal.getDevelopmentCost();
 		
-		this.grasslandCo2Tropical = tropical.getCo2ImpactRating();
-		this.grasslandCo2Subtropical = subtropical.getCo2ImpactRating();
-		this.grasslandCo2Temperate = temperate.getCo2ImpactRating(); 
-		this.grasslandCo2Boreal = boreal.getCo2ImpactRating();
+		this.grasslandCo2Tropical = tropical.getCo2ReductionRating();
+		this.grasslandCo2Subtropical = subtropical.getCo2ReductionRating();
+		this.grasslandCo2Temperate = temperate.getCo2ReductionRating(); 
+		this.grasslandCo2Boreal = boreal.getCo2ReductionRating();
 		this.grasslandLandingTropical = tropical.getChargeForLandingOnSquare(); 
 		this.grasslandLandingSubtropical = subtropical.getChargeForLandingOnSquare();
 		this.grasslandLandingTemperate = temperate.getChargeForLandingOnSquare();
@@ -87,10 +87,10 @@ public class Rules {
 		temperate.developGrassland();
 		boreal.developGrassland();	
 		
-		this.seedlingCo2Tropical = tropical.getCo2ImpactRating();
-		this.seedlingCo2Subtropical = subtropical.getCo2ImpactRating();
-		this.seedlingCo2Temperate = temperate.getCo2ImpactRating(); 
-		this.seedlingCo2Boreal = boreal.getCo2ImpactRating();
+		this.seedlingCo2Tropical = tropical.getCo2ReductionRating();
+		this.seedlingCo2Subtropical = subtropical.getCo2ReductionRating();
+		this.seedlingCo2Temperate = temperate.getCo2ReductionRating(); 
+		this.seedlingCo2Boreal = boreal.getCo2ReductionRating();
 		this.seedlingLandingTropical = tropical.getChargeForLandingOnSquare(); 
 		this.seedlingLandingSubtropical = subtropical.getChargeForLandingOnSquare();
 		this.seedlingLandingTemperate = temperate.getChargeForLandingOnSquare();
@@ -103,10 +103,10 @@ public class Rules {
 		temperate.developGrassland();
 		boreal.developGrassland();
 		
-		this.intermediateCo2Tropical = tropical.getCo2ImpactRating();
-		this.intermediateCo2Subtropical = subtropical.getCo2ImpactRating();
-		this.intermediateCo2Temperate = temperate.getCo2ImpactRating(); 
-		this.intermediateCo2Boreal = boreal.getCo2ImpactRating();
+		this.intermediateCo2Tropical = tropical.getCo2ReductionRating();
+		this.intermediateCo2Subtropical = subtropical.getCo2ReductionRating();
+		this.intermediateCo2Temperate = temperate.getCo2ReductionRating(); 
+		this.intermediateCo2Boreal = boreal.getCo2ReductionRating();
 		this.intermediateLandingTropical = tropical.getChargeForLandingOnSquare(); 
 		this.intermediateLandingSubtropical = subtropical.getChargeForLandingOnSquare();
 		this.intermediateLandingTemperate = temperate.getChargeForLandingOnSquare();
@@ -123,10 +123,10 @@ public class Rules {
 		this.costWSTemperate = temperate.getDevelopmentCost();
 		this.costWSBoreal = boreal.getDevelopmentCost();
 		
-		this.establishedCo2Tropical = tropical.getCo2ImpactRating();
-		this.establishedCo2Subtropical = subtropical.getCo2ImpactRating();
-		this.establishedCo2Temperate = temperate.getCo2ImpactRating(); 
-		this.establishedCo2Boreal = boreal.getCo2ImpactRating();
+		this.establishedCo2Tropical = tropical.getCo2ReductionRating();
+		this.establishedCo2Subtropical = subtropical.getCo2ReductionRating();
+		this.establishedCo2Temperate = temperate.getCo2ReductionRating(); 
+		this.establishedCo2Boreal = boreal.getCo2ReductionRating();
 		this.establishedLandingTropical = tropical.getChargeForLandingOnSquare(); 
 		this.establishedLandingSubtropical = subtropical.getChargeForLandingOnSquare();
 		this.establishedLandingTemperate = temperate.getChargeForLandingOnSquare();
@@ -138,10 +138,10 @@ public class Rules {
 		temperate.developGrassland();
 		boreal.developGrassland();
 		
-		this.wildlifeSCo2Tropical = tropical.getCo2ImpactRating();
-		this.wildlifeSCo2Subtropical = subtropical.getCo2ImpactRating();
-		this.wildlifeSCo2Temperate = temperate.getCo2ImpactRating(); 
-		this.wildlifeSCo2Boreal = boreal.getCo2ImpactRating();
+		this.wildlifeSCo2Tropical = tropical.getCo2ReductionRating();
+		this.wildlifeSCo2Subtropical = subtropical.getCo2ReductionRating();
+		this.wildlifeSCo2Temperate = temperate.getCo2ReductionRating(); 
+		this.wildlifeSCo2Boreal = boreal.getCo2ReductionRating();
 		this.wildlifeSLandingTropical = tropical.getChargeForLandingOnSquare(); 
 		this.wildlifeSLandingSubtropical = subtropical.getChargeForLandingOnSquare();
 		this.wildlifeSLandingTemperate = temperate.getChargeForLandingOnSquare();
@@ -177,7 +177,7 @@ public class Rules {
 					+ "\n"
 					+ "The combined number of the dice dictates how many grasslands the druid can pass through. \n"
 					+ "\n"
-					+ "Each druid has a starting mana balance of 1,000 mana points and a CO2 impact rating of 0. \n"
+					+ "Each druid has a starting mana balance of 1,000 mana points and a CO2 reduction rating of 0. \n"
 					+ "\n"
 					+ "Before the game commences, druids will each roll the dice. Turns will be taken in order of dice roll from the highest to lowest dice roll, in the event of a tie dice will be rolled again. \n"
 					+ "\n"
@@ -249,7 +249,7 @@ public class Rules {
 					+ "\n"
 					+ "When 3 forests have been planted in a grassland the druid is then eligible to upgrade this grassland to a wildlife sanctuary. \n"
 					+ "\n"
-					+ "For each forest a druid plants the environmental benefits they have made increase and in turn the amount of CO2 impact points they achieve each turn increases. This also results in a higher upkeep fee for visitors to the forest (See \"Charges\" and \"CO2 impact ratings\" section). \n"
+					+ "For each forest a druid plants the environmental benefits they have made increase and in turn the amount of CO2 reduction rating points they achieve each turn increases. This also results in a higher upkeep fee for visitors to the forest (See \"Charges\" and \"CO2 reduction ratings\" section). \n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
@@ -257,7 +257,7 @@ public class Rules {
 					+ "\n"
 					+ "Once a druid has planted 3 forests on their grassland they can then chose to upgrade that grassland to a wildlife sanctuary. The cost of doing so varies depending on the realm the grassland is located (See \"Charges\" section). \n"
 					+ "\n"
-					+ "Converting their grassland to a wildlife sanctuary is the biggest achievement a druid can make in their quest to save the world. As a result the wildlife sanctuary the amount of CO2 impact points they achieve each turn increases further. This also results in a higher upkeep fee for visitors to the forest (See \"Charges\" and \"CO2 impact ratings\" section). \n"
+					+ "Converting their grassland to a wildlife sanctuary is the biggest achievement a druid can make in their quest to save the world. As a result the wildlife sanctuary the amount of CO2 reduction rating points they achieve each turn increases further. This also results in a higher upkeep fee for visitors to the forest (See \"Charges\" and \"CO2 reduction ratings\" section). \n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
@@ -269,7 +269,7 @@ public class Rules {
 					+ "\n"
 					+ "At this point all grasslands and any remaining mana balance belonging to this druid will transfer to the druid who is the owner of the grassland that they have finished on. \n"
 					+ "\n"
-					+ "At this point they will NO longer accrue points against their CO2 impact rating per turn. However, their total consumption at the time they finished the game is saved as their final score and included in the leaderboard at the end of the game when determining the winner (see \"Winning the Game section). \n"
+					+ "At this point they will NO longer accrue points against their CO2 reduction rating per turn. However, their total consumption at the time they finished the game is saved as their final score and included in the leaderboard at the end of the game when determining the winner (see \"Winning the Game section). \n"
 					+ "\n"
 					+ " \n"
 					+ "\n\n"
@@ -300,16 +300,16 @@ public class Rules {
 					+ "\n"
 					+ " \n"
 					+ "\n"
-					+ "CO2 impact ratings \n"
+					+ "CO2 reduction ratings \n"
 					+ "\n"
-					+ "For each turn a druid will accrue points against their CO2 impact rating. This represents the beneficial impact their grasslands are having on CO2 emissions. \n"
+					+ "For each turn a druid will accrue points against their CO2 reduction rating. This represents the beneficial impact their grasslands are having on CO2 emissions. \n"
 					+ "\n"
 					+ "The amount accrued on each turn is dependent upon the status of each grassland the druid owns. \n"
 					+ "\n"
-					+ "Druids who own no grassland will accrue no points towards their CO2 impact rating. \n"
+					+ "Druids who own no grassland will accrue no points towards their CO2 reduction rating. \n"
 					+ "\n\n\n"
 					+ "Realm \t\t\t"
-					+ "CO2 impact rating earned per turn per grassland owned (based on no. developments - 0, 1, 2, 3 or 4) \n"
+					+ "CO2 reduction rating earned per turn per grassland owned (based on no. developments - 0, 1, 2, 3 or 4) \n"
 					+"___________________________________________________________________________________________________________________________"
 					+ "\n"
 					+ "Tropical \t\t\t"
@@ -329,13 +329,13 @@ public class Rules {
 					+ "\n"
 					+ "The game ends either when  only one player has mana remaining (i.e., is active) or when only one player  wishes to continue the game \n"
 					+ "\n"
-					+ "The mana balance of each druid is displayed at the end of the game along with their CO2 impact points.  \n"
+					+ "The mana balance of each druid is displayed at the end of the game along with their CO2 reduction rating points.  \n"
 					+ "\n"
 					+ "As mana is a resource, and the objective of the game is to reward spending of mana to make a difference positive impact towards saving the world, rather than hoarding it just to hold the highest balance, the ending mana balance will not be used as the metric to determine the winner of the game unless in the event of a tie. \n"
 					+ "\n"
-					+ "At the end of the game the druid who has consumed the most CO2 is the winner of the game, i.e. the druid with the highest CO2 impact rating. \n"
+					+ "At the end of the game the druid who has consumed the most CO2 is the winner of the game, i.e. the druid with the highest CO2 reduction rating. \n"
 					+ "\n"
-					+ "In the event of a tie, where more than 1 druid has the highest CO2 impact rating, the overall winner will be decided by establishing which one has the highest ending mana balance. \n"
+					+ "In the event of a tie, where more than 1 druid has the highest CO2 reduction rating, the overall winner will be decided by establishing which one has the highest ending mana balance. \n"
 					+ "\n"
 					+ "The winning druid does not need to be an active druid when the game ends. ";
 		return ruleText;
