@@ -53,7 +53,7 @@ public interface IGameBoard {
 	int getSquareOwnerId(int squareIndex);
 
 	/**
-	 * Returns the CO2 impact rating for the given square
+	 * Returns the CO2 reduction rating for the given square
 	 * @param squareIndex
 	 * @return 
 	 */

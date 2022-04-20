@@ -39,16 +39,16 @@ public class GrasslandValues {
 	 * development) - This is the Mana price that a Player will pay to upgrade to a
 	 * Wildlife Reserve
 	 * 
-	 * <li>Index 3: CO2 impact base - This is the base CO2 impact rating earned for
+	 * <li>Index 3: CO2 reduction rating base - This is the base CO2 reduction rating earned for
 	 * an owned Grassland that has no developments
 	 * 
 	 * <li>Index 4: CO2 minor development premium - This is the additional CO2
-	 * impact rating earned for each minor development on a Grassland, i.e. for each
+	 * reduction rating earned for each minor development on a Grassland, i.e. for each
 	 * forest that is planted a Player will earn this in addition to the base CO2
-	 * Impact.
+	 * Reduction Rating.
 	 * 
 	 * <li>Index 5: CO2 major development premium - This is the additional CO2
-	 * impact rating earned when a major development is made to a Grassland, This is
+	 * reduction rating earned when a major development is made to a Grassland, This is
 	 * earned in addition to 3 x the minor development premium and the base amount
 	 * 
 	 * <li>Index 6: Base cost to a player landing on a Grassland not owned by them -
@@ -159,12 +159,12 @@ public class GrasslandValues {
 	}
 
 	/**
-	 * Gets the 3 CO2 Impact Rating tiers in order to calculate the total CO2 Impact
+	 * Gets the 3 CO2 Reduction Rating tiers in order to calculate the total CO2 Reduction
 	 * Rating depending on the SquareStatus of a Grassland.
 	 * 
-	 * @return - an int[] of values where index 0 is the base CO2 impact rating,
-	 *         index 1 is the additional impact rating of each forest that is
-	 *         planted, and index 2 is the additional impact rating earned for a
+	 * @return - an int[] of values where index 0 is the base CO2 reduction rating,
+	 *         index 1 is the additional reduction rating of each forest that is
+	 *         planted, and index 2 is the additional reduction rating earned for a
 	 *         Wildlife Sanctuary.
 	 *         <p>
 	 *         Example usage of this value Set:
