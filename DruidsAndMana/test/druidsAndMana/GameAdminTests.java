@@ -24,12 +24,12 @@ class GameAdminTests {
 		inputService = new MockInputService();
 		outputService = new MockOutputService();
 		
-		IGameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
-		IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
+		//IGameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+		//IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
 		
-		gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
+		gameAdmin = new GameAdmin(inputService, outputService);
 		
-		board = gameAdmin.getGameBoard();
+		board = gameAdmin.getBoard();
 	}
 
 	@Test
@@ -51,7 +51,7 @@ class GameAdminTests {
 	void numOfPlayers_PlayerDoesNotConfirm_OutputsMessageToConsole() throws Exception {
 		
 		// Arrange
-		String expectedOutput = "Number of failed confirmations has reached the limit. Resetting game.";
+		String expectedOutput = "You are very indecisive! Let's try again from the start...";
 		inputService.setUserInputResponse("2");
 		inputService.setConfirmation(false);
 		
@@ -167,7 +167,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
@@ -199,7 +199,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
@@ -235,7 +235,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 999, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 999, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
@@ -263,7 +263,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
@@ -289,7 +289,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
@@ -320,7 +320,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, manaCharge, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);

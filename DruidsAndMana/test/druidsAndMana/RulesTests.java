@@ -11,7 +11,7 @@ class RulesTests {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		rules = new Rules(null);
+		rules = new Rules();
 	}
 	@Test
 	void testDisplayRules() {
