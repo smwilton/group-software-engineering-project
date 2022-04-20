@@ -282,7 +282,6 @@ public class GameAdmin {
 	/**
 	 * Checks if a square is owned and returns a boolean
 	 * 
-	 * @param board       : an instance of a game board
 	 * @param squareIndex : the index of the square to check
 	 * @return boolean : true if square has an owner, false if it is unowned
 	 */
@@ -689,17 +688,21 @@ public class GameAdmin {
 					+ " :_\\/_:'.:::.    ' *''*    * '.\\'/.' _\\(/_'.':'.'\r\n"
 					+ " : /\\ : :::::     *_\\/_*     -= o =-  /)\\    '  *\r\n"
 					+ "  '..'  ':::'     * /\\ *     .'/.\\'.   '\r\n" + "      *            *..*         :\n\n");
+			showAllCO2Ratings();
 			if (draw) {
 				int check = winners.size();
 				outputService.println("There is a draw! The winners are:\n");
 				for (Player winner : winners) {
-					outputService.print(winner.getPlayerName() + " ");
-					if (check > 1) {
-						outputService.print("and ");
+					outputService.print(winner.getPlayerName());
+					if(check>2) {
+						outputService.print(", ");
+						check--;
+					}else if (check == 2) {
+						outputService.print(" and ");
 						check--;
 					}
 				}
-				outputService.println("with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+				outputService.println(" with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
 			} else {
 				outputService.println("Congratulations " + winners.get(0).getPlayerName()
 						+ "! You are the winner with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
@@ -707,6 +710,17 @@ public class GameAdmin {
 			players.clear();
 			endGame();
 		}
+	}
+	
+	/**
+	 * A method to display all players CO2 stats
+	 */
+	public void showAllCO2Ratings() {
+		outputService.println("Player\t\tCO2 removed (m^3)");
+		for(Player player : getPlayers()) {
+			outputService.println(player.getPlayerName()+":\t\t"+player.getCo2()+"m^3");
+		}
+		outputService.print("\n");
 	}
 
 	/**
