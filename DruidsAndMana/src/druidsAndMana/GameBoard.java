@@ -27,12 +27,13 @@ public class GameBoard implements IGameBoard {
 	 * @param placesToMove
 	 * @return 
 	 */
+	
 	@Override
 	public int newsquarePosition(int playerCurrentPosition, int placesToMove) {
-		int total = playerCurrentPosition + placesToMove;
-		return total > squares.length ? total - 14 : total;
+		int total = (playerCurrentPosition+1) + placesToMove;
+		return total > squares.length ? total - 12 : total;
 	}
-		
+	
 	/**
 	 * Check if the square is grassland
 	 * @param squareIndex
