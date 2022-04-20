@@ -452,7 +452,7 @@ public class GameAdmin {
 					outputService.println("Tropical realm region " + i + "/2 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 				if (squares[i] instanceof Subtropical) {
 					if (subtropical == 0) {
@@ -462,7 +462,7 @@ public class GameAdmin {
 					outputService.println("Subtropical realm region " + (i - 2) + "/3 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 				if (squares[i] instanceof Temperate) {
 					if (temperate == 0) {
@@ -472,7 +472,7 @@ public class GameAdmin {
 					outputService.println("Temperate realm region " + (i - 6) + "/3 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 				if (squares[i] instanceof Boreal) {
 					if (boreal == 0) {
@@ -482,7 +482,7 @@ public class GameAdmin {
 					outputService.println("Boreal realm region " + (i - 9) + "/2 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 			}
 		}
@@ -716,7 +716,7 @@ public class GameAdmin {
 	 * A method to display all players CO2 stats
 	 */
 	public void showAllCO2Ratings() {
-		outputService.println("Player\t\tCO2 removed (m^3)");
+		outputService.println("Player\t\tCO2 removed");
 		for(Player player : getPlayers()) {
 			outputService.println(player.getPlayerName()+":\t\t"+player.getCo2()+"m^3");
 		}
