@@ -24,9 +24,9 @@ class SubtropicalTests {
 	String expectedAsciiArt, expectedDescription;
 	SquareStatus status1, status2, status3, status4, status5, status6;
 	int expectedPriceToBuyTier2, expectedPriceToPlantForestTier2, expectedPriceForWildlifeSanctuaryUpgradeTier2,
-			expectedCO2ImpactVacantTier2, expectedCO2ImpactGrasslandTier2, expectedCO2ImpactSeedlingTier2,
-			expectedCO2ImpactIntermediateTier2, expectedCO2ImpactEstablishedTier2,
-			expectedCO2ImpactWildlifeSanctuaryTier2, expectedLandOnCostVacantTier2, expectedLandOnCostGrasslandTier2,
+			expectedCO2ReductionVacantTier2, expectedCO2ReductionGrasslandTier2, expectedCO2ReductionSeedlingTier2,
+			expectedCO2ReductionIntermediateTier2, expectedCO2ReductionEstablishedTier2,
+			expectedCO2ReductionWildlifeSanctuaryTier2, expectedLandOnCostVacantTier2, expectedLandOnCostGrasslandTier2,
 			expectedLandOnCostSeedlingTier2, expectedLandOnCostIntermediateTier2, expectedLandOnCostEstablishedTier2,
 			expectedLandOnCostWildlifeSanctuaryTier2, ownerIdOption1, ownerIdOption2;
 	int[] values;
@@ -82,12 +82,12 @@ class SubtropicalTests {
 		expectedPriceToBuyTier2 = values[0];
 		expectedPriceToPlantForestTier2 = values[1];
 		expectedPriceForWildlifeSanctuaryUpgradeTier2 = values[2];
-		expectedCO2ImpactVacantTier2 = 0;
-		expectedCO2ImpactGrasslandTier2 = values[3];
-		expectedCO2ImpactSeedlingTier2 = (values[3]+values[4]);
-		expectedCO2ImpactIntermediateTier2 = (values[3]+(2*values[4]));
-		expectedCO2ImpactEstablishedTier2 = (values[3]+(3*values[4]));
-		expectedCO2ImpactWildlifeSanctuaryTier2 = (values[3]+(3*values[4])+ values[5]);
+		expectedCO2ReductionVacantTier2 = 0;
+		expectedCO2ReductionGrasslandTier2 = values[3];
+		expectedCO2ReductionSeedlingTier2 = (values[3]+values[4]);
+		expectedCO2ReductionIntermediateTier2 = (values[3]+(2*values[4]));
+		expectedCO2ReductionEstablishedTier2 = (values[3]+(3*values[4]));
+		expectedCO2ReductionWildlifeSanctuaryTier2 = (values[3]+(3*values[4])+ values[5]);
 		expectedLandOnCostVacantTier2 = 0;
 		expectedLandOnCostGrasslandTier2 = values[6];
 		expectedLandOnCostSeedlingTier2 = (values[6]+values[7]);
@@ -248,19 +248,19 @@ class SubtropicalTests {
 	}
 
 	/**
-	 * Test method for {@link druidsAndMana.Grassland#getCo2ImpactRating()}.
+	 * Test method for {@link druidsAndMana.Grassland#getCo2ReductionRating()}.
 	 * <p>
-	 * Tests the getCo2ImpactRating method returns the expected value for each stage
+	 * Tests the getCo2ReductionRating method returns the expected value for each stage
 	 * in the squares development
 	 */
 	@Test
-	void testGetCo2ImpactRating() {
-		assertEquals(expectedCO2ImpactVacantTier2, squareVacant.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactGrasslandTier2, squareGrassland.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactSeedlingTier2, squareSeedlingForest.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactIntermediateTier2, squareIntermediateForest.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactEstablishedTier2, squareEstablishedForest.getCo2ImpactRating());
-		assertEquals(expectedCO2ImpactWildlifeSanctuaryTier2, squareWildlifeSanctuary.getCo2ImpactRating());
+	void testGetCo2ReductionRating() {
+		assertEquals(expectedCO2ReductionVacantTier2, squareVacant.getCo2ReductionRating());
+		assertEquals(expectedCO2ReductionGrasslandTier2, squareGrassland.getCo2ReductionRating());
+		assertEquals(expectedCO2ReductionSeedlingTier2, squareSeedlingForest.getCo2ReductionRating());
+		assertEquals(expectedCO2ReductionIntermediateTier2, squareIntermediateForest.getCo2ReductionRating());
+		assertEquals(expectedCO2ReductionEstablishedTier2, squareEstablishedForest.getCo2ReductionRating());
+		assertEquals(expectedCO2ReductionWildlifeSanctuaryTier2, squareWildlifeSanctuary.getCo2ReductionRating());
 	}
 
 	/**

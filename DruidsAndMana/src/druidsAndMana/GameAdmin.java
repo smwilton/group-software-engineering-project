@@ -592,7 +592,7 @@ public class GameAdmin {
 	 */
 	public void upgradeOwnedGrassland(int squareIndex) {
 		int currentLandingCharge = board.manaCharge(squareIndex);
-		int currentCO2Impact = board.getCO2Modifier(squareIndex);
+		int currentCO2Reduction = board.getCO2Modifier(squareIndex);
 		String originalType = convertSquareTypeToString(board.getSquareType(squareIndex));
 		String newType = originalType;
 		if (board.playerCanUpgrade(currentPlayer + 1, squareIndex)) {
@@ -607,7 +607,7 @@ public class GameAdmin {
 						"\nCongratulations! You have upgraded that " + originalType + " to a " + newType + "!");
 				outputService.println("The mana charge for landing on this " + newType + " has increased from "
 						+ currentLandingCharge + " mana, to " + board.manaCharge(squareIndex) + " mana.\n"
-						+ "And its CO2 rating impact will increase from " + currentCO2Impact + "m^3 to "
+						+ "And its CO2 reduction rating will increase from " + currentCO2Reduction + "m^3 to "
 						+ board.getCO2Modifier(squareIndex) + "m^3.\n");
 			} else {
 				outputService
@@ -624,7 +624,7 @@ public class GameAdmin {
 		System.out.printf("That's " + getCurrentPlayer().getPlayerName() + "'s turn over.");
 		ArrayList<Grassland> owned = board.getAllPlayerOwnedGrasslands(getCurrentPlayer());
 		for (Grassland square : owned) {
-			getCurrentPlayer().setCo2(getCurrentPlayer().getCo2() + square.getCo2ImpactRating());
+			getCurrentPlayer().setCo2(getCurrentPlayer().getCo2() + square.getCo2ReductionRating());
 		}
 
 		do {
@@ -655,7 +655,7 @@ public class GameAdmin {
 
 	/**
 	 * This method will calculate the winner(s) of the game and display their names
-	 * and CO2 Impact Ratings with an ASCII art celebration design
+	 * and CO2 Reduction Ratings with an ASCII art celebration design
 	 */
 	public void declareWinner() {
 		if (gameOn) {
@@ -702,10 +702,10 @@ public class GameAdmin {
 						check--;
 					}
 				}
-				outputService.println(" with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+				outputService.println(" with a total CO2 reduction rating of " + winners.get(0).getCo2() + "m^3!");
 			} else {
 				outputService.println("Congratulations " + winners.get(0).getPlayerName()
-						+ "! You are the winner with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+						+ "! You are the winner with a total CO2 reduction rating of " + winners.get(0).getCo2() + "m^3!");
 			}
 			players.clear();
 			endGame();

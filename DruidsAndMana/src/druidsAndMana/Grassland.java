@@ -135,9 +135,9 @@ public abstract class Grassland implements ISquare {
 	 * Method to get the positive CO2 impact the Grassland is having on the
 	 * environment. The rating varies depending on the SquareStatus
 	 * 
-	 * @return - the CO2 Impact Rating earned for the Grassland
+	 * @return - the CO2 Reduction Rating earned for the Grassland
 	 */
-	public int getCo2ImpactRating() {
+	public int getCo2ReductionRating() {
 		int[] co2Values = grasslandValues.getCO2ValueSet();
 		switch (squareStatus) {
 		case GRASSLAND:
