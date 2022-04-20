@@ -4,6 +4,7 @@ public class MockInputService implements IInputService {
 
 	// This is a test fixture without using a mocking software like MOQ etc.
 	private String userInputResponse;
+	private int userIntInputResponse;
 	private boolean confirmation = false;
 	private String[] responses = new String[5];
 	private String[] fewerResponses = new String[2];
@@ -53,6 +54,10 @@ public class MockInputService implements IInputService {
 		this.userInputResponse = response;
 	}
 
+	public void setUserIntInput(int response) {
+		this.userIntInputResponse = response;
+	}
+	
 	@Override
 	public String GetUserInput(String prompt, String[] allowedInputs) {
 
@@ -80,10 +85,11 @@ public class MockInputService implements IInputService {
 		return userInputResponse;
 	}
 
+	
 	@Override
 	public int GetUserIntInput(String prompt, int[] allowedInputs) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return userIntInputResponse;
 	}
 
 }
