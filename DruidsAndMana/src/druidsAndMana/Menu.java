@@ -57,9 +57,9 @@ public class Menu {
 				option++;
 			}
 			
-			//Check if the Player has land that can be upgraded and if they can afford to so. If so, give them the option
+			//Check if the Player has land that can be upgraded and if they can afford to so. If so, give them the option to upgrade after they have moved
 			
-			if (admin.canUpgradeGrasslands() && !admin.getUpgradable().isEmpty()) {
+			if (admin.canUpgradeGrasslands() && !admin.getUpgradable().isEmpty() && admin.getHasMoved()) {
 				admin.getUpgradable().clear();
 				outputService.println(option + ") Plant a Forest on Grasslands");
 				upgrade = option;
@@ -126,9 +126,10 @@ public class Menu {
 			}
 			displayMenu();
 		} else if (playerChoice == purchase) {
-			inputService.GetUserConfirmation("Are you sure you want to invest "
-					+ admin.getBoard().costToUpgrade(admin.getCurrentPlayerPosition()) + " mana to rejuvenate this arid land?");
-			admin.buyUnownedGrassland();
+			if(inputService.GetUserConfirmation("Are you sure you want to invest "
+					+ admin.getBoard().costToUpgrade(admin.getCurrentPlayerPosition()) + " mana to rejuvenate this arid land?")) {
+				admin.buyUnownedGrassland();
+			}
 			displayMenu();
 		} else if (playerChoice == stats) {
 			admin.getCurrentPlayer().printStats();
