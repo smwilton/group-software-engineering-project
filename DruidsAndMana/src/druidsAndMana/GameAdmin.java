@@ -452,7 +452,7 @@ public class GameAdmin {
 					outputService.println("Tropical realm region " + i + "/2 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 				if (squares[i] instanceof Subtropical) {
 					if (subtropical == 0) {
@@ -462,7 +462,7 @@ public class GameAdmin {
 					outputService.println("Subtropical realm region " + (i - 2) + "/3 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 				if (squares[i] instanceof Temperate) {
 					if (temperate == 0) {
@@ -472,7 +472,7 @@ public class GameAdmin {
 					outputService.println("Temperate realm region " + (i - 6) + "/3 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 				if (squares[i] instanceof Boreal) {
 					if (boreal == 0) {
@@ -482,7 +482,7 @@ public class GameAdmin {
 					outputService.println("Boreal realm region " + (i - 9) + "/2 in this realm. A "
 							+ convertSquareTypeToString(board.getSquareType(i)) + " currently costing rival druids "
 							+ board.manaCharge(i) + " to land on. It removes " + board.getCO2Modifier(i)
-							+ "m^3 of CO2 at the end of each turn!");
+							+ "m^3 of CO2 from the air at the end of each turn!");
 				}
 			}
 		}
@@ -607,7 +607,7 @@ public class GameAdmin {
 						"\nCongratulations! You have upgraded that " + originalType + " to a " + newType + "!");
 				outputService.println("The mana charge for landing on this " + newType + " has increased from "
 						+ currentLandingCharge + " mana, to " + board.manaCharge(squareIndex) + " mana.\n"
-						+ "And its CO2 rating impact will increase from " + currentCO2Impact + "m^3 to "
+						+ "And its CO2 removal will increase from " + currentCO2Impact + "m^3 to "
 						+ board.getCO2Modifier(squareIndex) + "m^3.\n");
 			} else {
 				outputService
@@ -702,10 +702,10 @@ public class GameAdmin {
 						check--;
 					}
 				}
-				outputService.println(" with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+				outputService.println(" having each removed a total of " + winners.get(0).getCo2() + "m^3 of CO2 from the air!");
 			} else {
 				outputService.println("Congratulations " + winners.get(0).getPlayerName()
-						+ "! You are the winner with a total CO2 impact rating of " + winners.get(0).getCo2() + "m^3!");
+						+ "! You are the winner, removing a total of " + winners.get(0).getCo2() + "m^3 of CO2 from the air!");
 			}
 			players.clear();
 			endGame();
@@ -716,7 +716,7 @@ public class GameAdmin {
 	 * A method to display all players CO2 stats
 	 */
 	public void showAllCO2Ratings() {
-		outputService.println("Player\t\tCO2 removed (m^3)");
+		outputService.println("Player\t\tCO2 removed");
 		for(Player player : getPlayers()) {
 			outputService.println(player.getPlayerName()+":\t\t"+player.getCo2()+"m^3");
 		}
