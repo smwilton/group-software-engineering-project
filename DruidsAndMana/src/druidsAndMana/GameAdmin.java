@@ -691,7 +691,7 @@ public class GameAdmin {
 			showAllCO2Ratings();
 			if (draw) {
 				int check = winners.size();
-				outputService.println("There is a draw! The winners are:\n");
+				outputService.print("There is a draw! The winners are ");
 				for (Player winner : winners) {
 					outputService.print(winner.getPlayerName());
 					if(check>2) {
@@ -702,12 +702,13 @@ public class GameAdmin {
 						check--;
 					}
 				}
-				outputService.println(" with a total CO2 reduction rating of " + winners.get(0).getCo2() + "m^3!");
+				outputService.println(" with a total CO2 reduction rating of " + winners.get(0).getCo2() + "m^3!\n");
 			} else {
 				outputService.println("Congratulations " + winners.get(0).getPlayerName()
 						+ "! You are the winner with a total CO2 reduction rating of " + winners.get(0).getCo2() + "m^3!");
 			}
 			players.clear();
+			board = new GameBoard(builder);
 			endGame();
 		}
 	}
@@ -716,9 +717,9 @@ public class GameAdmin {
 	 * A method to display all players CO2 stats
 	 */
 	public void showAllCO2Ratings() {
-		outputService.println("Player\t\tCO2 removed");
+		outputService.println("Player\t\tCO2 removed\tMana reserves");
 		for(Player player : getPlayers()) {
-			outputService.println(player.getPlayerName()+":\t\t"+player.getCo2()+"m^3");
+			outputService.println(player.getPlayerName()+":\t\t"+player.getCo2()+"m^3\t\t"+player.getMana());
 		}
 		outputService.print("\n");
 	}
