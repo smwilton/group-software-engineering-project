@@ -12,8 +12,11 @@ public class GameBoard implements IGameBoard {
 
 	private ISquare[] squares;
 	
-	public GameBoard(IGameBoardBuilder iGameBoardBuilder) {
-		this.squares = iGameBoardBuilder.buildGameBoard();
+	private IGameBoardBuilder gameBoardBuilder;
+	
+	public GameBoard(IGameBoardBuilder gameBoardBuilder) {
+		this.gameBoardBuilder = gameBoardBuilder;
+		this.newGameBoard();
 	}
 	
 	@Override
@@ -226,5 +229,10 @@ public class GameBoard implements IGameBoard {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void newGameBoard() {
+		this.squares = gameBoardBuilder.buildGameBoard();
 	}	
 }

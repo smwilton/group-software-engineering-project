@@ -17,16 +17,14 @@ public class GameAdmin {
 	private ArrayList<Integer> upgradable = new ArrayList<Integer>();
 	private boolean gameOn = false;
 	private int currentPlayer;
-	private IGameBoardBuilder builder;
 	private IGameBoard board;
 	private Dice dice;
 	private boolean hasMoved = false;
 
-	public GameAdmin(IInputService inputService, IOutputService outputService) {
+	public GameAdmin(IInputService inputService, IOutputService outputService, IGameBoard gameBoard) {
 		this.inputService = inputService;
 		this.outputService = outputService;
-		this.builder = new GameBoardBuilder();
-		this.board = new GameBoard(builder);
+		this.board = gameBoard;
 		this.dice = new Dice(2);
 	}
 
@@ -708,7 +706,7 @@ public class GameAdmin {
 						+ "! You are the winner with a total CO2 reduction rating of " + winners.get(0).getCo2() + "m^3!");
 			}
 			players.clear();
-			board = new GameBoard(builder);
+			this.board.newGameBoard();
 			endGame();
 		}
 	}

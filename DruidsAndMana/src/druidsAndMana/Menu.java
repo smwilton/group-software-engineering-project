@@ -8,7 +8,9 @@ public class Menu {
 	private Rules rules;
 
 	public Menu(IInputService inputService, IOutputService outputService) {
-		this.admin = new GameAdmin(inputService, outputService);
+		IGameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+		IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
+		this.admin = new GameAdmin(inputService, outputService, gameBoard);
 		this.inputService = inputService;
 		this.outputService = outputService;
 		this.rules = new Rules();
