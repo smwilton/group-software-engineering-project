@@ -17,8 +17,9 @@ class RulesTests {
 	void testDisplayRules() {
 		String displayRules = rules.displayRules();
 		assertTrue(displayRules.contains("Game"));
-		assertTrue(displayRules.contains("Grassland with 2 forests"));
+		assertTrue(displayRules.contains("Grassland within a Realm"));
 		assertTrue(displayRules.contains("The game has 2 to 4 druids"));
+		assertTrue(displayRules.contains("Once a Druid has planted 3 forests on their grassland they can implement an upgrade"));
 		
 	}
 

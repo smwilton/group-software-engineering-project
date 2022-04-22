@@ -225,7 +225,7 @@ public class Rules {
 					+ "\n"
 					+ "A druid must own all grasslands within a realm before they can begin to develop any of their grasslands (see \"Planting Forest\" section for details on this). \n"
 					+ "\n"
-					+ "Once a druid has planted 3 forests on their grassland they can implement an upgrade (see \"Upgrading to wildlife sanctuary\" section for details on this). \n"
+					+ "Once a Druid has planted 3 forests on their grassland they can implement an upgrade (see \"Upgrading to wildlife sanctuary\" section for details on this). \n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
