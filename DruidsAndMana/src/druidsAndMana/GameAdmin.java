@@ -715,6 +715,7 @@ public class GameAdmin {
 						+ "! You are the winner with a total CO2 reduction rating of " + winners.get(0).getCo2() + "m^3!");
 			}
 			players.clear();
+			hasMoved = false;
 			this.board.newGameBoard();
 			endGame();
 		}
