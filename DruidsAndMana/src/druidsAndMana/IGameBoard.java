@@ -98,6 +98,12 @@ public interface IGameBoard {
 	 */
 	void upgradeGrassland(int squareIndex);
 
+	/**
+	 * Reset the gameboard
+	 * @return
+	 */
+	void newGameBoard();
+	
 	ISquare[] getSquares();
 
 }

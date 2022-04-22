@@ -24,10 +24,10 @@ class GameAdminTests {
 		inputService = new MockInputService();
 		outputService = new MockOutputService();
 		
-		//IGameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
-		//IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
+		IGameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+		IGameBoard gameBoard = new GameBoard(gameBoardBuilder);
 		
-		gameAdmin = new GameAdmin(inputService, outputService);
+		gameAdmin = new GameAdmin(inputService, outputService, gameBoard);
 		
 		board = gameAdmin.getBoard();
 	}
@@ -72,7 +72,7 @@ class GameAdminTests {
 		assertEquals(1, gameAdmin.getPlayers().size());
 		assertEquals("David", gameAdmin.getPlayers().get(0).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(0).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(0).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(0).getMana());
 		assertEquals(1, gameAdmin.getPlayers().get(0).getPlayerNumber());
 	}
 	
@@ -85,19 +85,19 @@ class GameAdminTests {
 		assertEquals(4, gameAdmin.getPlayers().size());
 		assertEquals("David", gameAdmin.getPlayers().get(0).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(0).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(0).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(0).getMana());
 		assertEquals(1, gameAdmin.getPlayers().get(0).getPlayerNumber());
 		assertEquals("Peter", gameAdmin.getPlayers().get(1).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(1).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(1).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(1).getMana());
 		assertEquals(2, gameAdmin.getPlayers().get(1).getPlayerNumber());
 		assertEquals("Nicola", gameAdmin.getPlayers().get(2).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(2).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(2).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(2).getMana());
 		assertEquals(3, gameAdmin.getPlayers().get(2).getPlayerNumber());
 		assertEquals("Sandra", gameAdmin.getPlayers().get(3).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(3).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(3).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(3).getMana());
 		assertEquals(4, gameAdmin.getPlayers().get(3).getPlayerNumber());
 	}
 	
@@ -167,7 +167,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
@@ -179,8 +179,8 @@ class GameAdminTests {
 		// Assert
 		String allOutput = outputService.getAllOutput();
 		assertTrue(allOutput.contains(mockTropical.description()));
-		assertTrue(allOutput.contains("Currently Unowned"));
-		assertTrue(allOutput.contains("Cost to buy: 0"));
+		assertTrue(allOutput.contains("Currently dry, barren and uninviting"));
+		assertTrue(allOutput.contains("Mana needed to rejuvenate the land: 0"));
 	}
 
 	@Test
@@ -199,7 +199,7 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", 1, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
@@ -212,7 +212,7 @@ class GameAdminTests {
 		String allOutput = outputService.getAllOutput();
 		assertTrue(allOutput.contains(mockTropical.description()));
 		assertTrue(allOutput.contains("Owned by: Mock"));
-		assertTrue(allOutput.contains("Mana Charge: 0"));
+		assertTrue(allOutput.contains("Mana Contribution: 0"));
 	}
 	
 	@Test
@@ -232,15 +232,20 @@ class GameAdminTests {
 		
 		// Create mock players
 		int expectedPlayerNumber = 1;
-		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 999, 0, 0);
+		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, expectedPlayerNumber, 999, 1, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 999, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
 		localGameAdmin.setCurrentPlayer(1);
 		
+		// Act
+		localGameAdmin.buyUnownedGrassland();
+		
+		// Assert		
+		assertEquals(expectedPlayerNumber, mockTropical.getOwnerId());
 	}
 	
 	@Test
@@ -263,12 +268,17 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
 		localGameAdmin.setCurrentPlayer(1);
 		
+		// Act
+		localGameAdmin.buyUnownedGrassland();
+		
+		// Assert		
+		assertEquals(0, mockTropical.getOwnerId());
 	}
 	
 	@Test
@@ -289,12 +299,21 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, 0, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
-		localGameAdmin.setCurrentPlayer(1);
+		localGameAdmin.setCurrentPlayer(0);
 		
+		// Act
+		localGameAdmin.payForLandingOnOwnedGrassland();
+		
+		// Assert
+		String allOutput = outputService.getAllOutput();
+		System.out.print(allOutput);
+		assertTrue(allOutput.contains("Oh no Mock! You do not have the mana reserves to repay this mana debt!"));
+		assertTrue(allOutput.contains("All of your Grasslands have been transferred to Mock."));
+		assertTrue(allOutput.contains("I'm afraid you are out of the game. We hope you had fun though!"));
 	}
 	
 	@Test
@@ -306,10 +325,8 @@ class GameAdminTests {
 		
 		// Creating a mock GameBoard
 		Tropical mockTropical = new Tropical(RealmTier.TIER_1);
+		mockTropical.setInitialOwnerId(2);
 		MockGameBoard mockBoard = new MockGameBoard(mockTropical);
-		
-		// Ensure the grass land is not owned
-		assertEquals(0, mockTropical.getOwnerId());
 		
 		// Setting the mana charge:
 		int manaCharge = 100;
@@ -320,18 +337,16 @@ class GameAdminTests {
 		Player mockPlayer1 = new Player("Mock", expectedPlayerNumber, 1, manaCharge, 0, 0);
 		Player mockPlayer2 = new Player("Mock", 2, 1, 0, 0, 0);
 		
-		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService);
+		GameAdmin localGameAdmin = new GameAdmin(inputService, outputService, mockBoard);
 		localGameAdmin.setPlayers(new ArrayList<Player>());
 		localGameAdmin.getPlayers().add(mockPlayer1);
 		localGameAdmin.getPlayers().add(mockPlayer2);
-		localGameAdmin.setCurrentPlayer(1);
+		localGameAdmin.setCurrentPlayer(0);
 		
-	}
-	
-	
-	@ParameterizedTest
-	@ValueSource(strings = {"Peter", "Alfred", "Daniel", "Joe"})
-	void example(String input) {
-		assertTrue(input.length() > 0);
+		// Act
+		localGameAdmin.payForLandingOnOwnedGrassland();
+		
+		assertEquals(0 ,mockPlayer1.getMana());
+		assertEquals(manaCharge, mockPlayer2.getMana());
 	}
 }

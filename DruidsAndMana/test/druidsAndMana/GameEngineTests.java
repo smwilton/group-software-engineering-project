@@ -25,7 +25,7 @@ class GameEngineTests {
 		MockOutputService outputService = new MockOutputService();
 		IGameBoardBuilder builder = new GameBoardBuilder();
 		GameBoard board = new GameBoard(builder);
-		GameAdmin admin = new GameAdmin(inputService, outputService);
+		GameAdmin admin = new GameAdmin(inputService, outputService, board);
 		Menu menu = new Menu(inputService, outputService);
 		gameEngine = new GameEngine();
 	}

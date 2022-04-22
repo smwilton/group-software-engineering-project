@@ -73,8 +73,8 @@ public class MockGameBoard implements IGameBoard {
 	@Override
 	public ArrayList<Grassland> getAllPlayerOwnedGrasslands(
 			Player currentPlayer) {
-		// TODO Auto-generated method stub
-		return null;
+		// Always return an emtpy array:
+		return new ArrayList<Grassland>();
 	}
 
 	@Override
@@ -115,6 +115,12 @@ public class MockGameBoard implements IGameBoard {
 	public ISquare[] getSquares() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void newGameBoard() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
