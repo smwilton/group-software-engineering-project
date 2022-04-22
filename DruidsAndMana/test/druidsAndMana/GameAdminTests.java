@@ -72,7 +72,7 @@ class GameAdminTests {
 		assertEquals(1, gameAdmin.getPlayers().size());
 		assertEquals("David", gameAdmin.getPlayers().get(0).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(0).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(0).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(0).getMana());
 		assertEquals(1, gameAdmin.getPlayers().get(0).getPlayerNumber());
 	}
 	
@@ -85,19 +85,19 @@ class GameAdminTests {
 		assertEquals(4, gameAdmin.getPlayers().size());
 		assertEquals("David", gameAdmin.getPlayers().get(0).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(0).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(0).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(0).getMana());
 		assertEquals(1, gameAdmin.getPlayers().get(0).getPlayerNumber());
 		assertEquals("Peter", gameAdmin.getPlayers().get(1).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(1).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(1).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(1).getMana());
 		assertEquals(2, gameAdmin.getPlayers().get(1).getPlayerNumber());
 		assertEquals("Nicola", gameAdmin.getPlayers().get(2).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(2).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(2).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(2).getMana());
 		assertEquals(3, gameAdmin.getPlayers().get(2).getPlayerNumber());
 		assertEquals("Sandra", gameAdmin.getPlayers().get(3).getPlayerName());
 		assertEquals(0, gameAdmin.getPlayers().get(3).getCo2());
-		assertEquals(1500, gameAdmin.getPlayers().get(3).getMana());
+		assertEquals(1000, gameAdmin.getPlayers().get(3).getMana());
 		assertEquals(4, gameAdmin.getPlayers().get(3).getPlayerNumber());
 	}
 	
