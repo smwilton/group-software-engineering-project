@@ -709,6 +709,7 @@ public class GameAdmin {
 			}
 			players.clear();
 			board = new GameBoard(builder);
+			hasMoved = false;
 			endGame();
 		}
 	}
