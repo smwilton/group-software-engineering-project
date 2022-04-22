@@ -9,6 +9,7 @@ public class Rules {
 
 	// Vars for getting Grassland values to populate rules
 	private GameBoardBuilder board = new GameBoardBuilder();
+	private GameAdmin admin = new GameAdmin(new ConsoleInputService(), new ConsoleOutputService(), new GameBoard(board));
 	private ISquare squares[] = board.buildGameBoard();
 	private Grassland tropical,subtropical,temperate,boreal;
 	private int numTropical, numSubtropical,numTemperate, numBoreal, 
@@ -24,7 +25,7 @@ public class Rules {
 	establishedCo2Tropical, establishedCo2Subtropical, establishedCo2Temperate, establishedCo2Boreal,
 	establishedLandingTropical, establishedLandingSubtropical, establishedLandingTemperate, establishedLandingBoreal,
 	wildlifeSCo2Tropical, wildlifeSCo2Subtropical, wildlifeSCo2Temperate, wildlifeSCo2Boreal,
-	wildlifeSLandingTropical, wildlifeSLandingSubtropical, wildlifeSLandingTemperate, wildlifeSLandingBoreal;
+	wildlifeSLandingTropical, wildlifeSLandingSubtropical, wildlifeSLandingTemperate, wildlifeSLandingBoreal, startMana;
 
 	private String ruleText;
 	
@@ -146,6 +147,9 @@ public class Rules {
 		this.wildlifeSLandingSubtropical = subtropical.getChargeForLandingOnSquare();
 		this.wildlifeSLandingTemperate = temperate.getChargeForLandingOnSquare();
 		this.wildlifeSLandingBoreal = boreal.getChargeForLandingOnSquare();
+		
+		// GET START MANA
+		this.startMana = admin.getStartMana();
 	}
 	
 	public String displayRules() {
@@ -157,13 +161,16 @@ public class Rules {
 					+ "\n"
 					+ "Game Premise \n"
 					+ "\n"
-					+ "Players, hereafter named \"Druids\" advance around the board, building up and using their mana reserves to acquire grassland. The goal is to develop these grasslands into prospering forests in order to combat the effect unsustainable logging and deforestation has had on global warming and wildlife\'s habitats; restoring health to the planet. Mana will also be given to rival druid\'s when resting in their forests to contribute to the worldwide fight and save the planet from destruction! \n"
+					+ "Players, hereafter named ‘Druids’ advance around the board, building up and using their mana reserves to acquire Grassland within Realms. The goal is to acquire all Grassland within a Realm and then develop these Grasslands into prospering\n"
+					+"forests in order to combat the effect unsustainable logging and deforestation has had on global warming and wildlife’s habitats; restoring health to the planet. Mana will also be given to rival Druids when resting in their forests to \n"
+					+"contribute to the upkeep of those Grasslands and help in the worldwide fight to save the planet from destruction! \n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
 					+ "Objective \n"
 					+ "\n"
-					+ "Druids aim to acquire and develop as many grasslands as they can, maximizing their contribution in the fight to save the planet. Play ends either when only one druid remains controlling the entire board, or when a druid chooses to end the game. When the game ends the winner will be the druid who has made the biggest difference. \n"
+					+ "Druids aim to acquire all Grasslands within as many Realms as they can so the Grasslands can be developed, maximizing their contribution in the fight to save the planet. Play ends either when only one Druid remains controlling the entire\n"
+					+"board, or when a Druid chooses to end the game. When the game ends the winner will be the Druid who has made the biggest difference. This contribution is measured by the Druid who have the highest CO2 Reduction Rating when the game ends.\n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
@@ -171,13 +178,13 @@ public class Rules {
 					+ "\n"
 					+ "The game has 2 to 4 druids \n"
 					+ "\n"
-					+ "The druids\" names are enter at the beginning of the gameplay. \n"
+					+ "The druids' names are enter at the beginning of the gameplay. \n"
 					+ "\n"
 					+ "Druids take turns to throw two virtual dice at the time of their turn. \n"
 					+ "\n"
 					+ "The combined number of the dice dictates how many grasslands the druid can pass through. \n"
 					+ "\n"
-					+ "Each druid has a starting mana balance of 1,000 mana points and a CO2 reduction rating of 0. \n"
+					+ "Each druid has a starting mana balance of "+String.format("%,d",startMana)+" mana points and a CO2 reduction rating of 0. \n"
 					+ "\n"
 					+ "Before the game commences, druids will each roll the dice. Turns will be taken in order of dice roll from the highest to lowest dice roll, in the event of a tie dice will be rolled again. \n"
 					+ "\n"
@@ -185,7 +192,7 @@ public class Rules {
 					+ "\n"
 					+ "What is mana? \n"
 					+ "\n"
-					+ "Mana is the druid\'s power and is used as the resource to exchange for grassland, developments, upgrades and when visiting other druid\'s grassland \n"
+					+ "Mana is the Druid’s power and is used as the resource to exchange for grassland, developments, upgrades and when visiting other Druid’s grassland.\n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
@@ -199,7 +206,7 @@ public class Rules {
 					+ "\n"
 					+ "After every full rotation of the board, druids are granted 100 mana as they pass the Sacred Alder Square to ymbolize them restoring their magical energy in their sanctuary. \n"
 					+ "\n"
-					+ "Ending your turn on the Sacred Alder Square grants a 200-mana bonus instead of the 100 mana for passing by. \n"
+					+ "Ending your turn on the Sacred Alder Square grants an additional 100-mana bonus, bringing the total earned to 200 mana instead\n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
@@ -209,11 +216,12 @@ public class Rules {
 					+ "\n"
 					+ "At the beginning of the game each grassland is vacant. \n"
 					+ "\n"
-					+ "When a druid lands on a vacant grassland they can chose to invest the required mana points to acquire that grassland or, alternatively, offer another druid the opportunity to acquire the grassland in their place.  \n"
+					+ "When a Druid lands on a vacant grassland they can choose to invest the required mana points to acquire that grassland or, alternatively, choose not buy, thus leaving the grassland vacant.\n"
 					+ "\n"
 					+ "The cost to acquire a grassland varies depending on the realm it is part of (see \"Charges\" section). \n"
 					+ "\n"
-					+ "When the druid acquires the grassland they are then considered to \"own\" it and from thereon in, any other druid who lands on the grassland will be required to contribute mana towards the upkeep of that area. This \"fee\" will vary depending on what realm the grassland is in, and how developed it is. The \"fee\" will be transferred to the owner of the area (see \"Landing on an Opponent\'s Grassland\" section for details on this). \n"
+					+ "When the druid acquires the grassland they are then considered to \"own\" it and from thereon in, any other druid who lands on the grassland will be required to contribute mana towards the upkeep of that area. This \"fee\" will \n"
+					+"vary depending on what realm the grassland is in, and how developed it is. The \"fee\" will be transferred to the owner of the area (see \"Landing on an Opponent\'s Grassland\" section for details on this). \n"
 					+ "\n"
 					+ "A druid must own all grasslands within a realm before they can begin to develop any of their grasslands (see \"Planting Forest\" section for details on this). \n"
 					+ "\n"
@@ -249,7 +257,8 @@ public class Rules {
 					+ "\n"
 					+ "When 3 forests have been planted in a grassland the druid is then eligible to upgrade this grassland to a wildlife sanctuary. \n"
 					+ "\n"
-					+ "For each forest a druid plants the environmental benefits they have made increase and in turn the amount of CO2 reduction rating points they achieve each turn increases. This also results in a higher upkeep fee for visitors to the forest (See \"Charges\" and \"CO2 reduction ratings\" section). \n"
+					+ "For each forest a druid plants the environmental benefits they have made increase and in turn the amount of CO2 reduction rating points they achieve each turn increases. This also results in a higher upkeep fee for visitors to the forest \n"
+					+"(See \"Charges\" and \"CO2 reduction ratings\" section). \n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
@@ -257,19 +266,19 @@ public class Rules {
 					+ "\n"
 					+ "Once a druid has planted 3 forests on their grassland they can then chose to upgrade that grassland to a wildlife sanctuary. The cost of doing so varies depending on the realm the grassland is located (See \"Charges\" section). \n"
 					+ "\n"
-					+ "Converting their grassland to a wildlife sanctuary is the biggest achievement a druid can make in their quest to save the world. As a result the wildlife sanctuary the amount of CO2 reduction rating points they achieve each turn increases further. This also results in a higher upkeep fee for visitors to the forest (See \"Charges\" and \"CO2 reduction ratings\" section). \n"
+					+ "Converting their grassland to a wildlife sanctuary is the biggest achievement a druid can make in their quest to save the world. As a result the wildlife sanctuary the amount of CO2 reduction rating points they achieve each turn increases \n"
+					+"further. This also results in a higher upkeep fee for visitors to the forest (See \"Charges\" and \"CO2 reduction ratings\" section). \n"
 					+ "\n"
 					+ " \n"
 					+ "\n"
 					+ "Mana Depletion \n"
 					+ "\n"
-					+ "If a druid lands on another druids grassland and cannot afford to pay the fee towards the upkeep of that grassland, but owns an empty grassland that has not been developed, they can release ownership of that grassland in order to recuperate the mana that was paid to acquire that grassland, and therefore in turn pay the fee to the owner of the grassland they have landed on. \n"
+					+ "If a Druid lands on another Druid’s grassland but has insufficient mana to pay the fee towards the upkeep of that grassland they are considered inactive and can no longer participate in the game.\n"
 					+ "\n"
-					+ "If a druid lands on another druid\'s grassland but has insufficient mana to pay the fee towards the upkeep of that grassland they are considered inactive and can no longer participate in the game. \n"
+					+ "At this point all grasslands belonging to this Druid will transfer to the Druid who is the owner of the grassland that they have finished on.\n"
 					+ "\n"
-					+ "At this point all grasslands and any remaining mana balance belonging to this druid will transfer to the druid who is the owner of the grassland that they have finished on. \n"
-					+ "\n"
-					+ "At this point they will NO longer accrue points against their CO2 reduction rating per turn. However, their total consumption at the time they finished the game is saved as their final score and included in the leaderboard at the end of the game when determining the winner (see \"Winning the Game section). \n"
+					+ "At this point they will NO longer accrue points against their CO2 reduction rating per turn. However, their total consumption at the time they finished the game is saved as their final score and included in the leaderboard at the end of the \n"
+					+"game when determining the winner (see \"Winning the Game section). \n"
 					+ "\n"
 					+ " \n"
 					+ "\n\n"
@@ -313,7 +322,7 @@ public class Rules {
 					+"___________________________________________________________________________________________________________________________"
 					+ "\n"
 					+ "Tropical \t\t\t"
-					+ grasslandCo2Tropical+"\t"+seedlingCo2Tropical+"\t"+intermediateCo2Tropical+"\t"+establishedCo2Tropical+"\t"+wildlifeSCo2Tropical+" \n\n"
+					+ grasslandCo2Tropical+"\t"+seedlingCo2Tropical+"\t"+intermediateCo2Tropical+"\t"+establishedCo2Tropical+"\t"+String.format("%,d",wildlifeSCo2Tropical)+" \n\n"
 					+ "Subtropical \t\t\t"
 					+ grasslandCo2Subtropical+"\t"+seedlingCo2Subtropical+"\t"+intermediateCo2Subtropical+"\t"+establishedCo2Subtropical+"\t"+wildlifeSCo2Subtropical+" \n\n"
 					+ "Temperate \t\t\t"
@@ -327,15 +336,16 @@ public class Rules {
 					+ "\n"
 					+ "Winning The Game \n"
 					+ "\n"
-					+ "The game ends either when  only one player has mana remaining (i.e., is active) or when only one player  wishes to continue the game \n"
+					+ "The game ends either when only one player has mana remaining (i.e., is active) or when any one player wishes to leave the game. \n"
 					+ "\n"
-					+ "The mana balance of each druid is displayed at the end of the game along with their CO2 reduction rating points.  \n"
+					+ "The mana balance of each Druid is displayed at the end of the game along with their CO2 reduction points. \n"
 					+ "\n"
-					+ "As mana is a resource, and the objective of the game is to reward spending of mana to make a difference positive impact towards saving the world, rather than hoarding it just to hold the highest balance, the ending mana balance will not be used as the metric to determine the winner of the game unless in the event of a tie. \n"
+					+ "As mana is a resource, and the objective of the game is to reward spending of mana to make a difference positive impact towards saving the world, rather than hoarding it just to hold the highest balance, the ending mana \n"+
+					"balance will not be used as the metric to determine the winner of the game. \n"
 					+ "\n"
 					+ "At the end of the game the druid who has consumed the most CO2 is the winner of the game, i.e. the druid with the highest CO2 reduction rating. \n"
 					+ "\n"
-					+ "In the event of a tie, where more than 1 druid has the highest CO2 reduction rating, the overall winner will be decided by establishing which one has the highest ending mana balance. \n"
+					+ "In the event of a tie, where more than 1 Druid has the highest CO2 reduction rating, the game is ended with a draw between those players.\n"
 					+ "\n"
 					+ "The winning druid does not need to be an active druid when the game ends. ";
 		return ruleText;

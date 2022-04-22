@@ -10,7 +10,8 @@ import java.util.ArrayList;
  *
  */
 public class GameAdmin {
-
+	private static final int START_MANA = 1000;
+	
 	private IInputService inputService;
 	private IOutputService outputService;
 	private ArrayList<Player> players = new ArrayList<Player>();
@@ -74,6 +75,14 @@ public class GameAdmin {
 
 	public void setCurrentPlayer(int currentPlayer) {
 		this.currentPlayer = currentPlayer;
+	}
+	
+	/**
+	 * Method to get the starting mana balance
+	 * @return - the starting mana balance
+	 */
+	public int getStartMana() {
+		return START_MANA;
 	}
 
 	/**
@@ -164,7 +173,7 @@ public class GameAdmin {
 					// Roll a dice to see which player goes first
 					int roll = dice.rollDice();
 					// If unique name chosen, creates a Player object with defualt starting values.
-					Player player = new Player(playerName, i + 1, 0, 1000, 0, roll);
+					Player player = new Player(playerName, i + 1, 0, START_MANA, 0, roll);
 					players.add(player);
 				} else {
 					// Display error message on repeated name input
